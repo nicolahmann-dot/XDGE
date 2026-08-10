@@ -124,7 +124,9 @@ function ServeCard({ card, index, hovered, onEnter, onLeave, style }) {
           style={{ width: '100%', height: '100%', position: 'absolute', inset: 0 }}
         >
           <picture>
-            <source media="(max-width: 768px)" srcSet={mobileSrc(card.img)} />
+            {mobileSrc(card.img) && (
+              <source media="(max-width: 768px)" srcSet={mobileSrc(card.img)} />
+            )}
             <motion.img
               src={card.img}
               alt={card.lines.join(' ')}

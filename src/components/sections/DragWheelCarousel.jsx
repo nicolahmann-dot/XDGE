@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { theme } from '../../theme';
 import { mobileSrc } from '../../utils/mobileSrc';
 import { SplitHeading } from '../primitives/SplitHeading';
@@ -114,7 +114,9 @@ function Card({ item, index, progress, total }) {
         background: '#111',
       }}>
         <picture>
-          <source media="(max-width: 768px)" srcSet={mobileSrc(item.img)} />
+          {mobileSrc(item.img) && (
+            <source media="(max-width: 768px)" srcSet={mobileSrc(item.img)} />
+          )}
           <img
             src={item.img}
             alt={item.title}
@@ -182,6 +184,10 @@ function Card({ item, index, progress, total }) {
 
 export function DragWheelCarousel() {
   const containerRef = useRef(null);
+
+  // Any-pixel latch for the heading, matching SplitHeading's trigger geometry.
+  const headingRef = useRef(null);
+  const headingSeen = useInView(headingRef, { once: true });
   
   // Progress value (0 to items.length - 1)
   const progressRaw = useMotionValue(0);

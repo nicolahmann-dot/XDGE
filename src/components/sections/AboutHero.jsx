@@ -1,6 +1,5 @@
 import { theme } from '../../theme';
 import { SplitHeading } from '../primitives/SplitHeading';
-import { HeroAmbient } from '../HeroAmbient';
 
 export function AboutHero() {
   return (
@@ -14,7 +13,8 @@ export function AboutHero() {
         padding: 'clamp(96px, 12vw, 140px) clamp(20px, 4vw, 56px) clamp(80px, 9vw, 120px)',
       }}
     >
-      <HeroAmbient src="/assets/videos/gold_swirls.mp4" overlayOpacity={0.25} />
+      {/* No ambient video here. The About hero is the section's own dark ground now —
+          the gold_swirls loop was removed outright rather than made lighter. */}
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <SplitHeading
           tag="h1"

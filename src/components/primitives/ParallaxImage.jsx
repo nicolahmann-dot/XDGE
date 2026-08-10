@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useSmallScreen } from '../../hooks/useSmallScreen';
+import { mobileSrc } from '../../utils/mobileSrc';
 
 /**
  * ParallaxImage — the image drifts vertically inside its frame as the page
@@ -53,10 +54,11 @@ export function ParallaxImage({
   // image is near the viewport, i.e. only while its parallax is observable.
   const near = useInView(ref, { margin: '300px 0px 300px 0px' });
 
-  // /assets/foo.webp -> /assets/foo@1000.jpg  (generated for every referenced image
-  // wider than 1100px; webp encoding was unavailable locally, and the decode saving
-  // is about pixel count rather than format anyway).
-  const mobileSrc = src ? src.replace(/\.(webp|jpe?g)$/i, '@1000.jpg') : src;
+  // /assets/foo.webp -> /assets/foo@1000.jpg, or null when no variant exists. The
+  // substitution used to live here and ran unconditionally, which emitted a <source>
+  // pointing at a file that wasn't there for any image under 1100px — a <picture>
+  // source does not fall back on 404, so it rendered as a broken box on phones.
+  const variant = mobileSrc(src);
 
   return (
     <div
@@ -71,7 +73,7 @@ export function ParallaxImage({
           pixel density. Measured on Home: 31MP decoded against 14.7MP the screen can
           actually show; the variants are 1.0MP each instead of 2.56MP. */}
       <picture>
-        <source media="(max-width: 768px)" srcSet={mobileSrc} />
+        {variant && <source media="(max-width: 768px)" srcSet={variant} />}
         <motion.img
           src={src}
           alt={alt}

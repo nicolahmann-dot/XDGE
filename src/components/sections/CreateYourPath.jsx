@@ -1,5 +1,4 @@
 import { theme } from '../../theme';
-import { FloatingVideo } from '../primitives/FloatingVideo';
 import { SplitHeading } from '../primitives/SplitHeading';
 
 export function CreateYourPath() {

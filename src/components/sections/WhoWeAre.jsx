@@ -80,7 +80,9 @@ export function WhoWeAre() {
               borderRadius: 4, overflow: 'hidden', background: '#000000',
             }}>
               <picture>
-                <source media="(max-width: 768px)" srcSet={mobileSrc('/assets/who-we-are.webp')} />
+                {mobileSrc('/assets/who-we-are.webp') && (
+                  <source media="(max-width: 768px)" srcSet={mobileSrc('/assets/who-we-are.webp')} />
+                )}
                 <motion.img
                   src="/assets/who-we-are.webp"
                   alt="XDGE coaching session"

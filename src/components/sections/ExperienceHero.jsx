@@ -1,5 +1,6 @@
 import { theme } from '../../theme';
 import { SplitHeading } from '../primitives/SplitHeading';
+import { Group, Reveal } from '../primitives/Reveal';
 import { HeroAmbient } from '../HeroAmbient';
 
 const pStyle = {
@@ -62,8 +63,14 @@ export function ExperienceHero() {
         {/* Content card — bottom-right */}
         <div className="xg-hero-body" style={{ alignItems: 'flex-end' }}>
           <div className="xg-hide-md" />
-          <div
-            data-reveal
+          {/* Group + Reveal per part, the same cascade as the Home hero copy — the
+              user asked for the heros to read identically across pages.
+
+              This block carried `data-reveal`, which hands it to the global CSS
+              engine: one 20px lift over 0.65s for the whole card. At this size, next
+              to the 48px rise used everywhere else, that reads as the text simply
+              being there rather than arriving — which is why it looked static. */}
+          <Group
             style={{
               maxWidth: 640,
             }}
@@ -80,12 +87,16 @@ export function ExperienceHero() {
               <div>Industry Professionals &amp; Coaches.</div>
               <div>Real Results For <span className="cyan-text">Ages 12&ndash;24+</span></div>
             </div>
+          
 
+            <Reveal>
             <div style={{
               height: 1, background: 'rgba(255,255,255,0.2)',
               margin: 'clamp(20px, 2.4vw, 30px) 0',
             }} />
+            </Reveal>
 
+            <Reveal>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(14px, 1.6vw, 18px)' }}>
               <p style={pStyle}>
                 Receive the same leadership development trusted by organisations
@@ -103,7 +114,8 @@ export function ExperienceHero() {
                 and impact that helps you stand out in future opportunities.
               </p>
             </div>
-          </div>
+            </Reveal>
+          </Group>
         </div>
       </div>
     </section>

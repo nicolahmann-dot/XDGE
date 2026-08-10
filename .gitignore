@@ -17,3 +17,4 @@ public/assets/picss/
 # .webp — so they were 296MB of every deploy payload for nothing. Kept on disk
 # locally as the editable originals; the .webp siblings stay tracked.
 public/assets/ALL NEW IMAGES/*.png
+.env*
