@@ -52,6 +52,7 @@ export function Hero() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
+        
       }}>
         <Reveal style={{ width: '100%' }}>
           <h3 style={{
