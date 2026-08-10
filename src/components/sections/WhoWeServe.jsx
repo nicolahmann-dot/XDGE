@@ -10,11 +10,24 @@ import { useSmallScreen } from '../../hooks/useSmallScreen';
 const MotionLink = motion(Link);
 
 const cards = [
-  { year: 'The XDGE', t: 'Graduates & Early Career', d: '', img: '/assets/graduates-card.webp' },
-  { year: 'The XDGE', t: 'University Applicants', d: '', img: '/assets/serve-02.webp' },
-  { year: 'The XDGE', t: 'School Students', d: '', img: '/assets/school-entry-edge.jpg' },
-  { year: 'The XDGE', t: 'Specialist Pathways', d: '', img: '/assets/serve-04.webp' },
+  { year: 'The XDGE', lines: ['GRADUATES', 'AND EARLY CAREER'], img: '/assets/graduates-card.webp' },
+  { year: 'The XDGE', lines: ['UNIVERSITY', 'APPLICANTS'], img: '/assets/serve-02.webp' },
+  { year: 'The XDGE', lines: ['SCHOOL', 'STUDENTS'], img: '/assets/school-entry-edge.jpg' },
+  { year: 'The XDGE', lines: ['SPECIALIST', 'PATHWAYS'], img: '/assets/serve-04.webp' },
 ];
+
+const serveCardHeadingProps = {
+  lineClasses: ['xdge-condensed-solid-white', 'xdge-condensed-solid-white'],
+  lineClipClasses: ['xdge-condensed-clip-narrow', 'xdge-condensed-clip-narrow'],
+  lineInnerClasses: ['xdge-tier-text-narrow', 'xdge-tier-text-narrow'],
+  style: {
+    fontFamily: theme.displayCondensed,
+    fontSize: 'clamp(40px, 5.2vw, 68px)',
+    lineHeight: 0.86,
+    letterSpacing: '-0.02em',
+    color: theme.base,
+  },
+};
 
 // Each card drives its own reveal and carries its own cascade delay.
 //
@@ -114,7 +127,7 @@ function ServeCard({ card, index, hovered, onEnter, onLeave, style }) {
             <source media="(max-width: 768px)" srcSet={mobileSrc(card.img)} />
             <motion.img
               src={card.img}
-              alt={card.t}
+              alt={card.lines.join(' ')}
               loading="lazy"
               decoding="async"
               // Hover zoom intentionally left to CSS (`.xg-glass-solid:hover img`),
@@ -167,31 +180,17 @@ function ServeCard({ card, index, hovered, onEnter, onLeave, style }) {
         <div style={{ fontSize: 12, color: theme.subtitle, letterSpacing: '0.04em' }}>
           {card.year}
         </div>
-        <h3 style={{
-          fontFamily: theme.display,
-          fontSize: 'clamp(36px, 4.5vw, 54px)',
-          lineHeight: 1.05,
-          margin: 0,
-          letterSpacing: '-0.01em',
-          fontWeight: 900,
-          textTransform: 'uppercase',
-          flex: 1,
-          // Reserve 4 lines so every card is the same height regardless of title
-          // length (the longest title wraps to 4 lines) — heights match, positions stagger.
-          minHeight: 'calc(1.05em * 4)',
-        }}>
-          {card.t}
-        </h3>
+        <div className="xg-serve-card-heading">
+          <SplitHeading
+            tag="h3"
+            lines={card.lines}
+            {...serveCardHeadingProps}
+          />
+        </div>
         <div style={{
-          display: 'flex', justifyContent: 'space-between',
+          display: 'flex', justifyContent: 'flex-end',
           alignItems: 'flex-end', gap: 16,
         }}>
-          <p style={{
-            fontSize: 13, color: theme.subtitle,
-            lineHeight: 1.55, margin: 0, maxWidth: 280,
-          }}>
-            {card.d}
-          </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <span style={{
               fontSize: 12, fontWeight: 600, letterSpacing: '0.04em',
@@ -226,36 +225,43 @@ export function WhoWeServe() {
   const [hovered, setHovered] = useState(null);
 
   return (
-    <section data-screen-label="05 Who We Serve" data-section-theme="dark" style={{
+    <section data-screen-label="05 Who We Serve" data-section-theme="dark" className="xg-whos-section" style={{
       background: theme.dark, color: theme.base,
       position: 'relative',
       overflow: 'hidden',
-      padding: 'clamp(90px, 11vw, 160px) clamp(20px, 4vw, 40px) clamp(90px, 11vw, 160px)',
+      padding: 'clamp(32px, 5vw, 56px) clamp(20px, 4vw, 40px) clamp(72px, 9vw, 120px)',
     }}>
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        <Group style={{ display: 'flex', flexDirection: 'column', marginBottom: 'clamp(32px, 6vw, 56px)' }}>
-          <div style={{ position: 'relative', alignSelf: 'center', textAlign: 'center', padding: '40px 0' }}>
+        <Group style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 'clamp(24px, 4vw, 40px)' }}>
+          <div className="xg-whos-heading-wrap">
             <SplitHeading
               lines={[
-                <span style={{ whiteSpace: 'nowrap' }}>
-                  <span className="cyan-text" style={{ paddingRight: '0.2em' }}>WHO</span>
-                  <span className="hollow-text">IS IT FOR</span>
+                <span className="xdge-whos-line">
+                  <span className="xdge-whos-solid">
+                    <span className="xdge-whos-wh">WH</span>
+                    <span className="xdge-whos-os-stack">
+                      <span className="xdge-whos-solid-base">O&rsquo;S</span>
+                      <span className="xdge-whos-solid-cut" aria-hidden="true">O&rsquo;S</span>
+                    </span>
+                  </span>
+                  <span className="xdge-whos-hollow"> IT FOR?</span>
                 </span>,
               ]}
+              lineClipClasses={['xdge-whos-clip']}
               style={{
-                fontFamily: theme.display, fontWeight: 900,
-                fontSize: 'clamp(40px, 11.3vw, 200px)',
-                lineHeight: 0.95, letterSpacing: '-0.02em',
-                textTransform: 'uppercase'
+                fontFamily: theme.displayCondensed,
+                fontSize: 'clamp(52px, 14.5vw, 240px)',
+                lineHeight: 0.95,
+                letterSpacing: '-0.02em',
+                textTransform: 'uppercase',
+                textAlign: 'center',
+                marginInline: 'auto',
               }}
             />
           </div>
-
-
         </Group>
 
-        {/* Cards are equal height (the title reserves 3 lines in ServeCard) but kept
-            STAGGERED — odd cards offset down — for the original masonry feel.
+        {/* Cards are equal height (two-line hollow titles) but kept STAGGERED —
             A plain div, not a `Group`: each card now owns its reveal and its own
             cascade delay, so an orchestrator here would drive nothing. */}
         <div className="xg-2" style={{ gap: 'clamp(24px, 4vw, 40px)', alignItems: 'flex-start' }}>

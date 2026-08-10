@@ -76,7 +76,7 @@ const lineMask = {
   },
 };
 
-export function SplitHeading({ lines, style, tag = 'h2', lineClasses = [] }) {
+export function SplitHeading({ lines, style, tag = 'h2', lineClasses = [], lineClipClasses = [], lineInnerClasses = [] }) {
   const Tag = motion[tag] || motion.h2;
   const ref = useRef(null);
   const fontsReady = useFontsReady();
@@ -116,14 +116,19 @@ export function SplitHeading({ lines, style, tag = 'h2', lineClasses = [] }) {
         // layout, so nothing shifts.
         <span
           key={i}
+          className={lineClipClasses[i] || undefined}
           style={{
             display: 'block',
             overflow: 'hidden',
             boxSizing: 'content-box',
-            paddingTop: PAD_TOP,
-            marginTop: `-${PAD_TOP}`,
-            paddingBottom: PAD_BOTTOM,
-            marginBottom: `-${PAD_BOTTOM}`,
+            ...(String(lineClipClasses[i] || '').includes('xdge-clip-tight-y')
+              ? { paddingTop: 0, marginTop: 0, paddingBottom: 0, marginBottom: 0 }
+              : {
+                  paddingTop: PAD_TOP,
+                  marginTop: `-${PAD_TOP}`,
+                  paddingBottom: PAD_BOTTOM,
+                  marginBottom: `-${PAD_BOTTOM}`,
+                }),
           }}
         >
           <motion.span data-no-reveal
@@ -131,7 +136,11 @@ export function SplitHeading({ lines, style, tag = 'h2', lineClasses = [] }) {
             className={lineClasses[i] || undefined}
             style={{ display: 'block' }}
           >
-            {l}
+            {lineInnerClasses[i] ? (
+              <span className={lineInnerClasses[i]}>{l}</span>
+            ) : (
+              l
+            )}
           </motion.span>
         </span>
       ))}

@@ -1,7 +1,16 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { theme, fadeUp } from '../../theme';
+import { theme } from '../../theme';
 import { Group } from '../primitives/Reveal';
+import {
+  FormCheckbox,
+  FormError,
+  FormHoneypot,
+  FormIntro,
+  FormSubmitButton,
+  FormSuccess,
+  formFieldProps as f,
+} from '../forms/formShared';
+import { trackEvent } from '../../utils/analytics';
 
 const programmeOptions = [
   'School Application Edge',
@@ -16,82 +25,6 @@ const programmeOptions = [
 
 const contactMethods = ['Email', 'Phone', 'Video Call'];
 
-const fieldLabel = {
-  fontFamily: theme.body,
-  fontSize: 11,
-  fontWeight: 700,
-  letterSpacing: '0.16em',
-  textTransform: 'uppercase',
-  color: '#555555',
-  marginBottom: 10,
-  display: 'block',
-};
-
-const fieldHint = {
-  fontFamily: theme.body,
-  fontSize: 12,
-  fontWeight: 500,
-  color: '#555555',
-  marginTop: 6,
-};
-
-const inputBase = {
-  width: '100%',
-  padding: '12px 0 14px',
-  background: 'transparent',
-  border: 'none',
-  borderBottom: '1px solid rgba(0,0,0,0.18)',
-  color: theme.ink,
-  fontFamily: theme.body,
-  fontSize: 16,
-  outline: 'none',
-  borderRadius: 0,
-  transition: 'border-color 0.3s var(--xg-ease)',
-};
-
-const checkboxLabel = {
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: 12,
-  padding: '14px 0',
-  cursor: 'pointer',
-  fontFamily: theme.body,
-  fontSize: 'clamp(14px, 1.4vw, 16px)',
-  color: theme.ink,
-};
-
-const checkboxBox = {
-  width: 18,
-  height: 18,
-  border: '1px solid rgba(0,0,0,0.45)',
-  borderRadius: 2,
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexShrink: 0,
-  background: 'transparent',
-  transition: 'border-color 0.25s var(--xg-ease), background 0.25s var(--xg-ease)',
-};
-
-function CheckedBox({ checked }) {
-  return (
-    <span
-      style={{
-        ...checkboxBox,
-        borderColor: checked ? theme.ink : 'rgba(0,0,0,0.45)',
-        background: checked ? theme.ink : 'transparent',
-      }}
-      aria-hidden="true"
-    >
-      {checked && (
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="20 6 9 17 4 12" />
-        </svg>
-      )}
-    </span>
-  );
-}
-
 export function ContactForm() {
   const [form, setForm] = useState({
     name: '',
@@ -103,22 +36,31 @@ export function ContactForm() {
     message: '',
     programmes: [],
     methods: [],
+    website: '',
   });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
 
-  const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
-  const toggle = (key, value) => () => setForm((f) => {
-    const arr = f[key];
+  const set = (key) => (e) => setForm((prev) => ({ ...prev, [key]: e.target.value }));
+  const toggle = (key, value) => () => setForm((prev) => {
+    const arr = prev[key];
     return {
-      ...f,
+      ...prev,
       [key]: arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value],
     };
   });
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (form.website) return;
+
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
+    if (!emailOk) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+
     setSending(true);
     setError('');
 
@@ -135,6 +77,7 @@ export function ContactForm() {
         throw new Error(data.error || 'Something went wrong.');
       }
 
+      trackEvent('form_submit', { form_name: 'contact' });
       setSubmitted(true);
     } catch (err) {
       setError(err.message || 'Failed to send. Please try again.');
@@ -145,44 +88,16 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <section
-        data-screen-label="Contact Form"
-        data-section-theme="light"
-        style={{
-          background: theme.base, color: theme.ink,
-          padding: 'clamp(56px, 7vw, 80px) clamp(20px, 4vw, 40px)',
-        }}
-      >
-        <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
-          <motion.h2
-            data-no-reveal
-            initial={{ opacity: 0, y: 36 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
-            style={{
-              fontFamily: theme.displayTight, fontWeight: 600,
-              fontSize: 'clamp(42px, 6vw, 78px)',
-              lineHeight: 1.1, letterSpacing: '-0.01em',
-              margin: 0,
-            }}
-          >
-            Thank you &mdash; your message is on its way.
-          </motion.h2>
-          <motion.p
-            data-no-reveal
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.2, 0.7, 0.2, 1] }}
-            style={{
-              fontFamily: theme.body, fontSize: 17, lineHeight: 1.55,
-              color: '#555555', marginTop: 24,
-            }}
-          >
-            We&rsquo;ll be in touch shortly. If you&rsquo;d like to skip the queue,
-            you can also book a discovery meeting below.
-          </motion.p>
-        </div>
-      </section>
+      <FormSuccess
+        screenLabel="Contact Form"
+        title="Thank you — your message is on its way."
+        body="We'll be in touch within 2–3 business days."
+        steps={[
+          'Our team reviews your enquiry',
+          'We respond with the right next step',
+          'Optional: book a discovery call on our Contact page',
+        ]}
+      />
     );
   }
 
@@ -190,194 +105,145 @@ export function ContactForm() {
     <section
       data-screen-label="Contact Form"
       data-section-theme="light"
-      style={{
-        background: theme.base, color: theme.ink,
-        padding: 'clamp(90px, 11vw, 160px) clamp(20px, 4vw, 40px)',
-      }}
+      className="xg-form-section-shell"
+      style={{ background: theme.base, color: theme.ink }}
     >
-      <form onSubmit={onSubmit} style={{ maxWidth: 880, margin: '0 auto' }}>
-        <Group style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(28px, 3.6vw, 44px)' }}>
-          {/* Row 1: Your Name */}
-          <label data-reveal style={{ display: 'block' }}>
-            <span style={fieldLabel}>Your Name</span>
+      <form onSubmit={onSubmit} className="xg-form">
+        <Group className="xg-form-stack">
+          <FormIntro
+            eyebrow="Contact"
+            title="Send us a message"
+            lede="Share a few details and we'll respond with the right next step — whether that's a programme recommendation, a discovery call, or a simple answer to your question."
+          />
+
+          <label data-reveal className={f.fieldClass}>
+            <span className={f.labelClass}>Your Name</span>
             <input
               required
               type="text"
               name="name"
               value={form.name}
               onChange={set('name')}
-              style={inputBase}
+              className={f.inputClass}
               autoComplete="name"
             />
           </label>
 
-          {/* Row 2: Guardian */}
-          <label data-reveal style={{ display: 'block' }}>
-            <span style={fieldLabel}>Parent / Guardian Name</span>
+          <label data-reveal className={f.fieldClass}>
+            <span className={f.labelClass}>Parent / Guardian Name</span>
             <input
               type="text"
               name="guardian"
               value={form.guardian}
               onChange={set('guardian')}
-              style={inputBase}
+              className={f.inputClass}
             />
-            <div style={fieldHint}>(If participant is under 18 years of age)</div>
+            <div className={f.hintClass}>(If participant is under 18 years of age)</div>
           </label>
 
-          {/* Row 3: Email + Phone */}
-          <div data-reveal className="xg-2" style={{ gap: 'clamp(24px, 3vw, 40px)' }}>
-            <label style={{ display: 'block' }}>
-              <span style={fieldLabel}>Email Address</span>
+          <div data-reveal className={`xg-2 ${f.groupClass}`}>
+            <label className={f.fieldClass}>
+              <span className={f.labelClass}>Email Address</span>
               <input
                 required
                 type="email"
                 name="email"
                 value={form.email}
                 onChange={set('email')}
-                style={inputBase}
+                className={f.inputClass}
                 autoComplete="email"
               />
             </label>
-            <label style={{ display: 'block' }}>
-              <span style={fieldLabel}>Phone Number</span>
+            <label className={f.fieldClass}>
+              <span className={f.labelClass}>Phone Number</span>
               <input
                 type="tel"
                 name="phone"
                 value={form.phone}
                 onChange={set('phone')}
-                style={inputBase}
+                className={f.inputClass}
                 autoComplete="tel"
               />
             </label>
           </div>
 
-          {/* Row 4: Location + Age */}
-          <div data-reveal className="xg-2" style={{ gap: 'clamp(24px, 3vw, 40px)' }}>
-            <label style={{ display: 'block' }}>
-              <span style={fieldLabel}>Location &mdash; City / Country</span>
+          <div data-reveal className={`xg-2 ${f.groupClass}`}>
+            <label className={f.fieldClass}>
+              <span className={f.labelClass}>Location — City / Country</span>
               <input
                 type="text"
                 name="location"
                 value={form.location}
                 onChange={set('location')}
-                style={inputBase}
+                className={f.inputClass}
               />
             </label>
-            <label style={{ display: 'block' }}>
-              <span style={fieldLabel}>Participant Age</span>
+            <label className={f.fieldClass}>
+              <span className={f.labelClass}>Participant Age</span>
               <input
                 type="text"
                 name="age"
                 inputMode="numeric"
                 value={form.age}
                 onChange={set('age')}
-                style={inputBase}
+                className={f.inputClass}
               />
             </label>
           </div>
 
-          {/* Row 5: Programmes (checkboxes) */}
-          <div data-reveal>
-            <div style={{ ...fieldLabel, marginBottom: 14 }}>Which Programme Are You Interested In?</div>
-            <div className="xg-2" style={{ gap: '0 clamp(24px, 3vw, 40px)' }}>
-              {programmeOptions.map((opt) => {
-                const checked = form.programmes.includes(opt);
-                return (
-                  <label key={opt} style={checkboxLabel}>
-                    <input
-                      type="checkbox"
-                      name="programmes"
-                      value={opt}
-                      checked={checked}
-                      onChange={toggle('programmes', opt)}
-                      style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }}
-                    />
-                    <CheckedBox checked={checked} />
-                    <span>{opt}</span>
-                  </label>
-                );
-              })}
+          <div data-reveal className="xg-form-options">
+            <div className={f.optionTitleClass}>Which Programme Are You Interested In?</div>
+            <div className="xg-form-check-grid">
+              {programmeOptions.map((opt) => (
+                <FormCheckbox
+                  key={opt}
+                  name="programmes"
+                  value={opt}
+                  checked={form.programmes.includes(opt)}
+                  onChange={toggle('programmes', opt)}
+                >
+                  {opt}
+                </FormCheckbox>
+              ))}
             </div>
           </div>
 
-          {/* Row 6: Message */}
-          <label data-reveal style={{ display: 'block' }}>
-            <span style={fieldLabel}>How Can We Help?</span>
+          <label data-reveal className={f.fieldClass}>
+            <span className={f.labelClass}>How Can We Help?</span>
             <textarea
               name="message"
               value={form.message}
               onChange={set('message')}
               rows={5}
-              style={{
-                ...inputBase,
-                resize: 'vertical',
-                minHeight: 120,
-                padding: '14px 0 16px',
-                lineHeight: 1.55,
-              }}
+              className={f.textareaClass}
             />
           </label>
 
-          {/* Row 7: Preferred contact method */}
-          <div data-reveal>
-            <div style={{ ...fieldLabel, marginBottom: 14 }}>Preferred Contact Method</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(20px, 3vw, 36px)' }}>
-              {contactMethods.map((m) => {
-                const checked = form.methods.includes(m);
-                return (
-                  <label key={m} style={checkboxLabel}>
-                    <input
-                      type="checkbox"
-                      name="methods"
-                      value={m}
-                      checked={checked}
-                      onChange={toggle('methods', m)}
-                      style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }}
-                    />
-                    <CheckedBox checked={checked} />
-                    <span>{m}</span>
-                  </label>
-                );
-              })}
+          <div data-reveal className="xg-form-options">
+            <div className={f.optionTitleClass}>Preferred Contact Method</div>
+            <div className="xg-form-check-row">
+              {contactMethods.map((method) => (
+                <FormCheckbox
+                  key={method}
+                  name="methods"
+                  value={method}
+                  checked={form.methods.includes(method)}
+                  onChange={toggle('methods', method)}
+                >
+                  {method}
+                </FormCheckbox>
+              ))}
             </div>
           </div>
 
-          {/* Submit */}
-          <div data-reveal style={{ paddingTop: 8 }}>
-            {error && (
-              <div style={{
-                padding: '12px 18px',
-                marginBottom: 16,
-                background: '#FFF0F0',
-                border: '1px solid #FFD0D0',
-                borderRadius: 8,
-                color: '#CC0000',
-                fontFamily: theme.body,
-                fontSize: 14,
-              }}>
-                {error}
-              </div>
-            )}
-            <button
-              type="submit"
-              disabled={sending}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 14,
-                padding: '16px 28px',
-                background: sending ? '#555' : theme.ink, color: theme.base,
-                border: 'none', borderRadius: 999,
-                fontFamily: theme.body, fontSize: 14, fontWeight: 600,
-                letterSpacing: '0.04em', textTransform: 'uppercase',
-                cursor: sending ? 'not-allowed' : 'pointer',
-                opacity: sending ? 0.7 : 1,
-                transition: 'background 0.3s var(--xg-ease), transform 0.3s var(--xg-ease), opacity 0.3s var(--xg-ease)',
-              }}
-              onMouseEnter={(e) => { if (!sending) e.currentTarget.style.transform = 'translateY(-2px)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; }}
-            >
-              {sending ? 'Sending…' : 'Send Message'}
-              {!sending && <span style={{ fontSize: 18, lineHeight: 1 }}>&rarr;</span>}
-            </button>
+          <div data-reveal className="xg-form-actions">
+            <FormHoneypot value={form.website} onChange={set('website')} />
+            <FormError message={error} />
+            <FormSubmitButton
+              sending={sending}
+              idleLabel="Send Message"
+              sendingLabel="Sending…"
+            />
           </div>
         </Group>
       </form>

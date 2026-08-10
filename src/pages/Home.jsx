@@ -8,6 +8,7 @@ import { WhatYouLeaveWith } from '../components/sections/WhatYouLeaveWith';
 import { ProvenOutcomes } from '../components/sections/ProvenOutcomes';
 import { Insights } from '../components/sections/Insights';
 import { IsThisRightForMe } from '../components/sections/IsThisRightForMe';
+import { StepIntoNextLevel } from '../components/sections/StepIntoNextLevel';
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
       <div className="xg-stick-wrap">
         <Insights />
       </div>
+      <StepIntoNextLevel />
     </>
   );
 }

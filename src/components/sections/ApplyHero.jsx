@@ -8,11 +8,13 @@ function ApplyHeading() {
     <SplitHeading
       tag="h1"
       lines={['READY TO BUILD', 'YOUR EDGE?']}
+      lineClasses={['xdge-contact-hero-heading', 'xdge-contact-hero-heading']}
+      lineClipClasses={['xdge-about-us-clip', 'xdge-about-us-clip']}
       style={{
-        fontFamily: theme.display, fontWeight: 900,
-        fontSize: 'clamp(40px, 11.3vw, 200px)',
-        lineHeight: 0.92, letterSpacing: '-0.03em',
-        color: theme.base,
+        fontFamily: theme.displayCondensed,
+        fontSize: 'clamp(56px, 13vw, 220px)',
+        lineHeight: 0.86,
+        margin: 0,
       }}
     />
   );

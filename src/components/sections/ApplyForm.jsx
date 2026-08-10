@@ -1,7 +1,16 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { theme, fadeUp } from '../../theme';
+import { theme } from '../../theme';
 import { Group } from '../primitives/Reveal';
+import {
+  FormCheckbox,
+  FormError,
+  FormHoneypot,
+  FormIntro,
+  FormSubmitButton,
+  FormSuccess,
+  formFieldProps as f,
+} from '../forms/formShared';
+import { trackEvent } from '../../utils/analytics';
 
 const programmeOptions = [
   'School Application Edge',
@@ -52,123 +61,20 @@ const sourceOptions = [
   'Other',
 ];
 
-const sectionTitle = {
-  fontFamily: theme.displayTight,
-  fontSize: 'clamp(22px, 2.4vw, 30px)',
-  fontWeight: 700,
-  letterSpacing: '-0.005em',
-  color: theme.ink,
-  margin: 0,
-  paddingBottom: 'clamp(12px, 1.4vw, 18px)',
-  borderBottom: '1px solid rgba(0,0,0,0.14)',
-};
-
-const sectionHint = {
-  fontFamily: theme.body,
-  fontSize: 13,
-  color: '#555555',
-  marginTop: 8,
-  fontStyle: 'italic',
-};
-
-const fieldLabel = {
-  fontFamily: theme.body,
-  fontSize: 11,
-  fontWeight: 700,
-  letterSpacing: '0.16em',
-  textTransform: 'uppercase',
-  color: '#555555',
-  marginBottom: 10,
-  display: 'block',
-};
-
-const inputBase = {
-  width: '100%',
-  padding: '12px 0 14px',
-  background: 'transparent',
-  border: 'none',
-  borderBottom: '1px solid rgba(0,0,0,0.18)',
-  color: theme.ink,
-  fontFamily: theme.body,
-  fontSize: 16,
-  outline: 'none',
-  borderRadius: 0,
-  transition: 'border-color 0.3s var(--xg-ease)',
-};
-
-const checkboxLabel = {
-  display: 'inline-flex',
-  alignItems: 'flex-start',
-  gap: 12,
-  padding: '12px 0',
-  cursor: 'pointer',
-  fontFamily: theme.body,
-  fontSize: 'clamp(14px, 1.4vw, 16px)',
-  lineHeight: 1.45,
-  color: theme.ink,
-};
-
-const checkboxBox = {
-  width: 18,
-  height: 18,
-  border: '1px solid rgba(0,0,0,0.45)',
-  borderRadius: 2,
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  flexShrink: 0,
-  marginTop: 3,
-  background: 'transparent',
-  transition: 'border-color 0.25s var(--xg-ease), background 0.25s var(--xg-ease)',
-};
-
-function CheckedBox({ checked }) {
+function CheckGrid({ name, options, values, onToggle }) {
   return (
-    <span
-      style={{
-        ...checkboxBox,
-        borderColor: checked ? theme.ink : 'rgba(0,0,0,0.45)',
-        background: checked ? theme.ink : 'transparent',
-      }}
-      aria-hidden="true"
-    >
-      {checked && (
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="20 6 9 17 4 12" />
-        </svg>
-      )}
-    </span>
-  );
-}
-
-function CheckGrid({ name, options, values, onToggle, columns = 2 }) {
-  return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: `repeat(${columns}, 1fr)`,
-        columnGap: 'clamp(24px, 3vw, 40px)',
-        rowGap: 0,
-      }}
-      className="xg-check-grid"
-    >
-      {options.map((opt) => {
-        const checked = values.includes(opt);
-        return (
-          <label key={opt} style={checkboxLabel}>
-            <input
-              type="checkbox"
-              name={name}
-              value={opt}
-              checked={checked}
-              onChange={() => onToggle(opt)}
-              style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }}
-            />
-            <CheckedBox checked={checked} />
-            <span>{opt}</span>
-          </label>
-        );
-      })}
+    <div className="xg-form-check-grid">
+      {options.map((opt) => (
+        <FormCheckbox
+          key={opt}
+          name={name}
+          value={opt}
+          checked={values.includes(opt)}
+          onChange={() => onToggle(opt)}
+        >
+          {opt}
+        </FormCheckbox>
+      ))}
     </div>
   );
 }
@@ -188,22 +94,33 @@ export function ApplyForm() {
     goals5yr: '',
     format: [],
     source: [],
+    website: '',
   });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
 
-  const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
-  const toggle = (key) => (value) => setForm((f) => {
-    const arr = f[key];
+  const set = (key) => (e) => setForm((prev) => ({ ...prev, [key]: e.target.value }));
+  const toggle = (key) => (value) => setForm((prev) => {
+    const arr = prev[key];
     return {
-      ...f,
+      ...prev,
       [key]: arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value],
     };
   });
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (form.website) return;
+
+    if (form.guardianEmail) {
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.guardianEmail.trim());
+      if (!emailOk) {
+        setError('Please enter a valid guardian email address.');
+        return;
+      }
+    }
+
     setSending(true);
     setError('');
 
@@ -220,6 +137,7 @@ export function ApplyForm() {
         throw new Error(data.error || 'Something went wrong.');
       }
 
+      trackEvent('form_submit', { form_name: 'apply' });
       setSubmitted(true);
     } catch (err) {
       setError(err.message || 'Failed to send. Please try again.');
@@ -230,45 +148,16 @@ export function ApplyForm() {
 
   if (submitted) {
     return (
-      <section
-        data-screen-label="Apply Form"
-        data-section-theme="light"
-        style={{
-          background: theme.base, color: theme.ink,
-          padding: 'clamp(56px, 7vw, 80px) clamp(20px, 4vw, 40px)',
-        }}
-      >
-        <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
-          <motion.h2
-            data-no-reveal
-            initial={{ opacity: 0, y: 36 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
-            style={{
-              fontFamily: theme.displayTight, fontWeight: 600,
-              fontSize: 'clamp(42px, 6vw, 78px)',
-              lineHeight: 1.1, letterSpacing: '-0.01em',
-              margin: 0,
-            }}
-          >
-            Thank you &mdash; your enquiry is in.
-          </motion.h2>
-          <motion.p
-            data-no-reveal
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.2, 0.7, 0.2, 1] }}
-            style={{
-              fontFamily: theme.body, fontSize: 17, lineHeight: 1.55,
-              color: '#555555', marginTop: 24,
-            }}
-          >
-            Nicola and the team will personally review what you&rsquo;ve shared
-            and be in touch shortly to discuss the right pathway for your
-            goals.
-          </motion.p>
-        </div>
-      </section>
+      <FormSuccess
+        screenLabel="Apply Form"
+        title="Thank you — your enquiry is in."
+        body="Nicola and the team will personally review what you've shared."
+        steps={[
+          'We review your goals and programme interests',
+          'We recommend the best XDGE pathway for you',
+          'We follow up within 2–3 business days to discuss next steps',
+        ]}
+      />
     );
   }
 
@@ -276,65 +165,64 @@ export function ApplyForm() {
     <section
       data-screen-label="Apply Form"
       data-section-theme="light"
-      style={{
-        background: theme.base, color: theme.ink,
-        padding: 'clamp(90px, 11vw, 160px) clamp(20px, 4vw, 40px)',
-      }}
+      className="xg-form-section-shell"
+      style={{ background: theme.base, color: theme.ink }}
     >
-      <form onSubmit={onSubmit} style={{ maxWidth: 920, margin: '0 auto' }}>
-        <Group style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(48px, 6vw, 80px)' }}>
+      <form onSubmit={onSubmit} className="xg-form xg-form--wide">
+        <Group className="xg-form-stack">
+          <FormIntro
+            eyebrow="Apply"
+            title="Start your enquiry"
+            lede="Tell us about the participant, your goals, and what you're hoping XDGE can help with. The more context you share, the better we can recommend the right pathway."
+          />
 
-          {/* ── Section: Parent / Guardian Information ── */}
-          <fieldset data-reveal style={{ border: 0, padding: 0, margin: 0 }}>
-            <legend style={{ ...sectionTitle, width: '100%' }}>Parent / Guardian Information</legend>
-            <div style={sectionHint}>(Required if the participant is under 18 years of age)</div>
+          <fieldset data-reveal className={f.sectionClass}>
+            <legend className={f.sectionTitleClass}>Parent / Guardian Information</legend>
+            <p className={f.sectionHintClass}>(Required if the participant is under 18 years of age)</p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(28px, 3.4vw, 40px)', marginTop: 'clamp(28px, 3.4vw, 40px)' }}>
-              <label style={{ display: 'block' }}>
-                <span style={fieldLabel}>Parent / Guardian Name</span>
-                <input type="text" value={form.guardianName} onChange={set('guardianName')} style={inputBase} autoComplete="name" />
+            <div className={`${f.groupClass} xg-form-group--spaced`} style={{ marginTop: 'clamp(24px, 3vw, 32px)' }}>
+              <label className={f.fieldClass}>
+                <span className={f.labelClass}>Parent / Guardian Name</span>
+                <input type="text" value={form.guardianName} onChange={set('guardianName')} className={f.inputClass} autoComplete="name" />
               </label>
-              <div className="xg-2" style={{ gap: 'clamp(24px, 3vw, 40px)' }}>
-                <label style={{ display: 'block' }}>
-                  <span style={fieldLabel}>Email Address</span>
-                  <input type="email" value={form.guardianEmail} onChange={set('guardianEmail')} style={inputBase} autoComplete="email" />
+              <div className="xg-2">
+                <label className={f.fieldClass}>
+                  <span className={f.labelClass}>Email Address</span>
+                  <input type="email" value={form.guardianEmail} onChange={set('guardianEmail')} className={f.inputClass} autoComplete="email" />
                 </label>
-                <label style={{ display: 'block' }}>
-                  <span style={fieldLabel}>Phone Number</span>
-                  <input type="tel" value={form.guardianPhone} onChange={set('guardianPhone')} style={inputBase} autoComplete="tel" />
+                <label className={f.fieldClass}>
+                  <span className={f.labelClass}>Phone Number</span>
+                  <input type="tel" value={form.guardianPhone} onChange={set('guardianPhone')} className={f.inputClass} autoComplete="tel" />
                 </label>
               </div>
             </div>
           </fieldset>
 
-          {/* ── Section: Participant Information ── */}
-          <fieldset data-reveal style={{ border: 0, padding: 0, margin: 0 }}>
-            <legend style={{ ...sectionTitle, width: '100%' }}>Participant Information</legend>
+          <fieldset data-reveal className={f.sectionClass}>
+            <legend className={f.sectionTitleClass}>Participant Information</legend>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(28px, 3.4vw, 40px)', marginTop: 'clamp(28px, 3.4vw, 40px)' }}>
-              <label style={{ display: 'block' }}>
-                <span style={fieldLabel}>Participant Name</span>
-                <input required type="text" value={form.participantName} onChange={set('participantName')} style={inputBase} />
+            <div className={`${f.groupClass} xg-form-group--spaced`} style={{ marginTop: 'clamp(24px, 3vw, 32px)' }}>
+              <label className={f.fieldClass}>
+                <span className={f.labelClass}>Participant Name</span>
+                <input required type="text" value={form.participantName} onChange={set('participantName')} className={f.inputClass} />
               </label>
-              <div className="xg-2" style={{ gap: 'clamp(24px, 3vw, 40px)' }}>
-                <label style={{ display: 'block' }}>
-                  <span style={fieldLabel}>Age</span>
-                  <input type="text" inputMode="numeric" value={form.age} onChange={set('age')} style={inputBase} />
+              <div className="xg-2">
+                <label className={f.fieldClass}>
+                  <span className={f.labelClass}>Age</span>
+                  <input type="text" inputMode="numeric" value={form.age} onChange={set('age')} className={f.inputClass} />
                 </label>
-                <label style={{ display: 'block' }}>
-                  <span style={fieldLabel}>Current School, College, University or Workplace</span>
-                  <input type="text" value={form.institution} onChange={set('institution')} style={inputBase} />
+                <label className={f.fieldClass}>
+                  <span className={f.labelClass}>Current School, College, University or Workplace</span>
+                  <input type="text" value={form.institution} onChange={set('institution')} className={f.inputClass} />
                 </label>
               </div>
             </div>
           </fieldset>
 
-          {/* ── Section: Programme Interest ── */}
-          <fieldset data-reveal style={{ border: 0, padding: 0, margin: 0 }}>
-            <legend style={{ ...sectionTitle, width: '100%' }}>Which Programme Interests You?</legend>
-            <div style={sectionHint}>(Select all that apply)</div>
-
-            <div style={{ marginTop: 'clamp(20px, 2.4vw, 28px)' }}>
+          <fieldset data-reveal className={f.sectionClass}>
+            <legend className={f.sectionTitleClass}>Which Programme Interests You?</legend>
+            <p className={f.sectionHintClass}>(Select all that apply)</p>
+            <div style={{ marginTop: 'clamp(16px, 2vw, 24px)' }}>
               <CheckGrid
                 name="programmes"
                 options={programmeOptions}
@@ -344,12 +232,10 @@ export function ApplyForm() {
             </div>
           </fieldset>
 
-          {/* ── Section: Achievements ── */}
-          <fieldset data-reveal style={{ border: 0, padding: 0, margin: 0 }}>
-            <legend style={{ ...sectionTitle, width: '100%' }}>What Are You Hoping To Achieve?</legend>
-            <div style={sectionHint}>(Select all that apply)</div>
-
-            <div style={{ marginTop: 'clamp(20px, 2.4vw, 28px)' }}>
+          <fieldset data-reveal className={f.sectionClass}>
+            <legend className={f.sectionTitleClass}>What Are You Hoping To Achieve?</legend>
+            <p className={f.sectionHintClass}>(Select all that apply)</p>
+            <div style={{ marginTop: 'clamp(16px, 2vw, 24px)' }}>
               <CheckGrid
                 name="achievements"
                 options={achievementOptions}
@@ -358,74 +244,54 @@ export function ApplyForm() {
               />
             </div>
 
-            <label style={{ display: 'block', marginTop: 'clamp(28px, 3.4vw, 40px)' }}>
-              <span style={fieldLabel}>If Other, Please Explain (50 words maximum)</span>
+            <label className={f.fieldClass} style={{ marginTop: 'clamp(24px, 3vw, 32px)' }}>
+              <span className={f.labelClass}>If Other, Please Explain (50 words maximum)</span>
               <textarea
                 rows={3}
                 value={form.achievementOther}
                 onChange={set('achievementOther')}
                 maxLength={400}
-                style={{ ...inputBase, resize: 'vertical', minHeight: 80, padding: '12px 0 14px', lineHeight: 1.5 }}
+                className={f.textareaClass}
+                style={{ minHeight: 96 }}
               />
             </label>
           </fieldset>
 
-          {/* ── Section: Your Goals ── */}
-          <fieldset data-reveal style={{ border: 0, padding: 0, margin: 0 }}>
-            <legend style={{ ...sectionTitle, width: '100%' }}>Your Goals</legend>
+          <fieldset data-reveal className={f.sectionClass}>
+            <legend className={f.sectionTitleClass}>Your Goals</legend>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(28px, 3.4vw, 40px)', marginTop: 'clamp(28px, 3.4vw, 40px)' }}>
-              <label style={{ display: 'block' }}>
-                <span style={fieldLabel}>What would you like to achieve in the next 12 months?</span>
-                <textarea
-                  rows={4}
-                  value={form.goals12mo}
-                  onChange={set('goals12mo')}
-                  style={{ ...inputBase, resize: 'vertical', minHeight: 100, padding: '12px 0 14px', lineHeight: 1.55 }}
-                />
+            <div className={`${f.groupClass} xg-form-group--spaced`} style={{ marginTop: 'clamp(24px, 3vw, 32px)' }}>
+              <label className={f.fieldClass}>
+                <span className={f.labelClass}>What would you like to achieve in the next 12 months?</span>
+                <textarea rows={4} value={form.goals12mo} onChange={set('goals12mo')} className={f.textareaClass} />
               </label>
-              <label style={{ display: 'block' }}>
-                <span style={fieldLabel}>What would you like to achieve in the next 5 years?</span>
-                <textarea
-                  rows={4}
-                  value={form.goals5yr}
-                  onChange={set('goals5yr')}
-                  style={{ ...inputBase, resize: 'vertical', minHeight: 100, padding: '12px 0 14px', lineHeight: 1.55 }}
-                />
+              <label className={f.fieldClass}>
+                <span className={f.labelClass}>What would you like to achieve in the next 5 years?</span>
+                <textarea rows={4} value={form.goals5yr} onChange={set('goals5yr')} className={f.textareaClass} />
               </label>
             </div>
           </fieldset>
 
-          {/* ── Section: Preferred Learning Format ── */}
-          <fieldset data-reveal style={{ border: 0, padding: 0, margin: 0 }}>
-            <legend style={{ ...sectionTitle, width: '100%' }}>Preferred Learning Format</legend>
-
-            <div style={{ marginTop: 'clamp(20px, 2.4vw, 28px)', display: 'flex', flexWrap: 'wrap', gap: 'clamp(20px, 3vw, 36px)' }}>
-              {formatOptions.map((opt) => {
-                const checked = form.format.includes(opt);
-                return (
-                  <label key={opt} style={checkboxLabel}>
-                    <input
-                      type="checkbox"
-                      name="format"
-                      value={opt}
-                      checked={checked}
-                      onChange={() => toggle('format')(opt)}
-                      style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }}
-                    />
-                    <CheckedBox checked={checked} />
-                    <span>{opt}</span>
-                  </label>
-                );
-              })}
+          <fieldset data-reveal className={f.sectionClass}>
+            <legend className={f.sectionTitleClass}>Preferred Learning Format</legend>
+            <div className="xg-form-check-row" style={{ marginTop: 'clamp(16px, 2vw, 24px)' }}>
+              {formatOptions.map((opt) => (
+                <FormCheckbox
+                  key={opt}
+                  name="format"
+                  value={opt}
+                  checked={form.format.includes(opt)}
+                  onChange={() => toggle('format')(opt)}
+                >
+                  {opt}
+                </FormCheckbox>
+              ))}
             </div>
           </fieldset>
 
-          {/* ── Section: How Did You Hear ── */}
-          <fieldset data-reveal style={{ border: 0, padding: 0, margin: 0 }}>
-            <legend style={{ ...sectionTitle, width: '100%' }}>How Did You Hear About XDGE?</legend>
-
-            <div style={{ marginTop: 'clamp(20px, 2.4vw, 28px)' }}>
+          <fieldset data-reveal className={f.sectionClass}>
+            <legend className={f.sectionTitleClass}>How Did You Hear About XDGE?</legend>
+            <div style={{ marginTop: 'clamp(16px, 2vw, 24px)' }}>
               <CheckGrid
                 name="source"
                 options={sourceOptions}
@@ -435,42 +301,14 @@ export function ApplyForm() {
             </div>
           </fieldset>
 
-          {/* Submit */}
-          <div data-reveal style={{ paddingTop: 8 }}>
-            {error && (
-              <div style={{
-                padding: '12px 18px',
-                marginBottom: 16,
-                background: '#FFF0F0',
-                border: '1px solid #FFD0D0',
-                borderRadius: 8,
-                color: '#CC0000',
-                fontFamily: theme.body,
-                fontSize: 14,
-              }}>
-                {error}
-              </div>
-            )}
-            <button
-              type="submit"
-              disabled={sending}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 14,
-                padding: '18px 32px',
-                background: sending ? '#555' : theme.ink, color: theme.base,
-                border: 'none', borderRadius: 999,
-                fontFamily: theme.body, fontSize: 14, fontWeight: 600,
-                letterSpacing: '0.04em', textTransform: 'uppercase',
-                cursor: sending ? 'not-allowed' : 'pointer',
-                opacity: sending ? 0.7 : 1,
-                transition: 'transform 0.3s var(--xg-ease), opacity 0.3s var(--xg-ease)',
-              }}
-              onMouseEnter={(e) => { if (!sending) e.currentTarget.style.transform = 'translateY(-2px)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; }}
-            >
-              {sending ? 'Submitting…' : 'Submit Your Enquiry'}
-              {!sending && <span style={{ fontSize: 18, lineHeight: 1 }}>&rarr;</span>}
-            </button>
+          <div data-reveal className="xg-form-actions">
+            <FormHoneypot value={form.website} onChange={set('website')} />
+            <FormError message={error} />
+            <FormSubmitButton
+              sending={sending}
+              idleLabel="Submit Your Enquiry"
+              sendingLabel="Submitting…"
+            />
           </div>
         </Group>
       </form>

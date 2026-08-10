@@ -209,20 +209,22 @@ export function ProvenOutcomes() {
       }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        <Group style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: 'clamp(40px, 6vw, 64px)', gap: 16 }}>
+        <Group className="xg-exp-heading-block" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: 'clamp(40px, 6vw, 64px)', gap: 16 }}>
           <div>
             <SplitHeading
-              lines={['REVIEWS']}
+              lines={[<span className="xdge-reviews-hollow">REVIEWS</span>]}
+              lineClipClasses={['xdge-reviews-clip']}
               style={{
-                fontFamily: theme.display, fontWeight: 900,
-                fontSize: 'clamp(40px, 11.3vw, 200px)',
-                lineHeight: 0.95, letterSpacing: '-0.02em',
-                margin: 0, textTransform: 'uppercase'
+                fontFamily: theme.displayCondensed,
+                lineHeight: 0.95,
+                letterSpacing: '-0.02em',
+                textTransform: 'uppercase',
+                margin: 0,
               }}
             />
           </div>
-          <div data-reveal style={{ paddingBottom: 24, color: theme.base }}>
-            <p style={{ fontSize: 'clamp(15px, 1.6vw, 17px)', lineHeight: 1.55, margin: '0 0 12px', color: theme.base, fontWeight: 500 }}>
+          <div data-reveal className="xg-section-lede-wrap" style={{ paddingBottom: 24, color: theme.base }}>
+            <p className="xg-section-lede" style={{ fontSize: 'clamp(15px, 1.6vw, 17px)', lineHeight: 1.55, margin: '0 0 12px', color: theme.base, fontWeight: 500 }}>
               What Young People And Parents Say About XDGE
             </p>
             <p style={{ fontSize: 14, lineHeight: 1.55, color: theme.base, margin: 0, maxWidth: 480 }}>

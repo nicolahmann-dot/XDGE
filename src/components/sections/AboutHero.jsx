@@ -1,9 +1,6 @@
-import { theme, fadeUp } from '../../theme';
-import { Group } from '../primitives/Reveal';
+import { theme } from '../../theme';
 import { SplitHeading } from '../primitives/SplitHeading';
 import { HeroAmbient } from '../HeroAmbient';
-
-const fadeEase = [0.2, 0.7, 0.2, 1];
 
 export function AboutHero() {
   return (
@@ -20,22 +17,19 @@ export function AboutHero() {
       <HeroAmbient src="/assets/videos/gold_swirls.mp4" overlayOpacity={0.25} />
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <SplitHeading
-          lines={[
-            <>
-              <span className="hollow-text">ABOUT</span>{' '}
-              <span className="cyan-text">US</span>
-            </>
-          ]}
+          tag="h1"
+          lines={['ABOUT US']}
+          lineInnerClasses={['xdge-about-us-filled']}
+          lineClipClasses={['xdge-about-us-clip']}
           style={{
-            fontFamily: theme.display, fontWeight: 900,
+            fontFamily: theme.displayCondensed,
             fontSize: 'clamp(40px, 11.3vw, 200px)',
-            lineHeight: 0.95, letterSpacing: '-0.06em',
+            lineHeight: 0.86,
             margin: 0,
           }}
         />
 
-        {/* Bottom-right intro block — bold heading, divider, body */}
-        <div style={{
+        <div className="xg-about-hero-copy" style={{
           display: 'flex', justifyContent: 'flex-end',
           marginTop: 'clamp(120px, 22vw, 360px)',
         }}>

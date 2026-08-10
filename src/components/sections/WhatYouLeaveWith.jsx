@@ -47,23 +47,23 @@ export function WhatYouLeaveWith() {
         padding: 'clamp(80px, 9vw, 120px) 0',
       }}
     >
-      <div style={{ textAlign: 'center', marginBottom: 60, position: 'relative', zIndex: 10, padding: '0 clamp(20px, 4vw, 40px)' }}>
+      <div className="xg-leave-with-header" style={{ marginBottom: 60, position: 'relative', zIndex: 10 }}>
         <SplitHeading
-          lineClasses={['hollow-text', 'cyan-text']}
           lines={[
-            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>WHAT YOU</span>,
-            <span style={{ display: 'block', whiteSpace: 'nowrap' }}>LEAVE WITH</span>,
+            <span className="xdge-leave-with-solid">WHAT YOU</span>,
+            <span className="xdge-leave-with-hollow">LEAVE WITH</span>,
           ]}
+          lineClipClasses={['xdge-leave-with-clip', 'xdge-leave-with-clip']}
           style={{
-            fontFamily: theme.display,
-            fontSize: 'clamp(40px, 11.3vw, 200px)',
-            fontWeight: 900,
-            letterSpacing: '-0.02em',
+            fontFamily: theme.displayCondensed,
             lineHeight: 0.95,
+            letterSpacing: '-0.02em',
             textTransform: 'uppercase',
+            width: 'fit-content',
+            maxWidth: '100%',
           }}
         />
-        <p style={{
+        <p className="xg-section-lede" style={{
           color: theme.subtitle,
           marginTop: 16,
           fontSize: 'clamp(16px, 1.8vw, 24px)',

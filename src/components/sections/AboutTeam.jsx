@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { theme, fadeUp } from '../../theme';
 import { Group } from '../primitives/Reveal';
 import { SplitHeading } from '../primitives/SplitHeading';
-import { ParallaxImage } from '../primitives/ParallaxImage';
 
 const team = [
   {
@@ -109,12 +108,29 @@ function Bio({ intro, more }) {
 
 function Avatar({ src, alt }) {
   return (
-    <ParallaxImage
-      src={src}
-      alt={alt}
-      objectPosition="50% 35%"
-      style={{ width: '100%', aspectRatio: '1 / 1', background: '#000000' }}
-    />
+    <div
+      className="xg-team-avatar"
+      style={{
+        width: '100%',
+        aspectRatio: '1 / 1',
+        overflow: 'hidden',
+        background: '#000000',
+      }}
+    >
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: '50% 35%',
+          display: 'block',
+        }}
+      />
+    </div>
   );
 }
 
@@ -131,18 +147,21 @@ export function AboutTeam() {
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <SplitHeading
+          tag="h2"
           lines={[
             <>
-              <span className="hollow-text">THE</span>{' '}
-              <span style={{ color: theme.base }}>TEAM</span>
-            </>
+              <span className="xdge-team-the">THE</span>
+              <span className="xdge-team-team">TEAM</span>
+            </>,
           ]}
+          lineClipClasses={['xdge-team-heading-clip']}
+          lineInnerClasses={['xdge-team-heading-line']}
           style={{
-            fontFamily: theme.display, fontWeight: 900,
+            fontFamily: theme.displayCondensed,
             fontSize: 'clamp(40px, 11.3vw, 200px)',
-            lineHeight: 0.95, letterSpacing: '-0.02em',
+            lineHeight: 1,
             marginBottom: 'clamp(40px, 6vw, 72px)',
-            textAlign: 'center',
+            textAlign: 'left',
           }}
         />
 
@@ -156,7 +175,7 @@ export function AboutTeam() {
               viewport={{ once: true, amount: 0.2 }}
               className="xg-team-row"
             >
-              {/* Col 1: intro (first row only) */}
+              {/* Col 1: intro (first row only; empty cell keeps desktop columns aligned) */}
               <div className="xg-team-intro">
                 {i === 0 ? (
                   <>

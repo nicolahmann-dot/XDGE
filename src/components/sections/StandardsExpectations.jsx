@@ -49,23 +49,28 @@ export function StandardsExpectations() {
       }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-        <Group style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: 'clamp(40px, 6vw, 64px)', gap: 32 }}>
+        <Group className="xg-exp-heading-block" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: 'clamp(40px, 6vw, 64px)', gap: 32 }}>
           <div style={{ width: '100%' }}>
             <SplitHeading
-              lines={['STANDARDS &', 'EXPECTATIONS']}
-              lineClasses={['hollow-text', 'cyan-text']}
+              lines={[
+                <span className="xdge-standards-top-line">
+                  <span className="xdge-standards-solid">STANDARDS</span>
+                  <span className="xdge-amp-box">&</span>
+                </span>,
+                <span className="xdge-standards-hollow">EXPECTATIONS</span>,
+              ]}
+              lineClipClasses={['xdge-standards-clip', 'xdge-standards-clip']}
               style={{
-                fontFamily: theme.display, fontWeight: 900,
-                // Capped below the usual 200px: this line is nowrap inside a container that
-            // stops at maxWidth 1280 while 11.3vw keeps growing, so past a ~1770px
-            // viewport it overflowed and the clip shaved the end off — "EXPECTATIONS" measured 1669px against 1280px.
-            fontSize: 'clamp(40px, 11.3vw, 150px)',
-                lineHeight: 0.95, letterSpacing: '-0.02em',
+                fontFamily: theme.displayCondensed,
+                lineHeight: 0.95,
+                letterSpacing: '-0.02em',
+                textTransform: 'uppercase',
                 textAlign: 'left',
               }}
             />
           </div>
           <p
+            className="xg-section-lede"
             data-reveal
             style={{
               fontSize: 'clamp(15px, 1.6vw, 18px)', lineHeight: 1.55,

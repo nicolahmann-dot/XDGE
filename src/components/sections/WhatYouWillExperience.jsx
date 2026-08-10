@@ -56,24 +56,24 @@ export function WhatYouWillExperience() {
       }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+        <div className="xg-exp-heading-block">
         <SplitHeading
           lines={[
-            <>
-              <span className="cyan-text">WHAT YOU</span>{' '}
-              <span style={{ color: theme.base }}>WILL</span>
-            </>,
-            <span className="hollow-text">EXPERIENCE</span>,
+            <span className="xdge-the-exp-line">
+              <span className="xdge-the-exp-solid">THE</span>{' '}
+              <span className="xdge-the-exp-hollow">EXPERIENCE</span>
+            </span>,
           ]}
+          lineClipClasses={['xdge-the-exp-clip']}
           style={{
-            fontFamily: theme.display, fontWeight: 900,
-            // Capped below the usual 200px: this line is nowrap inside a container that
-            // stops at maxWidth 1280 while 11.3vw keeps growing, so past a ~1770px
-            // viewport it overflowed and the clip shaved the end off — "EXPERIENCE" measured 1341px against 1280px.
-            fontSize: 'clamp(40px, 11.3vw, 185px)',
-            lineHeight: 0.92, letterSpacing: '-0.02em',
+            fontFamily: theme.displayCondensed,
+            fontSize: 'clamp(40px, 11.3vw, 200px)',
+            lineHeight: 1,
             textAlign: 'left',
+            textTransform: 'uppercase',
           }}
         />
+        </div>
 
         {/* icon + title + description list */}
         <div style={{
@@ -111,17 +111,28 @@ export function WhatYouWillExperience() {
         </div>
 
         {/* The People Behind Your Progress — bottom right */}
-        <div data-reveal style={{
-          marginLeft: 'auto', maxWidth: 560,
+        <div data-reveal className="xg-people-block xg-exp-heading-block" style={{
+          maxWidth: 560,
           marginTop: 'clamp(40px, 6vw, 80px)',
         }}>
-          <h3 style={{
-            margin: 0, fontFamily: theme.subheading, fontWeight: 400,
-            fontSize: 'clamp(22px, 2.6vw, 34px)', letterSpacing: '-0.01em',
-            color: theme.base,
-          }}>
-            The People Behind Your Progress
-          </h3>
+          <SplitHeading
+            tag="h3"
+            lines={[
+              <span className="xdge-people-hollow xdge-people-line-narrow">THE PEOPLE BEHIND YOUR</span>,
+              <span className="xdge-people-solid">PROGRESS.</span>,
+            ]}
+            lineClipClasses={[
+              'xdge-people-clip',
+              'xdge-people-clip xdge-people-clip-solid',
+            ]}
+            style={{
+              fontFamily: theme.displayCondensed,
+              fontSize: 'clamp(32px, 6.2vw, 88px)',
+              lineHeight: 0.92,
+              textAlign: 'left',
+              textTransform: 'uppercase',
+            }}
+          />
           <div style={{ height: 1, background: 'rgba(255,255,255,0.2)', margin: 'clamp(16px, 2vw, 24px) 0' }} />
           <p style={{
             margin: 0, fontFamily: theme.body,

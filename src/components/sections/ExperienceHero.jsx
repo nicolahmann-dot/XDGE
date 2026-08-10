@@ -31,31 +31,30 @@ export function ExperienceHero() {
         display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
         gap: 'clamp(40px, 6vw, 72px)',
       }}>
-        {/* Two-line hero — "HOW XDGE" (size B) over "WORKS" (size A), cyan X.
-            No scroll parallax on this block. It used to drift up 120px and fade to
-            0.4 opacity as the page scrolled, on top of the mask — which is why this
-            heading read differently from every other one on the site. The section
-            headings all measure the same on both pages (THE JOURNEY 0.70s, OUR
-            PERFORMANCE FORMULA 0.65s, WHAT YOU LEAVE WITH 0.70s, IS THIS RIGHT FOR
-            ME 0.65s); the drift was the only thing setting the hero apart. Dropping
-            it also removes a scroll subscriber. */}
+        {/* Three-line hero — hollow HOW / WORKS + client XDGE logo PNG. */}
         <div style={{ marginTop: 8 }}>
           <SplitHeading
             tag="h1"
             lines={[
-              <span style={{ display: 'block', whiteSpace: 'nowrap', fontSize: '0.45em', paddingBottom: '0.1em' }}>
-                <span className="hollow-text" style={{ paddingRight: '0.28em' }}>HOW</span>
-                <span className="cyan-text">X</span>
-                <span className="hollow-text">DGE</span>
+              <span className="xdge-how-works-stack">
+                <span className="xdge-how-works-kicker">HOW</span>
+                <img
+                  src="/assets/New Logo/Artboard 3.png"
+                  alt="XDGE"
+                  className="xdge-how-works-logo-img"
+                  decoding="async"
+                />
+                <span className="xdge-how-works-kicker xdge-how-works-kicker-bottom">WORKS</span>
               </span>,
-              <span className="hollow-text" style={{ display: 'block' }}>WORKS</span>,
             ]}
+            lineClipClasses={['xdge-clip-tight-y xdge-how-works-clip']}
             style={{
-              fontFamily: theme.display, fontWeight: 900,
-              fontSize: 'clamp(40px, 11.3vw, 200px)',
-              lineHeight: 0.95, letterSpacing: '-0.03em',
+              fontFamily: theme.displayCondensed,
+              fontSize: 'clamp(60px, 15vw, 230px)',
+              lineHeight: 1,
               textTransform: 'uppercase',
               textAlign: 'center',
+              margin: 0,
             }}
           />
         </div>
@@ -69,7 +68,7 @@ export function ExperienceHero() {
               maxWidth: 640,
             }}
           >
-            <div style={{
+            <div className="xg-experience-hero-tags" style={{
               fontFamily: theme.display, fontWeight: 900,
               fontSize: 'clamp(13px, 1.4vw, 20px)',
               lineHeight: 1.2, letterSpacing: '-0.01em',

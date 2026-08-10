@@ -180,27 +180,25 @@ export function IsThisRightForMe() {
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         {/* Full-width heading so it lays out as a clean 2-liner (IS THIS / RIGHT FOR ME)
             instead of being squeezed by the 2-column grid; CTA drops below, right-aligned. */}
-        <Group style={{ marginBottom: 'clamp(40px, 6vw, 64px)' }}>
+        <Group className="xg-exp-heading-block" style={{ marginBottom: 'clamp(40px, 6vw, 64px)' }}>
           <SplitHeading
-            lineClasses={['cyan-text', 'hollow-text']}
             lines={[
-              // Kicker line is 0.45em of the h2 size; the size lives on an inner
-              // span so the line's own clip is measured against it.
-              <span style={{ display: 'block', fontSize: '0.45em', letterSpacing: '0.02em' }}>IS THIS RIGHT</span>,
-              'FOR ME',
+              <span className="xdge-right-for-me-kicker">THINK YOU&rsquo;RE NOT</span>,
+              <span className="xdge-right-for-me-solid">THE &lsquo;LEADERSHIP TYPE&rsquo;?</span>,
             ]}
+            lineClipClasses={['xdge-right-for-me-clip xdge-right-for-me-clip-kicker', 'xdge-right-for-me-clip']}
             style={{
-              fontFamily: theme.display, fontWeight: 900,
-              fontSize: 'clamp(40px, 11.3vw, 200px)',
-              lineHeight: 0.95, letterSpacing: '-0.02em',
-              textTransform: 'uppercase'
+              fontFamily: theme.displayCondensed,
+              lineHeight: 0.95,
+              letterSpacing: '-0.02em',
+              textTransform: 'uppercase',
             }}
           />
-          <motion.div data-no-reveal variants={fadeUp} style={{
+          <motion.div data-no-reveal variants={fadeUp} className="xg-right-for-me-cta" style={{
             display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end',
             flexWrap: 'wrap', gap: 24, marginTop: 'clamp(24px, 3vw, 40px)',
           }}>
-            <div style={{ maxWidth: 480, textAlign: 'right' }}>
+            <div className="xg-right-for-me-cta-copy" style={{ maxWidth: 480, textAlign: 'right' }}>
               <p style={{
                 fontSize: 'clamp(15px, 1.6vw, 17px)', lineHeight: 1.55,
                 color: theme.base, margin: '0 0 18px',

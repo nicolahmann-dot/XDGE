@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { theme, fadeUp } from '../../theme';
 import { Group } from '../primitives/Reveal';
+import { SplitHeading } from '../primitives/SplitHeading';
 
 const CALENDLY_URL = 'https://calendly.com/thexdge/strategy-session';
 const EMBED_URL = `${CALENDLY_URL}?hide_event_type_details=0&hide_gdpr_banner=1`;
@@ -23,21 +24,20 @@ export function DiscoveryMeeting() {
           gap: 'clamp(32px, 5vw, 56px)',
           alignItems: 'flex-start',
         }}>
-          <h2
-            data-reveal="left"
+          <SplitHeading
+            tag="h2"
+            lines={['SCHEDULE A', 'DISCOVERY MEETING']}
+            lineClipClasses={['xdge-about-us-clip', 'xdge-condensed-clip-narrow']}
+            lineInnerClasses={[undefined, 'xdge-condensed-text-narrow']}
             style={{
-              fontFamily: theme.displayTight,
-              fontWeight: 600,
-              fontSize: 'clamp(40px, 11.3vw, 200px)',
-              lineHeight: 1.05,
-              letterSpacing: '-0.02em',
+              fontFamily: theme.displayCondensed,
+              fontSize: 'clamp(44px, 10vw, 170px)',
+              lineHeight: 0.86,
               margin: 0,
               color: theme.ink,
-              maxWidth: '20ch',
+              textTransform: 'uppercase',
             }}
-          >
-            Schedule a Discovery Meeting
-          </h2>
+          />
 
           <div
             data-reveal

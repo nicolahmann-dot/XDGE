@@ -56,15 +56,18 @@ export function IncubatorPathways() {
             </div>
             <div style={{ width: 96, height: 2, background: 'rgba(255,255,255,0.55)', margin: 'clamp(14px,1.6vw,20px) 0 clamp(24px,3vw,36px)' }} />
 
-            <SplitHeading
-              lines={['Entrepreneur & Incubator Pathways']}
-              style={{
-                fontFamily: theme.display, fontWeight: 900,
-                fontSize: 'clamp(34px, 6vw, 92px)',
-                lineHeight: 1.0, letterSpacing: '-0.02em',
-                color: '#FFFFFF',
-              }}
-            />
+            <div className="xg-exp-heading-block">
+              <SplitHeading
+                tag="h2"
+                lines={['Entrepreneur & Incubator Pathways']}
+                style={{
+                  fontFamily: theme.display, fontWeight: 900,
+                  fontSize: 'clamp(44px, 7.8vw, 118px)',
+                  lineHeight: 1.0, letterSpacing: '-0.02em',
+                  color: '#FFFFFF',
+                }}
+              />
+            </div>
 
             <div style={{ width: 96, height: 2, background: 'rgba(255,255,255,0.55)', margin: 'clamp(28px,3.4vw,44px) 0' }} />
 

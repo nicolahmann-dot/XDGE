@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { theme } from '../theme';
 import { useScrollLock } from '../hooks/useScrollLock';
-import { Logo } from './Logo';
+import { SocialLinks } from './SocialLinks';
 
 const MotionLink = motion(Link);
 
@@ -17,39 +17,7 @@ const primaryLinks = [
 const secondaryLinks = [
   { label: 'Apply', to: '/apply' },
   { label: 'Contact', to: '/contact' },
-  { label: 'Insights', href: '#' },
-];
-
-const socialLinks = [
-  {
-    name: 'Instagram',
-    href: '#',
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="18" height="18" rx="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none" />
-      </svg>
-    ),
-  },
-  {
-    name: 'LinkedIn',
-    href: '#',
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
-      </svg>
-    ),
-  },
-  {
-    name: 'Facebook',
-    href: '#',
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.51 1.5-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/>
-      </svg>
-    ),
-  },
+  { label: 'Insights', to: '/insights' },
 ];
 
 const overlayEase = [0.76, 0, 0.24, 1];
@@ -91,6 +59,13 @@ export function TopBar() {
   // Locks the page behind the panel without the 8px scrollbar reflow — see the hook.
   useScrollLock(open);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   // Detect which section's bg is currently behind the header band, switch colors accordingly.
   // Using IntersectionObserver eliminates forced synchronous layout (layout thrashing) on scroll.
   const currentThemeRef = useRef(sectionTheme);
@@ -121,6 +96,7 @@ export function TopBar() {
 
   // Hamburger adapts: black when open, otherwise dark on light / white on dark
   const fg = open ? '#000000' : (sectionTheme === 'light' ? theme.ink : theme.base);
+  const markTheme = open ? 'light' : sectionTheme;
 
   const barBase = {
     height: 2, display: 'block', background: fg,
@@ -147,9 +123,19 @@ export function TopBar() {
           padding: 'clamp(16px, 3vw, 24px) clamp(20px, 4vw, 40px)',
           gap: 16,
         }}>
-          <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-            {/* Logo removed per request */}
-          </div>
+          <Link
+            to="/"
+            className={`xg-home-mark xg-home-mark--${markTheme}${scrolled && !open ? ' is-scrolled' : ''}`}
+            data-cursor="grow"
+            aria-label="XDGE Home"
+            onClick={() => { setNavigating(false); setOpen(false); }}
+          >
+            <img
+              src="/assets/New Logo/Artboard 3.png"
+              alt=""
+              decoding="async"
+            />
+          </Link>
 
           <button
             onClick={() => { setNavigating(false); setOpen((o) => !o); }}
@@ -323,7 +309,7 @@ export function TopBar() {
                     gap: 'clamp(2px, 0.4vw, 4px)',
                   }}
                 >
-                  {secondaryLinks.map(({ label, href, to }, i) => {
+                  {secondaryLinks.map(({ label, to }, i) => {
                     const idx = i + primaryLinks.length;
                     const linkStyle = {
                       display: 'block',
@@ -345,11 +331,7 @@ export function TopBar() {
                     };
                     return (
                       <span key={label} style={clip}>
-                        {to ? (
-                          <MotionLink to={to} {...shared}>{label}</MotionLink>
-                        ) : (
-                          <motion.a href={href} {...shared}>{label}</motion.a>
-                        )}
+                        <MotionLink to={to} {...shared}>{label}</MotionLink>
                       </span>
                     );
                   })}
@@ -364,27 +346,7 @@ export function TopBar() {
                     textTransform: 'uppercase', color: '#000000',
                     marginBottom: 12, fontWeight: 600,
                   }}>Follow Us</div>
-                  <div style={{
-                    display: 'flex', gap: 14,
-                    justifyContent: 'flex-end', flexWrap: 'wrap',
-                  }}>
-                    {socialLinks.map((s) => (
-                      <motion.a
-                        key={s.name}
-                        href={s.href}
-                        aria-label={s.name}
-                        data-cursor="grow"
-                        whileHover={{ y: -3 }}
-                        transition={{ duration: 0.25 }}
-                        style={{
-                          width: 36, height: 36, borderRadius: '50%',
-                          border: `1px solid rgba(0,0,0,0.2)`,
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          color: '#000000', textDecoration: 'none',
-                        }}
-                      >{s.icon}</motion.a>
-                    ))}
-                  </div>
+                  <SocialLinks theme="light" justify="flex-end" />
                 </motion.div>
               </div>
             </div>

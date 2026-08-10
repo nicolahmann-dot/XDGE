@@ -8,6 +8,8 @@ html {
      frame timings looked clean while it still read as the animation stuttering.
      With the gutter always reserved, locking the scroll changes nothing. */
   scrollbar-gutter: stable;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 html,
@@ -458,8 +460,18 @@ section[data-screen-label^="01"]>div:not(.xg-hero-ambient) {
     gap: clamp(20px, 3vw, 32px);
   }
 
+  /* Empty intro placeholder — desktop grid spacer, hidden on mobile stack */
+  .xg-team-intro:not(:has(*)) {
+    display: none;
+  }
+
   .xg-team-image {
-    max-width: 360px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .xg-team-avatar {
+    width: 100%;
   }
 }
 
@@ -793,16 +805,151 @@ section[data-screen-label] {
   /* …but the HOME hero must stay full-screen on mobile (the rule above was
      collapsing it to ~content height, so the page didn't "start" on the hero). */
   section[data-screen-label="01 Hero"] {
-    min-height: 100vh !important;
-    min-height: 100svh !important;
+    min-height: auto !important;
   }
 
-  /* The XDGE lockup is centred in the full hero height on desktop, but on a
-     100vh phone that puts it right on top of the bottom "For Young People"
-     copy. Centre it in the UPPER portion instead so the two never overlap. */
-  section[data-screen-label="01 Hero"] .xg-hero-lockup {
-    height: 56vh !important;
-    height: 56svh !important;
+  /* Home hero lockup — compact stack on mobile (no forced viewport stretch) */
+  section[data-screen-label="01 Hero"] .xg-hero-brand-lockup {
+    position: relative !important;
+    height: auto !important;
+    min-height: auto !important;
+    justify-content: flex-start !important;
+    gap: clamp(4px, 1.2vw, 8px) !important;
+    padding-top: clamp(84px, 13vh, 112px) !important;
+    padding-bottom: clamp(12px, 2.5vw, 20px) !important;
+    transform: none !important;
+  }
+
+  section[data-screen-label="01 Hero"] .xg-hero-brand-kicker {
+    margin: 0 !important;
+    font-size: clamp(28px, 9vw, 48px);
+    letter-spacing: 0.1em;
+    text-indent: 0;
+  }
+
+  section[data-screen-label="01 Hero"] .xg-hero-brand-logo {
+    width: min(100%, clamp(260px, 78vw, 500px));
+    margin: 0 !important;
+  }
+
+  section[data-screen-label="01 Hero"] .xg-hero-brand-tagline {
+    margin: 0 !important;
+    font-size: clamp(16px, 5vw, 24px);
+    letter-spacing: 0.14em;
+    text-indent: 0.14em;
+    line-height: 1.2 !important;
+  }
+
+  section[data-screen-label="01 Hero"] .xg-hero-brand-keywords {
+    margin: 0 !important;
+    font-size: clamp(12px, 3.4vw, 16px);
+    letter-spacing: 0.18em;
+    text-indent: 0.18em;
+    line-height: 1.2 !important;
+  }
+}
+
+/* Home hero — video fills first viewport only; lockup sits above */
+.xg-home-hero .xg-video-bg-container {
+  height: 100vh;
+  height: 100svh;
+  bottom: auto;
+}
+
+/* Home hero — Artboard 3 logo + brand lockup typography */
+.xg-hero-brand-lockup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  height: 100svh;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: clamp(72px, 11vh, 128px) clamp(20px, 4vw, 40px) 0;
+  text-align: center;
+  transform: translateY(-2vh);
+}
+
+/* Chrome / silver foil — matches Artboard 3 metallic letterforms */
+.xg-hero-brand-kicker,
+.xg-hero-brand-tagline,
+.xg-hero-brand-keywords {
+  background: linear-gradient(
+    180deg,
+    #f4f4f4 0%,
+    #ffffff 18%,
+    #d4d4d4 42%,
+    #8a8a8a 58%,
+    #3d3d3d 78%,
+    #1a1a1a 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.35));
+}
+
+.xg-hero-brand-kicker {
+  margin: 0 0 clamp(4px, 0.6vw, 8px);
+  font-family: 'Bebas Neue', 'Inter', sans-serif;
+  font-size: clamp(32px, 5.5vw, 72px);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-indent: 0;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.xg-hero-brand-logo {
+  display: block;
+  width: min(100%, clamp(260px, 62vw, 840px));
+  height: auto;
+  aspect-ratio: 1191 / 358;
+  margin: 0;
+}
+
+.xg-hero-brand-tagline {
+  margin: clamp(10px, 1.5vw, 18px) 0 0;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(18px, 2.35vw, 34px);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  max-width: 36em;
+}
+
+.xg-hero-brand-keywords {
+  margin: clamp(12px, 1.6vw, 20px) 0 0;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(13px, 1.55vw, 20px);
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-indent: 0.26em;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+
+@media (max-width: 768px) {
+  section[data-screen-label="01 Hero"].xg-home-hero {
+    min-height: auto !important;
+    display: block !important;
+  }
+
+  section[data-screen-label="01 Hero"] .xg-hero-copy {
+    position: relative !important;
+    bottom: auto !important;
+    right: auto !important;
+    max-width: 100% !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    padding: clamp(28px, 5vw, 40px) clamp(16px, 4vw, 24px) clamp(48px, 8vw, 64px) !important;
   }
 }
 
@@ -1197,6 +1344,1619 @@ section[data-screen-label] {
   letter-spacing: 0.02em;
 }
 
+/* Condensed display headings — matches Canva PNG set (Bebas Neue + stroke). */
+.xdge-condensed-hollow {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.96);
+  text-stroke: 1px rgba(255, 255, 255, 0.96);
+  paint-order: stroke fill;
+  /* Bebas at display sizes reads loose unless tracked in; stroke widens gaps further. */
+  letter-spacing: -0.035em;
+}
+
+/* Hero lines like "OUR" — only 3 glyphs; tight but not touching. */
+.xdge-condensed-hollow-tight {
+  letter-spacing: -0.035em;
+}
+
+/* Contact hero — black fill + white stroke. */
+.xdge-contact-hero-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.98);
+  text-stroke: 2px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+  letter-spacing: -0.035em;
+}
+
+/* Hollow stroke on light sections (Contact discovery, etc.). */
+.xdge-condensed-hollow-ink {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.92);
+  text-stroke: 1px rgba(0, 0, 0, 0.92);
+  paint-order: stroke fill;
+  letter-spacing: -0.035em;
+}
+
+/* Squeeze long hero lines like PROGRAMMES — scale inner text, not the clip
+   (scaling the clip was shaving the last-letter stroke and squashing the S). */
+.xdge-condensed-clip-narrow {
+  width: fit-content;
+  max-width: 100%;
+  padding-right: 0.14em;
+  box-sizing: content-box;
+}
+
+/* Stroke headings — left/right slack so overflow clip doesn't shave A, S, etc. */
+.xdge-about-us-clip {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: content-box;
+  padding-left: 0.12em;
+  margin-left: -0.12em;
+  padding-right: 0.16em;
+}
+
+.xdge-condensed-text-narrow {
+  display: inline-block;
+  transform: scaleX(0.84);
+  transform-origin: left center;
+  letter-spacing: -0.03em;
+  padding-right: 0.05em;
+}
+
+/* Tier titles — PROFESSIONAL XDGE etc. (PNG set 4). */
+.xdge-tier-hollow {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.98);
+  text-stroke: 1px rgba(255, 255, 255, 0.98);
+  letter-spacing: -0.02em;
+}
+
+.xdge-tier-text-narrow {
+  display: inline-block;
+  /* Wider glyphs = thicker stems on E, P, etc. Stroke stays 1px. */
+  transform: scaleX(0.97);
+  transform-origin: left center;
+  letter-spacing: -0.015em;
+  padding-right: 0.07em;
+}
+
+.xdge-tier-heading-block {
+  margin-bottom: clamp(10px, 1.2vw, 16px);
+}
+
+/* Programmes page — tier taglines (solid white under hollow titles). */
+.xdge-programmes-tagline {
+  font-size: clamp(28px, 3.8vw, 66px) !important;
+  margin: 0.12em 0 clamp(10px, 1.4vw, 18px) !important;
+}
+
+/* Tier taglines — solid caps directly under hollow titles. */
+.xdge-condensed-tagline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff;
+  word-spacing: 0.1em;
+  line-height: 1;
+  margin: 0;
+  display: inline-block;
+  transform: scaleX(0.97);
+  transform-origin: left center;
+  padding-right: 0.06em;
+  letter-spacing: 0.025em;
+}
+
+.xdge-condensed-solid {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: 0.07em;
+}
+
+/* About page — condensed display lines (PNG reference). */
+.xdge-about-display {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 11.3vw, 200px);
+  line-height: 0.86;
+}
+
+.xdge-condensed-solid-white {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  letter-spacing: -0.015em;
+}
+
+.xdge-condensed-cyan {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #2FB7C6, #2C6FD6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+  letter-spacing: -0.015em;
+}
+
+.xdge-about-kicker-narrow {
+  display: inline-block;
+  font-size: 0.45em;
+  transform: scaleX(0.97);
+  transform-origin: left center;
+  letter-spacing: -0.02em;
+  padding-right: 0.06em;
+}
+
+/* The Team — CSS match to client PNG (Bebas, no image). */
+.xdge-team-heading-clip {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: content-box;
+  padding-left: 0.1em;
+  margin-left: -0.1em;
+  padding-right: 0.14em;
+}
+
+.xdge-team-heading-line {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 0.1em;
+  transform: scale(0.905, 1);
+  transform-origin: left bottom;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  padding-right: 0.05em;
+}
+
+.xdge-team-the,
+.xdge-team-team {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 1em;
+  line-height: 1;
+  letter-spacing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.xdge-team-the {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.98);
+  text-stroke: 1px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+}
+
+.xdge-team-team {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+[data-screen-label='The Team'] h2 {
+  line-height: 1;
+}
+
+/* The Experience — CSS match to Heading Set 1 PNG (single line, no image). */
+.xdge-the-exp-clip {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: content-box;
+  padding-left: 0.1em;
+  margin-left: -0.1em;
+  padding-right: 0.18em;
+}
+
+.xdge-the-exp-line {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 0.12em;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  padding-right: 0.04em;
+}
+
+.xdge-the-exp-solid,
+.xdge-the-exp-hollow {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: inherit;
+  line-height: 1;
+}
+
+.xdge-the-exp-solid {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.xdge-the-exp-hollow {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.98);
+  text-stroke: 1px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+}
+
+[data-screen-label='What You Will Experience'] h2 {
+  line-height: 1;
+}
+
+/* Who's It For? — Heading Set 2 PNG (upright + diagonal fill inside letters). */
+.xdge-whos-clip {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto !important;
+  overflow: visible !important;
+  box-sizing: content-box;
+  padding-left: 0.08em;
+  padding-right: 0.14em;
+}
+
+.xdge-whos-line {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 0;
+  line-height: 0.88;
+  padding-right: 0.04em;
+  margin-inline: auto;
+}
+
+.xdge-whos-solid,
+.xdge-whos-hollow {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.028em;
+  line-height: 0.88;
+}
+
+.xdge-whos-solid {
+  display: inline-flex;
+  align-items: baseline;
+  padding-right: 0.02em;
+}
+
+/* W + H — solid deep blue only, no diagonal cut. */
+.xdge-whos-wh {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: inherit;
+  line-height: inherit;
+  color: #173f8f !important;
+  -webkit-text-fill-color: #173f8f !important;
+}
+
+.xdge-whos-os-stack {
+  position: relative;
+  display: inline-block;
+}
+
+.xdge-whos-solid-base,
+.xdge-whos-solid-cut {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: inherit;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+/* O + S — blue base, then diagonal cyan on lower-right only. */
+.xdge-whos-solid-base {
+  background-image: linear-gradient(
+    90deg,
+    #1a4490 0%,
+    #1e4898 45%,
+    #2459b8 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+}
+
+/* One continuous diagonal — same line through O, apostrophe, and S. */
+.xdge-whos-solid-cut {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+    135deg,
+    #20E3E8 0%,
+    #58e6f4 42%,
+    #a2f7ff 68%,
+    #ffffff 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+}
+
+.xdge-whos-hollow {
+  display: inline-block;
+  padding-right: 0.08em;
+  letter-spacing: -0.02em;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.88);
+  text-stroke: 1px rgba(255, 255, 255, 0.88);
+  paint-order: stroke fill;
+}
+
+.xg-whos-heading-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  padding: clamp(4px, 1vw, 12px) 0 clamp(8px, 1.5vw, 16px);
+}
+
+.xg-serve-card-heading {
+  flex: 1;
+  min-height: calc(0.86em * 2);
+}
+
+.xg-serve-card-heading h3 {
+  margin: 0;
+}
+
+[data-screen-label='05 Who We Serve'] h2 {
+  line-height: 0.95;
+  font-size: clamp(52px, 14.5vw, 240px) !important;
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+  margin-inline: auto !important;
+  margin-bottom: 0 !important;
+  text-align: center !important;
+}
+
+.xg-whos-section,
+.xg-page [data-screen-label='05 Who We Serve'],
+.xg-page .xg-stick-wrap > [data-screen-label='05 Who We Serve'] {
+  padding-top: clamp(24px, 4vw, 48px) !important;
+}
+
+/* What You Leave With — solid top + hollow bottom (Heading Set 1 PNG ref). */
+.xdge-leave-with-clip {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: content-box;
+  padding-left: 0.08em;
+  margin-left: -0.08em;
+  padding-right: 0.14em;
+}
+
+.xdge-leave-with-clip + .xdge-leave-with-clip {
+  margin-top: -0.02em;
+}
+
+.xdge-leave-with-solid,
+.xdge-leave-with-hollow {
+  display: block;
+  white-space: nowrap;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+  padding-right: 0.04em;
+}
+
+.xdge-leave-with-solid {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.xdge-leave-with-hollow {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.98);
+  text-stroke: 1px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+}
+
+[data-screen-label='What You Leave With'] h2 {
+  line-height: 0.95;
+  font-size: clamp(34px, 9vw, 168px);
+}
+
+/* How XDGE Differs By Age & Outcomes — Heading Set 1 PNG ref. */
+.xdge-differs-clip {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: content-box;
+  padding-left: 0.08em;
+  margin-left: -0.08em;
+  padding-right: 0.14em;
+}
+
+.xdge-differs-clip + .xdge-differs-clip {
+  margin-top: -0.02em;
+}
+
+.xdge-differs-solid {
+  display: block;
+  white-space: nowrap;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.018em;
+  line-height: 0.92;
+  padding-right: 0.04em;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: scaleX(0.93);
+  transform-origin: left center;
+}
+
+.xdge-differs-bottom-line {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 0.1em;
+  letter-spacing: -0.016em;
+  line-height: 1;
+  padding-right: 0.06em;
+  transform: scaleX(0.9);
+  transform-origin: left center;
+}
+
+.xdge-differs-hollow {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: inherit;
+  line-height: 1;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.98);
+  text-stroke: 1px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+}
+
+.xdge-differs-amp-box,
+.xdge-amp-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 0.92em;
+  height: 0.92em;
+  background: #ffffff;
+  color: #000000;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 0.88em;
+  line-height: 1;
+  transform: translateY(-0.02em);
+}
+
+[data-screen-label='Different Ages, Different Focus'] h2 {
+  line-height: 0.95;
+  font-size: clamp(40px, 11.3vw, 185px);
+}
+
+/* Standards & Expectations — Heading Set 1 PNG ref. */
+.xdge-standards-clip {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: content-box;
+  padding-left: 0.08em;
+  margin-left: -0.08em;
+  padding-right: 0.14em;
+}
+
+.xdge-standards-clip + .xdge-standards-clip {
+  margin-top: -0.02em;
+}
+
+.xdge-standards-top-line {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 0.1em;
+  line-height: 1;
+  padding-right: 0.04em;
+}
+
+.xdge-standards-solid {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.018em;
+  line-height: 1;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.xdge-standards-hollow {
+  display: block;
+  white-space: nowrap;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.016em;
+  line-height: 0.92;
+  padding-right: 0.06em;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.98);
+  text-stroke: 1px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+  transform: scaleX(0.88);
+  transform-origin: left center;
+}
+
+[data-screen-label='Standards & Expectations'] h2 {
+  line-height: 0.95;
+  font-size: clamp(40px, 11.3vw, 150px);
+}
+
+/* Is This Right For Me — Think You're Not / The Leadership Type (Heading Set 1). */
+.xdge-right-for-me-clip {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: content-box;
+  padding-left: 0.08em;
+  margin-left: -0.08em;
+  padding-right: 0.14em;
+}
+
+.xdge-right-for-me-clip + .xdge-right-for-me-clip {
+  margin-top: -0.12em;
+}
+
+/* Scale(1.08) on the kicker extends past its layout box — extra clip slack for the T. */
+.xdge-right-for-me-clip-kicker {
+  padding-right: 0.42em;
+}
+
+.xdge-right-for-me-kicker {
+  display: block;
+  white-space: nowrap;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 0.58em;
+  letter-spacing: 0.01em;
+  line-height: 0.88;
+  padding-right: 0.1em;
+  transform: scale(1.08, 1.04);
+  transform-origin: left top;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.98);
+  text-stroke: 0.5px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+}
+
+.xdge-right-for-me-solid {
+  display: block;
+  white-space: nowrap;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.018em;
+  line-height: 0.9;
+  padding-right: 0.06em;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: scaleX(0.9);
+  transform-origin: left center;
+}
+
+[data-screen-label='Is This Right For Me'] h2 {
+  line-height: 0.95;
+  font-size: clamp(40px, 11.3vw, 165px);
+}
+
+/* Insights — hollow section title (Heading Set 1 PNG ref). */
+.xdge-insights-clip {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: content-box;
+  padding-left: 0.08em;
+  margin-left: -0.08em;
+  padding-right: 0.18em;
+}
+
+[data-screen-label='07 Insights'] h2 {
+  line-height: 0.95;
+  font-size: clamp(40px, 11.3vw, 200px);
+}
+
+/* Reviews — solid white section title. */
+.xdge-reviews-clip {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: content-box;
+  padding-left: 0.1em;
+  margin-left: -0.1em;
+  padding-right: 0.24em;
+}
+
+.xdge-reviews-hollow {
+  display: block;
+  white-space: nowrap;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  line-height: 0.92;
+  padding-right: 0.06em;
+  transform: scale(1.06, 1.04);
+  transform-origin: left center;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+[data-screen-label='Proven Outcomes'] h2 {
+  line-height: 0.95;
+  font-size: clamp(40px, 11.3vw, 200px);
+}
+
+/* The People Behind Your Progress — Heading Set 1 (hollow + solid). */
+.xdge-people-clip {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: content-box;
+  padding-left: 0.08em;
+  margin-left: -0.08em;
+  padding-right: 0.14em;
+}
+
+.xdge-people-clip-solid {
+  padding-right: 0.1em;
+}
+
+.xdge-people-hollow,
+.xdge-people-solid {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  padding-right: 0.03em;
+}
+
+.xdge-people-hollow {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.98);
+  text-stroke: 1px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+}
+
+.xdge-people-solid {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.xdge-people-line-narrow {
+  transform: scaleX(0.88);
+  transform-origin: left center;
+  padding-right: 0.08em;
+}
+
+.xdge-people-oneline {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.xdge-people-oneline-clip {
+  max-width: 100%;
+}
+
+[data-screen-label='Who We Are'] h2 {
+  font-size: clamp(48px, 11vw, 180px) !important;
+  line-height: 0.92;
+  margin: 0;
+}
+
+[data-screen-label='What You Will Experience'] h3 {
+  line-height: 0.92;
+  margin: 0;
+}
+
+/* The Journey — Heading Set 1 solid white (no image). */
+.xdge-the-journey-clip {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  box-sizing: content-box;
+  padding-left: 0.08em;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 0.12em;
+}
+
+.xdge-the-journey {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Why XDGE / Why Lead — solid WHY + hollow second word (Heading Set 1). */
+.xdge-why-clip {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: content-box;
+  padding-left: 0.08em;
+  margin-left: -0.08em;
+  padding-right: 0.14em;
+}
+
+.xdge-why-heading-line {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  padding-right: 0.04em;
+}
+
+.xdge-why-solid {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.xdge-why-hollow {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.98);
+  text-stroke: 1px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+}
+
+/* What We Stand For — stacked overlap (Heading Set 2). */
+.xdge-stand-for-stack-clip {
+  width: fit-content;
+  max-width: 100%;
+  overflow: visible !important;
+  padding-right: 0.1em;
+  box-sizing: content-box;
+}
+
+.xdge-stand-for-stack {
+  display: block;
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  line-height: 1;
+}
+
+.xdge-stand-for-top {
+  display: block;
+  position: relative;
+  z-index: 1;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.022em;
+  line-height: 0.88;
+  transform: scaleX(0.93);
+  transform-origin: left bottom;
+  padding-right: 0.05em;
+  background: linear-gradient(
+    90deg,
+    #173f8f 0%,
+    #2459b8 20%,
+    #2C6FD6 42%,
+    #34a8d4 58%,
+    #58d8ef 74%,
+    #2FB7C6 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+}
+
+.xdge-stand-for-we {
+  display: inline-block;
+  background-image: linear-gradient(
+    132deg,
+    #142f78 0%,
+    #1a4490 28%,
+    #1e4898 44%,
+    #1e4898 49.5%,
+    #58e6f4 50.5%,
+    #a2f7ff 58%,
+    #6ce4f2 72%,
+    #3aafd0 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+}
+
+.xdge-stand-for-bottom {
+  display: block;
+  position: relative;
+  z-index: 2;
+  margin-top: -0.36em;
+  margin-left: 0.07em;
+}
+
+.xdge-stand-for-bottom-text {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.016em;
+  line-height: 0.88;
+  transform: scaleX(0.735);
+  transform-origin: left top;
+  padding-right: 0.08em;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.98);
+  text-stroke: 2px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+  filter:
+    drop-shadow(0 0 1px rgba(0, 0, 0, 0.95))
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.88))
+    drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
+}
+
+[data-screen-label='What We Stand For'] h2 {
+  line-height: 1;
+}
+
+/* Performance Formula — stacked overlap (Heading Set 2 PNG). */
+.xdge-perf-formula-stack-clip {
+  width: fit-content;
+  max-width: 100%;
+  overflow: visible !important;
+  padding-right: 0.12em;
+  box-sizing: content-box;
+}
+
+.xdge-perf-formula-stack {
+  display: block;
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  line-height: 1;
+}
+
+.xdge-perf-formula-top {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.xdge-perf-formula-performance {
+  position: relative;
+  display: inline-block;
+  transform: scaleX(0.925);
+  transform-origin: left bottom;
+  padding-right: 0.05em;
+  letter-spacing: -0.024em;
+  line-height: 0.88;
+}
+
+.xdge-perf-formula-performance-base,
+.xdge-perf-formula-performance-cut {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: inherit;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+.xdge-perf-formula-performance-base {
+  background-image: linear-gradient(
+    90deg,
+    #173f8f 0%,
+    #1a4490 42%,
+    #1e4898 72%,
+    #2459b8 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+}
+
+/* Diagonal cyan slash — bottom-left of O through top-right of E. */
+.xdge-perf-formula-performance-cut {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+    128deg,
+    #3ecde8 0%,
+    #58e6f4 36%,
+    #8ef0ff 68%,
+    #b8f7ff 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+  clip-path: polygon(47% 100%, 100% 0, 100% 100%);
+}
+
+.xdge-perf-formula-bottom {
+  display: block;
+  position: relative;
+  z-index: 2;
+  margin-top: -0.42em;
+  margin-left: 1.3em;
+}
+
+/* Desktop editorial layouts — mobile overrides in @media (max-width: 768px) */
+@media (min-width: 769px) {
+  .xg-journey-heading-wrap {
+    align-self: center;
+    text-align: center;
+    padding: 40px 0;
+  }
+
+  .xg-journey-heading-wrap h2 {
+    text-align: center !important;
+  }
+
+  .xg-journey-intro {
+    align-self: flex-end;
+    align-items: flex-end;
+  text-align: right;
+  }
+
+  .xg-people-block {
+    margin-left: auto;
+  }
+
+  .xg-leave-with-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 clamp(20px, 4vw, 40px);
+  }
+
+  .xg-leave-with-header h2 {
+    margin-inline: auto !important;
+    text-align: center !important;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .xg-leave-with-header .xg-section-lede {
+    text-align: center;
+  }
+
+  [data-screen-label='What You Leave With'] h2 {
+    margin-inline: auto !important;
+    text-align: center !important;
+  }
+}
+
+.xdge-perf-formula-formula {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.012em;
+  line-height: 0.88;
+  transform: scaleX(0.74);
+  transform-origin: left top;
+  padding-right: 0.08em;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.98);
+  text-stroke: 1.5px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+  filter:
+    drop-shadow(0 0 1px rgba(0, 0, 0, 0.95))
+    drop-shadow(0 1px 0 rgba(0, 0, 0, 0.88))
+    drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
+}
+
+[data-screen-label='Our Performance Formula'] h2 {
+  line-height: 1;
+  margin-bottom: clamp(20px, 3vw, 32px) !important;
+}
+
+.xg-perf-formula-section {
+  padding-top: clamp(36px, 4.5vw, 64px) !important;
+}
+
+/* Tighten gap when Performance Formula follows Capability section on /performance-formula */
+[data-screen-label='Capability Built Inside Out'] {
+  padding-bottom: clamp(48px, 6vw, 80px) !important;
+}
+
+[data-screen-label='Capability Built Inside Out'] + .xg-perf-formula-section,
+[data-screen-label='Capability Built Inside Out'] + section[data-screen-label='Our Performance Formula'] {
+  padding-top: clamp(24px, 3vw, 40px) !important;
+}
+
+/* How Will You / Stand Out? — footer CTA (Heading Set 1). */
+.xdge-how-will-clip {
+  width: fit-content;
+  max-width: 100%;
+  overflow: visible !important;
+  padding-left: 0.08em;
+  margin-left: -0.08em;
+  padding-right: 0.38em;
+  box-sizing: content-box;
+}
+
+.xdge-how-will-stack {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  line-height: 1;
+}
+
+.xdge-how-will-top {
+  display: block;
+  padding-right: 0.05em;
+}
+
+.xdge-how-will-top-text {
+  display: inline-block;
+  transform: scale(1.06, 1.04);
+  transform-origin: left bottom;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.88;
+  padding-right: 0.08em;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.98);
+  text-stroke: 2px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+}
+
+.xdge-how-will-bottom {
+  display: block;
+  margin-top: 0.04em;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  line-height: 0.88;
+  transform: scaleX(0.88);
+  transform-origin: left top;
+  padding-right: 0.08em;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+[data-screen-label='Drag Wheel Carousel'] h2 {
+  line-height: 0.95;
+  font-size: clamp(40px, 11.3vw, 200px);
+}
+
+[data-screen-label='Step Into Your Next Level'] h2 {
+  line-height: 0.92;
+  font-size: clamp(44px, 11vw, 200px);
+}
+
+[data-screen-label='Step Into Your Next Level'] .xdge-leave-with-hollow,
+[data-screen-label='Step Into Your Next Level'] .xdge-leave-with-solid {
+  line-height: 0.92;
+}
+
+/* What Will You Stand For — footer CTA (bottom-of-page). */
+.xdge-cta-clip {
+  width: fit-content;
+  max-width: 100%;
+  overflow: visible !important;
+  box-sizing: content-box;
+  padding-left: 0.08em;
+  margin-left: -0.08em;
+  padding-right: 0.24em;
+}
+
+[data-screen-label='Step Into Your Next Level'] .xdge-cta-clip:not(:first-child) {
+  margin-top: -0.1em;
+}
+
+.xdge-cta-line {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  white-space: nowrap;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  line-height: 0.82;
+  padding-right: 0.08em;
+}
+
+.xdge-cta-line-sm {
+  font-size: 0.68em;
+  line-height: 0.82;
+  letter-spacing: -0.022em;
+  padding-right: 0.1em;
+  margin-bottom: -0.04em;
+}
+
+.xdge-cta-line-white {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.xdge-cta-line-blue {
+  margin-top: -0.02em;
+  margin-bottom: -0.04em;
+  background-image: linear-gradient(
+    90deg,
+    #173f8f 0%,
+    #1a4490 42%,
+    #1e4898 72%,
+    #2459b8 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+}
+
+.xg-cta-stand-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(220px, 0.58fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: stretch;
+}
+
+.xg-cta-stand-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(24px, 3vw, 36px);
+  min-width: 0;
+  overflow: visible;
+}
+
+.xg-cta-stand-lede {
+  max-width: 34ch;
+}
+
+.xg-cta-stand-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.xg-cta-stand-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  isolation: isolate;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+}
+
+.xg-cta-stand-btn-primary {
+  color: #ffffff;
+  background: linear-gradient(90deg, #1a6fd4 0%, #2484ff 32%, #3ecde8 68%, #8ee8ff 100%);
+  border: none;
+  box-shadow:
+    inset 0 1px 0 rgba(200, 248, 255, 0.28),
+    0 8px 24px rgba(26, 111, 212, 0.22);
+}
+
+.xg-cta-stand-btn-primary::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 5px 0 0 5px;
+  background: linear-gradient(180deg, #d8fbff 0%, #58e6f4 45%, #20e3e8 100%);
+  box-shadow:
+    0 0 8px rgba(88, 230, 244, 0.95),
+    0 0 18px rgba(88, 230, 244, 0.45);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.xg-cta-stand-btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(160, 236, 255, 0.22);
+  border-left-color: transparent;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.xg-cta-stand-btn-outline {
+  color: #58e6f4;
+  background: transparent;
+  border: none;
+}
+
+.xg-cta-stand-btn-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 5px;
+  padding: 1px;
+  background: linear-gradient(
+    90deg,
+    #58e6f4 0%,
+    #58e6f4 5%,
+    #3ecde8 14%,
+    #2484ff 36%,
+    #1e4898 58%,
+    rgba(30, 72, 152, 0.42) 78%,
+    rgba(23, 63, 143, 0.1) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.xg-cta-stand-btn-outline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10%;
+  bottom: 10%;
+  width: 2px;
+  background: #b8f7ff;
+  box-shadow:
+    0 0 6px rgba(88, 230, 244, 0.95),
+    0 0 14px rgba(88, 230, 244, 0.55);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (hover: hover) {
+  .xg-cta-stand-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .xg-cta-stand-btn-primary:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(200, 248, 255, 0.34),
+      0 12px 32px rgba(36, 132, 255, 0.32);
+    filter: brightness(1.05);
+  }
+
+  .xg-cta-stand-btn-outline:hover {
+    color: #8ef0ff;
+    background: rgba(32, 227, 232, 0.06);
+  }
+
+  .xg-cta-stand-btn-outline:hover::after {
+    box-shadow:
+      0 0 8px rgba(88, 230, 244, 1),
+      0 0 20px rgba(88, 230, 244, 0.65);
+  }
+}
+
+.xg-cta-stand-media {
+  position: relative;
+  min-height: clamp(280px, 38vw, 520px);
+  overflow: hidden;
+  background: #000000;
+}
+
+.xg-cta-stand-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .xg-cta-stand-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .xg-cta-stand-media {
+    order: -1;
+    min-height: clamp(240px, 62vw, 420px);
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+  [data-screen-label='Step Into Your Next Level'] h2 {
+    font-size: clamp(56px, 15vw, 100px) !important;
+    line-height: 0.92 !important;
+    margin-bottom: clamp(12px, 2.5vw, 18px) !important;
+  }
+
+  .xg-page .xdge-why-hollow {
+    -webkit-text-stroke: 0.6px rgba(255, 255, 255, 0.94) !important;
+    text-stroke: 0.6px rgba(255, 255, 255, 0.94) !important;
+  }
+
+  .xg-cta-stand-section {
+    padding-top: clamp(48px, 10vw, 72px) !important;
+    padding-bottom: clamp(48px, 10vw, 72px) !important;
+  }
+
+  .xg-cta-stand-copy {
+    gap: clamp(18px, 4vw, 28px) !important;
+  }
+
+  .xg-cta-stand-lede {
+    max-width: 100%;
+  }
+
+  .xg-cta-stand-actions {
+    gap: 12px;
+  }
+
+  .xg-cta-stand-btn {
+    padding: 14px 22px;
+    font-size: 12px;
+  }
+}
+
+/* How XDGE Works — /how-it-works hero (client logo + hollow kickers). */
+.xdge-how-works-clip {
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: visible !important;
+  box-sizing: content-box;
+  /* Top slack — 3px hollow stroke on HOW was being shaved by the mask clip. */
+  padding-top: 0.16em !important;
+  margin-top: -0.16em !important;
+  padding-bottom: 0.06em !important;
+  margin-bottom: -0.06em !important;
+}
+
+[data-screen-label='01 Experience Hero'] h1 .xdge-how-works-clip > span[data-no-reveal] {
+  overflow: visible;
+  box-sizing: content-box;
+}
+
+.xdge-how-works-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  line-height: 1;
+}
+
+.xdge-how-works-kicker {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+  transform: scale(0.68, 0.9);
+  transform-origin: center bottom;
+  margin: 0;
+  padding: 0;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-text-stroke: 3px rgba(255, 255, 255, 0.98);
+  text-stroke: 3px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+}
+
+.xdge-how-works-stack > .xdge-how-works-kicker:first-child {
+  margin-bottom: -0.18em;
+}
+
+.xdge-how-works-kicker-bottom {
+  transform-origin: center top;
+  margin-top: -0.06em;
+}
+
+.xdge-how-works-logo-img {
+  display: block;
+  width: min(100%, clamp(190px, 52vw, 660px));
+  height: auto;
+  aspect-ratio: 1191 / 358;
+  margin: 0;
+}
+
+[data-screen-label='01 Experience Hero'] h1 {
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  [data-screen-label='01 Experience Hero'] h1 {
+    font-size: clamp(44px, 11.5vw, 84px) !important;
+  }
+
+  .xdge-how-works-logo-img {
+    width: min(100%, clamp(210px, 66vw, 660px));
+  }
+
+  .xdge-how-works-stack > .xdge-how-works-kicker:first-child {
+    margin-bottom: -0.2em;
+  }
+
+  .xdge-how-works-kicker-bottom {
+    margin-top: -0.08em;
+  }
+}
+
+.xdge-create-your-line {
+  letter-spacing: 0.05em;
+  word-spacing: 0.04em;
+}
+
+/* Create Your Path block — 99% PNG match (shared scaleX + tight stack). */
+.xdge-create-path-kicker {
+  display: block;
+  font-size: 1em;
+  transform: scale(0.58, 0.48);
+  transform-origin: left top;
+  letter-spacing: 0.03em;
+  word-spacing: 0.01em;
+  line-height: 0.82;
+  margin: 0 0 -0.4em 0;
+  padding: 0;
+}
+
+.xdge-create-path-main {
+  display: block;
+  font-size: 0.92em;
+  transform: scale(1, 0.88);
+  transform-origin: left top;
+  letter-spacing: 0.018em;
+  line-height: 0.82;
+  margin: 0 0 0.02em 0;
+  padding: 0;
+}
+
+/* Zero vertical slack on clip wrappers. */
+.xdge-clip-flush {
+  line-height: 0 !important;
+  margin: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.xdge-clip-flush + .xdge-clip-flush {
+  margin-top: 0 !important;
+}
+
+/* Create Your Path — clip slack so hollow strokes (C, O) aren't shaved. */
+.xdge-create-path-line-clip {
+  line-height: 0 !important;
+  box-sizing: content-box;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  padding-bottom: 0.05em !important;
+  margin-bottom: -0.05em !important;
+}
+
+[data-screen-label='Create Your Own Path'] h2 > span.xdge-create-path-line-clip:first-of-type {
+  padding-top: 0.14em !important;
+  margin-top: -0.14em !important;
+}
+
+/* Create Your Path — collapse transform dead space between lines. */
+[data-screen-label='Create Your Own Path'] h2 {
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+[data-screen-label='Create Your Own Path'] .xdge-create-path-line-clip + .xdge-create-path-line-clip {
+  margin-top: -0.02em !important;
+}
+
+[data-screen-label='Create Your Own Path'] h2 > span.xdge-create-path-line-clip {
+  line-height: 0 !important;
+  height: auto;
+}
+
+[data-screen-label='Create Your Own Path'] h2 span[data-no-reveal] {
+  line-height: 0.82;
+  margin: 0;
+  padding: 0;
+  display: block;
+  overflow: visible;
+}
+
+/* ABOUT US — black fill + white stroke (tuned in devtools). */
+.xdge-about-us-filled {
+  display: inline-block;
+  font-family: 'Bebas Neue', sans-serif;
+  text-transform: uppercase;
+  color: #000000;
+  -webkit-text-fill-color: #000000;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.96);
+  paint-order: stroke fill;
+  transform: scaleX(0.69);
+  transform-origin: left center;
+  letter-spacing: 0.018em;
+  word-spacing: 0.01em;
+  padding-right: 1em;
+  white-space: nowrap;
+}
+
+/* Legacy alias */
+.xdge-about-us-line {
+  display: inline-block;
+  transform: scaleX(0.86);
+  transform-origin: left center;
+  letter-spacing: -0.04em;
+  word-spacing: 0.08em;
+  padding-right: 0.08em;
+}
+
 .cyan-text {
   font-family: 'Archivo Black', sans-serif;
   /* Muted/dulled blue gradient — less neon than the original #20E3E8 → #2484FF. */
@@ -1349,5 +3109,1634 @@ section[data-screen-label="Proven Outcomes"] {
   .xg-wwa-img {
     margin-top: 0;
     max-width: 460px;
+  }
+  [data-screen-label='Who We Are'] h2 {
+    font-size: clamp(56px, 15vw, 100px) !important;
+    line-height: 0.92 !important;
+    margin-bottom: clamp(16px, 3vw, 24px) !important;
+  }
+}
+
+/* ── About page — mobile responsive headings & layout ── */
+.xg-about-page h1,
+.xg-about-page h2 {
+  max-width: 100%;
+}
+
+.xg-about-page .xdge-about-us-clip,
+.xg-about-page .xdge-create-path-line-clip,
+.xg-about-page .xdge-team-heading-clip,
+.xg-about-page .xdge-why-clip,
+.xg-about-page .xdge-how-will-clip {
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .xg-about-page > section,
+  .xg-about-page .xg-stick-wrap > section {
+    padding-top: clamp(48px, 10vw, 72px) !important;
+    padding-bottom: clamp(48px, 10vw, 72px) !important;
+    padding-left: clamp(16px, 4vw, 24px) !important;
+    padding-right: clamp(16px, 4vw, 24px) !important;
+  }
+
+  .xg-about-page h1,
+  .xg-about-page h2 {
+    font-size: clamp(56px, 15vw, 100px) !important;
+    line-height: 0.95 !important;
+    margin-bottom: clamp(16px, 3vw, 24px) !important;
+  }
+
+  .xg-about-page [data-screen-label='About Hero'] h1 {
+    font-size: clamp(60px, 16vw, 108px) !important;
+  }
+
+  .xg-about-page [data-screen-label='About Hero'] {
+    padding-top: clamp(72px, 13vw, 96px) !important;
+    padding-bottom: clamp(48px, 8vw, 64px) !important;
+  }
+
+  .xg-about-page .xg-about-hero-copy {
+    justify-content: flex-start !important;
+    margin-top: clamp(48px, 10vw, 80px) !important;
+  }
+
+  .xg-about-page .xg-team-grid {
+    gap: clamp(20px, 4vw, 32px) !important;
+  }
+
+  .xg-about-page .xg-team-row {
+    gap: clamp(14px, 3vw, 20px) !important;
+  }
+
+  .xg-about-page .xg-team-image {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .xg-about-page .xg-team-avatar {
+    width: 100%;
+    min-height: 0;
+  }
+
+  .xg-about-page .xg-principles-intro {
+    margin-bottom: clamp(32px, 6vw, 56px) !important;
+  }
+
+  .xg-about-page .xg-principle-row {
+    padding: clamp(28px, 4.5vw, 40px) 0 !important;
+    gap: clamp(20px, 4vw, 32px) !important;
+  }
+
+  .xg-about-page .xg-2 {
+    gap: clamp(28px, 5vw, 40px) !important;
+  }
+
+  .xg-about-page .xdge-create-path-kicker {
+    transform: scale(0.92, 0.88);
+    transform-origin: left bottom;
+    margin-bottom: -0.12em;
+  }
+
+  .xg-about-page .xdge-create-path-main {
+    font-size: 1em;
+    transform: scale(1, 0.96);
+    transform-origin: left center;
+  }
+
+  .xg-about-page .xdge-stand-for-top {
+    transform: scaleX(0.96);
+  }
+
+  .xg-about-page .xdge-stand-for-bottom-text {
+    transform: scaleX(0.94);
+  }
+
+  .xg-about-page [data-screen-label='What We Stand For'] h2 {
+    font-size: clamp(56px, 15vw, 100px) !important;
+  }
+
+  .xg-about-page .xdge-how-will-top-text {
+    transform: none;
+  }
+
+  .xg-about-page .xdge-how-will-bottom {
+    transform: scaleX(0.96);
+  }
+
+  .xg-about-page .xdge-team-heading-line {
+    transform: scale(0.9, 1);
+    transform-origin: center bottom;
+  }
+
+  [data-screen-label='The Team'] h2 {
+    text-align: center !important;
+  }
+
+  [data-screen-label='The Team'] .xdge-team-heading-clip {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .xg-about-page .xg-principle-img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .xg-about-page > section,
+  .xg-about-page .xg-stick-wrap > section {
+    padding-top: clamp(44px, 7.5vw, 60px) !important;
+    padding-bottom: clamp(44px, 7.5vw, 60px) !important;
+  }
+
+  .xg-about-page h1,
+  .xg-about-page h2 {
+    font-size: clamp(52px, 14vw, 92px) !important;
+    margin-bottom: clamp(14px, 3vw, 20px) !important;
+  }
+
+  .xg-about-page [data-screen-label='What We Stand For'] h2 {
+    font-size: clamp(52px, 14vw, 92px) !important;
+  }
+
+  .xg-about-page .xg-about-hero-copy {
+    margin-top: clamp(36px, 8vw, 56px) !important;
+  }
+
+  .xg-about-page .xdge-create-path-kicker {
+    transform: scale(0.94, 0.9);
+  }
+}
+
+/* ── Site-wide mobile: fonts, headings, spacing ── */
+.xg-page {
+  overflow-x: clip;
+}
+
+.xg-page h1,
+.xg-page h2 {
+  max-width: 100%;
+}
+
+.xg-page .xdge-leave-with-clip,
+.xg-page .xdge-differs-clip,
+.xg-page .xdge-standards-clip,
+.xg-page .xdge-right-for-me-clip,
+.xg-page .xdge-reviews-clip,
+.xg-page .xdge-how-will-clip,
+.xg-page .xdge-whos-clip,
+.xg-page .xdge-the-exp-clip,
+.xg-page .xdge-the-journey-clip,
+.xg-page .xdge-perf-formula-stack-clip,
+.xg-page .xdge-how-works-clip,
+.xg-page .xdge-about-us-clip,
+.xg-page .xdge-create-path-line-clip,
+.xg-page .xdge-team-heading-clip,
+.xg-page .xdge-stand-for-stack-clip,
+.xg-page .xdge-people-clip,
+.xg-page .xdge-cta-clip,
+.xg-page .xdge-insights-clip,
+.xg-page .xdge-condensed-clip-narrow {
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .xg-page section[data-section-theme]:not([data-screen-label*='Hero']) {
+    padding-top: clamp(48px, 10vw, 72px) !important;
+    padding-bottom: clamp(48px, 10vw, 72px) !important;
+    padding-left: clamp(16px, 4vw, 24px) !important;
+    padding-right: clamp(16px, 4vw, 24px) !important;
+  }
+
+  .xg-page .xg-stick-wrap > section {
+    padding-top: clamp(48px, 10vw, 72px) !important;
+    padding-bottom: clamp(48px, 10vw, 72px) !important;
+    padding-left: clamp(16px, 4vw, 24px) !important;
+    padding-right: clamp(16px, 4vw, 24px) !important;
+  }
+
+  section[data-screen-label='Proven Outcomes'] {
+    padding-top: clamp(48px, 10vw, 72px) !important;
+    padding-bottom: clamp(48px, 10vw, 72px) !important;
+  }
+
+  /* Hero sections */
+  section[data-screen-label='01 Experience Hero'] {
+    min-height: auto !important;
+  }
+
+  section[data-screen-label='01 Experience Hero'] > div {
+    padding-top: clamp(88px, 14vw, 120px) !important;
+    padding-bottom: clamp(48px, 8vw, 72px) !important;
+    padding-left: clamp(16px, 4vw, 24px) !important;
+    padding-right: clamp(16px, 4vw, 24px) !important;
+    gap: clamp(32px, 6vw, 48px) !important;
+  }
+
+  section[data-screen-label*='Hero']:not([data-screen-label='01 Hero']) > div {
+    padding-left: clamp(16px, 4vw, 24px) !important;
+    padding-right: clamp(16px, 4vw, 24px) !important;
+  }
+
+  .xg-hero-body {
+    align-items: flex-start !important;
+  }
+
+  .xg-experience-hero-tags {
+    white-space: normal !important;
+  }
+
+  /* Body copy — readable minimum on phones */
+  .xg-page p,
+  .xg-page li {
+    font-size: max(14px, 1em);
+  }
+
+  /* Unified heading block rhythm — all pages */
+  .xg-page .xg-exp-heading-block {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: clamp(16px, 3vw, 24px);
+  }
+
+  .xg-page .xg-exp-heading-block h2,
+  .xg-page .xg-exp-heading-block h3 {
+    margin-bottom: 0 !important;
+  }
+
+  .xg-page .xg-section-lede {
+    font-size: clamp(15px, 3.8vw, 17px) !important;
+    line-height: 1.55 !important;
+    margin: clamp(12px, 2.5vw, 18px) 0 clamp(20px, 4vw, 32px) !important;
+    text-align: left !important;
+    max-width: 36em;
+  }
+
+  .xg-page .xg-section-lede-wrap .xg-section-lede {
+    margin-bottom: 10px !important;
+  }
+
+  /* Display headings — mobile (all pages, matches Experience scale) */
+  .xg-page section:not([data-screen-label*='Hero']) h1,
+  .xg-page section:not([data-screen-label*='Hero']) h2 {
+    font-size: clamp(56px, 15vw, 100px) !important;
+    line-height: 0.95 !important;
+    margin-bottom: clamp(16px, 3vw, 24px) !important;
+  }
+
+  [data-screen-label='What You Leave With'] h2 {
+    margin-inline: 0 !important;
+    text-align: left !important;
+  }
+
+  /* Mobile: unified left-aligned section headings (hero stays centered) */
+  .xg-page section:not([data-screen-label*='Hero']) h1,
+  .xg-page section:not([data-screen-label*='Hero']) h2,
+  .xg-page section:not([data-screen-label*='Hero']) h3 {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-inline: 0 !important;
+  }
+
+  .xg-leave-with-header {
+    text-align: left !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .xg-journey-heading-wrap {
+    align-self: flex-start !important;
+    text-align: left !important;
+    padding: 0 !important;
+    width: 100%;
+  }
+
+  [data-screen-label='05 Who We Serve'] h2,
+  [data-screen-label='05 Who We Serve'] .xdge-whos-clip {
+    text-align: center !important;
+    margin-inline: auto !important;
+    justify-content: center !important;
+    font-size: clamp(56px, 15vw, 112px) !important;
+    margin-bottom: 0 !important;
+  }
+
+  .xg-page [data-screen-label='05 Who We Serve'],
+  .xg-page .xg-stick-wrap > [data-screen-label='05 Who We Serve'],
+  .xg-whos-section {
+    padding-top: clamp(20px, 3.5vw, 36px) !important;
+  }
+
+  .xg-whos-heading-wrap {
+    justify-content: center !important;
+    text-align: center !important;
+    padding-top: 0 !important;
+    padding-bottom: clamp(8px, 2vw, 12px) !important;
+  }
+
+  .xg-journey-intro {
+    align-self: flex-start !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    max-width: 100% !important;
+  }
+
+  .xg-people-block {
+    margin-left: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .xdge-the-journey-clip {
+    margin-inline: 0 !important;
+  }
+
+  .xdge-perf-formula-bottom {
+    text-align: left !important;
+    margin-top: -0.42em !important;
+    margin-left: 1.3em !important;
+  }
+
+  [data-screen-label='Our Performance Formula'] .xdge-perf-formula-performance {
+    transform: scaleX(0.925) !important;
+    transform-origin: left bottom !important;
+  }
+
+  [data-screen-label='Our Performance Formula'] .xdge-perf-formula-formula {
+    transform: scaleX(0.74) !important;
+    transform-origin: left top !important;
+  }
+
+  [data-screen-label='07 Insights'] h2 {
+    font-size: clamp(56px, 15vw, 100px) !important;
+    margin-bottom: clamp(16px, 3vw, 24px) !important;
+  }
+
+  [data-screen-label='Drag Wheel Carousel'] h2 {
+    font-size: clamp(56px, 15vw, 100px) !important;
+    margin-bottom: clamp(16px, 3vw, 24px) !important;
+  }
+
+  .xg-perf-formula-section {
+    padding-top: clamp(48px, 10vw, 72px) !important;
+    padding-bottom: clamp(48px, 10vw, 72px) !important;
+  }
+
+  [data-screen-label='Our Performance Formula'] h2 {
+    font-size: clamp(56px, 15vw, 100px) !important;
+    margin-bottom: clamp(16px, 3vw, 24px) !important;
+  }
+
+  .xg-whos-section h3 {
+    font-size: clamp(28px, 7.5vw, 44px) !important;
+    line-height: 0.86 !important;
+  }
+
+  [class*='xdge-'][class*='-clip'] {
+    margin-left: 0 !important;
+  }
+
+  /* Hero display headings */
+  section[data-screen-label*='Hero'] h1 {
+    font-size: clamp(40px, 10.5vw, 76px) !important;
+    line-height: 0.95 !important;
+  }
+
+  [data-screen-label='01 Experience Hero'] h1 {
+    font-size: clamp(44px, 11.5vw, 84px) !important;
+  }
+
+  /* Hollow headings — fixed px stroke reads too heavy on mobile once type hits 56–100px. */
+  .xg-page .hollow-text,
+  .xg-page [class*='-hollow'],
+  .xg-page .xdge-condensed-hollow,
+  .xg-page .xdge-tier-hollow,
+  .xg-page .xdge-the-exp-hollow,
+  .xg-page .xdge-differs-hollow,
+  .xg-page .xdge-people-hollow,
+  .xg-page .xdge-leave-with-hollow,
+  .xg-page .xdge-standards-hollow,
+  .xg-page .xdge-the-exp-line,
+  .xg-page .xdge-the-journey,
+  .xg-page .xdge-whos-hollow,
+  .xg-page .xdge-team-the,
+  .xg-page .xdge-create-path-kicker,
+  .xg-page .xdge-right-for-me-kicker,
+  .xg-page .xdge-differs-bottom-line {
+    -webkit-text-stroke: 0.6px rgba(255, 255, 255, 0.94) !important;
+    text-stroke: 0.6px rgba(255, 255, 255, 0.94) !important;
+  }
+
+  .xg-page .xdge-how-will-top-text,
+  .xg-page .xdge-stand-for-bottom-text,
+  .xg-page .xdge-about-us-filled,
+  .xg-page .xdge-how-works-kicker {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.96) !important;
+    text-stroke: 1px rgba(255, 255, 255, 0.96) !important;
+    filter: none !important;
+  }
+
+  .xg-page .xdge-perf-formula-formula {
+    -webkit-text-stroke: 0.85px rgba(255, 255, 255, 0.96) !important;
+    text-stroke: 0.85px rgba(255, 255, 255, 0.96) !important;
+    filter: none !important;
+  }
+
+  /* PNG heading scales — minimal squeeze; font-size carries mobile weight */
+  .xg-page .xdge-differs-solid,
+  .xg-page .xdge-standards-hollow,
+  .xg-page .xdge-standards-solid,
+  .xg-page .xdge-right-for-me-kicker,
+  .xg-page .xdge-right-for-me-solid,
+  .xg-page .xdge-reviews-hollow,
+  .xg-page .xdge-how-will-top-text,
+  .xg-page .xdge-how-will-bottom,
+  .xg-page .xdge-the-journey,
+  .xg-page .xdge-leave-with-solid,
+  .xg-page .xdge-leave-with-hollow,
+  .xg-page .xdge-the-exp-line,
+  .xg-page .xdge-people-hollow,
+  .xg-page .xdge-people-solid,
+  .xg-page .xdge-insights-hollow,
+  .xg-page .xdge-cta-line,
+  .xg-page .xdge-cta-line-blue,
+  .xg-page .xdge-whos-wh,
+  .xg-page .xdge-whos-hollow {
+    transform: none;
+    transform-origin: left center;
+  }
+
+  .xg-page .xdge-differs-bottom-line,
+  .xg-page .xdge-people-line-narrow,
+  .xg-page .xdge-tier-text-narrow,
+  .xg-page .xdge-about-us-filled,
+  .xg-page .xdge-stand-for-bottom-text {
+    transform: scaleX(0.96);
+    transform-origin: left center;
+  }
+
+  .xg-page .xdge-create-path-kicker {
+    transform: scale(0.92, 0.88);
+    transform-origin: left bottom;
+  }
+
+  .xg-page .xdge-create-path-main {
+    transform: scale(1, 0.96);
+    transform-origin: left center;
+  }
+
+  .xg-page .xdge-stand-for-top {
+    transform: scaleX(0.96);
+    transform-origin: left bottom;
+  }
+
+  /* Layout fixes */
+  .xg-ages-modal-bullets {
+    grid-template-columns: 1fr !important;
+    gap: clamp(24px, 4vw, 32px) !important;
+  }
+
+  .xg-right-for-me-cta {
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+  }
+
+  .xg-right-for-me-cta-copy {
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+
+  .xg-step-images {
+    flex-direction: column !important;
+    width: calc(100% + 2 * clamp(16px, 4vw, 24px)) !important;
+    max-width: none !important;
+    margin-left: calc(-1 * clamp(16px, 4vw, 24px)) !important;
+    margin-right: calc(-1 * clamp(16px, 4vw, 24px)) !important;
+    gap: clamp(10px, 2.5vw, 14px) !important;
+  }
+
+  .xg-step-images > div,
+  .xg-step-image {
+    width: 100% !important;
+    max-width: none !important;
+    aspect-ratio: 4 / 3;
+  }
+
+  .xg-step-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .xg-leave-marquee .xg-glass-solid {
+    width: clamp(200px, 62vw, 280px) !important;
+  }
+
+  .xg-page .xg-2,
+  .xg-page .xg-3 {
+    gap: clamp(24px, 4vw, 32px) !important;
+  }
+
+  /* Programmes page — unified mobile headings (same scale as other pages) */
+  .xg-programmes-page [data-screen-label='Programme Tiers'] h2 {
+    font-size: clamp(56px, 15vw, 100px) !important;
+    line-height: 0.95 !important;
+    margin-bottom: clamp(12px, 2.5vw, 18px) !important;
+  }
+
+  .xg-programmes-page [data-screen-label='Programme Tiers'] .xdge-programmes-tagline {
+    font-size: clamp(32px, 8.5vw, 48px) !important;
+    margin: 0.1em 0 clamp(10px, 2vw, 16px) !important;
+    transform: none !important;
+    letter-spacing: 0.02em;
+  }
+
+  .xg-programmes-page [data-screen-label='Programme Tiers'] .xdge-tier-text-narrow,
+  .xg-programmes-page [data-screen-label='Programme Tiers'] .xdge-tier-hollow {
+    transform: none !important;
+    transform-origin: left center;
+  }
+
+  .xg-programmes-page [data-screen-label='Incubator Pathways'] h2 {
+    font-size: clamp(56px, 15vw, 100px) !important;
+    line-height: 0.95 !important;
+    margin-bottom: clamp(16px, 3vw, 24px) !important;
+  }
+
+  .xg-programmes-page [data-screen-label='01 Programmes Hero'] h1 {
+    font-size: clamp(56px, 15vw, 108px) !important;
+    line-height: 0.92 !important;
+  }
+
+  /* Contact page — display headings */
+  .xg-contact-page [data-screen-label='01 Contact Hero'] h1 {
+    font-size: clamp(56px, 15vw, 108px) !important;
+    line-height: 0.86 !important;
+    margin-bottom: clamp(12px, 2.5vw, 18px) !important;
+  }
+
+  .xg-page .xdge-contact-hero-heading {
+    -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.98) !important;
+    text-stroke: 1.2px rgba(255, 255, 255, 0.98) !important;
+  }
+
+  .xg-contact-page [data-screen-label='Discovery Meeting'] h2 {
+    font-size: clamp(48px, 13vw, 92px) !important;
+    line-height: 0.86 !important;
+    margin-bottom: clamp(12px, 2.5vw, 18px) !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+  }
+
+  .xg-contact-page [data-screen-label='Contact Form'] h2 {
+    font-size: clamp(32px, 7.5vw, 48px) !important;
+    line-height: 1.1 !important;
+    margin-bottom: clamp(12px, 2.5vw, 18px) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .xg-page section[data-section-theme]:not([data-screen-label*='Hero']),
+  .xg-page .xg-stick-wrap > section {
+    padding-top: clamp(40px, 8vw, 56px) !important;
+    padding-bottom: clamp(40px, 8vw, 56px) !important;
+  }
+
+  .xg-page section:not([data-screen-label*='Hero']) h1,
+  .xg-page section:not([data-screen-label*='Hero']) h2 {
+    font-size: clamp(52px, 14vw, 92px) !important;
+    margin-bottom: clamp(14px, 3vw, 20px) !important;
+  }
+
+  [data-screen-label='05 Who We Serve'] h2,
+  [data-screen-label='05 Who We Serve'] .xdge-whos-clip {
+    font-size: clamp(52px, 14vw, 104px) !important;
+  }
+
+  section[data-screen-label*='Hero'] h1 {
+    font-size: clamp(56px, 15vw, 100px) !important;
+  }
+
+  .xg-page .xdge-differs-bottom-line,
+  .xg-page .xdge-people-line-narrow,
+  .xg-page .xdge-about-us-filled,
+  .xg-page .xdge-stand-for-bottom-text {
+    transform: scaleX(0.94);
+    transform-origin: left center;
+  }
+
+  .xg-programmes-page [data-screen-label='Programme Tiers'] h2 {
+    font-size: clamp(52px, 14vw, 92px) !important;
+  }
+
+  .xg-programmes-page [data-screen-label='Programme Tiers'] .xdge-programmes-tagline {
+    font-size: clamp(28px, 7.8vw, 44px) !important;
+  }
+
+  .xg-programmes-page [data-screen-label='Incubator Pathways'] h2 {
+    font-size: clamp(52px, 14vw, 92px) !important;
+  }
+
+  .xg-programmes-page [data-screen-label='01 Programmes Hero'] h1 {
+    font-size: clamp(52px, 14vw, 100px) !important;
+  }
+
+  .xg-contact-page [data-screen-label='01 Contact Hero'] h1 {
+    font-size: clamp(52px, 14vw, 100px) !important;
+  }
+
+  .xg-contact-page [data-screen-label='Discovery Meeting'] h2 {
+    font-size: clamp(44px, 12vw, 84px) !important;
+  }
+
+  .xg-contact-page [data-screen-label='Contact Form'] h2 {
+    font-size: clamp(28px, 7vw, 42px) !important;
+  }
+}
+
+/* ── Experience page — mobile typography + layout system ── */
+@media (max-width: 768px) {
+  /* Unified section header: left-aligned, same rhythm */
+  .xg-experience-page section:not([data-screen-label='01 Experience Hero']) h1,
+  .xg-experience-page section:not([data-screen-label='01 Experience Hero']) h2,
+  .xg-experience-page section:not([data-screen-label='01 Experience Hero']) h3 {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-inline: 0 !important;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .xg-experience-page .xg-exp-heading-block {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: clamp(20px, 4vw, 28px);
+  }
+
+  .xg-experience-page .xg-exp-heading-block h2,
+  .xg-experience-page .xg-exp-heading-block h3 {
+    margin-bottom: 0 !important;
+  }
+
+  .xg-experience-page .xg-section-lede {
+    font-size: clamp(15px, 1.6vw, 17px) !important;
+    line-height: 1.55 !important;
+    font-weight: 500;
+    color: #ffffff;
+    max-width: 36em;
+    margin: clamp(16px, 3vw, 22px) 0 clamp(32px, 6vw, 48px) !important;
+    text-align: left !important;
+  }
+
+  .xg-experience-page .xg-section-lede-wrap .xg-section-lede {
+    margin-bottom: 12px !important;
+  }
+
+  .xg-experience-page .xg-section-lede-wrap p:not(.xg-section-lede) {
+    text-align: left !important;
+    max-width: 36em;
+  }
+
+  /* All main section headings — large on mobile */
+  .xg-page .xg-experience-page section:not([data-screen-label*='Hero']) h1,
+  .xg-page .xg-experience-page section:not([data-screen-label*='Hero']) h2,
+  .xg-experience-page section:not([data-screen-label*='Hero']) h1,
+  .xg-experience-page section:not([data-screen-label*='Hero']) h2,
+  .xg-experience-page [data-screen-label='What You Will Experience'] h2,
+  .xg-experience-page [data-screen-label='The Journey'] h2,
+  .xg-experience-page [data-screen-label='Our Performance Formula'] h2,
+  .xg-experience-page [data-screen-label='What You Leave With'] h2,
+  .xg-experience-page [data-screen-label='Different Ages, Different Focus'] h2,
+  .xg-experience-page [data-screen-label='Standards & Expectations'] h2,
+  .xg-experience-page [data-screen-label='Is This Right For Me'] h2,
+  .xg-experience-page [data-screen-label='Proven Outcomes'] h2,
+  .xg-experience-page [data-screen-label='Step Into Your Next Level'] h2 {
+    font-size: clamp(56px, 15vw, 100px) !important;
+    line-height: 0.95 !important;
+  }
+
+  .xg-page .xg-experience-page [data-screen-label='01 Experience Hero'] h1,
+  .xg-experience-page [data-screen-label='01 Experience Hero'] h1 {
+    font-size: clamp(60px, 16vw, 108px) !important;
+    text-align: center !important;
+  }
+
+  .xg-page .xg-experience-page [data-screen-label='What You Will Experience'] h3,
+  .xg-experience-page [data-screen-label='What You Will Experience'] h3 {
+    font-size: clamp(46px, 12.5vw, 80px) !important;
+  }
+
+  /* Fix inconsistent centered / offset headings */
+  .xg-experience-page .xg-leave-with-header {
+    text-align: left !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: clamp(32px, 6vw, 48px) !important;
+  }
+
+  .xg-experience-page .xg-leave-with-header h2 {
+    margin-inline: 0 !important;
+  }
+
+  .xg-experience-page .xg-leave-with-header .xg-section-lede {
+    margin-top: clamp(14px, 2.5vw, 18px) !important;
+    margin-bottom: 0 !important;
+    color: #a8a8a8;
+  }
+
+  .xg-experience-page .xg-journey-header {
+    margin-bottom: clamp(40px, 7vw, 56px) !important;
+  }
+
+  .xg-experience-page .xg-journey-heading-wrap {
+    align-self: flex-start !important;
+    text-align: left !important;
+    padding: 0 !important;
+    width: 100%;
+  }
+
+  .xg-experience-page .xdge-the-journey-clip {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-inline: 0 !important;
+  }
+
+  .xg-experience-page .xg-journey-intro {
+    align-self: flex-start !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    max-width: 100% !important;
+    margin-top: clamp(16px, 3vw, 22px) !important;
+  }
+
+  .xg-experience-page .xg-journey-intro .xg-section-lede {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .xg-experience-page .xg-people-block {
+    margin-left: 0 !important;
+    max-width: 100% !important;
+    margin-top: clamp(40px, 8vw, 64px) !important;
+  }
+
+  .xg-experience-page .xdge-perf-formula-bottom {
+    text-align: left !important;
+    margin-top: -0.42em !important;
+    margin-left: 1.3em !important;
+  }
+
+  .xg-experience-page [data-screen-label='Our Performance Formula'] .xdge-perf-formula-performance {
+    transform: scaleX(0.925) !important;
+    transform-origin: left bottom !important;
+  }
+
+  .xg-experience-page [data-screen-label='Our Performance Formula'] .xdge-perf-formula-formula {
+    transform: scaleX(0.74) !important;
+    transform-origin: left top !important;
+  }
+
+  /* Clip wrappers — left edge, no auto-centering */
+  .xg-experience-page [class*='xdge-'][class*='-clip'] {
+    margin-left: 0 !important;
+  }
+
+  /* Minimal horizontal squeeze — let font-size carry the weight */
+  .xg-experience-page .xdge-the-exp-line,
+  .xg-experience-page .xdge-the-journey,
+  .xg-experience-page .xdge-leave-with-solid,
+  .xg-experience-page .xdge-leave-with-hollow,
+  .xg-experience-page .xdge-reviews-hollow,
+  .xg-experience-page .xdge-differs-solid,
+  .xg-experience-page .xdge-standards-hollow,
+  .xg-experience-page .xdge-standards-solid,
+  .xg-experience-page .xdge-right-for-me-kicker,
+  .xg-experience-page .xdge-right-for-me-solid,
+  .xg-experience-page .xdge-how-will-top-text,
+  .xg-experience-page .xdge-how-will-bottom,
+  .xg-experience-page .xdge-people-hollow,
+  .xg-experience-page .xdge-people-solid {
+    transform: none;
+    transform-origin: left center;
+  }
+
+  .xg-experience-page .xdge-differs-bottom-line,
+  .xg-experience-page .xdge-people-line-narrow {
+    transform: scaleX(0.96);
+    transform-origin: left center;
+  }
+
+  .xg-experience-page [data-screen-label='What You Leave With'] {
+    padding-left: clamp(16px, 4vw, 24px) !important;
+    padding-right: clamp(16px, 4vw, 24px) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .xg-page .xg-experience-page section:not([data-screen-label*='Hero']) h1,
+  .xg-page .xg-experience-page section:not([data-screen-label*='Hero']) h2,
+  .xg-experience-page section:not([data-screen-label*='Hero']) h1,
+  .xg-experience-page section:not([data-screen-label*='Hero']) h2,
+  .xg-experience-page [data-screen-label='What You Will Experience'] h2,
+  .xg-experience-page [data-screen-label='The Journey'] h2,
+  .xg-experience-page [data-screen-label='Our Performance Formula'] h2,
+  .xg-experience-page [data-screen-label='What You Leave With'] h2,
+  .xg-experience-page [data-screen-label='Different Ages, Different Focus'] h2,
+  .xg-experience-page [data-screen-label='Standards & Expectations'] h2,
+  .xg-experience-page [data-screen-label='Is This Right For Me'] h2,
+  .xg-experience-page [data-screen-label='Proven Outcomes'] h2,
+  .xg-experience-page [data-screen-label='Step Into Your Next Level'] h2 {
+    font-size: clamp(52px, 14vw, 92px) !important;
+  }
+
+  .xg-page .xg-experience-page [data-screen-label='01 Experience Hero'] h1,
+  .xg-experience-page [data-screen-label='01 Experience Hero'] h1 {
+    font-size: clamp(56px, 15vw, 100px) !important;
+  }
+
+  .xg-page .xg-experience-page [data-screen-label='What You Will Experience'] h3,
+  .xg-experience-page [data-screen-label='What You Will Experience'] h3 {
+    font-size: clamp(42px, 11.5vw, 72px) !important;
+  }
+
+  .xg-experience-page .xdge-differs-solid,
+  .xg-experience-page .xdge-standards-hollow,
+  .xg-experience-page .xdge-right-for-me-solid,
+  .xg-experience-page .xdge-how-will-bottom {
+    transform: none;
+    transform-origin: left center;
+  }
+
+  .xg-experience-page [data-screen-label='Our Performance Formula'] .xdge-perf-formula-performance {
+    transform: scaleX(0.925) !important;
+    transform-origin: left bottom !important;
+  }
+
+  .xg-experience-page [data-screen-label='Our Performance Formula'] .xdge-perf-formula-formula {
+    transform: scaleX(0.74) !important;
+    transform-origin: left top !important;
+  }
+
+  .xg-experience-page .xdge-differs-bottom-line {
+    transform: scaleX(0.94);
+  }
+}
+
+/* ── Forms — Contact + Apply (shared UI system) ── */
+.xg-form-section-shell {
+  background: #ffffff;
+  color: #000000;
+  padding: clamp(72px, 9vw, 120px) clamp(20px, 4vw, 40px);
+}
+
+.xg-form {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.xg-form--wide {
+  max-width: 920px;
+}
+
+.xg-form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 4vw, 48px);
+}
+
+.xg-form-intro {
+  max-width: 42rem;
+  margin-bottom: clamp(8px, 1.5vw, 16px);
+}
+
+.xg-form-eyebrow {
+  margin: 0 0 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #888888;
+}
+
+.xg-form-title {
+  margin: 0 0 14px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #000000;
+}
+
+.xg-form-lede {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(15px, 1.55vw, 17px);
+  line-height: 1.6;
+  color: #555555;
+  max-width: 38em;
+}
+
+.xg-form-field {
+  display: block;
+}
+
+.xg-form-field:focus-within .xg-form-label {
+  color: #2C6FD6;
+}
+
+.xg-form-label,
+.xg-form-option-title {
+  display: block;
+  margin-bottom: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #666666;
+  transition: color 0.25s var(--xg-ease);
+}
+
+.xg-form-option-title {
+  margin-bottom: 14px;
+}
+
+.xg-form-hint,
+.xg-form-section-hint {
+  margin-top: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: #777777;
+}
+
+.xg-form-section-hint {
+  margin-top: 0;
+  font-style: italic;
+}
+
+.xg-form-input,
+.xg-form-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  background: #f7f7f8;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  color: #000000;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  outline: none;
+  transition:
+    background 0.25s var(--xg-ease),
+    border-color 0.25s var(--xg-ease),
+    box-shadow 0.25s var(--xg-ease);
+}
+
+.xg-form-textarea {
+  resize: vertical;
+  min-height: 132px;
+}
+
+.xg-form-input:hover,
+.xg-form-textarea:hover {
+  border-color: rgba(0, 0, 0, 0.16);
+  background: #fafafb;
+}
+
+.xg-form-input:focus,
+.xg-form-textarea:focus {
+  background: #ffffff;
+  border-color: #2C6FD6 !important;
+  box-shadow: 0 0 0 3px rgba(44, 111, 214, 0.12);
+}
+
+.xg-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 32px);
+}
+
+.xg-form-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.xg-form-check-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.xg-form-check-grid > .xg-form-check {
+  min-width: 0;
+}
+
+.xg-form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: #fafafa;
+  cursor: pointer;
+  transition:
+    border-color 0.25s var(--xg-ease),
+    background 0.25s var(--xg-ease),
+    box-shadow 0.25s var(--xg-ease);
+}
+
+.xg-form-check:hover {
+  border-color: rgba(44, 111, 214, 0.28);
+  background: #ffffff;
+}
+
+.xg-form-check.is-checked,
+.xg-form-check:has(.xg-form-check-native:checked) {
+  border-color: rgba(44, 111, 214, 0.55);
+  background: rgba(44, 111, 214, 0.05);
+  box-shadow: 0 8px 20px -16px rgba(44, 111, 214, 0.45);
+}
+
+.xg-form-check-native {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.xg-form-check-box {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #ffffff;
+  transition:
+    border-color 0.25s var(--xg-ease),
+    background 0.25s var(--xg-ease);
+}
+
+.xg-form-check.is-checked .xg-form-check-box,
+.xg-form-check:has(.xg-form-check-native:checked) .xg-form-check-box {
+  border-color: #000000;
+  background: #000000;
+}
+
+.xg-form-check-text {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(14px, 1.4vw, 15px);
+  line-height: 1.45;
+  color: #000000;
+  overflow-wrap: anywhere;
+}
+
+.xg-form-check-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.xg-form-section {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  padding-bottom: clamp(36px, 5vw, 52px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.xg-form-section:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.xg-form-section-title {
+  width: 100%;
+  margin: 0;
+  padding-bottom: clamp(12px, 1.4vw, 16px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: #000000;
+}
+
+.xg-form-actions {
+  padding-top: 8px;
+}
+
+.xg-form-error {
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  background: #fff5f5;
+  border: 1px solid #ffd4d4;
+  border-radius: 10px;
+  color: #b42318;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.xg-form-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 52px;
+  padding: 16px 28px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #111111 0%, #1a1a1a 100%);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 10px 28px -14px rgba(0, 0, 0, 0.55);
+  transition:
+    transform 0.3s var(--xg-ease),
+    box-shadow 0.3s var(--xg-ease),
+    opacity 0.3s var(--xg-ease),
+    filter 0.3s var(--xg-ease);
+}
+
+.xg-form-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px -14px rgba(0, 0, 0, 0.62);
+  filter: brightness(1.05);
+}
+
+.xg-form-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.xg-form-submit-arrow {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.xg-form-success-section {
+  background: #ffffff;
+  color: #000000;
+  padding: clamp(72px, 9vw, 120px) clamp(20px, 4vw, 40px);
+}
+
+.xg-form-success-panel {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(32px, 5vw, 48px);
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+  box-shadow: 0 18px 50px -30px rgba(0, 0, 0, 0.18);
+}
+
+.xg-form-success-title {
+  margin: 0;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(28px, 4.5vw, 42px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #000000;
+}
+
+.xg-form-success-body {
+  margin: 18px 0 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: #555555;
+}
+
+@media (max-width: 768px) {
+  .xg-form-check-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .xg-form-submit {
+    width: 100%;
+  }
+
+  .xg-form-title,
+  .xg-form-success-title,
+  .xg-form-section-title {
+    font-size: clamp(26px, 7vw, 34px) !important;
+    line-height: 1.1 !important;
+  }
+
+  .xg-form-section-title {
+    font-size: clamp(22px, 6vw, 28px) !important;
+  }
+}
+
+/* ── Global chrome — home mark + back to top ── */
+.xg-home-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  text-decoration: none;
+  transition:
+    background 0.45s var(--xg-ease),
+    border-color 0.45s var(--xg-ease),
+    transform 0.35s var(--xg-ease),
+    box-shadow 0.45s var(--xg-ease);
+}
+
+.xg-home-mark img {
+  display: block;
+  width: auto;
+  height: clamp(22px, 2.6vw, 28px);
+  object-fit: contain;
+  transition: filter 0.35s var(--xg-ease), opacity 0.35s var(--xg-ease);
+}
+
+.xg-home-mark--dark img {
+  filter: none;
+}
+
+.xg-home-mark--light img {
+  filter: brightness(0);
+}
+
+.xg-home-mark.is-scrolled.xg-home-mark--dark {
+  background: rgba(0, 0, 0, 0.62);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 10px 28px -18px rgba(0, 0, 0, 0.65);
+}
+
+.xg-home-mark.is-scrolled.xg-home-mark--light {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 28px -18px rgba(0, 0, 0, 0.18);
+}
+
+.xg-back-top {
+  position: fixed;
+  right: clamp(20px, 4vw, 40px);
+  bottom: clamp(20px, 4vw, 40px);
+  z-index: 1050;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.72);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  box-shadow: 0 12px 32px -18px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    opacity 0.35s var(--xg-ease),
+    transform 0.35s var(--xg-ease),
+    box-shadow 0.35s var(--xg-ease),
+    background 0.35s var(--xg-ease);
+}
+
+.xg-back-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+@media (hover: hover) {
+  .xg-home-mark:hover {
+    transform: translateY(-1px);
+  }
+
+  .xg-back-top:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px -16px rgba(0, 0, 0, 0.55);
+  }
+}
+
+@media (max-width: 768px) {
+  .xg-home-mark,
+  .xg-back-top {
+    width: 48px;
+    height: 48px;
+  }
+
+  .xg-home-mark img {
+    height: 20px;
+  }
+
+  .xg-back-top {
+    bottom: calc(clamp(20px, 4vw, 40px) + 64px);
+  }
+}
+
+/* ── Client-ready polish — loader, cursor, sticky CTA, FAQ, legal ── */
+.xg-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.xg-skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  padding: 10px 16px;
+  background: #ffffff;
+  color: #000000;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  transform: translateY(-140%);
+  transition: transform 0.25s var(--xg-ease);
+}
+
+.xg-skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid #2C6FD6;
+  outline-offset: 2px;
+}
+
+@media (pointer: fine) {
+  .xg-custom-cursor,
+  .xg-custom-cursor * {
+    cursor: none !important;
+  }
+
+  .xg-cursor-wrap {
+    mix-blend-mode: difference;
+  }
+}
+
+.xg-page-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+}
+
+.xg-page-loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.xg-page-loader-logo {
+  width: clamp(48px, 8vw, 72px);
+  height: auto;
+  opacity: 0.9;
+  animation: xg-loader-pulse 1.4s ease-in-out infinite;
+}
+
+.xg-page-loader-bar {
+  width: 120px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.xg-page-loader-bar-fill {
+  height: 100%;
+  width: 40%;
+  background: #20E3E8;
+  border-radius: 999px;
+  animation: xg-loader-slide 1.1s ease-in-out infinite;
+}
+
+@keyframes xg-loader-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes xg-loader-slide {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(320%); }
+}
+
+.xg-sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1040;
+  display: none;
+  gap: 8px;
+  padding: 12px clamp(16px, 4vw, 24px);
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  background: rgba(0, 0, 0, 0.88);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transform: translateY(110%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s var(--xg-ease), opacity 0.4s var(--xg-ease);
+}
+
+@media (max-width: 768px) {
+  .xg-sticky-cta {
+    display: flex;
+  }
+}
+
+.xg-sticky-cta.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.xg-sticky-cta-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.25s var(--xg-ease), filter 0.25s var(--xg-ease);
+}
+
+.xg-sticky-cta-btn-primary {
+  background: #ffffff;
+  color: #000000;
+}
+
+.xg-sticky-cta-btn-secondary {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.xg-programme-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.xg-cta-stand-btn-dark {
+  color: #000000 !important;
+  border-color: rgba(0, 0, 0, 0.35) !important;
+}
+
+.xg-footer-insights-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.3s var(--xg-ease), border-color 0.3s var(--xg-ease);
+}
+
+.xg-footer-insights-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.xg-form-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.xg-form-success-steps {
+  margin: 24px 0 0;
+  padding-left: 1.2em;
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #555555;
+}
+
+.xg-form-success-steps li {
+  margin-bottom: 8px;
+}
+
+.xg-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.xg-faq-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.xg-faq-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(15px, 1.5vw, 17px);
+  font-weight: 600;
+  line-height: 1.4;
+  color: #000000;
+}
+
+.xg-faq-icon {
+  flex-shrink: 0;
+  font-size: 20px;
+  font-weight: 400;
+  color: #888888;
+}
+
+.xg-faq-answer {
+  margin: 0 0 20px;
+  padding-right: 32px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #555555;
+}
+
+.xg-faq-cta {
+  margin-top: clamp(32px, 5vw, 48px);
+  padding-top: 32px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.xg-insight-body p {
+  margin: 0 0 1.25em;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(16px, 1.6vw, 18px);
+  line-height: 1.7;
+  color: #333333;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xg-page {
+    animation: none !important;
+  }
+
+  .xg-page-loader-logo,
+  .xg-page-loader-bar-fill,
+  .xdge-footer-marquee {
+    animation: none !important;
+  }
+
+  .xg-lift:hover {
+    translate: none;
+  }
+
+  .xg-sticky-cta,
+  .xg-back-top {
+    transition: none;
   }
 }

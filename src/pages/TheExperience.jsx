@@ -11,7 +11,7 @@ import { StepIntoNextLevel } from '../components/sections/StepIntoNextLevel';
 
 export default function TheExperience() {
   return (
-    <>
+    <div className="xg-experience-page">
       <ExperienceHero />
       <div className="xg-stick-wrap">
         <WhatYouWillExperience />
@@ -26,6 +26,6 @@ export default function TheExperience() {
       </div>
       <ProvenOutcomes />
       <StepIntoNextLevel />
-    </>
+    </div>
   );
 }

@@ -1,30 +1,10 @@
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { theme, fadeUp, cardStagger, cardRise } from '../../theme';
+import { theme, cardStagger, cardRise } from '../../theme';
+import { insightPosts } from '../../data/insights';
 import { Group } from '../primitives/Reveal';
 import { SplitHeading } from '../primitives/SplitHeading';
 import { ParallaxImage } from '../primitives/ParallaxImage';
-
-const posts = [
-  {
-    tag1: 'CAREER', tag2: 'UNIVERSITY',
-    title: 'How Leadership Advances Early Careers',
-    body: 'The greater advantage is interviewing as a future leader, then transitioning into the workplace as someone employers already see as professionally credible, work-ready, able to lead from any seat, take ownership, and create impact from day one.',
-    img: '/assets/ALL NEW IMAGES/9.webp',
-  },
-  {
-    tag1: 'UNIVERSITY', tag2: null,
-    title: 'What Top Universities Seek In Emerging Leaders',
-    body: 'Competitive universities look for evidence of initiative, contribution, and real-world impact from students who can clearly communicate the difference they have made.',
-    img: '/assets/ALL NEW IMAGES/5.webp',
-  },
-  {
-    tag1: 'SCHOOL', tag2: 'UNIVERSITY',
-    title: 'How Young Leadership Creates Lasting Advantage',
-    body: 'Leadership is about developing conviction, building on your unique strengths, standing behind your beliefs and ambitions, and knowing how to translate them into action that creates your long-term advantage. How different might our lives have been if these foundations had been built in our formative years?',
-    img: '/assets/ALL NEW IMAGES/ALL NEW IMAGES (4).webp',
-  },
-];
-
 
 export function Insights() {
   return (
@@ -39,79 +19,86 @@ export function Insights() {
           <div>
             <SplitHeading
               lines={['INSIGHTS']}
+              lineClasses={['xdge-condensed-hollow xdge-tier-hollow']}
+              lineClipClasses={['xdge-insights-clip']}
               style={{
-                fontFamily: theme.display, fontWeight: 900,
+                fontFamily: theme.displayCondensed,
                 fontSize: 'clamp(40px, 11.3vw, 200px)',
-                lineHeight: 0.95, letterSpacing: '-0.02em',
+                lineHeight: 0.95,
+                letterSpacing: '-0.02em',
+                textTransform: 'uppercase',
+                margin: 0,
               }}
             />
           </div>
-          <motion.div data-no-reveal variants={fadeUp} style={{ paddingBottom: 24 }}>
+          <motion.div data-no-reveal style={{ paddingBottom: 24 }}>
             <p style={{ fontSize: 17, lineHeight: 1.55, color: theme.subtitle, margin: '0 0 24px', maxWidth: 480 }}>
               Get our latest thoughts and opinions on all things leadership, mindset, and performance.
             </p>
-            <motion.a
-              whileHover={{ x: 4 }}
-              href="#"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 10, padding: '12px 20px',
-                border: `1px solid ${theme.base}`, borderRadius: 999, color: theme.base,
-                textDecoration: 'none', fontSize: 13, fontWeight: 500,
-              }}
-            >All Insights <span style={{ fontSize: 16 }}>→</span></motion.a>
+            <motion.div whileHover={{ x: 4 }}>
+              <Link
+                to="/insights"
+                data-cursor="grow"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 10, padding: '12px 20px',
+                  border: `1px solid ${theme.base}`, borderRadius: 999, color: theme.base,
+                  textDecoration: 'none', fontSize: 13, fontWeight: 500,
+                }}
+              >All Insights <span style={{ fontSize: 16 }}>→</span></Link>
+            </motion.div>
           </motion.div>
         </Group>
-        {/* cardStagger/cardRise rather than the default text stagger: three
-            large cards 0.13s apart all overlap in flight, which reads as a
-            scramble. 0.28s apart over 1.1s each is a clean one-by-one cascade.
-            Hover lift is CSS (.xg-lift) so it cannot fight this reveal. */}
         <Group className="xg-3" variants={cardStagger}>
-          {posts.map((p, i) => (
-            <motion.a data-no-reveal
-              key={i}
-              href="#"
+          {insightPosts.map((p) => (
+            <motion.div data-no-reveal
+              key={p.slug}
               variants={cardRise}
-              className="xg-glass-solid xg-lift"
-              style={{
-                display: 'block', textDecoration: 'none', color: theme.base,
-                overflow: 'hidden', borderRadius: 8,
-              }}
             >
-              <ParallaxImage
-                src={p.img || `/assets/blog-0${i + 1}.webp`}
-                alt={p.title}
-                loading="lazy"
-                style={{ width: '100%', aspectRatio: '1/1' }}
-              />
-              <div style={{ padding: '22px 24px 28px', display: 'flex', flexDirection: 'column', gap: 14 }}>
-                <div style={{
-                  display: 'flex', gap: 8,
-                  fontSize: 11, color: theme.subtitle,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  fontWeight: 600,
-                }}>
-                  <span>{p.tag1}</span>
-                  {p.tag2 && (<><span>·</span><span>{p.tag2}</span></>)}
+              <Link
+                to={`/insights/${p.slug}`}
+                data-cursor="grow"
+                className="xg-glass-solid xg-lift"
+                style={{
+                  display: 'block', textDecoration: 'none', color: theme.base,
+                  overflow: 'hidden', borderRadius: 8,
+                }}
+              >
+                <ParallaxImage
+                  src={p.img}
+                  alt={p.title}
+                  loading="lazy"
+                  style={{ width: '100%', aspectRatio: '1/1' }}
+                />
+                <div style={{ padding: '22px 24px 28px', display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  <div style={{
+                    display: 'flex', gap: 8,
+                    fontSize: 11, color: theme.subtitle,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    fontWeight: 600,
+                  }}>
+                    <span>{p.tag1}</span>
+                    {p.tag2 && (<><span>·</span><span>{p.tag2}</span></>)}
+                  </div>
+                  <h3 style={{
+                    fontFamily: theme.body,
+                    fontSize: 'clamp(15px, 1.4vw, 18px)',
+                    lineHeight: 1.35,
+                    letterSpacing: '-0.005em',
+                    margin: 0, fontWeight: 700,
+                    color: theme.base,
+                  }}>
+                    {p.title}
+                  </h3>
+                  <p style={{
+                    fontSize: 13, lineHeight: 1.55,
+                    color: theme.subtitle, margin: 0,
+                  }}>
+                    {p.excerpt}
+                  </p>
                 </div>
-                <h3 style={{
-                  fontFamily: theme.body,
-                  fontSize: 'clamp(15px, 1.4vw, 18px)',
-                  lineHeight: 1.35,
-                  letterSpacing: '-0.005em',
-                  margin: 0, fontWeight: 700,
-                  color: theme.base,
-                }}>
-                  {p.title}
-                </h3>
-                <p style={{
-                  fontSize: 13, lineHeight: 1.55,
-                  color: theme.subtitle, margin: 0,
-                }}>
-                  {p.body}
-                </p>
-              </div>
-            </motion.a>
+              </Link>
+            </motion.div>
           ))}
         </Group>
       </div>

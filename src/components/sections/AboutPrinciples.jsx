@@ -39,7 +39,7 @@ const principles = [
 export function AboutPrinciples() {
   return (
     <section
-      data-screen-label="Why XDGE Exists"
+      data-screen-label="Why XDGE"
       data-section-theme="dark"
       style={{
         background: theme.dark,
@@ -52,18 +52,25 @@ export function AboutPrinciples() {
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <div style={{ position: 'relative' }}>
           <SplitHeading
-            lines={['WHY XDGE', 'EXISTS']}
-            lineClasses={['hollow-text', 'cyan-text']}
+            tag="h2"
+            lines={[
+              <span className="xdge-why-heading-line">
+                <span className="xdge-why-solid">WHY </span>
+                <span className="xdge-why-hollow">XDGE</span>
+              </span>,
+            ]}
+            lineClipClasses={['xdge-why-clip']}
             style={{
-              fontFamily: theme.display, fontWeight: 900,
+              fontFamily: theme.displayCondensed,
               fontSize: 'clamp(40px, 11.3vw, 200px)',
-              lineHeight: 0.95, letterSpacing: '-0.02em',
+              lineHeight: 1,
               marginBottom: 'clamp(28px, 4vw, 40px)',
             }}
           />
         </div>
 
         <motion.div data-no-reveal
+          className="xg-principles-intro"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"

@@ -56,11 +56,22 @@ export default async function handler(req, res) {
     programmes, achievements, achievementOther,
     goals12mo, goals5yr,
     format, source,
+    website,
   } = req.body;
 
-  // Basic validation
+  if (website) {
+    return res.status(200).json({ success: true });
+  }
+
   if (!participantName) {
     return res.status(400).json({ error: 'Participant name is required.' });
+  }
+
+  if (guardianEmail) {
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(guardianEmail).trim());
+    if (!emailOk) {
+      return res.status(400).json({ error: 'Please provide a valid guardian email address.' });
+    }
   }
 
   const html = `

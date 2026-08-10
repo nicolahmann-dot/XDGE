@@ -6,27 +6,27 @@ import { SplitHeading } from '../primitives/SplitHeading';
 
 const tiers = [
   {
-    name: 'SCHOOL XDGE',
-    tagline: 'Lead From The Start',
-    desc: 'For school students aged 11–18 looking to build leadership, initiative, and real-world experience that supports future applications and opportunities.',
+    name: 'PROFESSIONAL XDGE',
+    tagline: 'Presence From Day One',
+    desc: 'For final-year students, graduates, and early career professionals looking to develop the professional skills, leadership capability, and workplace confidence needed to earn trust, build influence, and make an impact from day one.',
     cards: [
       {
         duration: 'Weeks 1-4',
-        title: 'Lead Yourself',
-        desc: 'Build the confidence, resilience, self-awareness, and mindset mastery that help young people take ownership, lead with confidence, and realise their potential.',
-        img: '/assets/ALL NEW IMAGES/6.webp',
+        title: 'High Performance Leadership Mindset',
+        desc: 'Build the mindset, confidence, resilience, and professional presence that distinguish high performers and future leaders.',
+        img: '/assets/ALL NEW IMAGES/16.webp',
       },
       {
         duration: 'Weeks 5-8',
-        title: 'Leadership Toolkit',
-        desc: 'Develop communication, teamwork, problem-solving, presentation, and leadership skills adapted from the professional world to help young people stand out with confidence.',
-        img: '/assets/ALL NEW IMAGES/7.webp',
+        title: 'Leadership Influence & Impact Skills',
+        desc: 'Develop executive presence, workplace influence, and the practical leadership and people skills needed to build credibility, navigate challenges, and create results from day one.',
+        img: '/assets/ALL NEW IMAGES/17.webp',
       },
       {
         duration: 'Weeks 9-12',
-        title: 'Leadership Changemaker Project',
-        desc: 'Create and lead a meaningful project that demonstrates leadership, initiative, and real-world impact while showcasing your unique strengths and ability to make a difference.',
-        img: '/assets/ALL NEW IMAGES/15.webp',
+        title: 'Career Accelerator Project',
+        desc: 'Lead a signature leadership project that showcases your expertise, demonstrates real-world impact, and helps establish your reputation as an emerging leader in your chosen profession.',
+        img: '/assets/ALL NEW IMAGES/18.webp',
       },
     ],
   },
@@ -56,27 +56,27 @@ const tiers = [
     ],
   },
   {
-    name: 'PROFESSIONAL XDGE',
-    tagline: 'Presence From Day One',
-    desc: 'For final-year students, graduates, and early career professionals looking to develop the professional skills, leadership capability, and workplace confidence needed to earn trust, build influence, and make an impact from day one.',
+    name: 'SCHOOL XDGE',
+    tagline: 'Lead From The Start',
+    desc: 'For school students aged 11–18 looking to build leadership, initiative, and real-world experience that supports future applications and opportunities.',
     cards: [
       {
         duration: 'Weeks 1-4',
-        title: 'High Performance Leadership Mindset',
-        desc: 'Build the mindset, confidence, resilience, and professional presence that distinguish high performers and future leaders.',
-        img: '/assets/ALL NEW IMAGES/16.webp',
+        title: 'Lead Yourself',
+        desc: 'Build the confidence, resilience, self-awareness, and mindset mastery that help young people take ownership, lead with confidence, and realise their potential.',
+        img: '/assets/ALL NEW IMAGES/6.webp',
       },
       {
         duration: 'Weeks 5-8',
-        title: 'Leadership Influence & Impact Skills',
-        desc: 'Develop executive presence, workplace influence, and the practical leadership and people skills needed to build credibility, navigate challenges, and create results from day one.',
-        img: '/assets/ALL NEW IMAGES/17.webp',
+        title: 'Leadership Toolkit',
+        desc: 'Develop communication, teamwork, problem-solving, presentation, and leadership skills adapted from the professional world to help young people stand out with confidence.',
+        img: '/assets/ALL NEW IMAGES/7.webp',
       },
       {
         duration: 'Weeks 9-12',
-        title: 'Career Accelerator Project',
-        desc: 'Lead a signature leadership project that showcases your expertise, demonstrates real-world impact, and helps establish your reputation as an emerging leader in your chosen profession.',
-        img: '/assets/ALL NEW IMAGES/18.webp',
+        title: 'Leadership Changemaker Project',
+        desc: 'Create and lead a meaningful project that demonstrates leadership, initiative, and real-world impact while showcasing your unique strengths and ability to make a difference.',
+        img: '/assets/ALL NEW IMAGES/15.webp',
       },
     ],
   },
@@ -106,6 +106,17 @@ const tiers = [
     ],
   },
 ];
+
+const tierHeadingProps = {
+  lineClasses: ['xdge-condensed-hollow xdge-tier-hollow'],
+  lineClipClasses: ['xdge-condensed-clip-narrow'],
+  lineInnerClasses: ['xdge-tier-text-narrow'],
+  style: {
+    fontFamily: theme.displayCondensed,
+    fontSize: 'clamp(64px, 12vw, 168px)',
+    lineHeight: 0.86,
+  },
+};
 
 function ProgrammeCard({ card }) {
   return (
@@ -205,29 +216,15 @@ export function ProgrammeTiers() {
           <div key={tier.name}>
             {/* tier heading — hollow name + tagline + description (About-page style) */}
             <div style={{ marginBottom: 'clamp(28px, 4vw, 48px)' }}>
-              {/* Same line mask as every other display heading — this was a plain
-                  <h3>, so it only got the generic CSS fade while the rest of the
-                  site rose from behind a clip. */}
-              <SplitHeading
-                tag="h3"
-                lineClasses={['hollow-text']}
-                lines={[tier.name]}
-                style={{
-                  // no fontFamily/fontWeight here — let .hollow-text (thin Archivo)
-                  // apply, so these match the hero "OUR" outline thickness.
-                  fontSize: 'clamp(48px, 8vw, 120px)',
-                  lineHeight: 0.95, letterSpacing: '-0.02em',
-                  textTransform: 'uppercase',
-                }}
-              />
-              <div style={{
-                fontWeight: 400,
-                fontSize: 'clamp(26px, 3.2vw, 44px)',
-                lineHeight: 1.1, letterSpacing: '-0.01em',
-                color: theme.base,
-                margin: 'clamp(8px, 1vw, 14px) 0 clamp(10px, 1.4vw, 18px)',
-              }}>
-                {tier.tagline}
+              <div className="xdge-tier-heading-block xg-exp-heading-block xg-programmes-tier-heading">
+                <SplitHeading
+                  tag="h2"
+                  lines={[tier.name]}
+                  {...tierHeadingProps}
+                />
+                <p className="xdge-condensed-tagline xdge-programmes-tagline">
+                  {tier.tagline}
+                </p>
               </div>
               <p style={{
                 fontFamily: theme.body,

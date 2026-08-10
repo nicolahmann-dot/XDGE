@@ -6,13 +6,14 @@ function ProgrammesHeading() {
   return (
     <SplitHeading
       tag="h1"
-      lineClasses={['hollow-text', 'cyan-text']}
+      lineClasses={['xdge-condensed-hollow xdge-condensed-hollow-tight', 'xdge-condensed-hollow']}
+      lineClipClasses={[undefined, 'xdge-condensed-clip-narrow']}
+      lineInnerClasses={[undefined, 'xdge-condensed-text-narrow']}
       lines={['OUR', 'PROGRAMMES']}
       style={{
-        fontFamily: theme.display, fontWeight: 900,
-        fontSize: 'clamp(40px, 11.3vw, 200px)',
-        lineHeight: 0.92, letterSpacing: '-0.03em',
-        color: theme.base,
+        fontFamily: theme.displayCondensed,
+        fontSize: 'clamp(56px, 13vw, 220px)',
+        lineHeight: 0.86,
       }}
     />
   );

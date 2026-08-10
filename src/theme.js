@@ -26,6 +26,7 @@ export const theme = {
   // Fonts
   display: "'Archivo Black', sans-serif",
   displayTight: "'Archivo Black', sans-serif",
+  displayCondensed: "'Bebas Neue', sans-serif",
   subheading: "'Avenir', 'Avenir Next', 'Segoe UI', sans-serif",
   body: "'Inter', sans-serif",
   italic: "'Inter', sans-serif",

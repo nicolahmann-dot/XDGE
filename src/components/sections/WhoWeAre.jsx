@@ -41,31 +41,33 @@ export function WhoWeAre() {
     <section
       data-screen-label="Who We Are"
       data-section-theme="dark"
+      className="xg-wwa-section"
       style={{
         background: theme.dark,
         color: theme.base,
         position: 'relative',
         overflow: 'hidden',
-        padding: 'clamp(90px, 11vw, 160px) clamp(20px, 4vw, 40px)',
+        padding: 'clamp(40px, 5vw, 72px) clamp(20px, 4vw, 40px) clamp(90px, 11vw, 160px)',
       }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        <div style={{ marginBottom: 'clamp(40px, 6vw, 64px)', position: 'relative' }}>
+        <div style={{ marginBottom: 'clamp(32px, 4.5vw, 48px)', position: 'relative' }}>
           <SplitHeading
             lines={[
-              <span style={{ whiteSpace: 'nowrap' }}>
-                <span className="cyan-text" style={{ paddingRight: '0.2em' }}>WHO</span>
-                <span className="hollow-text">ARE WE</span>
-              </span>,
+              <span className="xdge-people-hollow xdge-people-line-narrow">THE PEOPLE BEHIND YOUR</span>,
+              <span className="xdge-people-solid">PROGRESS.</span>,
+            ]}
+            lineClipClasses={[
+              'xdge-clip-tight-y xdge-people-clip',
+              'xdge-clip-tight-y xdge-people-clip xdge-people-clip-solid',
             ]}
             style={{
-              fontFamily: theme.display, fontWeight: 900,
-              // Capped below the usual 200px: this line is nowrap inside a container that
-            // stops at maxWidth 1280 while 11.3vw keeps growing, so past a ~1770px
-            // viewport it overflowed and the clip shaved the end off — "WHO ARE WE" measured 1371px against a 1280px container.
-            fontSize: 'clamp(40px, 11.3vw, 185px)',
-              lineHeight: 0.92, letterSpacing: '-0.02em',
-              textAlign: 'left', margin: 0, textTransform: 'uppercase',
+              fontFamily: theme.displayCondensed,
+              lineHeight: 0.92,
+              letterSpacing: '-0.02em',
+              textAlign: 'left',
+              margin: 0,
+              textTransform: 'uppercase',
             }}
           />
         </div>

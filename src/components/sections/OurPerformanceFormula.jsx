@@ -206,34 +206,46 @@ export function OurPerformanceFormula({ dark = true, diagramMaxWidth } = {}) {
     <section
       data-screen-label="Our Performance Formula"
       data-section-theme={dark ? 'dark' : 'light'}
+      className="xg-perf-formula-section"
       style={{
         background: bg,
         color: fg,
         position: 'relative',
         overflow: 'hidden',
-        padding: 'clamp(90px, 11vw, 160px) clamp(20px, 4vw, 40px)',
+        padding: 'clamp(36px, 4.5vw, 64px) clamp(20px, 4vw, 40px) clamp(64px, 8vw, 112px)',
       }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         
-        {/* Massive full-width heading */}
+        {/* Massive full-width heading — PERFORMANCE / FORMULA (Heading Set 2). */}
+        <div className="xg-exp-heading-block">
         <SplitHeading
-          lineClasses={['cyan-text', 'hollow-text']}
           lines={[
-            // Kicker line is 0.45em of the h2 size; the size lives on an inner
-            // span so the line's own clip is measured against it.
-            <span style={{ display: 'block', fontSize: '0.45em', letterSpacing: '0.02em' }}>OUR PERFORMANCE</span>,
-            'FORMULA',
+            <span className="xdge-perf-formula-stack">
+              <span className="xdge-perf-formula-top">
+                <span className="xdge-perf-formula-performance">
+                  <span className="xdge-perf-formula-performance-base">PERFORMANCE</span>
+                  <span className="xdge-perf-formula-performance-cut" aria-hidden="true">
+                    PERFORMANCE
+                  </span>
+                </span>
+              </span>
+              <span className="xdge-perf-formula-bottom">
+                <span className="xdge-perf-formula-formula">FORMULA</span>
+              </span>
+            </span>,
           ]}
+          lineClipClasses={['xdge-clip-tight-y xdge-perf-formula-stack-clip']}
           style={{
-            fontFamily: theme.display, fontWeight: 900,
+            fontFamily: theme.displayCondensed,
             fontSize: 'clamp(40px, 11.3vw, 200px)',
-            lineHeight: 0.9, letterSpacing: '-0.02em',
-            marginBottom: 'clamp(40px, 6vw, 80px)',
+            lineHeight: 1,
+            marginBottom: 'clamp(20px, 3vw, 32px)',
             textTransform: 'uppercase',
             width: '100%',
           }}
         />
+        </div>
 
         <div className="xg-2" style={{ alignItems: 'center' }}>
           {/* Left text — heading + each line cascade in one-by-one */}

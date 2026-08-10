@@ -205,7 +205,7 @@ function Modal({ slide, onClose }) {
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
               gap: 'clamp(20px, 3vw, 40px)',
-            }}>
+            }} className="xg-ages-modal-bullets">
               <div>
                 <div style={{
                   fontSize: 11, letterSpacing: '0.16em',
@@ -342,20 +342,28 @@ export function DifferentAgesDifferentFocus() {
       }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+        <div className="xg-exp-heading-block">
         <SplitHeading
-          lines={['HOW DOES XDGE DIFFER', 'BY AGE AND OUTCOMES?']}
+          lines={[
+            <span className="xdge-differs-solid">HOW XDGE DIFFERS BY</span>,
+            <span className="xdge-differs-bottom-line">
+              <span className="xdge-differs-hollow">AGE</span>
+              <span className="xdge-amp-box">&</span>
+              <span className="xdge-differs-hollow">OUTCOMES?</span>
+            </span>,
+          ]}
+          lineClipClasses={['xdge-differs-clip', 'xdge-differs-clip']}
           style={{
-            fontFamily: theme.display, fontWeight: 900,
-            // Capped below the usual 200px: this line is nowrap inside a container that
-            // stops at maxWidth 1280 while 11.3vw keeps growing, so past a ~1770px
-            // viewport it overflowed and the clip shaved the end off — "BY AGE AND OUTCOMES?" measured 1357px against 1280px.
-            fontSize: 'clamp(40px, 11.3vw, 185px)',
-            lineHeight: 0.95, letterSpacing: '-0.02em',
+            fontFamily: theme.displayCondensed,
+            lineHeight: 0.95,
+            letterSpacing: '-0.02em',
+            textTransform: 'uppercase',
             marginBottom: 'clamp(28px, 4vw, 40px)',
           }}
         />
 
         <motion.p
+          className="xg-section-lede"
           data-no-reveal
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -374,6 +382,7 @@ export function DifferentAgesDifferentFocus() {
           This is not the same programme repeated at different ages. Each stage
           is designed around where students are and what they are working towards next.
         </motion.p>
+        </div>
 
         <Group
           className="xg-3"

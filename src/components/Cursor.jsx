@@ -1,19 +1,23 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 const SIZE = 24;
 const INTERACTIVE = 'a, button, [role="button"], [data-cursor="grow"], input, textarea, select';
 
-// Plain-JS custom cursor — no framer-motion. Uses CSS transition for the
-// scale state change instead of React re-renders, eliminating snap on
-// hover/press transitions.
 export function Cursor() {
   const wrapRef = useRef(null);
   const innerRef = useRef(null);
 
   useEffect(() => {
+    const fine = window.matchMedia('(pointer: fine)');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (!fine.matches || reduced.matches) return undefined;
+
+    document.documentElement.classList.add('xg-custom-cursor');
+
     const wrap = wrapRef.current;
     const inner = innerRef.current;
-    if (!wrap || !inner) return;
+    if (!wrap || !inner) return undefined;
 
     let currentScale = 1;
 
@@ -47,7 +51,9 @@ export function Cursor() {
     document.addEventListener('mouseout', out);
     document.addEventListener('mousedown', down);
     document.addEventListener('mouseup', up);
+
     return () => {
+      document.documentElement.classList.remove('xg-custom-cursor');
       window.removeEventListener('mousemove', move);
       document.removeEventListener('mouseover', over);
       document.removeEventListener('mouseout', out);
@@ -60,10 +66,13 @@ export function Cursor() {
     <div
       ref={wrapRef}
       aria-hidden="true"
+      className="xg-cursor-wrap"
       style={{
         position: 'fixed',
-        top: 0, left: 0,
-        width: SIZE, height: SIZE,
+        top: 0,
+        left: 0,
+        width: SIZE,
+        height: SIZE,
         pointerEvents: 'none',
         zIndex: 9999,
         transform: 'translate3d(-100px, -100px, 0)',
@@ -74,7 +83,8 @@ export function Cursor() {
         ref={innerRef}
         className="xdge-cursor"
         style={{
-          width: SIZE, height: SIZE,
+          width: SIZE,
+          height: SIZE,
           borderRadius: '50%',
           background: 'rgba(0,0,0,0.85)',
           border: '1px solid rgba(255,255,255,0.6)',

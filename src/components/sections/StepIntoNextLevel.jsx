@@ -3,131 +3,95 @@ import { Link } from 'react-router-dom';
 import { theme, fadeUp } from '../../theme';
 import { Group } from '../primitives/Reveal';
 import { SplitHeading } from '../primitives/SplitHeading';
+import { mobileSrc } from '../../utils/mobileSrc';
 
-const fadeEase = [0.2, 0.7, 0.2, 1];
+function PlayIcon() {
+  return (
+    <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true">
+      <path d="M0 0v12l10-6z" />
+    </svg>
+  );
+}
 
 export function StepIntoNextLevel() {
   return (
     <section
       data-screen-label="Step Into Your Next Level"
       data-section-theme="dark"
+      className="xg-cta-stand-section"
       style={{
         background: theme.dark,
         color: theme.base,
         position: 'relative',
-        overflow: 'hidden',
-        padding: 'clamp(90px, 11vw, 160px) clamp(20px, 4vw, 40px)',
+        overflow: 'visible',
+        padding: 'clamp(72px, 9vw, 120px) clamp(20px, 4vw, 40px)',
       }}
     >
-      {/* Background removed per request — this section is now flat `theme.dark`.
-          It used to run `<HeroMotion variant="ascend" />`, a 2D-canvas animation
-          (not a video, despite looking like one), which drove its own rAF loop
-          behind the heading. */}
-      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        <div style={{ position: 'relative' }}>
-          <SplitHeading
-            lines={['STEP INTO YOUR', 'NEXT LEVEL']}
-            lineClasses={['hollow-text', 'cyan-text']}
-            style={{
-              fontFamily: theme.display, fontWeight: 900,
-              fontSize: 'clamp(40px, 11.3vw, 200px)',
-              lineHeight: 0.92, letterSpacing: '-0.02em',
-              marginBottom: 'clamp(48px, 7vw, 88px)',
-            }}
-          />
-        </div>
-
-        <Group className="xg-2" style={{ alignItems: 'flex-start', gap: 'clamp(40px, 8vw, 120px)' }}>
-          <motion.div data-no-reveal
-            variants={fadeUp}
-            style={{
-              display: 'flex', flexDirection: 'column',
-              gap: 18,
-            }}
-          >
-            <div style={{ display: 'flex', gap: 14 }}>
-              <div style={{
-                width: 'clamp(120px, 14vw, 180px)',
-                aspectRatio: '1 / 1',
-                overflow: 'hidden', background: '#000000',
-              }}>
-                <img
-                  src="/assets/ALL NEW IMAGES/ALL NEW IMAGES (5).webp"
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  style={{
-                    width: '100%', height: '100%',
-                    objectFit: 'cover',
-                    objectPosition: '50% 30%',
-                    display: 'block',
-                  }}
-                />
-              </div>
-              <div style={{
-                width: 'clamp(120px, 14vw, 180px)',
-                aspectRatio: '1 / 1',
-                overflow: 'hidden', background: '#000000',
-              }}>
-                <img
-                  src="/assets/ALL NEW IMAGES/ALL NEW IMAGES (4).webp"
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  style={{
-                    width: '100%', height: '100%',
-                    objectFit: 'cover',
-                    objectPosition: '50% 30%',
-                    display: 'block',
-                  }}
-                />
-              </div>
-            </div>
-            <div style={{
-              fontSize: 14, lineHeight: 1.5,
-              color: theme.subtitle,
-              maxWidth: 360,
-            }}>
-              Mostly available 9AM &ndash; 6PM (GMT) Mon&ndash;Fri
-            </div>
-          </motion.div>
-
-          <motion.div data-no-reveal
-            variants={fadeUp}
-            style={{
-              display: 'flex', flexDirection: 'column',
-              gap: 'clamp(20px, 3vw, 32px)',
-              paddingTop: 'clamp(8px, 2vw, 16px)',
-            }}
-          >
-            <p style={{
-              fontSize: 'clamp(20px, 2.4vw, 30px)',
-              lineHeight: 1.4,
-              color: theme.base, margin: 0,
-              fontWeight: 500,
-              letterSpacing: '-0.005em',
-              maxWidth: 560,
-            }}>
-              Leadership development for ages 12&ndash;24, designed for what
-              happens next.
-            </p>
-
-            <Link
-              to="/contact"
-              data-cursor="grow"
+      <div className="xg-cta-stand-inner" style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+        <Group className="xg-cta-stand-grid">
+          <div className="xg-cta-stand-copy">
+            <SplitHeading
+              tag="h2"
+              lines={[
+                <span className="xdge-leave-with-hollow">LET&rsquo;S CHAT</span>,
+                <span className="xdge-leave-with-hollow">ABOUT YOUR</span>,
+                <span className="xdge-leave-with-solid">NEXT LEVEL</span>,
+              ]}
+              lineClipClasses={[
+                'xdge-clip-tight-y xdge-cta-clip',
+                'xdge-clip-tight-y xdge-cta-clip',
+                'xdge-clip-tight-y xdge-cta-clip',
+              ]}
               style={{
-                alignSelf: 'flex-start',
-                display: 'inline-flex', alignItems: 'center', gap: 12,
-                padding: '18px 32px',
-                background: theme.ink, color: theme.base,
-                textDecoration: 'none',
-                fontSize: 15, fontWeight: 600,
-                letterSpacing: '0.04em',
+                fontFamily: theme.displayCondensed,
+                lineHeight: 0.92,
+                letterSpacing: '-0.02em',
                 textTransform: 'uppercase',
+                margin: 0,
               }}
+            />
+
+            <motion.div
+              data-no-reveal
+              variants={fadeUp}
+              className="xg-cta-stand-lede"
             >
-              Let’s Talk <span style={{ fontSize: 18 }}>→</span>
-            </Link>
+              <p style={{ margin: '0 0 6px', fontSize: 'clamp(15px, 1.6vw, 18px)', lineHeight: 1.5, color: theme.base }}>
+                Your beliefs. Your purpose. Your impact.
+              </p>
+              <p style={{ margin: 0, fontSize: 'clamp(15px, 1.6vw, 18px)', lineHeight: 1.5, color: theme.base, fontWeight: 700 }}>
+                It starts with you.
+              </p>
+            </motion.div>
+
+            <motion.div
+              data-no-reveal
+              variants={fadeUp}
+              className="xg-cta-stand-actions"
+            >
+              <Link to="/contact" data-cursor="grow" className="xg-cta-stand-btn xg-cta-stand-btn-primary">
+                Contact <PlayIcon />
+              </Link>
+              <Link to="/apply" data-cursor="grow" className="xg-cta-stand-btn xg-cta-stand-btn-outline">
+                Apply <PlayIcon />
+              </Link>
+            </motion.div>
+          </div>
+
+          <motion.div
+            data-no-reveal
+            variants={fadeUp}
+            className="xg-cta-stand-media"
+          >
+            <picture>
+              <source media="(max-width: 768px)" srcSet={mobileSrc('/assets/ALL NEW IMAGES/13.webp')} />
+              <img
+                src="/assets/ALL NEW IMAGES/13.webp"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </motion.div>
         </Group>
       </div>

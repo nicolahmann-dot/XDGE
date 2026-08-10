@@ -123,34 +123,33 @@ export function TheJourney() {
       }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        <Group style={{ display: 'flex', flexDirection: 'column', marginBottom: 'clamp(56px, 8vw, 96px)' }}>
-          <div style={{ position: 'relative', alignSelf: 'center', textAlign: 'center', padding: '40px 0' }}>
+        <Group className="xg-journey-header" style={{ display: 'flex', flexDirection: 'column', marginBottom: 'clamp(56px, 8vw, 96px)' }}>
+          <div className="xg-journey-heading-wrap" style={{ position: 'relative' }}>
             <SplitHeading
               lines={[
-                <span style={{ whiteSpace: 'nowrap' }}>
-                  <span className="hollow-text" style={{ paddingRight: '0.2em' }}>THE</span>{' '}
-                  <span className="cyan-text">JOURNEY</span>
-                </span>,
+                <span className="xdge-the-journey">THE JOURNEY</span>,
               ]}
+              lineClipClasses={['xdge-the-journey-clip']}
               style={{
-                fontFamily: theme.display, fontWeight: 900,
+                fontFamily: theme.displayCondensed,
                 fontSize: 'clamp(40px, 11.3vw, 200px)',
-                lineHeight: 0.95, letterSpacing: '-0.02em',
-                textTransform: 'uppercase', textAlign: 'center'
+                lineHeight: 1,
+                letterSpacing: '-0.02em',
+                textTransform: 'uppercase',
+                textAlign: 'left',
               }}
             />
           </div>
 
-          <motion.div data-no-reveal variants={fadeUp} style={{ 
-            alignSelf: 'flex-end', 
+          <motion.div data-no-reveal variants={fadeUp} className="xg-journey-intro" style={{ 
             display: 'flex', 
             flexDirection: 'column', 
-            alignItems: 'flex-end', 
-            textAlign: 'right',
+            alignItems: 'flex-start', 
+            textAlign: 'left',
             marginTop: 'clamp(16px, 3vw, 32px)',
             maxWidth: 500
           }}>
-            <p
+            <p className="xg-section-lede"
               style={{
                 fontSize: 'clamp(15px, 1.6vw, 17px)', lineHeight: 1.55,
                 color: theme.base, margin: 0, paddingBottom: 24, maxWidth: 480,

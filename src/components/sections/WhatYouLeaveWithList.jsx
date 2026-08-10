@@ -66,15 +66,21 @@ export function WhatYouLeaveWithList() {
       }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+        <div className="xg-leave-with-header" style={{ marginBottom: 'clamp(48px, 7vw, 88px)' }}>
         <SplitHeading
-          lines={['WHAT YOU', 'LEAVE WITH.']}
+          lines={[
+            <span className="xdge-leave-with-solid">WHAT YOU</span>,
+            <span className="xdge-leave-with-hollow">LEAVE WITH</span>,
+          ]}
+          lineClipClasses={['xdge-leave-with-clip', 'xdge-leave-with-clip']}
           style={{
-            fontFamily: theme.display, fontWeight: 900,
-            fontSize: 'clamp(40px, 11.3vw, 200px)',
-            lineHeight: 0.95, letterSpacing: '-0.02em',
-            marginBottom: 'clamp(48px, 7vw, 88px)',
+            fontFamily: theme.displayCondensed,
+            lineHeight: 0.95,
+            letterSpacing: '-0.02em',
+            textTransform: 'uppercase',
           }}
         />
+        </div>
 
         <div className="xg-leave-list">
           {items.map((it) => (

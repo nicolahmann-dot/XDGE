@@ -2,10 +2,6 @@ import { theme } from '../../theme';
 import { FloatingVideo } from '../primitives/FloatingVideo';
 import { SplitHeading } from '../primitives/SplitHeading';
 
-/**
- * CreateYourPath — centered banner heading with a lightning video behind it.
- * CREATE YOUR OWN (outline) / PATH & LEAVE (white) + A TRAIL (gradient).
- */
 export function CreateYourPath() {
   return (
     <section
@@ -16,7 +12,6 @@ export function CreateYourPath() {
         color: theme.base,
         position: 'relative',
         overflow: 'hidden',
-        // generous vertical space above and below the heading
         padding: 'clamp(90px, 11vw, 160px) clamp(20px, 4vw, 40px)',
       }}
     >
@@ -29,26 +24,27 @@ export function CreateYourPath() {
           opacity: 0.4, zIndex: 0,
         }}
       />
-      <div style={{ display: 'flex', justifyContent: 'center', width: '100%', position: 'relative', zIndex: 10 }}>
-        {/* Same line mask as every other display heading. This was a plain <h2>,
-            so it only ever got the generic 0.65s CSS fade while the rest of the
-            site rose from behind a clip — which is why it read as not animating.
-            Font size lives on the h2 and the kicker is 0.45em of it (the original
-            5.09vw/11.3vw and 90px/200px are both exactly that ratio), because the
-            clip's em padding resolves against the h2's size, not the line's. */}
+      <div style={{ width: '100%', maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <SplitHeading
-          lineClasses={['cyan-text', 'hollow-text']}
-          lines={[
-            <span style={{ display: 'block', fontSize: '0.45em', whiteSpace: 'nowrap', paddingLeft: '0.05em' }}>
-              CREATE YOUR OWN PATH &amp;
-            </span>,
-            'LEAVE A TRAIL',
+          tag="h2"
+          lines={['CREATE YOUR', 'OWN PATH', '& LEAVE A TRAIL']}
+          lineInnerClasses={[
+            'xdge-condensed-hollow xdge-create-path-kicker',
+            'xdge-condensed-solid-white xdge-create-path-main',
+            'xdge-condensed-hollow xdge-create-path-kicker',
+          ]}
+          lineClipClasses={[
+            'xdge-create-path-line-clip xdge-about-us-clip',
+            'xdge-create-path-line-clip xdge-condensed-clip-narrow xdge-about-us-clip',
+            'xdge-create-path-line-clip xdge-about-us-clip',
           ]}
           style={{
             textAlign: 'left',
-            fontFamily: theme.display, fontWeight: 900,
+            fontFamily: theme.displayCondensed,
             fontSize: 'clamp(40px, 11.3vw, 200px)',
-            lineHeight: 0.95, letterSpacing: '-0.02em',
+            lineHeight: 0,
+            margin: 0,
+            padding: 0,
             textTransform: 'uppercase',
           }}
         />
