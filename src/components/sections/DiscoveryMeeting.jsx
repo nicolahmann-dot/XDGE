@@ -26,15 +26,16 @@ export function DiscoveryMeeting() {
         }}>
           <SplitHeading
             tag="h2"
-            lines={['SCHEDULE A', 'DISCOVERY MEETING']}
-            lineClipClasses={['xdge-about-us-clip', 'xdge-condensed-clip-narrow']}
-            lineInnerClasses={[undefined, 'xdge-condensed-text-narrow']}
+            lines={[
+              <span className="xdge-condensed-solid-ink">SCHEDULE A</span>,
+              <span className="xdge-condensed-solid-ink xdge-discovery-meeting-line2">DISCOVERY MEETING</span>,
+            ]}
+            lineClipClasses={['xdge-light-page-heading-clip', 'xdge-light-page-heading-clip']}
             style={{
               fontFamily: theme.displayCondensed,
-              fontSize: 'clamp(44px, 10vw, 170px)',
-              lineHeight: 0.86,
+              fontSize: 'clamp(33px, 7.5vw, 128px)',
+              lineHeight: 0.88,
               margin: 0,
-              color: theme.ink,
               textTransform: 'uppercase',
             }}
           />

@@ -9,7 +9,7 @@ export const site = {
   email: 'info@thexdge.com',
 
   phones: {
-    uk: { display: '07309 423777', tel: '+447309423777', label: 'UK' },
+    uk: { display: '0330 133 4470', tel: '+443301334470', label: 'UK' },
     usa: { display: '619 983 8853', tel: '+16199838853', label: 'USA' },
   },
 

@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
 import { theme, fadeUp } from '../../theme';
 import { Group } from '../primitives/Reveal';
+import { SplitHeading } from '../primitives/SplitHeading';
 
 export function ApplyClosing() {
   return (
@@ -15,21 +15,22 @@ export function ApplyClosing() {
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <Group className="xg-2" style={{ alignItems: 'flex-start', gap: 'clamp(40px, 6vw, 88px)' }}>
-          <h2
-            data-reveal="left"
+          <SplitHeading
+            tag="h2"
+            lines={[
+              <span className="xdge-condensed-solid-ink">Submit Your</span>,
+              <span className="xdge-condensed-solid-ink xdge-apply-enquiry-line2">Enquiry</span>,
+            ]}
+            lineClipClasses={['xdge-light-page-heading-clip', 'xdge-light-page-heading-clip']}
             style={{
-              fontFamily: theme.displayTight,
-              fontWeight: 600,
-              fontSize: 'clamp(40px, 11.3vw, 200px)',
-              lineHeight: 1.05,
-              letterSpacing: '-0.02em',
+              fontFamily: theme.displayCondensed,
+              fontSize: 'clamp(30px, 8.5vw, 150px)',
+              lineHeight: 0.88,
               margin: 0,
-              color: theme.ink,
+              textTransform: 'uppercase',
               maxWidth: '14ch',
             }}
-          >
-            Submit Your Enquiry
-          </h2>
+          />
 
           <div
             data-reveal="right"

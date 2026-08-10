@@ -34,10 +34,10 @@ export function ProgrammesHero() {
       <HeroAmbient
         src="/assets/videos/thunder_2.mp4"
         overlayOpacity={0.28}
-        edgeFade="to right"
+        edgeFade="to left"
         videoStyle={{
           position: 'absolute',
-          top: 0, right: 0, left: 'auto',
+          top: 0, left: 0, right: 'auto',
           width: '58%',
           height: '100%',
           objectFit: 'cover',

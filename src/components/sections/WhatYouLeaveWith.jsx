@@ -47,7 +47,7 @@ export function WhatYouLeaveWith() {
         padding: 'clamp(80px, 9vw, 120px) 0',
       }}
     >
-      <div className="xg-leave-with-header" style={{ marginBottom: 60, position: 'relative', zIndex: 10 }}>
+      <div className="xg-leave-with-header">
         <SplitHeading
           lines={[
             <span className="xdge-leave-with-solid">WHAT YOU</span>,
@@ -56,19 +56,14 @@ export function WhatYouLeaveWith() {
           lineClipClasses={['xdge-leave-with-clip', 'xdge-leave-with-clip']}
           style={{
             fontFamily: theme.displayCondensed,
-            lineHeight: 0.95,
+            lineHeight: 0.88,
             letterSpacing: '-0.02em',
             textTransform: 'uppercase',
-            width: 'fit-content',
+            width: '100%',
             maxWidth: '100%',
           }}
         />
-        <p className="xg-section-lede" style={{
-          color: theme.subtitle,
-          marginTop: 16,
-          fontSize: 'clamp(16px, 1.8vw, 24px)',
-          fontWeight: 500,
-        }}>
+        <p className="xg-section-lede xg-leave-with-lede">
           Proof of your capability. Ready for selection.
         </p>
       </div>

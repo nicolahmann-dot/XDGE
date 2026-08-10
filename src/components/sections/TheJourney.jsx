@@ -60,7 +60,6 @@ const steps = [
     n: '01',
     title: 'Select Your Path',
     line1: 'Together, we explore your interests, ambitions, strengths, and future goals.',
-    line2: 'We identify a project and pathway that will help you grow, stand out, and prepare for your next step.',
     icon: Icons.Search,
     offset: 152,
   },
@@ -68,7 +67,6 @@ const steps = [
     n: '02',
     title: 'Build Your Inner Leadership',
     line1: 'During the first 4–5 weeks, you build self-awareness, confidence, and resilience.',
-    line2: 'The leadership foundations needed to create a strong internal operating system.',
     icon: Icons.Bulb,
     offset: 78,
   },
@@ -76,7 +74,6 @@ const steps = [
     n: '03',
     title: 'Develop Your Professional Skillset',
     line1: 'You develop the communication, professional, and leadership skills.',
-    line2: 'The skills that help people create results in the real world.',
     icon: Icons.Briefcase,
     offset: 30,
   },
@@ -84,7 +81,6 @@ const steps = [
     n: '04',
     title: 'Lead A Real-World Project',
     line1: 'Put leadership into practice by taking your project from idea to implementation.',
-    line2: 'Apply your skills to create meaningful impact.',
     icon: Icons.Flag,
     offset: 30,
   },
@@ -92,7 +88,6 @@ const steps = [
     n: '05',
     title: 'Build Your Leadership Portfolio',
     line1: 'Create a professional portfolio that showcases your project, achievements, and journey.',
-    line2: 'Evidence of your capability for your next-level goal.',
     icon: Icons.Clipboard,
     offset: 78,
   },
@@ -100,7 +95,6 @@ const steps = [
     n: '06',
     title: 'Present Your Impact',
     line1: 'Showcase your project to a panel of leaders and prepare for interviews.',
-    line2: 'Demonstrate readiness for your next opportunity.',
     icon: Icons.Trophy,
     offset: 152,
   },
@@ -123,11 +117,14 @@ export function TheJourney() {
       }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        <Group className="xg-journey-header" style={{ display: 'flex', flexDirection: 'column', marginBottom: 'clamp(56px, 8vw, 96px)' }}>
+        <Group className="xg-journey-header" style={{ display: 'flex', flexDirection: 'column', marginBottom: 'clamp(36px, 5vw, 56px)' }}>
           <div className="xg-journey-heading-wrap" style={{ position: 'relative' }}>
             <SplitHeading
               lines={[
-                <span className="xdge-the-journey">THE JOURNEY</span>,
+                <span className="xdge-the-journey-line">
+                  <span className="xdge-the-journey-hollow">THE </span>
+                  <span className="xdge-the-journey-solid">JOURNEY</span>
+                </span>,
               ]}
               lineClipClasses={['xdge-the-journey-clip']}
               style={{
@@ -146,7 +143,7 @@ export function TheJourney() {
             flexDirection: 'column', 
             alignItems: 'flex-start', 
             textAlign: 'left',
-            marginTop: 'clamp(16px, 3vw, 32px)',
+            marginTop: 'clamp(10px, 1.8vw, 18px)',
             maxWidth: 500
           }}>
             <p className="xg-section-lede"
@@ -257,16 +254,10 @@ export function TheJourney() {
                 <p style={{
                   fontSize: 'clamp(11px, 1vw, 12px)',
                   lineHeight: 1.5,
-                  margin: '0 0 6px',
+                  margin: 0,
                   color: theme.base,
                   fontWeight: 500,
                 }}>{s.line1}</p>
-                <p style={{
-                  fontSize: 'clamp(11px, 1vw, 12px)',
-                  lineHeight: 1.5,
-                  margin: 0,
-                  color: theme.subtitle,
-                }}>{s.line2}</p>
               </div>
             ))}
           </div>
@@ -303,15 +294,10 @@ export function TheJourney() {
                   }}>{s.title}</h3>
                   <p style={{
                     fontSize: 13, lineHeight: 1.5,
-                    margin: '0 0 6px',
+                    margin: 0,
                     color: theme.base,
                     fontWeight: 500,
                   }}>{s.line1}</p>
-                  <p style={{
-                    fontSize: 13, lineHeight: 1.5,
-                    margin: 0,
-                    color: theme.subtitle,
-                  }}>{s.line2}</p>
                 </div>
               </div>
             ))}

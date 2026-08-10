@@ -13,7 +13,7 @@ const groups = [
     age: 'Ages 19+',
     img: '/assets/right-for-me-2.webp',
     highlight:
-      'Many of our graduates, professionals, and emerging leaders started here — wanting to stand out, make an impact, and step confidently into the next stage of their career.',
+      'We know exactly what employers look for. We train and guide you to demonstrate it through your professional profile, interview responses and project evidence, helping you overcome your individual roadblocks and stand out as an emerging leader in your field.',
     bullets: [
       'I have an idea, interest, or industry problem I want to develop into a project I can showcase in interviews',
       'I want to stand out in competitive interviews',
@@ -29,7 +29,7 @@ const groups = [
     age: 'Ages 16+',
     img: '/assets/ALL NEW IMAGES/2.webp',
     highlight:
-      'If you recognise yourself in these, you’re likely exactly where many of our students are.',
+      'We help you develop and demonstrate the leadership to be seen as an emerging leader in your chosen field. By leading a relevant project shaped around your interests, you build the evidence and confidence to stand out in applications and interviews.',
     bullets: [
       'I’m academically capable but unsure how to truly stand out',
       'I have an idea related to my chosen degree that I want to develop and showcase through a leadership project',
@@ -45,7 +45,7 @@ const groups = [
     age: 'Ages 11+',
     img: '/assets/new/pic-body-text.webp',
     highlight:
-      'This stage is often where confidence, leadership habits, and self-belief begin to grow.',
+      'We help you discover what you stand for and build the confidence to be seen as a young person with leadership potential. By leading a project shaped around what matters to you, you create achievements to be proud of and evidence that helps you stand out in school applications, interviews and future opportunities.',
     bullets: [
       'I want more confidence in myself',
       'I want to become more focused, motivated, and disciplined',
@@ -180,7 +180,7 @@ export function IsThisRightForMe() {
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         {/* Full-width heading so it lays out as a clean 2-liner (IS THIS / RIGHT FOR ME)
             instead of being squeezed by the 2-column grid; CTA drops below, right-aligned. */}
-        <Group className="xg-exp-heading-block" style={{ marginBottom: 'clamp(40px, 6vw, 64px)' }}>
+        <Group className="xg-exp-heading-block" style={{ marginBottom: 'clamp(28px, 4vw, 44px)' }}>
           <SplitHeading
             lines={[
               <span className="xdge-right-for-me-kicker">THINK YOU&rsquo;RE NOT</span>,
@@ -189,7 +189,7 @@ export function IsThisRightForMe() {
             lineClipClasses={['xdge-right-for-me-clip xdge-right-for-me-clip-kicker', 'xdge-right-for-me-clip']}
             style={{
               fontFamily: theme.displayCondensed,
-              lineHeight: 0.95,
+              lineHeight: 0.88,
               letterSpacing: '-0.02em',
               textTransform: 'uppercase',
             }}

@@ -40,7 +40,6 @@ export function Hero() {
           decoding="async"
         />
         <p className="xg-hero-brand-tagline">LEAD YOUR OWN OPPORTUNITIES.</p>
-        <p className="xg-hero-brand-keywords">TRAIN • BUILD • LEAD • IMPACT</p>
       </div>
 
       <Group className="xg-hero-copy" style={{
@@ -49,7 +48,7 @@ export function Hero() {
         right: 'clamp(24px, 4vw, 40px)',
         zIndex: 10,
         textAlign: 'right',
-        maxWidth: 580,
+        maxWidth: 720,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
@@ -63,9 +62,23 @@ export function Hero() {
             color: theme.base,
             fontWeight: 600,
           }}>
-            For Young People 12&ndash;24 Building<br />
-            Their Next Step Advantage
+            Career. University. School. You Need A Standout Factor
           </h3>
+        </Reveal>
+
+        <Reveal style={{ width: '100%' }}>
+          <p style={{
+            fontSize: 'clamp(20px, 2.2vw, 28px)',
+            lineHeight: 1.25,
+            margin: '10px 0 0',
+            fontFamily: theme.body,
+            color: theme.base,
+            fontWeight: 600,
+          }}>
+            <strong style={{ fontWeight: 700 }}>The XDGE</strong> Gives You the{' '}
+            <strong style={{ fontWeight: 700 }}>Leadership Advantage</strong> to Get In &amp; Go Further{' '}
+            | Ages 11&ndash;24+
+          </p>
         </Reveal>
 
         <Reveal style={{ width: '100%' }}>
@@ -80,11 +93,10 @@ export function Hero() {
             color: '#e0e0e0',
             fontWeight: 400,
           }}>
-            The XDGE (pronounced Edge) helps ambitious young people develop the
-            leadership, skills, and real-world experience that define their distinctive edge.
-            Guided by experienced leaders and industry experts, participants build the
-            confidence, capability, and portfolio to stand out in their next opportunity and
-            make an impact in school, university, careers, business, and life.
+            Guided by leadership development specialists and industry experts, our 12-week programmes
+            give young people the leadership advantage to stand out and excel. Each programme is
+            strategically aligned with the expectations of their next level and shaped around each
+            young person&rsquo;s individuality and aspirations.
           </p>
         </Reveal>
 

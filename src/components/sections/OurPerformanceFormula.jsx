@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { theme, fadeUp, stagger } from '../../theme';
 import { SplitHeading } from '../primitives/SplitHeading';
+import { FloatingVideo } from '../primitives/FloatingVideo';
 
 // Performance Formula diagram keeps the original blue accent on purpose —
 // it's the signature visual identity of this section, opted out of the
@@ -215,6 +216,17 @@ export function OurPerformanceFormula({ dark = true, diagramMaxWidth } = {}) {
         padding: 'clamp(36px, 4.5vw, 64px) clamp(20px, 4vw, 40px) clamp(64px, 8vw, 112px)',
       }}
     >
+      <FloatingVideo
+        src="/assets/videos/lightning_1.mp4"
+        style={{
+          top: '42%',
+          left: '0%',
+          transform: 'translate(-18%, -50%)',
+          width: 'clamp(480px, 72vw, 1400px)',
+          opacity: 0.38,
+          zIndex: 0,
+        }}
+      />
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         
         {/* Massive full-width heading — PERFORMANCE / FORMULA (Heading Set 2). */}
@@ -224,9 +236,19 @@ export function OurPerformanceFormula({ dark = true, diagramMaxWidth } = {}) {
             <span className="xdge-perf-formula-stack">
               <span className="xdge-perf-formula-top">
                 <span className="xdge-perf-formula-performance">
-                  <span className="xdge-perf-formula-performance-base">PERFORMANCE</span>
+                  <span className="xdge-perf-formula-performance-base">
+                    <span className="xdge-perf-formula-p-wrap">
+                      <span className="xdge-perf-formula-p-letter">P</span>
+                      <span className="xdge-perf-formula-p-your" aria-hidden="true">your</span>
+                    </span>
+                    ERFORMANCE
+                  </span>
                   <span className="xdge-perf-formula-performance-cut" aria-hidden="true">
-                    PERFORMANCE
+                    <span className="xdge-perf-formula-p-wrap">
+                      <span className="xdge-perf-formula-p-letter">P</span>
+                      <span className="xdge-perf-formula-p-your">your</span>
+                    </span>
+                    ERFORMANCE
                   </span>
                 </span>
               </span>
@@ -238,9 +260,9 @@ export function OurPerformanceFormula({ dark = true, diagramMaxWidth } = {}) {
           lineClipClasses={['xdge-clip-tight-y xdge-perf-formula-stack-clip']}
           style={{
             fontFamily: theme.displayCondensed,
-            fontSize: 'clamp(40px, 11.3vw, 200px)',
-            lineHeight: 1,
-            marginBottom: 'clamp(20px, 3vw, 32px)',
+            fontSize: 'clamp(48px, 12.5vw, 240px)',
+            lineHeight: 0.92,
+            marginBottom: 'clamp(12px, 2vw, 20px)',
             textTransform: 'uppercase',
             width: '100%',
           }}

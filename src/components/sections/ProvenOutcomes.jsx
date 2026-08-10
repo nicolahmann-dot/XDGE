@@ -251,7 +251,7 @@ export function ProvenOutcomes() {
             {String(index + 1).padStart(2, '0')} - {String(total).padStart(2, '0')}
           </div>
           <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.18)' }} />
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+          <div className="xg-outcomes-nav-btns" style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
             <motion.button
               onClick={goPrev}
               whileHover={{ scale: 1.02, x: -2 }}
@@ -317,7 +317,7 @@ export function ProvenOutcomes() {
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'minmax(140px, 200px) 1fr',
-                gap: 'clamp(16px, 4vw, 56px)',
+                gap: 'clamp(32px, 6vw, 80px)',
                 alignItems: 'flex-start',
               }}
             >

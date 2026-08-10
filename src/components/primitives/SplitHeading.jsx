@@ -58,8 +58,8 @@ import { useFontsReady } from '../../hooks/useFontsReady';
 // box is small while PAD_BOTTOM is a fraction of the h2's much larger size. 160%
 // gives 0.60x the line height of clearance, which covers all of them. Starting
 // further below costs nothing visually — it is hidden either way.
-const PAD_BOTTOM = '0.15em';
-const PAD_TOP = '0.25em';
+const PAD_BOTTOM = '0.10em';
+const PAD_TOP = '0.16em';
 
 // All lines rise TOGETHER — one delay, no per-line offset.
 //

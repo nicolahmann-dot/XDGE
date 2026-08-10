@@ -945,11 +945,16 @@ section[data-screen-label] {
   section[data-screen-label="01 Hero"] .xg-hero-copy {
     position: relative !important;
     bottom: auto !important;
+    left: auto !important;
     right: auto !important;
     max-width: 100% !important;
     align-items: flex-start !important;
     text-align: left !important;
     padding: clamp(28px, 5vw, 40px) clamp(16px, 4vw, 24px) clamp(48px, 8vw, 64px) !important;
+  }
+
+  section[data-screen-label="01 Hero"] .xg-hero-standout-headline {
+    max-width: none !important;
   }
 }
 
@@ -995,7 +1000,11 @@ section[data-screen-label] {
 @media (max-width: 720px) {
   .xg-outcomes-card {
     grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    gap: clamp(28px, 6vw, 36px) !important;
+  }
+
+  .xg-outcomes-nav-btns {
+    gap: 16px !important;
   }
 }
 
@@ -1376,7 +1385,7 @@ section[data-screen-label] {
   letter-spacing: -0.035em;
 }
 
-/* Hollow stroke on light sections (Contact discovery, etc.). */
+/* Hollow stroke on light sections (Contact discovery, Apply closing, etc.). */
 .xdge-condensed-hollow-ink {
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
@@ -1387,6 +1396,51 @@ section[data-screen-label] {
   text-stroke: 1px rgba(0, 0, 0, 0.92);
   paint-order: stroke fill;
   letter-spacing: -0.035em;
+}
+
+/* Solid black condensed headings on light sections. */
+.xdge-condensed-solid-ink {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-text-stroke: 0 transparent;
+  text-stroke: 0 transparent;
+  letter-spacing: 0.02em;
+}
+
+[data-screen-label='Discovery Meeting'] .xdge-discovery-meeting-line2 {
+  letter-spacing: 0.04em;
+}
+
+[data-screen-label='Apply Closing'] .xdge-apply-enquiry-line2 {
+  letter-spacing: 0.06em;
+}
+
+.xdge-light-page-heading-clip {
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: content-box;
+  padding-left: 0.08em;
+  margin-left: -0.08em;
+  padding-right: 0.12em;
+}
+
+.xdge-light-page-heading-clip + .xdge-light-page-heading-clip {
+  margin-top: -0.12em;
+}
+
+[data-screen-label='Apply Closing'] h2 {
+  font-size: clamp(30px, 8.5vw, 150px);
+  line-height: 0.88;
+  margin-bottom: clamp(8px, 1.2vw, 14px);
+}
+
+[data-screen-label='Discovery Meeting'] h2 {
+  font-size: clamp(33px, 7.5vw, 128px);
+  line-height: 0.88;
+  margin-bottom: clamp(8px, 1.2vw, 14px);
 }
 
 /* Squeeze long hero lines like PROGRAMMES — scale inner text, not the clip
@@ -1760,7 +1814,7 @@ section[data-screen-label] {
 }
 
 .xdge-leave-with-clip + .xdge-leave-with-clip {
-  margin-top: -0.02em;
+  margin-top: -0.14em;
 }
 
 .xdge-leave-with-solid,
@@ -1789,8 +1843,65 @@ section[data-screen-label] {
 }
 
 [data-screen-label='What You Leave With'] h2 {
-  line-height: 0.95;
-  font-size: clamp(34px, 9vw, 168px);
+  line-height: 0.88;
+  font-size: clamp(40px, 11.3vw, 200px);
+  margin-bottom: clamp(8px, 1.2vw, 14px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  text-align: center;
+}
+
+[data-screen-label='What You Leave With'] .xdge-leave-with-clip {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.xg-leave-with-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 clamp(20px, 4vw, 40px);
+  margin-bottom: clamp(32px, 5vw, 48px);
+  position: relative;
+  z-index: 10;
+}
+
+.xg-leave-with-header h2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-inline: auto;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.xg-leave-with-header .xg-section-lede {
+  text-align: center;
+}
+
+.xg-leave-with-lede {
+  color: #A8A8A8;
+  margin-top: clamp(10px, 1.5vw, 14px);
+  font-size: clamp(16px, 1.8vw, 24px);
+  font-weight: 500;
+}
+
+.xg-drag-wheel-heading {
+  margin-bottom: clamp(32px, 5vw, 48px);
+}
+
+.xg-exp-heading-block h2 {
+  margin-bottom: clamp(8px, 1.2vw, 14px);
+}
+
+.xg-exp-heading-block .xg-section-lede {
+  margin-top: clamp(10px, 1.5vw, 16px);
 }
 
 /* How XDGE Differs By Age & Outcomes — Heading Set 1 PNG ref. */
@@ -1804,7 +1915,7 @@ section[data-screen-label] {
 }
 
 .xdge-differs-clip + .xdge-differs-clip {
-  margin-top: -0.02em;
+  margin-top: -0.14em;
 }
 
 .xdge-differs-solid {
@@ -1866,8 +1977,19 @@ section[data-screen-label] {
   transform: translateY(-0.02em);
 }
 
+/* Site-wide — tighter gap between multi-line display headings */
+h1 > span + span,
+h2 > span + span {
+  margin-top: -0.14em;
+}
+
+h1 > span[class*='-clip'] + span[class*='-clip'],
+h2 > span[class*='-clip'] + span[class*='-clip'] {
+  margin-top: -0.14em;
+}
+
 [data-screen-label='Different Ages, Different Focus'] h2 {
-  line-height: 0.95;
+  line-height: 0.88;
   font-size: clamp(40px, 11.3vw, 185px);
 }
 
@@ -1882,7 +2004,7 @@ section[data-screen-label] {
 }
 
 .xdge-standards-clip + .xdge-standards-clip {
-  margin-top: -0.02em;
+  margin-top: -0.14em;
 }
 
 .xdge-standards-top-line {
@@ -1925,8 +2047,13 @@ section[data-screen-label] {
 }
 
 [data-screen-label='Standards & Expectations'] h2 {
-  line-height: 0.95;
+  line-height: 0.88;
   font-size: clamp(40px, 11.3vw, 150px);
+}
+
+[data-screen-label='Standards & Expectations'] .xdge-amp-box {
+  background: transparent;
+  color: #ffffff;
 }
 
 /* Is This Right For Me — Think You're Not / The Leadership Type (Heading Set 1). */
@@ -1940,7 +2067,7 @@ section[data-screen-label] {
 }
 
 .xdge-right-for-me-clip + .xdge-right-for-me-clip {
-  margin-top: -0.12em;
+  margin-top: -0.24em;
 }
 
 /* Scale(1.08) on the kicker extends past its layout box — extra clip slack for the T. */
@@ -1955,7 +2082,7 @@ section[data-screen-label] {
   font-weight: 400;
   text-transform: uppercase;
   font-size: 0.58em;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.03em;
   line-height: 0.88;
   padding-right: 0.1em;
   transform: scale(1.08, 1.04);
@@ -1983,7 +2110,7 @@ section[data-screen-label] {
 }
 
 [data-screen-label='Is This Right For Me'] h2 {
-  line-height: 0.95;
+  line-height: 0.88;
   font-size: clamp(40px, 11.3vw, 165px);
 }
 
@@ -2109,6 +2236,31 @@ section[data-screen-label] {
   padding-right: 0.12em;
 }
 
+.xdge-the-journey-line {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  padding-right: 0.04em;
+}
+
+.xdge-the-journey-solid {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.xdge-the-journey-hollow {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.98);
+  text-stroke: 1px rgba(255, 255, 255, 0.98);
+  paint-order: stroke fill;
+}
+
+/* Legacy — keep for any cached refs */
 .xdge-the-journey {
   display: inline-block;
   white-space: nowrap;
@@ -2222,7 +2374,7 @@ section[data-screen-label] {
   display: block;
   position: relative;
   z-index: 2;
-  margin-top: -0.36em;
+  margin-top: -0.46em;
   margin-left: 0.07em;
 }
 
@@ -2277,11 +2429,45 @@ section[data-screen-label] {
 .xdge-perf-formula-performance {
   position: relative;
   display: inline-block;
-  transform: scaleX(0.925);
+  transform: scaleX(0.97);
   transform-origin: left bottom;
   padding-right: 0.05em;
   letter-spacing: -0.024em;
   line-height: 0.88;
+}
+
+.xdge-perf-formula-p-wrap {
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.xdge-perf-formula-p-letter {
+  display: inline-block;
+}
+
+.xdge-perf-formula-p-your {
+  position: absolute;
+  left: 25%;
+  top: 62%;
+  transform: translate(-50%, -50%);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.115em;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-transform: lowercase;
+  writing-mode: sideways-lr;
+  text-orientation: mixed;
+  white-space: nowrap;
+  pointer-events: none;
+  color: rgba(184, 247, 255, 0.95);
+  -webkit-text-fill-color: rgba(184, 247, 255, 0.95);
+}
+
+.xdge-perf-formula-performance-cut .xdge-perf-formula-p-your {
+  opacity: 0;
 }
 
 .xdge-perf-formula-performance-base,
@@ -2332,16 +2518,26 @@ section[data-screen-label] {
   display: block;
   position: relative;
   z-index: 2;
-  margin-top: -0.42em;
+  margin-top: -0.46em;
   margin-left: 1.3em;
 }
 
 /* Desktop editorial layouts — mobile overrides in @media (max-width: 768px) */
 @media (min-width: 769px) {
+  /* Mobile: unified left-aligned section headings (hero stays centered) */
+  .xg-page section:not([data-screen-label*='Hero']):not([data-screen-label='What You Leave With']) h1,
+  .xg-page section:not([data-screen-label*='Hero']):not([data-screen-label='What You Leave With']) h2,
+  .xg-page section:not([data-screen-label*='Hero']):not([data-screen-label='What You Leave With']) h3 {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-inline: 0 !important;
+  }
+
   .xg-journey-heading-wrap {
     align-self: center;
     text-align: center;
-    padding: 40px 0;
+    padding: clamp(16px, 2.5vw, 24px) 0;
   }
 
   .xg-journey-heading-wrap h2 {
@@ -2364,6 +2560,9 @@ section[data-screen-label] {
     align-items: center;
     text-align: center;
     padding: 0 clamp(20px, 4vw, 40px);
+    margin-bottom: clamp(32px, 5vw, 48px);
+    position: relative;
+    z-index: 10;
   }
 
   .xg-leave-with-header h2 {
@@ -2390,7 +2589,7 @@ section[data-screen-label] {
   text-transform: uppercase;
   letter-spacing: -0.012em;
   line-height: 0.88;
-  transform: scaleX(0.74);
+  transform: scaleX(0.82);
   transform-origin: left top;
   padding-right: 0.08em;
   color: #000000 !important;
@@ -2405,8 +2604,8 @@ section[data-screen-label] {
 }
 
 [data-screen-label='Our Performance Formula'] h2 {
-  line-height: 1;
-  margin-bottom: clamp(20px, 3vw, 32px) !important;
+  line-height: 0.92;
+  margin-bottom: clamp(12px, 2vw, 20px) !important;
 }
 
 .xg-perf-formula-section {
@@ -2453,7 +2652,7 @@ section[data-screen-label] {
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.035em;
   line-height: 0.88;
   padding-right: 0.08em;
   color: #000000 !important;
@@ -2463,9 +2662,17 @@ section[data-screen-label] {
   paint-order: stroke fill;
 }
 
+.xdge-how-will-after-how {
+  margin-left: 0.02em;
+}
+
+.xdge-how-will-after-will {
+  margin-left: -0.05em;
+}
+
 .xdge-how-will-bottom {
   display: block;
-  margin-top: 0.04em;
+  margin-top: -0.08em;
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
@@ -2479,7 +2686,7 @@ section[data-screen-label] {
 }
 
 [data-screen-label='Drag Wheel Carousel'] h2 {
-  line-height: 0.95;
+  line-height: 0.88;
   font-size: clamp(40px, 11.3vw, 200px);
 }
 
@@ -2505,7 +2712,7 @@ section[data-screen-label] {
 }
 
 [data-screen-label='Step Into Your Next Level'] .xdge-cta-clip:not(:first-child) {
-  margin-top: -0.1em;
+  margin-top: -0.18em;
 }
 
 .xdge-cta-line {
@@ -2535,7 +2742,7 @@ section[data-screen-label] {
 }
 
 .xdge-cta-line-blue {
-  margin-top: -0.02em;
+  margin-top: -0.10em;
   margin-bottom: -0.04em;
   background-image: linear-gradient(
     90deg,
@@ -2550,11 +2757,18 @@ section[data-screen-label] {
   color: transparent !important;
 }
 
+.xg-cta-stand-section {
+  background-color: #000000;
+  background-image: url('/assets/door.png');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: cover;
+}
+
 .xg-cta-stand-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(220px, 0.58fr);
-  gap: clamp(32px, 5vw, 72px);
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: min(100%, 640px);
 }
 
 .xg-cta-stand-copy {
@@ -2593,6 +2807,11 @@ section[data-screen-label] {
   transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
 }
 
+.xg-cta-stand-btn > * {
+  position: relative;
+  z-index: 1;
+}
+
 .xg-cta-stand-btn-primary {
   color: #ffffff;
   background: linear-gradient(90deg, #1a6fd4 0%, #2484ff 32%, #3ecde8 68%, #8ee8ff 100%);
@@ -2623,8 +2842,7 @@ section[data-screen-label] {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  border: 1px solid rgba(160, 236, 255, 0.22);
-  border-left-color: transparent;
+  border: 1px solid rgba(160, 236, 255, 0.28);
   pointer-events: none;
   z-index: 0;
 }
@@ -2633,6 +2851,9 @@ section[data-screen-label] {
   color: #58e6f4;
   background: transparent;
   border: none;
+  box-shadow:
+    0 0 0 1px rgba(88, 230, 244, 0.22),
+    0 0 14px rgba(36, 132, 255, 0.12);
 }
 
 .xg-cta-stand-btn-outline::before {
@@ -2642,14 +2863,13 @@ section[data-screen-label] {
   border-radius: 5px;
   padding: 1px;
   background: linear-gradient(
-    90deg,
+    135deg,
     #58e6f4 0%,
-    #58e6f4 5%,
-    #3ecde8 14%,
-    #2484ff 36%,
-    #1e4898 58%,
-    rgba(30, 72, 152, 0.42) 78%,
-    rgba(23, 63, 143, 0.1) 100%
+    #3ecde8 18%,
+    #2484ff 42%,
+    #1e4898 62%,
+    #2484ff 82%,
+    #58e6f4 100%
   );
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -2666,14 +2886,12 @@ section[data-screen-label] {
 .xg-cta-stand-btn-outline::after {
   content: '';
   position: absolute;
-  left: 0;
-  top: 10%;
-  bottom: 10%;
-  width: 2px;
-  background: #b8f7ff;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(88, 230, 244, 0.18);
   box-shadow:
-    0 0 6px rgba(88, 230, 244, 0.95),
-    0 0 14px rgba(88, 230, 244, 0.55);
+    inset 0 0 0 1px rgba(88, 230, 244, 0.08),
+    0 0 10px rgba(88, 230, 244, 0.14);
   pointer-events: none;
   z-index: 0;
 }
@@ -2693,39 +2911,16 @@ section[data-screen-label] {
   .xg-cta-stand-btn-outline:hover {
     color: #8ef0ff;
     background: rgba(32, 227, 232, 0.06);
+    box-shadow:
+      0 0 0 1px rgba(88, 230, 244, 0.35),
+      0 0 20px rgba(36, 132, 255, 0.22);
   }
 
   .xg-cta-stand-btn-outline:hover::after {
+    border-color: rgba(142, 240, 255, 0.32);
     box-shadow:
-      0 0 8px rgba(88, 230, 244, 1),
-      0 0 20px rgba(88, 230, 244, 0.65);
-  }
-}
-
-.xg-cta-stand-media {
-  position: relative;
-  min-height: clamp(280px, 38vw, 520px);
-  overflow: hidden;
-  background: #000000;
-}
-
-.xg-cta-stand-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  display: block;
-}
-
-@media (max-width: 900px) {
-  .xg-cta-stand-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .xg-cta-stand-media {
-    order: -1;
-    min-height: clamp(240px, 62vw, 420px);
-    max-width: 420px;
+      inset 0 0 0 1px rgba(88, 230, 244, 0.14),
+      0 0 16px rgba(88, 230, 244, 0.35);
   }
 }
 
@@ -2744,6 +2939,8 @@ section[data-screen-label] {
   .xg-cta-stand-section {
     padding-top: clamp(48px, 10vw, 72px) !important;
     padding-bottom: clamp(48px, 10vw, 72px) !important;
+    background-position: right center;
+    background-size: auto 100%;
   }
 
   .xg-cta-stand-copy {
@@ -2785,6 +2982,7 @@ section[data-screen-label] {
 }
 
 .xdge-how-works-stack {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2798,10 +2996,8 @@ section[data-screen-label] {
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: -0.04em;
+  letter-spacing: 0.03em;
   line-height: 0.88;
-  transform: scale(0.68, 0.9);
-  transform-origin: center bottom;
   margin: 0;
   padding: 0;
   color: #000000 !important;
@@ -2809,15 +3005,25 @@ section[data-screen-label] {
   -webkit-text-stroke: 3px rgba(255, 255, 255, 0.98);
   text-stroke: 3px rgba(255, 255, 255, 0.98);
   paint-order: stroke fill;
+  white-space: nowrap;
 }
 
 .xdge-how-works-stack > .xdge-how-works-kicker:first-child {
-  margin-bottom: -0.18em;
+  position: absolute;
+  bottom: calc(100% - 0.18em);
+  left: 50%;
+  transform: translateX(-50%) scale(0.68, 0.9);
+  transform-origin: center bottom;
+  margin-bottom: 0;
 }
 
 .xdge-how-works-kicker-bottom {
+  position: absolute;
+  top: calc(100% - 0.1em);
+  left: 50%;
+  transform: translateX(-50%) scale(0.68, 0.9);
   transform-origin: center top;
-  margin-top: -0.06em;
+  margin-top: 0;
 }
 
 .xdge-how-works-logo-img {
@@ -2842,11 +3048,11 @@ section[data-screen-label] {
   }
 
   .xdge-how-works-stack > .xdge-how-works-kicker:first-child {
-    margin-bottom: -0.2em;
+    bottom: calc(100% - 0.2em);
   }
 
   .xdge-how-works-kicker-bottom {
-    margin-top: -0.08em;
+    top: calc(100% - 0.12em);
   }
 }
 
@@ -2914,7 +3120,7 @@ section[data-screen-label] {
 }
 
 [data-screen-label='Create Your Own Path'] .xdge-create-path-line-clip + .xdge-create-path-line-clip {
-  margin-top: -0.02em !important;
+  margin-top: -0.10em !important;
 }
 
 [data-screen-label='Create Your Own Path'] h2 > span.xdge-create-path-line-clip {
@@ -2930,15 +3136,39 @@ section[data-screen-label] {
   overflow: visible;
 }
 
-/* ABOUT US — black fill + white stroke (tuned in devtools). */
+/* ABOUT US — client PNG heading (chrome gradient ref). */
+.xdge-about-us-heading {
+  margin: 0;
+  line-height: 0;
+}
+
+.xdge-about-us-heading-img {
+  display: block;
+  width: min(100%, clamp(230px, 56vw, 720px));
+  height: auto;
+  max-height: clamp(64px, 12.5vw, 155px);
+  aspect-ratio: 1613 / 503;
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* Legacy CSS heading — kept if PNG is swapped back. */
 .xdge-about-us-filled {
   display: inline-block;
   font-family: 'Bebas Neue', sans-serif;
   text-transform: uppercase;
-  color: #000000;
-  -webkit-text-fill-color: #000000;
-  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.96);
-  paint-order: stroke fill;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #d8d8d8 38%,
+    #8a8a8a 68%,
+    #3d3d3d 88%,
+    #1a1a1a 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
   transform: scaleX(0.69);
   transform-origin: left center;
   letter-spacing: 0.018em;
@@ -3148,17 +3378,22 @@ section[data-screen-label="Proven Outcomes"] {
   }
 
   .xg-about-page [data-screen-label='About Hero'] h1 {
-    font-size: clamp(60px, 16vw, 108px) !important;
+    margin-bottom: clamp(16px, 3vw, 24px) !important;
+  }
+
+  .xg-about-page .xdge-about-us-heading-img {
+    width: min(100%, clamp(210px, 80vw, 530px));
+    max-height: clamp(56px, 15.5vw, 118px);
   }
 
   .xg-about-page [data-screen-label='About Hero'] {
     padding-top: clamp(72px, 13vw, 96px) !important;
-    padding-bottom: clamp(48px, 8vw, 64px) !important;
+    padding-bottom: clamp(28px, 5vw, 40px) !important;
   }
 
   .xg-about-page .xg-about-hero-copy {
     justify-content: flex-start !important;
-    margin-top: clamp(48px, 10vw, 80px) !important;
+    margin-top: clamp(28px, 7vw, 48px) !important;
   }
 
   .xg-about-page .xg-team-grid {
@@ -3261,7 +3496,7 @@ section[data-screen-label="Proven Outcomes"] {
   }
 
   .xg-about-page .xg-about-hero-copy {
-    margin-top: clamp(36px, 8vw, 56px) !important;
+    margin-top: clamp(24px, 6vw, 40px) !important;
   }
 
   .xg-about-page .xdge-create-path-kicker {
@@ -3326,12 +3561,42 @@ section[data-screen-label="Proven Outcomes"] {
     min-height: auto !important;
   }
 
-  section[data-screen-label='01 Experience Hero'] > div {
-    padding-top: clamp(88px, 14vw, 120px) !important;
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-inner {
+    padding-top: 0 !important;
     padding-bottom: clamp(48px, 8vw, 72px) !important;
     padding-left: clamp(16px, 4vw, 24px) !important;
     padding-right: clamp(16px, 4vw, 24px) !important;
-    gap: clamp(32px, 6vw, 48px) !important;
+    gap: 0 !important;
+    min-height: auto !important;
+    justify-content: flex-start !important;
+  }
+
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-lockup {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    padding: clamp(88px, 14vw, 120px) clamp(16px, 4vw, 24px) 0 !important;
+    margin: 0;
+    pointer-events: auto;
+  }
+
+  .xdge-how-works-stack > .xdge-how-works-kicker:first-child,
+  .xdge-how-works-kicker-bottom {
+    position: static;
+    transform: scale(0.68, 0.9);
+    margin: 0;
+  }
+
+  .xdge-how-works-stack > .xdge-how-works-kicker:first-child {
+    margin-bottom: -0.26em;
+    transform-origin: center bottom;
+  }
+
+  .xdge-how-works-kicker-bottom {
+    margin-top: -0.14em;
+    transform-origin: center top;
   }
 
   section[data-screen-label*='Hero']:not([data-screen-label='01 Hero']) > div {
@@ -3386,24 +3651,44 @@ section[data-screen-label="Proven Outcomes"] {
   }
 
   [data-screen-label='What You Leave With'] h2 {
-    margin-inline: 0 !important;
-    text-align: left !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    margin-inline: auto !important;
+    text-align: center !important;
   }
 
-  /* Mobile: unified left-aligned section headings (hero stays centered) */
-  .xg-page section:not([data-screen-label*='Hero']) h1,
-  .xg-page section:not([data-screen-label*='Hero']) h2,
-  .xg-page section:not([data-screen-label*='Hero']) h3 {
-    text-align: left !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    margin-inline: 0 !important;
+  [data-screen-label='What You Leave With'] .xdge-leave-with-clip {
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   .xg-leave-with-header {
-    text-align: left !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding-left: clamp(16px, 4vw, 24px) !important;
+    padding-right: clamp(16px, 4vw, 24px) !important;
+  }
+
+  .xg-leave-with-header .xg-section-lede {
+    text-align: center !important;
+  }
+
+  .xg-experience-page .xg-leave-with-header {
+    align-items: center !important;
+    text-align: center !important;
+    padding-left: clamp(16px, 4vw, 24px) !important;
+    padding-right: clamp(16px, 4vw, 24px) !important;
+  }
+
+  .xg-experience-page .xg-leave-with-header h2 {
+    margin-inline: auto !important;
+  }
+
+  .xg-experience-page .xg-leave-with-header .xg-section-lede {
+    text-align: center !important;
   }
 
   .xg-journey-heading-wrap {
@@ -3453,17 +3738,17 @@ section[data-screen-label="Proven Outcomes"] {
 
   .xdge-perf-formula-bottom {
     text-align: left !important;
-    margin-top: -0.42em !important;
+    margin-top: -0.46em !important;
     margin-left: 1.3em !important;
   }
 
   [data-screen-label='Our Performance Formula'] .xdge-perf-formula-performance {
-    transform: scaleX(0.925) !important;
+    transform: scaleX(0.97) !important;
     transform-origin: left bottom !important;
   }
 
   [data-screen-label='Our Performance Formula'] .xdge-perf-formula-formula {
-    transform: scaleX(0.74) !important;
+    transform: scaleX(0.82) !important;
     transform-origin: left top !important;
   }
 
@@ -3517,7 +3802,7 @@ section[data-screen-label="Proven Outcomes"] {
   .xg-page .xdge-leave-with-hollow,
   .xg-page .xdge-standards-hollow,
   .xg-page .xdge-the-exp-line,
-  .xg-page .xdge-the-journey,
+  .xg-page .xdge-the-journey-hollow,
   .xg-page .xdge-whos-hollow,
   .xg-page .xdge-team-the,
   .xg-page .xdge-create-path-kicker,
@@ -3529,11 +3814,11 @@ section[data-screen-label="Proven Outcomes"] {
 
   .xg-page .xdge-how-will-top-text,
   .xg-page .xdge-stand-for-bottom-text,
-  .xg-page .xdge-about-us-filled,
   .xg-page .xdge-how-works-kicker {
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.96) !important;
     text-stroke: 1px rgba(255, 255, 255, 0.96) !important;
     filter: none !important;
+    letter-spacing: 0.025em !important;
   }
 
   .xg-page .xdge-perf-formula-formula {
@@ -3681,11 +3966,31 @@ section[data-screen-label="Proven Outcomes"] {
   }
 
   .xg-contact-page [data-screen-label='Discovery Meeting'] h2 {
-    font-size: clamp(48px, 13vw, 92px) !important;
-    line-height: 0.86 !important;
+    font-size: clamp(28px, 9vw, 72px) !important;
+    line-height: 0.88 !important;
     margin-bottom: clamp(12px, 2.5vw, 18px) !important;
-    color: #000000 !important;
-    -webkit-text-fill-color: #000000 !important;
+  }
+
+  .xg-contact-page [data-screen-label='Discovery Meeting'] .xdge-condensed-solid-ink {
+    letter-spacing: 0.025em !important;
+  }
+
+  .xg-contact-page [data-screen-label='Discovery Meeting'] .xdge-discovery-meeting-line2 {
+    letter-spacing: 0.035em !important;
+  }
+
+  .xg-contact-page [data-screen-label='Apply Closing'] h2,
+  .xg-page [data-screen-label='Apply Closing'] h2 {
+    font-size: clamp(28px, 9vw, 80px) !important;
+    line-height: 0.88 !important;
+  }
+
+  .xg-page [data-screen-label='Apply Closing'] .xdge-condensed-solid-ink {
+    letter-spacing: 0.025em !important;
+  }
+
+  .xg-page [data-screen-label='Apply Closing'] .xdge-apply-enquiry-line2 {
+    letter-spacing: 0.05em !important;
   }
 
   .xg-contact-page [data-screen-label='Contact Form'] h2 {
@@ -3746,7 +4051,7 @@ section[data-screen-label="Proven Outcomes"] {
   }
 
   .xg-contact-page [data-screen-label='Discovery Meeting'] h2 {
-    font-size: clamp(44px, 12vw, 84px) !important;
+    font-size: clamp(28px, 9vw, 72px) !important;
   }
 
   .xg-contact-page [data-screen-label='Contact Form'] h2 {
@@ -3757,9 +4062,9 @@ section[data-screen-label="Proven Outcomes"] {
 /* ── Experience page — mobile typography + layout system ── */
 @media (max-width: 768px) {
   /* Unified section header: left-aligned, same rhythm */
-  .xg-experience-page section:not([data-screen-label='01 Experience Hero']) h1,
-  .xg-experience-page section:not([data-screen-label='01 Experience Hero']) h2,
-  .xg-experience-page section:not([data-screen-label='01 Experience Hero']) h3 {
+  .xg-experience-page section:not([data-screen-label='01 Experience Hero']):not([data-screen-label='What You Leave With']) h1,
+  .xg-experience-page section:not([data-screen-label='01 Experience Hero']):not([data-screen-label='What You Leave With']) h2,
+  .xg-experience-page section:not([data-screen-label='01 Experience Hero']):not([data-screen-label='What You Leave With']) h3 {
     text-align: left !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -3829,20 +4134,29 @@ section[data-screen-label="Proven Outcomes"] {
 
   /* Fix inconsistent centered / offset headings */
   .xg-experience-page .xg-leave-with-header {
-    text-align: left !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding-left: clamp(16px, 4vw, 24px) !important;
+    padding-right: clamp(16px, 4vw, 24px) !important;
     margin-bottom: clamp(32px, 6vw, 48px) !important;
   }
 
   .xg-experience-page .xg-leave-with-header h2 {
-    margin-inline: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    margin-inline: auto !important;
+    text-align: center !important;
+    width: 100% !important;
   }
 
   .xg-experience-page .xg-leave-with-header .xg-section-lede {
     margin-top: clamp(14px, 2.5vw, 18px) !important;
     margin-bottom: 0 !important;
     color: #a8a8a8;
+    text-align: center !important;
   }
 
   .xg-experience-page .xg-journey-header {
@@ -3888,12 +4202,12 @@ section[data-screen-label="Proven Outcomes"] {
   }
 
   .xg-experience-page [data-screen-label='Our Performance Formula'] .xdge-perf-formula-performance {
-    transform: scaleX(0.925) !important;
+    transform: scaleX(0.97) !important;
     transform-origin: left bottom !important;
   }
 
   .xg-experience-page [data-screen-label='Our Performance Formula'] .xdge-perf-formula-formula {
-    transform: scaleX(0.74) !important;
+    transform: scaleX(0.82) !important;
     transform-origin: left top !important;
   }
 
@@ -3904,7 +4218,7 @@ section[data-screen-label="Proven Outcomes"] {
 
   /* Minimal horizontal squeeze — let font-size carry the weight */
   .xg-experience-page .xdge-the-exp-line,
-  .xg-experience-page .xdge-the-journey,
+  .xg-experience-page .xdge-the-journey-line,
   .xg-experience-page .xdge-leave-with-solid,
   .xg-experience-page .xdge-leave-with-hollow,
   .xg-experience-page .xdge-reviews-hollow,
@@ -4351,8 +4665,8 @@ section[data-screen-label="Proven Outcomes"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
+  width: clamp(56px, 6vw, 64px);
+  height: clamp(56px, 6vw, 64px);
   border-radius: 999px;
   border: 1px solid transparent;
   background: transparent;
@@ -4367,8 +4681,11 @@ section[data-screen-label="Proven Outcomes"] {
 .xg-home-mark img {
   display: block;
   width: auto;
-  height: clamp(22px, 2.6vw, 28px);
+  height: clamp(28px, 3.2vw, 36px);
+  max-width: none;
   object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
   transition: filter 0.35s var(--xg-ease), opacity 0.35s var(--xg-ease);
 }
 
@@ -4440,12 +4757,12 @@ section[data-screen-label="Proven Outcomes"] {
 @media (max-width: 768px) {
   .xg-home-mark,
   .xg-back-top {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
   }
 
   .xg-home-mark img {
-    height: 20px;
+    height: 26px;
   }
 
   .xg-back-top {
@@ -4610,7 +4927,119 @@ section[data-screen-label="Proven Outcomes"] {
 .xg-programme-cta-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
+}
+
+.xg-programme-cta-panel {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  padding: clamp(28px, 4vw, 40px);
+  border-radius: 5px;
+  background: #000000;
+  isolation: isolate;
+}
+
+.xg-programme-cta-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 5px;
+  padding: 1px;
+  background: linear-gradient(
+    90deg,
+    #58e6f4 0%,
+    #58e6f4 5%,
+    #3ecde8 14%,
+    #2484ff 36%,
+    #1e4898 58%,
+    rgba(30, 72, 152, 0.42) 78%,
+    rgba(23, 63, 143, 0.1) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.xg-programme-cta-grid {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.xg-programme-cta-copy {
+  flex: 1 1 280px;
+}
+
+.xg-experience-hero-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 11;
+  padding: clamp(96px, 12vw, 140px) clamp(20px, 4vw, 56px) clamp(32px, 4vw, 48px);
+  min-height: 0;
+  pointer-events: none;
+}
+
+.xg-experience-hero-body {
+  pointer-events: auto;
+}
+
+@media (min-width: 769px) {
+  section[data-screen-label='01 Experience Hero'].xg-experience-hero-section {
+    min-height: 120vh;
+  }
+
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-lockup {
+    position: absolute;
+    left: 50%;
+    top: 58vh;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: min(100%, 1280px);
+    padding: 0 clamp(20px, 4vw, 56px);
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-inner {
+    flex: 1;
+    min-height: 120vh;
+    padding: clamp(96px, 12vw, 140px) clamp(20px, 4vw, 56px) clamp(32px, 4vw, 48px);
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 768px) {
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-lockup {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    padding: clamp(88px, 14vw, 120px) clamp(16px, 4vw, 24px) 0;
+    z-index: 10;
+  }
+
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-inner {
+    padding: 0 clamp(16px, 4vw, 24px) clamp(48px, 8vw, 72px);
+    min-height: auto;
+    justify-content: flex-start;
+  }
 }
 
 .xg-cta-stand-btn-dark {
