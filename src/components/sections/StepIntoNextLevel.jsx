@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { theme, fadeUp } from '../../theme';
 import { Group } from '../primitives/Reveal';
 import { SplitHeading } from '../primitives/SplitHeading';
-import { mobileSrc } from '../../utils/mobileSrc';
 
 function PlayIcon() {
   return (
@@ -20,10 +19,9 @@ export function StepIntoNextLevel() {
       data-section-theme="dark"
       className="xg-cta-stand-section"
       style={{
-        background: theme.dark,
         color: theme.base,
         position: 'relative',
-        overflow: 'visible',
+        overflow: 'hidden',
         padding: 'clamp(72px, 9vw, 120px) clamp(20px, 4vw, 40px)',
       }}
     >
@@ -77,22 +75,6 @@ export function StepIntoNextLevel() {
               </Link>
             </motion.div>
           </div>
-
-          <motion.div
-            data-no-reveal
-            variants={fadeUp}
-            className="xg-cta-stand-media"
-          >
-            <picture>
-              <source media="(max-width: 768px)" srcSet={mobileSrc('/assets/ALL NEW IMAGES/13.webp')} />
-              <img
-                src="/assets/ALL NEW IMAGES/13.webp"
-                alt=""
-                loading="lazy"
-                decoding="async"
-              />
-            </picture>
-          </motion.div>
         </Group>
       </div>
     </section>

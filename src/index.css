@@ -2763,6 +2763,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   background-repeat: no-repeat;
   background-position: right center;
   background-size: cover;
+  min-height: clamp(420px, 52vw, 640px);
 }
 
 .xg-cta-stand-grid {
