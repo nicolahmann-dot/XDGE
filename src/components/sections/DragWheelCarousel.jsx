@@ -219,9 +219,7 @@ export function DragWheelCarousel() {
         <SplitHeading
           lines={[
             <span className="xdge-how-will-stack">
-              <span className="xdge-how-will-top">
-                <span className="xdge-how-will-top-text">HOW WILL YOU</span>
-              </span>
+              <span className="xdge-how-will-top-text">HOW WILL YOU </span>
               <span className="xdge-how-will-bottom">STAND OUT?</span>
             </span>,
           ]}

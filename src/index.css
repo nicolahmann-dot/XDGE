@@ -2056,7 +2056,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   color: #ffffff;
 }
 
-/* Is This Right For Me — Think You're Not / The Leadership Type (Heading Set 1). */
+/* Is This Right For Me — single-line hollow heading. */
 .xdge-right-for-me-clip {
   width: fit-content;
   max-width: 100%;
@@ -2066,27 +2066,15 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   padding-right: 0.14em;
 }
 
-.xdge-right-for-me-clip + .xdge-right-for-me-clip {
-  margin-top: -0.24em;
-}
-
-/* Scale(1.08) on the kicker extends past its layout box — extra clip slack for the T. */
-.xdge-right-for-me-clip-kicker {
-  padding-right: 0.42em;
-}
-
 .xdge-right-for-me-kicker {
   display: block;
   white-space: nowrap;
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
-  font-size: 0.58em;
   letter-spacing: -0.03em;
   line-height: 0.88;
   padding-right: 0.1em;
-  transform: scale(1.08, 1.04);
-  transform-origin: left top;
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
   -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.98);
@@ -2095,23 +2083,15 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 }
 
 .xdge-right-for-me-solid {
-  display: block;
-  white-space: nowrap;
-  font-family: 'Bebas Neue', sans-serif;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: -0.018em;
-  line-height: 0.9;
-  padding-right: 0.06em;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-  transform: scaleX(0.9);
-  transform-origin: left center;
+  -webkit-text-stroke: 0 transparent;
+  text-stroke: 0 transparent;
 }
 
 [data-screen-label='Is This Right For Me'] h2 {
   line-height: 0.88;
-  font-size: clamp(40px, 11.3vw, 165px);
+  font-size: clamp(42px, 7.8vw, 108px);
 }
 
 /* Insights — hollow section title (Heading Set 1 PNG ref). */
@@ -2635,59 +2615,40 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 
 .xdge-how-will-stack {
   display: block;
+  white-space: nowrap;
   width: fit-content;
   max-width: 100%;
-  line-height: 1;
-}
-
-.xdge-how-will-top {
-  display: block;
-  padding-right: 0.05em;
+  line-height: 0.88;
 }
 
 .xdge-how-will-top-text {
-  display: inline-block;
-  transform: scale(1.06, 1.04);
-  transform-origin: left bottom;
+  display: inline;
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.035em;
   line-height: 0.88;
-  padding-right: 0.08em;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.98);
-  text-stroke: 2px rgba(255, 255, 255, 0.98);
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.98);
+  text-stroke: 0.5px rgba(255, 255, 255, 0.98);
   paint-order: stroke fill;
 }
 
-.xdge-how-will-after-how {
-  margin-left: 0.02em;
-}
-
-.xdge-how-will-after-will {
-  margin-left: -0.05em;
-}
-
 .xdge-how-will-bottom {
-  display: block;
-  margin-top: -0.08em;
+  display: inline;
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.015em;
   line-height: 0.88;
-  transform: scaleX(0.88);
-  transform-origin: left top;
-  padding-right: 0.08em;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
 
 [data-screen-label='Drag Wheel Carousel'] h2 {
   line-height: 0.88;
-  font-size: clamp(40px, 11.3vw, 200px);
+  font-size: clamp(42px, 7.8vw, 108px);
 }
 
 [data-screen-label='Step Into Your Next Level'] h2 {
@@ -3452,12 +3413,9 @@ section[data-screen-label="Proven Outcomes"] {
     font-size: clamp(56px, 15vw, 100px) !important;
   }
 
-  .xg-about-page .xdge-how-will-top-text {
-    transform: none;
-  }
-
+  .xg-about-page .xdge-how-will-top-text,
   .xg-about-page .xdge-how-will-bottom {
-    transform: scaleX(0.96);
+    transform: none;
   }
 
   .xg-about-page .xdge-team-heading-line {
@@ -3651,6 +3609,16 @@ section[data-screen-label="Proven Outcomes"] {
     margin-bottom: clamp(16px, 3vw, 24px) !important;
   }
 
+  [data-screen-label='Is This Right For Me'] h2 {
+    font-size: clamp(38px, 7.2vw, 72px) !important;
+    line-height: 0.88 !important;
+  }
+
+  [data-screen-label='Drag Wheel Carousel'] h2 {
+    font-size: clamp(38px, 7.2vw, 72px) !important;
+    line-height: 0.88 !important;
+  }
+
   [data-screen-label='What You Leave With'] h2 {
     display: flex !important;
     flex-direction: column !important;
@@ -3754,11 +3722,6 @@ section[data-screen-label="Proven Outcomes"] {
   }
 
   [data-screen-label='07 Insights'] h2 {
-    font-size: clamp(56px, 15vw, 100px) !important;
-    margin-bottom: clamp(16px, 3vw, 24px) !important;
-  }
-
-  [data-screen-label='Drag Wheel Carousel'] h2 {
     font-size: clamp(56px, 15vw, 100px) !important;
     margin-bottom: clamp(16px, 3vw, 24px) !important;
   }
@@ -4014,6 +3977,16 @@ section[data-screen-label="Proven Outcomes"] {
     margin-bottom: clamp(14px, 3vw, 20px) !important;
   }
 
+  [data-screen-label='Is This Right For Me'] h2 {
+    font-size: clamp(32px, 6.8vw, 58px) !important;
+    line-height: 0.88 !important;
+  }
+
+  [data-screen-label='Drag Wheel Carousel'] h2 {
+    font-size: clamp(32px, 6.8vw, 58px) !important;
+    line-height: 0.88 !important;
+  }
+
   [data-screen-label='05 Who We Serve'] h2,
   [data-screen-label='05 Who We Serve'] .xdge-whos-clip {
     font-size: clamp(52px, 14vw, 104px) !important;
@@ -4120,6 +4093,11 @@ section[data-screen-label="Proven Outcomes"] {
   .xg-experience-page [data-screen-label='Step Into Your Next Level'] h2 {
     font-size: clamp(56px, 15vw, 100px) !important;
     line-height: 0.95 !important;
+  }
+
+  [data-screen-label='Is This Right For Me'] h2 {
+    font-size: clamp(38px, 7.2vw, 72px) !important;
+    line-height: 0.88 !important;
   }
 
   .xg-page .xg-experience-page [data-screen-label='01 Experience Hero'] h1,
@@ -4265,6 +4243,12 @@ section[data-screen-label="Proven Outcomes"] {
     font-size: clamp(52px, 14vw, 92px) !important;
   }
 
+  .xg-page .xg-experience-page [data-screen-label='Is This Right For Me'] h2,
+  .xg-experience-page [data-screen-label='Is This Right For Me'] h2 {
+    font-size: clamp(32px, 6.8vw, 58px) !important;
+    line-height: 0.88 !important;
+  }
+
   .xg-page .xg-experience-page [data-screen-label='01 Experience Hero'] h1,
   .xg-experience-page [data-screen-label='01 Experience Hero'] h1 {
     font-size: clamp(56px, 15vw, 100px) !important;
@@ -4277,7 +4261,6 @@ section[data-screen-label="Proven Outcomes"] {
 
   .xg-experience-page .xdge-differs-solid,
   .xg-experience-page .xdge-standards-hollow,
-  .xg-experience-page .xdge-right-for-me-solid,
   .xg-experience-page .xdge-how-will-bottom {
     transform: none;
     transform-origin: left center;

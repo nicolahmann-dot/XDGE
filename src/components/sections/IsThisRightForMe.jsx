@@ -178,15 +178,15 @@ export function IsThisRightForMe() {
       }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        {/* Full-width heading so it lays out as a clean 2-liner (IS THIS / RIGHT FOR ME)
-            instead of being squeezed by the 2-column grid; CTA drops below, right-aligned. */}
         <Group className="xg-exp-heading-block" style={{ marginBottom: 'clamp(28px, 4vw, 44px)' }}>
           <SplitHeading
             lines={[
-              <span className="xdge-right-for-me-kicker">THINK YOU&rsquo;RE NOT</span>,
-              <span className="xdge-right-for-me-solid">THE &lsquo;LEADERSHIP TYPE&rsquo;?</span>,
+              <span className="xdge-right-for-me-kicker">
+                THINK YOU&rsquo;RE NOT THE{' '}
+                <span className="xdge-right-for-me-solid">&lsquo;LEADERSHIP TYPE&rsquo;?</span>
+              </span>,
             ]}
-            lineClipClasses={['xdge-right-for-me-clip xdge-right-for-me-clip-kicker', 'xdge-right-for-me-clip']}
+            lineClipClasses={['xdge-right-for-me-clip']}
             style={{
               fontFamily: theme.displayCondensed,
               lineHeight: 0.88,
