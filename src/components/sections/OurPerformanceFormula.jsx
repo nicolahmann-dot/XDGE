@@ -239,14 +239,14 @@ export function OurPerformanceFormula({ dark = true, diagramMaxWidth } = {}) {
                   <span className="xdge-perf-formula-performance-base">
                     <span className="xdge-perf-formula-p-wrap">
                       <span className="xdge-perf-formula-p-letter">P</span>
-                      <span className="xdge-perf-formula-p-your" aria-hidden="true">your</span>
+                      <span className="xdge-perf-formula-p-your" aria-hidden="true">YOUR</span>
                     </span>
                     ERFORMANCE
                   </span>
                   <span className="xdge-perf-formula-performance-cut" aria-hidden="true">
                     <span className="xdge-perf-formula-p-wrap">
                       <span className="xdge-perf-formula-p-letter">P</span>
-                      <span className="xdge-perf-formula-p-your">your</span>
+                      <span className="xdge-perf-formula-p-your">YOUR</span>
                     </span>
                     ERFORMANCE
                   </span>

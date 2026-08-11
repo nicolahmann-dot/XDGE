@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { theme, fadeUp } from '../../theme';
 import { Group } from '../primitives/Reveal';
 import { SplitHeading } from '../primitives/SplitHeading';
+import { mobileSrc } from '../../utils/mobileSrc';
 
 function PlayIcon() {
   return (
@@ -12,16 +13,19 @@ function PlayIcon() {
   );
 }
 
-export function StepIntoNextLevel() {
+export function StepIntoNextLevel({ variant = 'door' }) {
+  const withMedia = variant === 'media';
+
   return (
     <section
       data-screen-label="Step Into Your Next Level"
       data-section-theme="dark"
-      className="xg-cta-stand-section"
+      className={`xg-cta-stand-section${withMedia ? ' xg-cta-stand-section--media' : ''}`}
       style={{
         color: theme.base,
         position: 'relative',
-        overflow: 'hidden',
+        overflow: withMedia ? 'visible' : 'hidden',
+        background: withMedia ? theme.dark : undefined,
         padding: 'clamp(72px, 9vw, 120px) clamp(20px, 4vw, 40px)',
       }}
     >
@@ -42,7 +46,7 @@ export function StepIntoNextLevel() {
               ]}
               style={{
                 fontFamily: theme.displayCondensed,
-                lineHeight: 0.92,
+                lineHeight: 0.75,
                 letterSpacing: '-0.02em',
                 textTransform: 'uppercase',
                 margin: 0,
@@ -75,6 +79,26 @@ export function StepIntoNextLevel() {
               </Link>
             </motion.div>
           </div>
+
+          {withMedia && (
+            <motion.div
+              data-no-reveal
+              variants={fadeUp}
+              className="xg-cta-stand-media"
+            >
+              <picture>
+                {mobileSrc('/assets/ALL NEW IMAGES/13.webp') && (
+                  <source media="(max-width: 768px)" srcSet={mobileSrc('/assets/ALL NEW IMAGES/13.webp')} />
+                )}
+                <img
+                  src="/assets/ALL NEW IMAGES/13.webp"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+            </motion.div>
+          )}
         </Group>
       </div>
     </section>

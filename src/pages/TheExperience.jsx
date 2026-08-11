@@ -25,7 +25,7 @@ export default function TheExperience() {
         <IsThisRightForMe />
       </div>
       <ProvenOutcomes />
-      <StepIntoNextLevel />
+      <StepIntoNextLevel variant="media" />
     </div>
   );
 }

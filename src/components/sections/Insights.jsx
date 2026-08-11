@@ -24,7 +24,7 @@ export function Insights() {
               style={{
                 fontFamily: theme.displayCondensed,
                 fontSize: 'clamp(40px, 11.3vw, 200px)',
-                lineHeight: 0.95,
+                lineHeight: 0.75,
                 letterSpacing: '-0.02em',
                 textTransform: 'uppercase',
                 margin: 0,

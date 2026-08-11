@@ -56,7 +56,7 @@ export function WhatYouLeaveWith() {
           lineClipClasses={['xdge-leave-with-clip', 'xdge-leave-with-clip']}
           style={{
             fontFamily: theme.displayCondensed,
-            lineHeight: 0.88,
+            lineHeight: 0.75,
             letterSpacing: '-0.02em',
             textTransform: 'uppercase',
             width: '100%',

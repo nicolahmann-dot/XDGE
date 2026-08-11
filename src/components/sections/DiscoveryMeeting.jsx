@@ -34,7 +34,7 @@ export function DiscoveryMeeting() {
             style={{
               fontFamily: theme.displayCondensed,
               fontSize: 'clamp(33px, 7.5vw, 128px)',
-              lineHeight: 0.88,
+              lineHeight: 0.75,
               margin: 0,
               textTransform: 'uppercase',
             }}

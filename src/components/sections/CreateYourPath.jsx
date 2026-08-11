@@ -24,7 +24,7 @@ export function CreateYourPath() {
           opacity: 0.4, zIndex: 0,
         }}
       />
-      <div style={{ width: '100%', maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+      <div style={{ width: '100%', maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10, overflow: 'visible' }}>
         <SplitHeading
           tag="h2"
           lines={['CREATE YOUR', 'OWN PATH', '& LEAVE A TRAIL']}

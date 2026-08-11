@@ -62,7 +62,7 @@ export function IndividualProgramme() {
             // stops at maxWidth 1280 while 11.3vw keeps growing, so past a ~1770px
             // viewport it overflowed and the clip shaved the end off — "EXPERIENCE" measured 1289px against 1280px.
             fontSize: 'clamp(40px, 11.3vw, 180px)',
-            lineHeight: 0.92, letterSpacing: '-0.02em',
+            lineHeight: 0.75, letterSpacing: '-0.02em',
             marginBottom: 'clamp(28px, 4vw, 40px)',
           }}
         />

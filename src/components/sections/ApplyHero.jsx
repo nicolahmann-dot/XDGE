@@ -13,7 +13,7 @@ function ApplyHeading() {
       style={{
         fontFamily: theme.displayCondensed,
         fontSize: 'clamp(56px, 13vw, 220px)',
-        lineHeight: 0.86,
+        lineHeight: 0.756,
         margin: 0,
       }}
     />

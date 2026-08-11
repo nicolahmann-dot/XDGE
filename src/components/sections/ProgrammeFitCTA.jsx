@@ -27,7 +27,7 @@ export function ProgrammeFitCTA() {
             // viewport it overflowed and the clip shaved the end off — "RIGHT PROGRAMME"
             // measured 1427px against 1280px, i.e. 1280/(1427/200) = 179px is the limit.
             fontSize: 'clamp(40px, 11.3vw, 175px)',
-            lineHeight: 0.92, letterSpacing: '-0.02em',
+            lineHeight: 0.75, letterSpacing: '-0.02em',
             marginBottom: 'clamp(48px, 7vw, 88px)',
           }}
         />

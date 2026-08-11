@@ -1,5 +1,5 @@
-import { theme } from '../../theme';
-import { SplitHeading } from '../primitives/SplitHeading';
+import { motion } from 'framer-motion';
+import { theme, fadeUp } from '../../theme';
 
 export function AboutHero() {
   return (
@@ -9,25 +9,29 @@ export function AboutHero() {
       data-section-theme="dark"
       style={{
         background: theme.dark, color: theme.base,
-        position: 'relative', overflow: 'hidden',
+        position: 'relative', overflow: 'visible',
         padding: 'clamp(96px, 12vw, 140px) clamp(20px, 4vw, 56px) clamp(80px, 9vw, 120px)',
       }}
     >
       {/* No ambient video here. The About hero is the section's own dark ground now —
           the gold_swirls loop was removed outright rather than made lighter. */}
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        <SplitHeading
-          tag="h1"
-          lines={['ABOUT US']}
-          lineInnerClasses={['xdge-about-us-filled']}
-          lineClipClasses={['xdge-about-us-clip']}
+        <motion.h1
+          data-no-reveal
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
           style={{
             fontFamily: theme.displayCondensed,
             fontSize: 'clamp(40px, 11.3vw, 200px)',
             lineHeight: 0.86,
             margin: 0,
+            overflow: 'visible',
           }}
-        />
+        >
+          <span className="xdge-about-us-filled">ABOUT US</span>
+        </motion.h1>
 
         <div className="xg-about-hero-copy" style={{
           display: 'flex', justifyContent: 'flex-end',

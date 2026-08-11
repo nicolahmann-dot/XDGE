@@ -118,17 +118,17 @@ export function WhatYouWillExperience() {
           <SplitHeading
             tag="h3"
             lines={[
-              <span className="xdge-people-hollow xdge-people-line-narrow">THE PEOPLE BEHIND YOUR</span>,
-              <span className="xdge-people-solid">PROGRESS.</span>,
+              <span className="xdge-people-hollow xdge-people-line-narrow">THE PEOPLE BEHIND</span>,
+              <span className="xdge-people-solid">YOUR PROGRESS</span>,
             ]}
             lineClipClasses={[
-              'xdge-people-clip',
-              'xdge-people-clip xdge-people-clip-solid',
+              'xdge-clip-tight-y xdge-people-clip',
+              'xdge-clip-tight-y xdge-people-clip xdge-people-clip-solid',
             ]}
             style={{
               fontFamily: theme.displayCondensed,
               fontSize: 'clamp(32px, 6.2vw, 88px)',
-              lineHeight: 0.92,
+              lineHeight: 0.75,
               textAlign: 'left',
               textTransform: 'uppercase',
             }}

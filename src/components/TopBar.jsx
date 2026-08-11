@@ -96,7 +96,6 @@ export function TopBar() {
 
   // Hamburger adapts: black when open, otherwise dark on light / white on dark
   const fg = open ? '#000000' : (sectionTheme === 'light' ? theme.ink : theme.base);
-  const markTheme = open ? 'light' : sectionTheme;
 
   const barBase = {
     height: 2, display: 'block', background: fg,
@@ -119,24 +118,10 @@ export function TopBar() {
         }}
       >
         <div style={{
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          display: 'flex', justifyContent: 'flex-end', alignItems: 'center',
           padding: 'clamp(16px, 3vw, 24px) clamp(20px, 4vw, 40px)',
           gap: 16,
         }}>
-          <Link
-            to="/"
-            className={`xg-home-mark xg-home-mark--${markTheme}${scrolled && !open ? ' is-scrolled' : ''}`}
-            data-cursor="grow"
-            aria-label="XDGE Home"
-            onClick={() => { setNavigating(false); setOpen(false); }}
-          >
-            <img
-              src="/assets/New Logo/Artboard 3.png"
-              alt=""
-              decoding="async"
-            />
-          </Link>
-
           <button
             onClick={() => { setNavigating(false); setOpen((o) => !o); }}
             data-cursor="grow"
@@ -227,7 +212,7 @@ export function TopBar() {
                       <span style={{
                         fontFamily: theme.display, fontWeight: 900,
                         fontSize: 'clamp(48px, 6.5vw, 88px)', color: '#000000',
-                        letterSpacing: '-0.02em', lineHeight: 0.85
+                        letterSpacing: '-0.02em', lineHeight: 0.755
                       }}>XDG</span>
                       <svg viewBox="0 0 100 100" style={{ height: 'clamp(32px, 4.5vw, 64px)', marginLeft: '6px', fill: '#000000' }}>
                         <rect y="15" width="100" height="15" />

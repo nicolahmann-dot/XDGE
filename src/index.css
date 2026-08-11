@@ -1209,6 +1209,16 @@ section[data-screen-label] {
   flex: 0 0 auto;
 }
 
+.xdge-footer-marquee-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-size: clamp(40px, 11.3vw, 200px);
+  line-height: 0.86;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
 /* What You Leave With — image cards auto-scroll continuously like the footer
    strip. Two copies + translate 0 → -50% = seamless infinite loop. */
 .xg-leave-marquee {
@@ -1428,18 +1438,18 @@ section[data-screen-label] {
 }
 
 .xdge-light-page-heading-clip + .xdge-light-page-heading-clip {
-  margin-top: -0.12em;
+  margin-top: var(--xdge-heading-line-gap);
 }
 
 [data-screen-label='Apply Closing'] h2 {
   font-size: clamp(30px, 8.5vw, 150px);
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   margin-bottom: clamp(8px, 1.2vw, 14px);
 }
 
 [data-screen-label='Discovery Meeting'] h2 {
   font-size: clamp(33px, 7.5vw, 128px);
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   margin-bottom: clamp(8px, 1.2vw, 14px);
 }
 
@@ -1487,13 +1497,27 @@ section[data-screen-label] {
 }
 
 .xdge-tier-heading-block {
-  margin-bottom: clamp(10px, 1.2vw, 16px);
+  margin-bottom: clamp(6px, 0.8vw, 12px);
 }
 
 /* Programmes page — tier taglines (solid white under hollow titles). */
 .xdge-programmes-tagline {
   font-size: clamp(28px, 3.8vw, 66px) !important;
-  margin: 0.12em 0 clamp(10px, 1.4vw, 18px) !important;
+  margin: 0 0 clamp(10px, 1.4vw, 18px) !important;
+}
+
+[data-screen-label='01 Programmes Hero'] h1 {
+  line-height: 0.72;
+}
+
+[data-screen-label='01 Programmes Hero'] h1 > span + span,
+[data-screen-label='01 Programmes Hero'] h1 > span[class*='-clip'] + span[class*='-clip'] {
+  margin-top: -0.5em;
+}
+
+.xg-programmes-page [data-screen-label='Programme Tiers'] h2 {
+  line-height: 0.72;
+  margin-bottom: clamp(6px, 1.2vw, 12px);
 }
 
 /* Tier taglines — solid caps directly under hollow titles. */
@@ -1534,6 +1558,22 @@ section[data-screen-label] {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   letter-spacing: -0.015em;
+}
+
+[data-screen-label='FAQ Hero'] h1 {
+  line-height: 0.75;
+  overflow: visible;
+}
+
+[data-screen-label='FAQ Hero'] h1 > span + span,
+[data-screen-label='FAQ Hero'] h1 > span[class*='-clip'] + span[class*='-clip'] {
+  margin-top: -0.38em;
+}
+
+[data-screen-label='FAQ Hero'] .xdge-condensed-solid-white {
+  display: block;
+  line-height: 0.75;
+  margin: 0;
 }
 
 .xdge-condensed-cyan {
@@ -1675,7 +1715,7 @@ section[data-screen-label] {
   flex-wrap: nowrap;
   white-space: nowrap;
   gap: 0;
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   padding-right: 0.04em;
   margin-inline: auto;
 }
@@ -1686,7 +1726,7 @@ section[data-screen-label] {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.028em;
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
 }
 
 .xdge-whos-solid {
@@ -1787,7 +1827,7 @@ section[data-screen-label] {
 }
 
 [data-screen-label='05 Who We Serve'] h2 {
-  line-height: 0.95;
+  line-height: var(--xdge-heading-line-height);
   font-size: clamp(52px, 14.5vw, 240px) !important;
   display: flex !important;
   justify-content: center !important;
@@ -1814,7 +1854,7 @@ section[data-screen-label] {
 }
 
 .xdge-leave-with-clip + .xdge-leave-with-clip {
-  margin-top: -0.14em;
+  margin-top: var(--xdge-heading-line-gap);
 }
 
 .xdge-leave-with-solid,
@@ -1825,7 +1865,7 @@ section[data-screen-label] {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  line-height: 0.92;
+  line-height: var(--xdge-heading-line-height);
   padding-right: 0.04em;
 }
 
@@ -1843,7 +1883,7 @@ section[data-screen-label] {
 }
 
 [data-screen-label='What You Leave With'] h2 {
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   font-size: clamp(40px, 11.3vw, 200px);
   margin-bottom: clamp(8px, 1.2vw, 14px);
   display: flex;
@@ -1915,7 +1955,7 @@ section[data-screen-label] {
 }
 
 .xdge-differs-clip + .xdge-differs-clip {
-  margin-top: -0.14em;
+  margin-top: var(--xdge-heading-line-gap);
 }
 
 .xdge-differs-solid {
@@ -1925,7 +1965,7 @@ section[data-screen-label] {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.018em;
-  line-height: 0.92;
+  line-height: var(--xdge-heading-line-height);
   padding-right: 0.04em;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
@@ -1977,19 +2017,38 @@ section[data-screen-label] {
   transform: translateY(-0.02em);
 }
 
-/* Site-wide — tighter gap between multi-line display headings */
+/* Site-wide — unified gap between multi-line display headings */
+:root {
+  --xdge-heading-line-gap: -0.38em;
+  --xdge-heading-line-height: 0.75;
+}
+
 h1 > span + span,
-h2 > span + span {
-  margin-top: -0.14em;
+h2 > span + span,
+h3 > span + span {
+  margin-top: var(--xdge-heading-line-gap);
 }
 
 h1 > span[class*='-clip'] + span[class*='-clip'],
-h2 > span[class*='-clip'] + span[class*='-clip'] {
-  margin-top: -0.14em;
+h2 > span[class*='-clip'] + span[class*='-clip'],
+h3 > span[class*='-clip'] + span[class*='-clip'] {
+  margin-top: var(--xdge-heading-line-gap);
+}
+
+h1 > span[class*='-clip'] > span[data-no-reveal],
+h2 > span[class*='-clip'] > span[data-no-reveal],
+h3 > span[class*='-clip'] > span[data-no-reveal] {
+  line-height: var(--xdge-heading-line-height);
+}
+
+section:not([data-screen-label*='Hero']) h1,
+section:not([data-screen-label*='Hero']) h2,
+section:not([data-screen-label*='Hero']) h3 {
+  line-height: var(--xdge-heading-line-height);
 }
 
 [data-screen-label='Different Ages, Different Focus'] h2 {
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   font-size: clamp(40px, 11.3vw, 185px);
 }
 
@@ -2004,7 +2063,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 }
 
 .xdge-standards-clip + .xdge-standards-clip {
-  margin-top: -0.14em;
+  margin-top: var(--xdge-heading-line-gap);
 }
 
 .xdge-standards-top-line {
@@ -2035,7 +2094,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.016em;
-  line-height: 0.92;
+  line-height: var(--xdge-heading-line-height);
   padding-right: 0.06em;
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
@@ -2047,7 +2106,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 }
 
 [data-screen-label='Standards & Expectations'] h2 {
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   font-size: clamp(40px, 11.3vw, 150px);
 }
 
@@ -2056,7 +2115,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   color: #ffffff;
 }
 
-/* Is This Right For Me — single-line hollow heading. */
+/* Is This Right For Me — two-line hollow + solid heading. */
 .xdge-right-for-me-clip {
   width: fit-content;
   max-width: 100%;
@@ -2071,10 +2130,12 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   white-space: nowrap;
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
+  font-size: 0.72em;
   text-transform: uppercase;
   letter-spacing: -0.03em;
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   padding-right: 0.1em;
+  margin: 0;
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
   -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.98);
@@ -2083,6 +2144,15 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 }
 
 .xdge-right-for-me-solid {
+  display: block;
+  white-space: nowrap;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: var(--xdge-heading-line-height);
+  padding-right: 0.06em;
+  margin: 0;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   -webkit-text-stroke: 0 transparent;
@@ -2090,7 +2160,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 }
 
 [data-screen-label='Is This Right For Me'] h2 {
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   font-size: clamp(42px, 7.8vw, 108px);
 }
 
@@ -2105,7 +2175,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 }
 
 [data-screen-label='07 Insights'] h2 {
-  line-height: 0.95;
+  line-height: var(--xdge-heading-line-height);
   font-size: clamp(40px, 11.3vw, 200px);
 }
 
@@ -2126,7 +2196,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.015em;
-  line-height: 0.92;
+  line-height: var(--xdge-heading-line-height);
   padding-right: 0.06em;
   transform: scale(1.06, 1.04);
   transform-origin: left center;
@@ -2135,7 +2205,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 }
 
 [data-screen-label='Proven Outcomes'] h2 {
-  line-height: 0.95;
+  line-height: var(--xdge-heading-line-height);
   font-size: clamp(40px, 11.3vw, 200px);
 }
 
@@ -2155,14 +2225,15 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 
 .xdge-people-hollow,
 .xdge-people-solid {
-  display: inline-block;
+  display: block;
   white-space: nowrap;
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.015em;
-  line-height: 1;
+  line-height: var(--xdge-heading-line-height);
   padding-right: 0.03em;
+  margin: 0;
 }
 
 .xdge-people-hollow {
@@ -2195,12 +2266,12 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 
 [data-screen-label='Who We Are'] h2 {
   font-size: clamp(48px, 11vw, 180px) !important;
-  line-height: 0.92;
+  line-height: var(--xdge-heading-line-height);
   margin: 0;
 }
 
 [data-screen-label='What You Will Experience'] h3 {
-  line-height: 0.92;
+  line-height: var(--xdge-heading-line-height);
   margin: 0;
 }
 
@@ -2312,7 +2383,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.022em;
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   transform: scaleX(0.93);
   transform-origin: left bottom;
   padding-right: 0.05em;
@@ -2354,7 +2425,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   display: block;
   position: relative;
   z-index: 2;
-  margin-top: -0.46em;
+  margin-top: -0.32em;
   margin-left: 0.07em;
 }
 
@@ -2364,7 +2435,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.016em;
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   transform: scaleX(0.735);
   transform-origin: left top;
   padding-right: 0.08em;
@@ -2428,16 +2499,16 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 
 .xdge-perf-formula-p-your {
   position: absolute;
-  left: 25%;
+  left: 29%;
   top: 62%;
   transform: translate(-50%, -50%);
   font-family: 'Inter', sans-serif;
   font-size: 0.115em;
   font-weight: 600;
-  font-style: italic;
-  letter-spacing: 0.02em;
+  font-style: normal;
+  letter-spacing: 0.04em;
   line-height: 1;
-  text-transform: lowercase;
+  text-transform: uppercase;
   writing-mode: sideways-lr;
   text-orientation: mixed;
   white-space: nowrap;
@@ -2583,9 +2654,14 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
     drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
 }
 
+/* Exempt — stacked overlap heading; not subject to site-wide line-gap tuning. */
 [data-screen-label='Our Performance Formula'] h2 {
   line-height: 0.92;
   margin-bottom: clamp(12px, 2vw, 20px) !important;
+}
+
+[data-screen-label='Our Performance Formula'] h2 > span[class*='-clip'] > span[data-no-reveal] {
+  line-height: 0.92;
 }
 
 .xg-perf-formula-section {
@@ -2618,7 +2694,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   white-space: nowrap;
   width: fit-content;
   max-width: 100%;
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
 }
 
 .xdge-how-will-top-text {
@@ -2627,7 +2703,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.035em;
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
   -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.98);
@@ -2641,24 +2717,24 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.015em;
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
 
 [data-screen-label='Drag Wheel Carousel'] h2 {
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   font-size: clamp(42px, 7.8vw, 108px);
 }
 
 [data-screen-label='Step Into Your Next Level'] h2 {
-  line-height: 0.92;
+  line-height: var(--xdge-heading-line-height);
   font-size: clamp(44px, 11vw, 200px);
 }
 
 [data-screen-label='Step Into Your Next Level'] .xdge-leave-with-hollow,
 [data-screen-label='Step Into Your Next Level'] .xdge-leave-with-solid {
-  line-height: 0.92;
+  line-height: var(--xdge-heading-line-height);
 }
 
 /* What Will You Stand For — footer CTA (bottom-of-page). */
@@ -2673,7 +2749,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 }
 
 [data-screen-label='Step Into Your Next Level'] .xdge-cta-clip:not(:first-child) {
-  margin-top: -0.18em;
+  margin-top: var(--xdge-heading-line-gap);
 }
 
 .xdge-cta-line {
@@ -2725,6 +2801,33 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   background-position: right center;
   background-size: cover;
   min-height: clamp(420px, 52vw, 640px);
+}
+
+.xg-cta-stand-section--media {
+  background-image: none;
+  min-height: auto;
+}
+
+.xg-cta-stand-section--media .xg-cta-stand-grid {
+  grid-template-columns: minmax(0, 1.12fr) minmax(220px, 0.58fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: stretch;
+  max-width: 100%;
+}
+
+.xg-cta-stand-media {
+  position: relative;
+  min-height: clamp(280px, 38vw, 520px);
+  overflow: hidden;
+  background: #000000;
+}
+
+.xg-cta-stand-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
 }
 
 .xg-cta-stand-grid {
@@ -2889,7 +2992,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 @media (max-width: 768px) {
   [data-screen-label='Step Into Your Next Level'] h2 {
     font-size: clamp(56px, 15vw, 100px) !important;
-    line-height: 0.92 !important;
+    line-height: var(--xdge-heading-line-height) !important;
     margin-bottom: clamp(12px, 2.5vw, 18px) !important;
   }
 
@@ -2903,6 +3006,16 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
     padding-bottom: clamp(48px, 10vw, 72px) !important;
     background-position: right center;
     background-size: auto 100%;
+  }
+
+  .xg-cta-stand-section--media .xg-cta-stand-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .xg-cta-stand-section--media .xg-cta-stand-media {
+    order: -1;
+    min-height: clamp(240px, 62vw, 420px);
+    max-width: 420px;
   }
 
   .xg-cta-stand-copy {
@@ -2959,7 +3072,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  line-height: 0.88;
+  line-height: var(--xdge-heading-line-height);
   margin: 0;
   padding: 0;
   color: #000000 !important;
@@ -3032,7 +3145,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   letter-spacing: 0.03em;
   word-spacing: 0.01em;
   line-height: 0.82;
-  margin: 0 0 -0.4em 0;
+  margin: 0 0 -0.28em 0;
   padding: 0;
 }
 
@@ -3065,13 +3178,18 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
   box-sizing: content-box;
   padding-top: 0 !important;
   margin-top: 0 !important;
-  padding-bottom: 0.05em !important;
-  margin-bottom: -0.05em !important;
+  padding-bottom: 0.06em !important;
+  margin-bottom: -0.06em !important;
 }
 
 [data-screen-label='Create Your Own Path'] h2 > span.xdge-create-path-line-clip:first-of-type {
-  padding-top: 0.14em !important;
-  margin-top: -0.14em !important;
+  padding-top: 0.22em !important;
+  margin-top: 0 !important;
+}
+
+[data-screen-label='Create Your Own Path'] h2 > span.xdge-create-path-line-clip:last-of-type {
+  padding-bottom: 0.08em !important;
+  margin-bottom: -0.08em !important;
 }
 
 /* Create Your Path — collapse transform dead space between lines. */
@@ -3082,7 +3200,7 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 }
 
 [data-screen-label='Create Your Own Path'] .xdge-create-path-line-clip + .xdge-create-path-line-clip {
-  margin-top: -0.10em !important;
+  margin-top: -0.22em !important;
 }
 
 [data-screen-label='Create Your Own Path'] h2 > span.xdge-create-path-line-clip {
@@ -3099,6 +3217,19 @@ h2 > span[class*='-clip'] + span[class*='-clip'] {
 }
 
 /* ABOUT US — client PNG heading (chrome gradient ref). */
+[data-screen-label='About Hero'] h1 {
+  overflow: visible;
+  line-height: 0.86;
+  padding-top: 0.06em;
+}
+
+[data-screen-label='About Hero'] .xdge-about-us-filled {
+  display: inline-block;
+  line-height: 0.86;
+  padding-top: 0.04em;
+  vertical-align: top;
+}
+
 .xdge-about-us-heading {
   margin: 0;
   line-height: 0;
@@ -3304,7 +3435,7 @@ section[data-screen-label="Proven Outcomes"] {
   }
   [data-screen-label='Who We Are'] h2 {
     font-size: clamp(56px, 15vw, 100px) !important;
-    line-height: 0.92 !important;
+    line-height: var(--xdge-heading-line-height) !important;
     margin-bottom: clamp(16px, 3vw, 24px) !important;
   }
 }
@@ -3335,12 +3466,14 @@ section[data-screen-label="Proven Outcomes"] {
   .xg-about-page h1,
   .xg-about-page h2 {
     font-size: clamp(56px, 15vw, 100px) !important;
-    line-height: 0.95 !important;
+    line-height: var(--xdge-heading-line-height) !important;
     margin-bottom: clamp(16px, 3vw, 24px) !important;
   }
 
   .xg-about-page [data-screen-label='About Hero'] h1 {
     margin-bottom: clamp(16px, 3vw, 24px) !important;
+    line-height: 0.86 !important;
+    padding-top: 0.06em !important;
   }
 
   .xg-about-page .xdge-about-us-heading-img {
@@ -3605,18 +3738,22 @@ section[data-screen-label="Proven Outcomes"] {
   .xg-page section:not([data-screen-label*='Hero']) h1,
   .xg-page section:not([data-screen-label*='Hero']) h2 {
     font-size: clamp(56px, 15vw, 100px) !important;
-    line-height: 0.95 !important;
+    line-height: var(--xdge-heading-line-height) !important;
     margin-bottom: clamp(16px, 3vw, 24px) !important;
   }
 
   [data-screen-label='Is This Right For Me'] h2 {
     font-size: clamp(38px, 7.2vw, 72px) !important;
-    line-height: 0.88 !important;
+    line-height: var(--xdge-heading-line-height) !important;
+  }
+
+  [data-screen-label='Is This Right For Me'] .xdge-right-for-me-kicker {
+    font-size: 0.78em;
   }
 
   [data-screen-label='Drag Wheel Carousel'] h2 {
     font-size: clamp(38px, 7.2vw, 72px) !important;
-    line-height: 0.88 !important;
+    line-height: var(--xdge-heading-line-height) !important;
   }
 
   [data-screen-label='What You Leave With'] h2 {
@@ -3748,7 +3885,7 @@ section[data-screen-label="Proven Outcomes"] {
   /* Hero display headings */
   section[data-screen-label*='Hero'] h1 {
     font-size: clamp(40px, 10.5vw, 76px) !important;
-    line-height: 0.95 !important;
+    line-height: var(--xdge-heading-line-height) !important;
   }
 
   [data-screen-label='01 Experience Hero'] h1 {
@@ -3795,8 +3932,6 @@ section[data-screen-label="Proven Outcomes"] {
   .xg-page .xdge-differs-solid,
   .xg-page .xdge-standards-hollow,
   .xg-page .xdge-standards-solid,
-  .xg-page .xdge-right-for-me-kicker,
-  .xg-page .xdge-right-for-me-solid,
   .xg-page .xdge-reviews-hollow,
   .xg-page .xdge-how-will-top-text,
   .xg-page .xdge-how-will-bottom,
@@ -3889,13 +4024,13 @@ section[data-screen-label="Proven Outcomes"] {
   /* Programmes page — unified mobile headings (same scale as other pages) */
   .xg-programmes-page [data-screen-label='Programme Tiers'] h2 {
     font-size: clamp(56px, 15vw, 100px) !important;
-    line-height: 0.95 !important;
+    line-height: var(--xdge-heading-line-height) !important;
     margin-bottom: clamp(12px, 2.5vw, 18px) !important;
   }
 
   .xg-programmes-page [data-screen-label='Programme Tiers'] .xdge-programmes-tagline {
     font-size: clamp(32px, 8.5vw, 48px) !important;
-    margin: 0.1em 0 clamp(10px, 2vw, 16px) !important;
+    margin: 0 0 clamp(10px, 2vw, 16px) !important;
     transform: none !important;
     letter-spacing: 0.02em;
   }
@@ -3908,13 +4043,13 @@ section[data-screen-label="Proven Outcomes"] {
 
   .xg-programmes-page [data-screen-label='Incubator Pathways'] h2 {
     font-size: clamp(56px, 15vw, 100px) !important;
-    line-height: 0.95 !important;
+    line-height: var(--xdge-heading-line-height) !important;
     margin-bottom: clamp(16px, 3vw, 24px) !important;
   }
 
   .xg-programmes-page [data-screen-label='01 Programmes Hero'] h1 {
     font-size: clamp(56px, 15vw, 108px) !important;
-    line-height: 0.92 !important;
+    line-height: var(--xdge-heading-line-height) !important;
   }
 
   /* Contact page — display headings */
@@ -3931,7 +4066,7 @@ section[data-screen-label="Proven Outcomes"] {
 
   .xg-contact-page [data-screen-label='Discovery Meeting'] h2 {
     font-size: clamp(28px, 9vw, 72px) !important;
-    line-height: 0.88 !important;
+    line-height: var(--xdge-heading-line-height) !important;
     margin-bottom: clamp(12px, 2.5vw, 18px) !important;
   }
 
@@ -3946,7 +4081,7 @@ section[data-screen-label="Proven Outcomes"] {
   .xg-contact-page [data-screen-label='Apply Closing'] h2,
   .xg-page [data-screen-label='Apply Closing'] h2 {
     font-size: clamp(28px, 9vw, 80px) !important;
-    line-height: 0.88 !important;
+    line-height: var(--xdge-heading-line-height) !important;
   }
 
   .xg-page [data-screen-label='Apply Closing'] .xdge-condensed-solid-ink {
@@ -3979,12 +4114,12 @@ section[data-screen-label="Proven Outcomes"] {
 
   [data-screen-label='Is This Right For Me'] h2 {
     font-size: clamp(32px, 6.8vw, 58px) !important;
-    line-height: 0.88 !important;
+    line-height: var(--xdge-heading-line-height) !important;
   }
 
   [data-screen-label='Drag Wheel Carousel'] h2 {
     font-size: clamp(32px, 6.8vw, 58px) !important;
-    line-height: 0.88 !important;
+    line-height: var(--xdge-heading-line-height) !important;
   }
 
   [data-screen-label='05 Who We Serve'] h2,
@@ -4092,12 +4227,16 @@ section[data-screen-label="Proven Outcomes"] {
   .xg-experience-page [data-screen-label='Proven Outcomes'] h2,
   .xg-experience-page [data-screen-label='Step Into Your Next Level'] h2 {
     font-size: clamp(56px, 15vw, 100px) !important;
-    line-height: 0.95 !important;
+    line-height: var(--xdge-heading-line-height) !important;
   }
 
   [data-screen-label='Is This Right For Me'] h2 {
     font-size: clamp(38px, 7.2vw, 72px) !important;
-    line-height: 0.88 !important;
+    line-height: var(--xdge-heading-line-height) !important;
+  }
+
+  [data-screen-label='Is This Right For Me'] .xdge-right-for-me-kicker {
+    font-size: 0.78em;
   }
 
   .xg-page .xg-experience-page [data-screen-label='01 Experience Hero'] h1,
@@ -4204,8 +4343,6 @@ section[data-screen-label="Proven Outcomes"] {
   .xg-experience-page .xdge-differs-solid,
   .xg-experience-page .xdge-standards-hollow,
   .xg-experience-page .xdge-standards-solid,
-  .xg-experience-page .xdge-right-for-me-kicker,
-  .xg-experience-page .xdge-right-for-me-solid,
   .xg-experience-page .xdge-how-will-top-text,
   .xg-experience-page .xdge-how-will-bottom,
   .xg-experience-page .xdge-people-hollow,
@@ -4246,7 +4383,7 @@ section[data-screen-label="Proven Outcomes"] {
   .xg-page .xg-experience-page [data-screen-label='Is This Right For Me'] h2,
   .xg-experience-page [data-screen-label='Is This Right For Me'] h2 {
     font-size: clamp(32px, 6.8vw, 58px) !important;
-    line-height: 0.88 !important;
+    line-height: var(--xdge-heading-line-height) !important;
   }
 
   .xg-page .xg-experience-page [data-screen-label='01 Experience Hero'] h1,
@@ -4982,6 +5119,39 @@ section[data-screen-label="Proven Outcomes"] {
   pointer-events: auto;
 }
 
+/* How It Works — hero body copy (tags + prose). Lockup position untouched. */
+.xg-experience-hero-tags {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 900;
+  font-size: clamp(13px, 1.4vw, 20px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.xg-experience-hero-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: clamp(20px, 2.4vw, 30px) 0;
+}
+
+.xg-experience-hero-prose {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 1.6vw, 18px);
+}
+
+.xg-experience-hero-prose p {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(14px, 1.4vw, 16px);
+  line-height: 1.6;
+  color: #a8a8a8;
+  margin: 0;
+}
+
+/* Keep body copy off the left-side video orb — lockup position unchanged */
 @media (min-width: 769px) {
   section[data-screen-label='01 Experience Hero'].xg-experience-hero-section {
     min-height: 120vh;
@@ -5003,8 +5173,42 @@ section[data-screen-label="Proven Outcomes"] {
   section[data-screen-label='01 Experience Hero'] .xg-experience-hero-inner {
     flex: 1;
     min-height: 120vh;
-    padding: clamp(96px, 12vw, 140px) clamp(20px, 4vw, 56px) clamp(32px, 4vw, 48px);
+    padding: clamp(96px, 12vw, 140px) clamp(20px, 4vw, 56px) clamp(20px, 3vw, 36px);
     justify-content: flex-end;
+  }
+
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-body {
+    display: block;
+    margin-top: clamp(32px, 5vh, 72px);
+  }
+
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-body .xg-hide-md {
+    display: none;
+  }
+
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-copy {
+    margin-left: auto;
+    margin-right: 0;
+    width: min(100%, 640px);
+    max-width: 640px;
+    transform: translateY(clamp(20px, 3vh, 48px));
+  }
+}
+
+/* Heavy zoom only — very short viewport; mild shrink, stay right */
+@media (min-width: 769px) and (max-height: 640px) {
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-copy {
+    max-width: min(100%, 520px);
+    width: min(100%, 520px);
+  }
+
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-tags {
+    font-size: clamp(12px, 1.3vw, 17px);
+    white-space: normal;
+  }
+
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-prose p {
+    font-size: clamp(13px, 1.3vw, 15px);
   }
 }
 
@@ -5020,9 +5224,22 @@ section[data-screen-label="Proven Outcomes"] {
   }
 
   section[data-screen-label='01 Experience Hero'] .xg-experience-hero-inner {
-    padding: 0 clamp(16px, 4vw, 24px) clamp(48px, 8vw, 72px);
+    padding: clamp(20px, 4vw, 32px) clamp(16px, 4vw, 24px) clamp(48px, 8vw, 72px);
     min-height: auto;
     justify-content: flex-start;
+  }
+
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-copy {
+    margin-left: auto;
+    margin-right: 0;
+    max-width: min(100%, 640px);
+    width: min(100%, 640px);
+    margin-top: clamp(28px, 5vh, 48px);
+    transform: none;
+  }
+
+  section[data-screen-label='01 Experience Hero'] .xg-experience-hero-tags {
+    white-space: normal;
   }
 }
 

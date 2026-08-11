@@ -11,7 +11,7 @@ export default function Programmes() {
       <ProgrammeTiers />
       <ProgrammeCTA />
       <IncubatorPathways />
-      <StepIntoNextLevel />
+      <StepIntoNextLevel variant="media" />
     </div>
   );
 }

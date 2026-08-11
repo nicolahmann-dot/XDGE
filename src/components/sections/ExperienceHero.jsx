@@ -5,7 +5,6 @@ import { HeroAmbient } from '../HeroAmbient';
 
 const pStyle = {
   fontFamily: theme.body,
-  fontSize: 'clamp(14px, 1.4vw, 16px)',
   lineHeight: 1.6,
   color: theme.subtitle,
   margin: 0,
@@ -21,7 +20,6 @@ export function ExperienceHero() {
       style={{
         background: theme.dark,
         color: theme.base,
-        minHeight: '120vh',
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
@@ -64,17 +62,8 @@ export function ExperienceHero() {
       <div className="xg-experience-hero-inner">
         <div className="xg-hero-body xg-experience-hero-body" style={{ alignItems: 'flex-end' }}>
           <div className="xg-hide-md" />
-          <Group style={{ maxWidth: 640 }}>
-            <div className="xg-experience-hero-tags" style={{
-              fontFamily: theme.display,
-              fontWeight: 900,
-              fontSize: 'clamp(13px, 1.4vw, 20px)',
-              lineHeight: 1.2,
-              letterSpacing: '-0.01em',
-              textTransform: 'uppercase',
-              color: theme.base,
-              whiteSpace: 'nowrap',
-            }}>
+          <Group className="xg-experience-hero-copy">
+            <div className="xg-experience-hero-tags">
               <div>For Ages 11&ndash;24+</div>
               <div>Real Leadership Development.</div>
               <div>Real Projects.</div>
@@ -83,15 +72,11 @@ export function ExperienceHero() {
             </div>
 
             <Reveal>
-              <div style={{
-                height: 1,
-                background: 'rgba(255,255,255,0.2)',
-                margin: 'clamp(20px, 2.4vw, 30px) 0',
-              }} />
+              <div className="xg-experience-hero-divider" />
             </Reveal>
 
             <Reveal>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(14px, 1.6vw, 18px)' }}>
+              <div className="xg-experience-hero-prose">
                 <p style={pStyle}>
                   Experience the same leadership development trusted by organisations
                   worldwide, re-engineered for young people, graduates and early-career

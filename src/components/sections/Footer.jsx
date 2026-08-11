@@ -47,13 +47,7 @@ export function Footer() {
         maskImage: 'linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%)',
       }}>
         <div
-          className="xdge-footer-marquee"
-          style={{
-            fontFamily: theme.display, fontWeight: 900,
-            fontSize: 'clamp(40px, 11.3vw, 200px)',
-            lineHeight: 0.95, letterSpacing: '-0.01em',
-            color: theme.base,
-          }}
+          className="xdge-footer-marquee xdge-footer-marquee-text"
         >
           <span style={{ paddingRight: '0.35em' }}>CAREER · UNIVERSITY · SCHOOL ·</span>
           <span style={{ paddingRight: '0.35em' }}>CAREER · UNIVERSITY · SCHOOL ·</span>

@@ -181,15 +181,13 @@ export function IsThisRightForMe() {
         <Group className="xg-exp-heading-block" style={{ marginBottom: 'clamp(28px, 4vw, 44px)' }}>
           <SplitHeading
             lines={[
-              <span className="xdge-right-for-me-kicker">
-                THINK YOU&rsquo;RE NOT THE{' '}
-                <span className="xdge-right-for-me-solid">&lsquo;LEADERSHIP TYPE&rsquo;?</span>
-              </span>,
+              <span className="xdge-right-for-me-kicker">THINK YOU&rsquo;RE NOT</span>,
+              <span className="xdge-right-for-me-solid">THE &lsquo;LEADERSHIP TYPE&rsquo;?</span>,
             ]}
-            lineClipClasses={['xdge-right-for-me-clip']}
+            lineClipClasses={['xdge-right-for-me-clip', 'xdge-right-for-me-clip']}
             style={{
               fontFamily: theme.displayCondensed,
-              lineHeight: 0.88,
+              lineHeight: 0.75,
               letterSpacing: '-0.02em',
               textTransform: 'uppercase',
             }}

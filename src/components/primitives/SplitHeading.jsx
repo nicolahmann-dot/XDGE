@@ -58,8 +58,9 @@ import { useFontsReady } from '../../hooks/useFontsReady';
 // box is small while PAD_BOTTOM is a fraction of the h2's much larger size. 160%
 // gives 0.60x the line height of clearance, which covers all of them. Starting
 // further below costs nothing visually — it is hidden either way.
-const PAD_BOTTOM = '0.10em';
+const PAD_BOTTOM = '0.06em';
 const PAD_TOP = '0.16em';
+const PAD_BOTTOM_TIGHT = '0.04em';
 
 // All lines rise TOGETHER — one delay, no per-line offset.
 //
@@ -122,7 +123,12 @@ export function SplitHeading({ lines, style, tag = 'h2', lineClasses = [], lineC
             overflow: 'hidden',
             boxSizing: 'content-box',
             ...(String(lineClipClasses[i] || '').includes('xdge-clip-tight-y')
-              ? { paddingTop: 0, marginTop: 0, paddingBottom: 0, marginBottom: 0 }
+              ? {
+                  paddingTop: PAD_TOP,
+                  marginTop: `-${PAD_TOP}`,
+                  paddingBottom: PAD_BOTTOM_TIGHT,
+                  marginBottom: `-${PAD_BOTTOM_TIGHT}`,
+                }
               : {
                   paddingTop: PAD_TOP,
                   marginTop: `-${PAD_TOP}`,

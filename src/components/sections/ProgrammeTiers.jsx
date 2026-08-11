@@ -114,7 +114,7 @@ const tierHeadingProps = {
   style: {
     fontFamily: theme.displayCondensed,
     fontSize: 'clamp(64px, 12vw, 168px)',
-    lineHeight: 0.86,
+    lineHeight: 0.72,
   },
 };
 

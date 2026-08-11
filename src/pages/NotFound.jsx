@@ -38,7 +38,7 @@ export default function NotFound() {
           margin: '0 0 20px',
           fontFamily: theme.displayCondensed,
           fontSize: 'clamp(48px, 12vw, 96px)',
-          lineHeight: 0.92,
+          lineHeight: 0.75,
           letterSpacing: '-0.02em',
           textTransform: 'uppercase',
         }}>

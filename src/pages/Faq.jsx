@@ -5,6 +5,7 @@ import { theme, fadeUp } from '../theme';
 import { faqGroups } from '../data/faq';
 import { usePageMeta } from '../hooks/usePageMeta';
 import { Group } from '../components/primitives/Reveal';
+import { SplitHeading } from '../components/primitives/SplitHeading';
 
 function FaqItem({ item, open, onToggle }) {
   return (
@@ -62,16 +63,23 @@ export default function Faq() {
             }}>
               FAQ
             </motion.p>
-            <motion.h1 data-no-reveal variants={fadeUp} style={{
-              margin: '0 0 20px',
-              fontFamily: theme.displayCondensed,
-              fontSize: 'clamp(48px, 11vw, 120px)',
-              lineHeight: 0.92,
-              letterSpacing: '-0.02em',
-              textTransform: 'uppercase',
-            }}>
-              Frequently Asked Questions
-            </motion.h1>
+            <SplitHeading
+              tag="h1"
+              lines={['FREQUENTLY ASKED', 'QUESTIONS']}
+              lineClasses={['xdge-condensed-solid-white', 'xdge-condensed-solid-white']}
+              lineClipClasses={[
+                'xdge-clip-tight-y xdge-about-us-clip',
+                'xdge-clip-tight-y xdge-about-us-clip',
+              ]}
+              style={{
+                fontFamily: theme.displayCondensed,
+                fontSize: 'clamp(48px, 11vw, 120px)',
+                lineHeight: 0.75,
+                letterSpacing: '-0.02em',
+                textTransform: 'uppercase',
+                margin: '0 0 20px',
+              }}
+            />
             <motion.p data-no-reveal variants={fadeUp} style={{
               margin: 0,
               fontFamily: theme.body,

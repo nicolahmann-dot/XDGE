@@ -177,7 +177,7 @@ function Modal({ slide, onClose }) {
         <h2 style={{
           fontFamily: theme.display, fontWeight: 900,
           fontSize: 'clamp(48px, 8.3vw, 96px)',
-          lineHeight: 0.95, letterSpacing: '-0.02em',
+          lineHeight: 0.75, letterSpacing: '-0.02em',
           margin: '0 0 clamp(24px, 4vw, 40px)',
           color: theme.base,
           textTransform: 'uppercase',
@@ -355,7 +355,7 @@ export function DifferentAgesDifferentFocus() {
           lineClipClasses={['xdge-differs-clip', 'xdge-differs-clip']}
           style={{
             fontFamily: theme.displayCondensed,
-            lineHeight: 0.95,
+            lineHeight: 0.75,
             letterSpacing: '-0.02em',
             textTransform: 'uppercase',
             marginBottom: 'clamp(28px, 4vw, 40px)',

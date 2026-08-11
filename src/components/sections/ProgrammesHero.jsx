@@ -7,13 +7,16 @@ function ProgrammesHeading() {
     <SplitHeading
       tag="h1"
       lineClasses={['xdge-condensed-hollow xdge-condensed-hollow-tight', 'xdge-condensed-hollow']}
-      lineClipClasses={[undefined, 'xdge-condensed-clip-narrow']}
+      lineClipClasses={[
+        'xdge-clip-tight-y xdge-about-us-clip',
+        'xdge-clip-tight-y xdge-condensed-clip-narrow',
+      ]}
       lineInnerClasses={[undefined, 'xdge-condensed-text-narrow']}
       lines={['OUR', 'PROGRAMMES']}
       style={{
         fontFamily: theme.displayCondensed,
         fontSize: 'clamp(56px, 13vw, 220px)',
-        lineHeight: 0.86,
+        lineHeight: 0.72,
       }}
     />
   );

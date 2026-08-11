@@ -35,7 +35,7 @@ export function Culture() {
               style={{
                 fontFamily: theme.display, fontWeight: 900,
                 fontSize: 'clamp(40px, 11.3vw, 200px)',
-                lineHeight: 0.95, letterSpacing: '-0.02em',
+                lineHeight: 0.75, letterSpacing: '-0.02em',
               }}
             />
           </div>

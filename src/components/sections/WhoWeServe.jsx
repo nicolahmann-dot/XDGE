@@ -23,7 +23,7 @@ const serveCardHeadingProps = {
   style: {
     fontFamily: theme.displayCondensed,
     fontSize: 'clamp(40px, 5.2vw, 68px)',
-    lineHeight: 0.86,
+    lineHeight: 0.756,
     letterSpacing: '-0.02em',
     color: theme.base,
   },
@@ -253,7 +253,7 @@ export function WhoWeServe() {
               style={{
                 fontFamily: theme.displayCondensed,
                 fontSize: 'clamp(52px, 14.5vw, 240px)',
-                lineHeight: 0.95,
+                lineHeight: 0.75,
                 letterSpacing: '-0.02em',
                 textTransform: 'uppercase',
                 textAlign: 'center',

@@ -226,7 +226,7 @@ export function DragWheelCarousel() {
           lineClipClasses={['xdge-clip-tight-y xdge-how-will-clip']}
           style={{
             fontFamily: theme.displayCondensed,
-            lineHeight: 0.95,
+            lineHeight: 0.75,
             letterSpacing: '-0.02em',
             textTransform: 'uppercase',
           }}

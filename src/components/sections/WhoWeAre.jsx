@@ -31,7 +31,7 @@ const Icons = {
 const points = [
   { icon: Icons.person, bold: 'Leadership Experts', rest: ', University Professors, Senior Leaders, Investors, Entrepreneurs' },
   { icon: Icons.cap, bold: 'All Masters or PhD Qualified', rest: '' },
-  { icon: Icons.star, bold: '20+ Years', rest: ' of Senior Leadership Experience' },
+  { icon: Icons.star, bold: 'Each with 20+ years experience', rest: '' },
   { icon: Icons.globe, bold: 'Experience Across Multiple', rest: ' Industries Around The Globe' },
   { icon: Icons.target, bold: 'On a Mission to Give', rest: " Young People the Practical Wisdom, Leadership Skills, and Competitive Edge We Wish We'd Had Sooner" },
 ];
@@ -54,8 +54,8 @@ export function WhoWeAre() {
         <div style={{ marginBottom: 'clamp(32px, 4.5vw, 48px)', position: 'relative' }}>
           <SplitHeading
             lines={[
-              <span className="xdge-people-hollow xdge-people-line-narrow">THE PEOPLE BEHIND YOUR</span>,
-              <span className="xdge-people-solid">PROGRESS.</span>,
+              <span className="xdge-people-hollow xdge-people-line-narrow">THE PEOPLE BEHIND</span>,
+              <span className="xdge-people-solid">YOUR PROGRESS</span>,
             ]}
             lineClipClasses={[
               'xdge-clip-tight-y xdge-people-clip',
@@ -63,7 +63,7 @@ export function WhoWeAre() {
             ]}
             style={{
               fontFamily: theme.displayCondensed,
-              lineHeight: 0.92,
+              lineHeight: 0.75,
               letterSpacing: '-0.02em',
               textAlign: 'left',
               margin: 0,

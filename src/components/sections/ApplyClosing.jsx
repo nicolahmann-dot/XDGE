@@ -25,7 +25,7 @@ export function ApplyClosing() {
             style={{
               fontFamily: theme.displayCondensed,
               fontSize: 'clamp(30px, 8.5vw, 150px)',
-              lineHeight: 0.88,
+              lineHeight: 0.75,
               margin: 0,
               textTransform: 'uppercase',
               maxWidth: '14ch',

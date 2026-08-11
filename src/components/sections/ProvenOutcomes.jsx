@@ -216,7 +216,7 @@ export function ProvenOutcomes() {
               lineClipClasses={['xdge-reviews-clip']}
               style={{
                 fontFamily: theme.displayCondensed,
-                lineHeight: 0.95,
+                lineHeight: 0.75,
                 letterSpacing: '-0.02em',
                 textTransform: 'uppercase',
                 margin: 0,
