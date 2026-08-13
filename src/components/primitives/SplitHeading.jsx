@@ -58,8 +58,17 @@ import { useFontsReady } from '../../hooks/useFontsReady';
 // box is small while PAD_BOTTOM is a fraction of the h2's much larger size. 160%
 // gives 0.60x the line height of clearance, which covers all of them. Starting
 // further below costs nothing visually — it is hidden either way.
+// PAD_TOP is sized for the WORST case, not the average one, because it costs
+// nothing when unused: the matching negative margin keeps it out of the layout,
+// so a clip with more slack than it needs renders identically. Three things stack
+// on top of the plain cap-height overflow and each is per-heading, which is why
+// tuning this value section-by-section never converged — one heading's number was
+// always wrong for the next:
+//   `line-height` 0.75 puts the content area ~0.22em above the line box already;
+//   `-webkit-text-stroke` (up to 3px) paints OUTSIDE the glyph outline;
+//   `transform: scale()` on inner spans moves the painted top again.
 const PAD_BOTTOM = '0.06em';
-const PAD_TOP = '0.16em';
+const PAD_TOP = '0.3em';
 const PAD_BOTTOM_TIGHT = '0.04em';
 
 // All lines rise TOGETHER — one delay, no per-line offset.

@@ -1,40 +1,77 @@
+import { useState } from 'react';
 import { theme } from '../../theme';
+import { mobileSrc } from '../../utils/mobileSrc';
 import { SplitHeading } from '../primitives/SplitHeading';
 
-// Carousel 2 imagery — every image from "Images for Carousel 2" (optimized WebP),
-// used once. Fixed-size square cards, image only (no text).
+// Carousel 2 imagery, in filename order — card-1 … card-7. Built from the
+// 4750px source art by scripts/optimize-images.mjs.
+//
+// Image only: no number, no title, no caption. The artefacts speak for
+// themselves and the section heading already says what they are. `alt` is
+// therefore the only place the meaning is written down, so it names the
+// artefact rather than just describing the photograph.
 const items = [
-  { img: '/assets/leave-1.webp' },
-  { img: '/assets/leave-2.webp' },
-  { img: '/assets/leave-3.webp' },
-  { img: '/assets/leave-4.webp' },
-  { img: '/assets/leave-5.webp' },
-  { img: '/assets/leave-7.webp' },
-  { img: '/assets/WhatsApp Image 2026-06-16 at 1.04.14 PM.jpeg', cover: true },
+  {
+    img: '/assets/card-1.webp',
+    alt: 'Leadership Playbook — a personalised roadmap for your next opportunity and future growth.',
+  },
+  {
+    img: '/assets/card-2.webp',
+    alt: 'Leadership Portfolio — a professional showcase of your projects, achievements, leadership, and impact.',
+  },
+  {
+    img: '/assets/card-3.webp',
+    alt: 'Recorded Capstone Presentation — evidence of how you think, communicate, and perform as a leader.',
+  },
+  {
+    img: '/assets/card-4.webp',
+    alt: 'Skills Transcript — a verified record of the skills and capabilities you have demonstrated.',
+  },
+  {
+    img: '/assets/card-5.webp',
+    alt: 'Interview & Opportunity Rehearsal — practical preparation for interviews and competitive selection.',
+  },
+  {
+    img: '/assets/card-6.webp',
+    alt: 'Certificate of Completion — formal recognition of your achievement and progression.',
+  },
+  {
+    img: '/assets/card-7.webp',
+    alt: 'Letter of Recommendation — a personal endorsement from experienced leaders and professionals.',
+  },
 ];
 
-function LeaveCard({ img, cover }) {
+function Slice({ item, isActive, onSelect }) {
   return (
-    <div
-      className="xg-glass-solid"
-      style={{
-        position: 'relative',
-        width: 'clamp(240px, 28vw, 420px)',
-        aspectRatio: '1 / 1',
-        flexShrink: 0,
-        // trailing gap lives INSIDE the card so two copies tile seamlessly under
-        // the -50% marquee translate (matches the footer strip technique).
-        marginRight: 'clamp(16px, 2.5vw, 40px)',
-        borderRadius: 24,
-        overflow: 'hidden',
-        border: `1px solid ${theme.borderDark}`,
-        background: `#0a0a0a url("${img}") center/${cover ? 'cover' : 'contain'} no-repeat`,
-      }}
-    />
+    <button
+      type="button"
+      className="xg-fs-slice"
+      data-active={isActive || undefined}
+      data-cursor="grow"
+      aria-pressed={isActive}
+      onClick={onSelect}
+      onMouseEnter={onSelect}
+      onFocus={onSelect}
+    >
+      <picture>
+        {mobileSrc(item.img) && (
+          <source media="(max-width: 768px)" srcSet={mobileSrc(item.img)} />
+        )}
+        <img
+          className="xg-fs-img"
+          src={item.img}
+          alt={item.alt}
+          decoding="async"
+          loading="lazy"
+        />
+      </picture>
+    </button>
   );
 }
 
 export function WhatYouLeaveWith() {
+  const [active, setActive] = useState(0);
+
   return (
     <section
       data-screen-label="What You Leave With"
@@ -68,19 +105,20 @@ export function WhatYouLeaveWith() {
         </p>
       </div>
 
-      {/* Continuous auto-scroll marquee (same mechanism as the footer
-          CAREER · UNIVERSITY · SCHOOL strip): two copies of the cards tile
-          seamlessly, translate 0 → -50% forever, pause on hover. Pure CSS on
-          the compositor thread — zero main-thread cost. */}
-      <div data-reveal style={{ width: '100%', overflow: 'hidden', position: 'relative', padding: '20px 0' }}>
-        <div
-          className="xg-leave-marquee"
-          style={{ display: 'flex', width: 'max-content' }}
-        >
-          {[...items, ...items].map((it, i) => (
-            <LeaveCard key={i} img={it.img} cover={it.cover} />
-          ))}
-        </div>
+      {/* Not wrapped in `data-reveal`: fading the strip in as one block would
+          animate opacity across a container holding seven full-size artefact
+          images, which flattens the whole subtree into a single composited
+          layer and forces every image to decode for it. The slices carry their
+          own interaction instead. */}
+      <div className="xg-fs-row" data-no-reveal>
+        {items.map((it, i) => (
+          <Slice
+            key={it.img}
+            item={it}
+            isActive={i === active}
+            onSelect={() => setActive(i)}
+          />
+        ))}
       </div>
     </section>
   );

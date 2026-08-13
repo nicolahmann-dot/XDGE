@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 /**
  * MarqueeIdle — stops the auto-scrolling strips while they are off-screen.
  *
- * The marquees (`.xdge-footer-marquee`, `.xg-leave-marquee`) are `animation:
+ * The marquees (`.xdge-marquee`, `.xdge-footer-marquee`) are `animation:
  * xdge-marquee … linear infinite` plus a standing `will-change: transform`. That
  * combination never stops: the footer strip sits at the bottom of every page and
- * the WHAT YOU LEAVE WITH strip mid-Home, and both keep a promoted compositor
- * layer alive and a compositor animation ticking for the whole session — including
- * while the visitor is thousands of pixels away and cannot see either of them.
+ * keeps a promoted compositor layer alive and a compositor animation ticking for
+ * the whole session — including while the visitor is thousands of pixels away and
+ * cannot see it.
  *
  * CSS alone cannot express "pause when out of view", so an IntersectionObserver
  * toggles `.xg-mq-idle`, which pauses the animation and releases `will-change`.
@@ -21,7 +21,7 @@ import { useEffect } from 'react';
  * for invisible content are still worth not paying for, particularly on hardware
  * with less GPU memory headroom than the test machine.
  */
-const MARQUEES = '.xdge-marquee, .xdge-footer-marquee, .xg-leave-marquee';
+const MARQUEES = '.xdge-marquee, .xdge-footer-marquee';
 
 export function MarqueeIdle() {
   useEffect(() => {

@@ -54,27 +54,13 @@ export function Hero() {
         alignItems: 'flex-end',
       }}>
         <Reveal style={{ width: '100%' }}>
-          <h3 style={{
-            fontSize: 'clamp(20px, 2.2vw, 28px)',
-            lineHeight: 1.25,
-            margin: 0,
-            fontFamily: theme.body,
-            color: theme.base,
-            fontWeight: 600,
-          }}>
+          <h3 className="xg-hero-standout-headline">
             Career. University. School. You Need A Standout Factor
           </h3>
         </Reveal>
 
         <Reveal style={{ width: '100%' }}>
-          <p style={{
-            fontSize: 'clamp(20px, 2.2vw, 28px)',
-            lineHeight: 1.25,
-            margin: '10px 0 0',
-            fontFamily: theme.body,
-            color: theme.base,
-            fontWeight: 600,
-          }}>
+          <p className="xg-hero-standout-subline">
             <strong style={{ fontWeight: 700 }}>The XDGE</strong> Gives You the{' '}
             <strong style={{ fontWeight: 700 }}>Leadership Advantage</strong> to Get In &amp; Go Further{' '}
             | Ages 11&ndash;24+

@@ -936,6 +936,33 @@ section[data-screen-label] {
   line-height: 1.35;
 }
 
+/* Home hero — copy above divider line */
+.xg-hero-standout-headline {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(15px, 1.65vw, 21px);
+  line-height: 1.25;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.xg-hero-standout-subline {
+  margin: 10px 0 0;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(12px, 1.3vw, 16px);
+  line-height: 1.25;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+@media (min-width: 769px) {
+  section[data-screen-label="01 Hero"] .xg-hero-copy {
+    max-width: min(920px, 94vw) !important;
+  }
+}
+
 @media (max-width: 768px) {
   section[data-screen-label="01 Hero"].xg-home-hero {
     min-height: auto !important;
@@ -955,6 +982,13 @@ section[data-screen-label] {
 
   section[data-screen-label="01 Hero"] .xg-hero-standout-headline {
     max-width: none !important;
+    white-space: normal;
+    font-size: clamp(15px, 3.8vw, 20px);
+  }
+
+  section[data-screen-label="01 Hero"] .xg-hero-standout-subline {
+    white-space: normal;
+    font-size: clamp(15px, 3.8vw, 20px);
   }
 }
 
@@ -1054,74 +1088,197 @@ section[data-screen-label] {
   }
 }
 
-/* Journey stepper — arched curve on desktop, vertical timeline on mobile */
-.xg-journey-track {
+/* Journey stepper — milestone timeline. Centre rail on desktop with cards
+   alternating either side of it; on mobile the rail slides to the left edge and
+   every card sits to its right. */
+.xg-tl {
   position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
+  /* The rail is drawn against this, and `--xg-tl-rail-x` is the single place
+     the desktop/mobile difference lives — nodes and card gutters all read it,
+     so moving the rail cannot leave the nodes behind. */
+  --xg-tl-rail-x: 50%;
 }
 
-.xg-journey-curve-area {
-  position: relative;
-  height: clamp(180px, 22vw, 260px);
-}
-
-.xg-journey-curve {
+/* Starts level with the first node — the same offset the nodes use — and the
+   tail below the last node is masked off, since there is no way to know that
+   card's height in CSS and a line running past the final milestone reads as an
+   unfinished journey. */
+.xg-tl-rail {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: clamp(28px, 3vw, 40px);
+  bottom: 0;
+  left: var(--xg-tl-rail-x);
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.14);
   pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%);
 }
 
-.xg-journey-circles {
+.xg-tl-rail-fill {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: stretch;
+  display: block;
+  background: linear-gradient(to bottom, #20e3e8 0%, #2484ff 60%, #2146e8 100%);
+  /* Driven by scroll position from the component. scaleY on a 2px-wide element
+     is compositor-only, so tying it to scroll costs nothing per frame — the
+     alternative, animating height, would relayout the section on every tick. */
+  transform-origin: top;
 }
 
-.xg-journey-circle-cell {
-  flex: 1;
+.xg-tl-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.xg-tl-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: clamp(44px, 6vw, 96px);
+}
+
+/* Cards interlock rather than stack: each one starts before the previous has
+   finished, which is what makes the column read as a single zigzag path instead
+   of six separate rows. Safe because neighbours are always on opposite sides —
+   the nearest same-side card is two items away. */
+.xg-tl-item + .xg-tl-item {
+  margin-top: clamp(-72px, -5vw, -32px);
+}
+
+.xg-tl-item[data-side='left'] .xg-tl-card {
+  grid-column: 1;
+}
+
+.xg-tl-item[data-side='right'] .xg-tl-card {
+  grid-column: 2;
+}
+
+.xg-tl-node {
+  position: absolute;
+  top: clamp(28px, 3vw, 40px);
+  left: var(--xg-tl-rail-x);
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: #0a0a0a;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  z-index: 2;
+  transition:
+    border-color 0.45s var(--xg-ease-hover),
+    background 0.45s var(--xg-ease-hover),
+    box-shadow 0.45s var(--xg-ease-hover);
+}
+
+.xg-tl-node[data-reached] {
+  background: #20e3e8;
+  border-color: #20e3e8;
+  box-shadow: 0 0 0 5px rgba(32, 227, 232, 0.14), 0 0 18px rgba(32, 227, 232, 0.5);
+}
+
+.xg-tl-card {
+  position: relative;
+  padding: clamp(22px, 2.4vw, 32px);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.055) 0%, rgba(255, 255, 255, 0.015) 100%);
+  transition:
+    transform 0.45s var(--xg-ease-hover),
+    border-color 0.45s var(--xg-ease-hover);
+}
+
+@media (hover: hover) {
+  .xg-tl-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(32, 227, 232, 0.42);
+  }
+}
+
+.xg-tl-card-top {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: clamp(16px, 1.8vw, 22px);
+}
+
+.xg-tl-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
-  min-width: 0;
+  color: #ffffff;
+  flex-shrink: 0;
 }
 
-.xg-journey-labels {
-  display: flex;
-  margin-top: clamp(20px, 3vw, 36px);
-  gap: clamp(8px, 1vw, 14px);
+.xg-tl-num {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(34px, 3.6vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.16);
 }
 
-.xg-journey-label-cell {
-  flex: 1;
-  text-align: left;
-  padding: clamp(14px, 1.4vw, 18px) 4px 0;
-  min-width: 0;
-  border-top: 1px solid rgba(248, 248, 248, 0.18);
+/* Scoped through `.xg-tl` purely to outweigh the global
+   `section:not([Hero]) h3 { line-height: var(--xdge-heading-line-height) }`,
+   which is 0.75. That value is meant for the huge single-word display headings;
+   on a two-line card title it drags the second line up into the first and the
+   caps get shaved. A bare `.xg-tl-title` loses to it on specificity. */
+.xg-tl .xg-tl-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 700;
+  font-size: clamp(15px, 1.5vw, 19px);
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 10px;
 }
 
-.xg-journey-mobile {
-  display: none;
+.xg-tl-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(13px, 1.15vw, 14px);
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
 }
 
-@media (max-width: 768px) {
-
-  .xg-journey-curve-area,
-  .xg-journey-labels {
-    display: none;
+@media (max-width: 900px) {
+  .xg-tl {
+    --xg-tl-rail-x: 9px;
   }
 
-  .xg-journey-mobile {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
+  .xg-tl-item {
+    grid-template-columns: 1fr;
+    padding-left: clamp(34px, 7vw, 52px);
   }
 
-  .xg-journey-mobile-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
+  /* The zigzag has nothing to zig against once every card is on one side, so
+     the interlock has to go or the cards simply overlap each other. */
+  .xg-tl-item + .xg-tl-item {
+    margin-top: clamp(16px, 3vw, 24px);
+  }
+
+  .xg-tl-item[data-side='left'] .xg-tl-card,
+  .xg-tl-item[data-side='right'] .xg-tl-card {
+    grid-column: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xg-tl-card,
+  .xg-tl-node {
+    transition: none;
   }
 }
 
@@ -1188,8 +1345,7 @@ section[data-screen-label] {
    two-copies trick only works when that width is the content width, so -50%
    lands exactly one copy along. Without it the element was constrained to its
    parent: measured 1440px wide against copies of 3072px each, so the strip
-   travelled 720px and snapped back — it never completed a loop.
-   `.xg-leave-marquee` sets this inline; this one had been missed. */
+   travelled 720px and snapped back — it never completed a loop. */
 /* 90s, not 35s. Duration here is not a speed on its own — it is the time to cross
    one copy, and one copy is ~3072px at this font size, so 35s worked out to ~88px/s.
    That only looked calm while the loop was broken and the strip was snapping back
@@ -1219,15 +1375,118 @@ section[data-screen-label] {
   color: #ffffff;
 }
 
-/* What You Leave With — image cards auto-scroll continuously like the footer
-   strip. Two copies + translate 0 → -50% = seamless infinite loop. */
-.xg-leave-marquee {
-  animation: xdge-marquee 32s linear infinite;
-  will-change: transform;
+/* What You Leave With — focus slice carousel. One artefact open, the other six
+   held as narrow slivers beside it; hover or click opens one and closes the
+   last.
+
+   The open/closed size is carried by `flex-grow`, not `width`. Widths would
+   have to be hard numbers (or percentages that stop adding up once the gaps
+   are in), and this strip has to hold seven items across everything from 769px
+   to 2560px. With `flex-basis: 0` the grow factors ARE the ratio, so the split
+   is correct at every width and stays correct if items are added or removed. */
+.xg-fs-row {
+  display: flex;
+  gap: clamp(6px, 0.7vw, 12px);
+  align-items: stretch;
+  height: clamp(340px, 42vw, 560px);
+  padding: 0 clamp(20px, 4vw, 40px);
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
-.xg-leave-marquee:hover {
-  animation-play-state: paused;
+.xg-fs-slice {
+  position: relative;
+  flex: 1 1 0%;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: clamp(40px, 4vw, 72px);
+  overflow: hidden;
+  background: #0a0a0a;
+  cursor: pointer;
+  appearance: none;
+  /* `flex-grow` is not a compositor property, so this is a layout animation on
+     seven siblings. Affordable because it runs once per interaction rather than
+     per scroll frame, and nothing inside a slice moves independently. */
+  transition:
+    flex-grow 0.72s var(--xg-ease-hover),
+    border-radius 0.72s var(--xg-ease-hover);
+}
+
+/* Grow 6, not 10. The source art is square (4750x4750 document mockups), and 6
+   against six slivers makes the open panel almost exactly square at this
+   height — so `cover` crops next to nothing and the whole artefact stays
+   readable. A wider panel would slice the top and bottom off a document that
+   is the entire point of the card. Retune if the images stop being square. */
+.xg-fs-slice[data-active] {
+  flex-grow: 6;
+  border-radius: clamp(18px, 1.6vw, 26px);
+}
+
+.xg-fs-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: 50% 50%;
+  filter: brightness(0.5) saturate(0.75);
+  transform: scale(1.04);
+  transition:
+    filter 0.72s var(--xg-ease-hover),
+    transform 0.72s var(--xg-ease-hover);
+}
+
+.xg-fs-slice[data-active] .xg-fs-img {
+  filter: none;
+  transform: none;
+}
+
+@media (hover: hover) {
+  .xg-fs-slice:not([data-active]):hover .xg-fs-img {
+    filter: brightness(0.78) saturate(0.9);
+  }
+}
+
+/* Seven slivers across a phone would be ~40px each, which is texture rather
+   than content — and these artefacts are documents that have to be readable.
+   Below 768px the strip becomes a swipeable rail of full square cards and
+   selection stops changing anything's width. */
+@media (max-width: 768px) {
+  .xg-fs-row {
+    height: auto;
+    align-items: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 12px;
+  }
+
+  .xg-fs-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .xg-fs-slice,
+  .xg-fs-slice[data-active] {
+    flex: 0 0 78vw;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    scroll-snap-align: center;
+    border-radius: 18px;
+  }
+
+  .xg-fs-slice .xg-fs-img {
+    filter: none;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xg-fs-slice,
+  .xg-fs-img {
+    transition: none;
+  }
 }
 
 /* Applied by MarqueeIdle while a strip is off-screen: stops the infinite
@@ -1843,6 +2102,22 @@ section[data-screen-label] {
   padding-top: clamp(24px, 4vw, 48px) !important;
 }
 
+/* This heading is ONE line, so the global 0.75 buys nothing here — that value
+   exists to close the gap between stacked lines, and there is no second line to
+   close a gap against. What it does cost is a line box shorter than the glyphs
+   in it, which leaves the cap-tops hanging above the box where any clipping
+   ancestor shaves them: the section itself clips (`overflow: hidden`, for the
+   card hover zoom) and so does the absolutely-positioned cyan overlay, whose
+   `clip-path` is resolved against that same short box and was cutting the top of
+   the S. 0.95 contains the glyph, so nothing has anything to shave. */
+[data-screen-label='05 Who We Serve'] h2,
+[data-screen-label='05 Who We Serve'] h2 > span[class*='-clip'] > span[data-no-reveal],
+[data-screen-label='05 Who We Serve'] .xdge-whos-line,
+[data-screen-label='05 Who We Serve'] .xdge-whos-solid,
+[data-screen-label='05 Who We Serve'] .xdge-whos-hollow {
+  line-height: 0.95;
+}
+
 /* What You Leave With — solid top + hollow bottom (Heading Set 1 PNG ref). */
 .xdge-leave-with-clip {
   width: fit-content;
@@ -2041,6 +2316,22 @@ h3 > span[class*='-clip'] > span[data-no-reveal] {
   line-height: var(--xdge-heading-line-height);
 }
 
+/* Only the clip span is allowed to clip — it is the one that owns the mask
+   reveal and carries slack for it. At line-height 0.75 the caps sit above their
+   line box, so any OTHER hidden overflow in the chain shaves them, and the
+   heading element and the moving span are both in that chain. */
+h1[data-no-reveal],
+h2[data-no-reveal],
+h3[data-no-reveal] {
+  overflow: visible;
+}
+
+h1 > span[class*='-clip'] > span[data-no-reveal],
+h2 > span[class*='-clip'] > span[data-no-reveal],
+h3 > span[class*='-clip'] > span[data-no-reveal] {
+  overflow: visible;
+}
+
 section:not([data-screen-label*='Hero']) h1,
 section:not([data-screen-label*='Hero']) h2,
 section:not([data-screen-label*='Hero']) h3 {
@@ -2130,7 +2421,7 @@ section:not([data-screen-label*='Hero']) h3 {
   white-space: nowrap;
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
-  font-size: 0.72em;
+  font-size: 0.88em;
   text-transform: uppercase;
   letter-spacing: -0.03em;
   line-height: var(--xdge-heading-line-height);
@@ -2161,7 +2452,7 @@ section:not([data-screen-label*='Hero']) h3 {
 
 [data-screen-label='Is This Right For Me'] h2 {
   line-height: var(--xdge-heading-line-height);
-  font-size: clamp(42px, 7.8vw, 108px);
+  font-size: clamp(40px, 11.3vw, 150px);
 }
 
 /* Insights — hollow section title (Heading Set 1 PNG ref). */
@@ -2689,20 +2980,13 @@ section:not([data-screen-label*='Hero']) h3 {
   box-sizing: content-box;
 }
 
-.xdge-how-will-stack {
-  display: block;
-  white-space: nowrap;
-  width: fit-content;
-  max-width: 100%;
-  line-height: var(--xdge-heading-line-height);
-}
-
 .xdge-how-will-top-text {
-  display: inline;
+  display: block;
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.035em;
+  word-spacing: -0.02em;
   line-height: var(--xdge-heading-line-height);
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
@@ -2711,8 +2995,12 @@ section:not([data-screen-label*='Hero']) h3 {
   paint-order: stroke fill;
 }
 
+.xdge-how-will-you {
+  margin-left: 0.02em;
+}
+
 .xdge-how-will-bottom {
-  display: inline;
+  display: block;
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
@@ -2724,7 +3012,12 @@ section:not([data-screen-label*='Hero']) h3 {
 
 [data-screen-label='Drag Wheel Carousel'] h2 {
   line-height: var(--xdge-heading-line-height);
-  font-size: clamp(42px, 7.8vw, 108px);
+  font-size: clamp(40px, 11.3vw, 150px);
+}
+
+/* Both lines are full size — use a lighter stack gap than the global -0.38em */
+[data-screen-label='Drag Wheel Carousel'] h2 > span[class*='-clip'] + span[class*='-clip'] {
+  margin-top: -0.12em;
 }
 
 [data-screen-label='Step Into Your Next Level'] h2 {
@@ -3743,16 +4036,16 @@ section[data-screen-label="Proven Outcomes"] {
   }
 
   [data-screen-label='Is This Right For Me'] h2 {
-    font-size: clamp(38px, 7.2vw, 72px) !important;
+    font-size: clamp(48px, 12vw, 100px) !important;
     line-height: var(--xdge-heading-line-height) !important;
   }
 
   [data-screen-label='Is This Right For Me'] .xdge-right-for-me-kicker {
-    font-size: 0.78em;
+    font-size: 0.9em;
   }
 
   [data-screen-label='Drag Wheel Carousel'] h2 {
-    font-size: clamp(38px, 7.2vw, 72px) !important;
+    font-size: clamp(48px, 12vw, 100px) !important;
     line-height: var(--xdge-heading-line-height) !important;
   }
 
@@ -3822,7 +4115,6 @@ section[data-screen-label="Proven Outcomes"] {
   .xg-whos-heading-wrap {
     justify-content: center !important;
     text-align: center !important;
-    padding-top: 0 !important;
     padding-bottom: clamp(8px, 2vw, 12px) !important;
   }
 
@@ -4012,10 +4304,6 @@ section[data-screen-label="Proven Outcomes"] {
     object-fit: cover;
   }
 
-  .xg-leave-marquee .xg-glass-solid {
-    width: clamp(200px, 62vw, 280px) !important;
-  }
-
   .xg-page .xg-2,
   .xg-page .xg-3 {
     gap: clamp(24px, 4vw, 32px) !important;
@@ -4113,12 +4401,12 @@ section[data-screen-label="Proven Outcomes"] {
   }
 
   [data-screen-label='Is This Right For Me'] h2 {
-    font-size: clamp(32px, 6.8vw, 58px) !important;
+    font-size: clamp(40px, 10vw, 80px) !important;
     line-height: var(--xdge-heading-line-height) !important;
   }
 
   [data-screen-label='Drag Wheel Carousel'] h2 {
-    font-size: clamp(32px, 6.8vw, 58px) !important;
+    font-size: clamp(40px, 10vw, 80px) !important;
     line-height: var(--xdge-heading-line-height) !important;
   }
 
@@ -4231,12 +4519,12 @@ section[data-screen-label="Proven Outcomes"] {
   }
 
   [data-screen-label='Is This Right For Me'] h2 {
-    font-size: clamp(38px, 7.2vw, 72px) !important;
+    font-size: clamp(48px, 12vw, 100px) !important;
     line-height: var(--xdge-heading-line-height) !important;
   }
 
   [data-screen-label='Is This Right For Me'] .xdge-right-for-me-kicker {
-    font-size: 0.78em;
+    font-size: 0.9em;
   }
 
   .xg-page .xg-experience-page [data-screen-label='01 Experience Hero'] h1,
@@ -4382,7 +4670,7 @@ section[data-screen-label="Proven Outcomes"] {
 
   .xg-page .xg-experience-page [data-screen-label='Is This Right For Me'] h2,
   .xg-experience-page [data-screen-label='Is This Right For Me'] h2 {
-    font-size: clamp(32px, 6.8vw, 58px) !important;
+    font-size: clamp(40px, 10vw, 80px) !important;
     line-height: var(--xdge-heading-line-height) !important;
   }
 
@@ -5348,6 +5636,45 @@ section[data-screen-label="Proven Outcomes"] {
   font-size: clamp(16px, 1.6vw, 18px);
   line-height: 1.7;
   color: #333333;
+}
+
+/* ── Section rhythm ─────────────────────────────────────────────────────────
+   One vertical scale for every content section, so the gap between any two of
+   them is the same. Each section used to set its own padding in an inline
+   `style` prop and they had drifted to nine different values: the gap between
+   Proven Outcomes and Insights measured 320px against 176px between Insights
+   and the closing CTA, which is what reads as "no rhythm" while scrolling
+   rather than any single gap being wrong.
+
+   `!important` is load-bearing. The values being replaced are inline styles, so
+   nothing in a stylesheet beats them otherwise, and this block sits last so it
+   also wins over the earlier per-section `!important` tightenings that were
+   added one at a time for the same complaint.
+
+   VERTICAL ONLY, deliberately. The drag wheel and the leave-with marquee both
+   run their rails edge-to-edge with `padding: … 0`, so setting the horizontal
+   axis here would inset them and break the bleed. */
+:root {
+  --xg-section-y: clamp(56px, 6.5vw, 88px);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --xg-section-y: clamp(44px, 9vw, 64px);
+  }
+}
+
+.xg-page section[data-section-theme]:not([data-screen-label*='Hero']),
+.xg-page .xg-stick-wrap > section[data-section-theme]:not([data-screen-label*='Hero']) {
+  padding-top: var(--xg-section-y) !important;
+  padding-bottom: var(--xg-section-y) !important;
+}
+
+/* Capability and the formula below it are one argument, not two sections — the
+   reader is meant to run straight from the claim into the diagram. */
+.xg-page [data-screen-label='Capability Built Inside Out'] + .xg-perf-formula-section,
+.xg-page [data-screen-label='Capability Built Inside Out'] + section[data-screen-label='Our Performance Formula'] {
+  padding-top: clamp(24px, 3vw, 40px) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

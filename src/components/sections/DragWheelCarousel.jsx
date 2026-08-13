@@ -218,12 +218,13 @@ export function DragWheelCarousel() {
       <div style={{ marginBottom: 60, position: 'relative', zIndex: 10, padding: '0 clamp(20px, 4vw, 40px)' }}>
         <SplitHeading
           lines={[
-            <span className="xdge-how-will-stack">
-              <span className="xdge-how-will-top-text">HOW WILL YOU </span>
-              <span className="xdge-how-will-bottom">STAND OUT?</span>
-            </span>,
+            <span className="xdge-how-will-top-text">HOW WILL<span className="xdge-how-will-you">YOU</span></span>,
+            <span className="xdge-how-will-bottom">STAND OUT?</span>,
           ]}
-          lineClipClasses={['xdge-clip-tight-y xdge-how-will-clip']}
+          lineClipClasses={[
+            'xdge-clip-tight-y xdge-how-will-clip',
+            'xdge-clip-tight-y xdge-how-will-clip',
+          ]}
           style={{
             fontFamily: theme.displayCondensed,
             lineHeight: 0.75,

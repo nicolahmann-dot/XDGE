@@ -1,5 +1,5 @@
-import { useRef, useEffect } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView, useReducedMotion, useScroll, useSpring } from 'framer-motion';
 import { theme, fadeUp } from '../../theme';
 import { Group } from '../primitives/Reveal';
 import { SplitHeading } from '../primitives/SplitHeading';
@@ -61,49 +61,98 @@ const steps = [
     title: 'Select Your Path',
     line1: 'Together, we explore your interests, ambitions, strengths, and future goals.',
     icon: Icons.Search,
-    offset: 152,
   },
   {
     n: '02',
     title: 'Build Your Inner Leadership',
     line1: 'During the first 4–5 weeks, you build self-awareness, confidence, and resilience.',
     icon: Icons.Bulb,
-    offset: 78,
   },
   {
     n: '03',
     title: 'Develop Your Professional Skillset',
     line1: 'You develop the communication, professional, and leadership skills.',
     icon: Icons.Briefcase,
-    offset: 30,
   },
   {
     n: '04',
     title: 'Lead A Real-World Project',
     line1: 'Put leadership into practice by taking your project from idea to implementation.',
     icon: Icons.Flag,
-    offset: 30,
   },
   {
     n: '05',
     title: 'Build Your Leadership Portfolio',
     line1: 'Create a professional portfolio that showcases your project, achievements, and journey.',
     icon: Icons.Clipboard,
-    offset: 78,
   },
   {
     n: '06',
     title: 'Present Your Impact',
     line1: 'Showcase your project to a panel of leaders and prepare for interviews.',
     icon: Icons.Trophy,
-    offset: 152,
   },
 ];
 
 const fadeEase = [0.22, 1, 0.36, 1];
 
+// Cards must arrive one at a time as the reader scrolls, so the trigger is a
+// LINE partway up the viewport rather than "is it on screen at all". With a
+// plain visibility test the whole section enters at once on a tall display and
+// three or four cards fire together, which is the opposite of a timeline.
+// Discounting the bottom 30% means a card only animates once it has climbed
+// past that line, and the interlocked spacing then hands them over in turn.
+const CARD_VIEWPORT = { once: true, amount: 0.25, margin: '0px 0px -30% 0px' };
+
+function Milestone({ step, index }) {
+  const ref = useRef(null);
+  const reduced = useReducedMotion();
+  // Node lights on the same line as its card and stays lit — a node that
+  // re-dims on scroll-up reads as the timeline un-happening.
+  const reached = useInView(ref, CARD_VIEWPORT);
+  const side = index % 2 === 0 ? 'left' : 'right';
+
+  // `li` is one of the CSS reveal engine's units, so without `data-no-reveal`
+  // the item would fade in under CSS while the card inside it slides in under
+  // framer — two curves on the same content.
+  return (
+    <li ref={ref} data-no-reveal className="xg-tl-item" data-side={side}>
+      <span className="xg-tl-node" data-reached={reached || undefined} aria-hidden="true" />
+
+      <motion.article
+        data-no-reveal
+        className="xg-tl-card"
+        initial="hidden"
+        whileInView="visible"
+        viewport={CARD_VIEWPORT}
+        variants={{
+          hidden: { opacity: 0, x: reduced ? 0 : (side === 'left' ? -32 : 32), y: reduced ? 0 : 28 },
+          visible: { opacity: 1, x: 0, y: 0, transition: { duration: 0.7, ease: fadeEase } },
+        }}
+      >
+        <div className="xg-tl-card-top">
+          <span className="xg-tl-icon">{step.icon}</span>
+          <span className="xg-tl-num" aria-hidden="true">{step.n}</span>
+        </div>
+        <h3 className="xg-tl-title">{step.title}</h3>
+        <p className="xg-tl-desc">{step.line1}</p>
+      </motion.article>
+    </li>
+  );
+}
 
 export function TheJourney() {
+  const trackRef = useRef(null);
+
+  // The rail fills against scroll position rather than a one-shot reveal, so the
+  // line is always exactly as far along as the reader is. Ends at "end 70%" so
+  // it completes on the last card rather than after the section has left.
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ['start 72%', 'end 70%'],
+  });
+  const fill = useSpring(scrollYProgress, { stiffness: 90, damping: 26, mass: 0.4 });
+
   return (
     <section
       data-screen-label="The Journey"
@@ -158,150 +207,22 @@ export function TheJourney() {
           </motion.div>
         </Group>
 
-        <div className="xg-journey-track">
-          {/* Curve area: the line DRAWS first, then the icons pop in one-by-one */}
-          <motion.div
-            className="xg-journey-curve-area"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <svg
-              className="xg-journey-curve"
-              viewBox="0 0 1200 220"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <motion.path
-                d="M 100 180 C 320 30 880 30 1100 180"
-                stroke="rgba(255,255,255,0.45)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                fill="none"
-                variants={{
-                  hidden: { pathLength: 0, opacity: 0 },
-                  visible: { pathLength: 1, opacity: 1, transition: { duration: 2.4, ease: fadeEase, delay: 0.1 } },
-                }}
-              />
-              <motion.path
-                d="M 1090 172 L 1108 180 L 1090 188"
-                stroke="rgba(255,255,255,0.55)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                fill="none"
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: { opacity: 1, transition: { duration: 0.6, delay: 2.3 } },
-                }}
-              />
-            </svg>
-
-            {/* icons start after the line finishes drawing, then stagger in */}
-            <motion.div
-              className="xg-journey-circles"
-              variants={{
-                hidden: {},
-                visible: { transition: { delayChildren: 2.5, staggerChildren: 0.13 } },
-              }}
-            >
-              {steps.map((s, i) => (
-                <motion.div
-                  key={i}
-                  className="xg-journey-circle-cell"
-                  style={{ paddingTop: s.offset }}
-                  variants={{
-                    hidden: { opacity: 0, y: 16 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: fadeEase } },
-                  }}
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.15, borderColor: theme.accent, boxShadow: `0 0 20px rgba(32, 227, 232, 0.3)` }}
-                    transition={{ duration: 0.3 }}
-                    style={{
-                      width: 56, height: 56, borderRadius: '50%',
-                      background: theme.dark,
-                      border: `1px solid ${theme.base}`,
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: theme.base,
-                      flexShrink: 0,
-                      boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
-                    }}>
-                    {s.icon}
-                  </motion.div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          <div className="xg-journey-labels">
-            {steps.map((s) => (
-              <div key={s.n} className="xg-journey-label-cell">
-                <div style={{
-                  fontFamily: theme.display, fontWeight: 900,
-                  fontSize: 'clamp(22px, 2.2vw, 30px)',
-                  lineHeight: 1, letterSpacing: '-0.01em',
-                  color: theme.base,
-                  marginBottom: 10,
-                }}>{s.n}</div>
-                <h3 style={{
-                  fontFamily: theme.display, fontWeight: 700,
-                  fontSize: 'clamp(13px, 1.25vw, 16px)',
-                  lineHeight: 1.18, letterSpacing: '-0.005em',
-                  margin: '0 0 10px',
-                  textTransform: 'uppercase',
-                  color: theme.base,
-                }}>{s.title}</h3>
-                <p style={{
-                  fontSize: 'clamp(11px, 1vw, 12px)',
-                  lineHeight: 1.5,
-                  margin: 0,
-                  color: theme.base,
-                  fontWeight: 500,
-                }}>{s.line1}</p>
-              </div>
-            ))}
+        {/* One DOM for both breakpoints: the rail moves from centre to the left
+            edge in CSS and every card lands on the right of it, so there is no
+            second copy of the six steps to keep in sync. */}
+        <div className="xg-tl" ref={trackRef}>
+          <div className="xg-tl-rail" aria-hidden="true">
+            <motion.span
+              className="xg-tl-rail-fill"
+              style={{ scaleY: fill }}
+            />
           </div>
 
-          <Group className="xg-journey-mobile">
-            {steps.map((s) => (
-              <div
-                key={s.n}
-                data-reveal
-                className="xg-journey-mobile-step"
-              >
-                <div style={{
-                  width: 52, height: 52, borderRadius: '50%',
-                  background: theme.dark,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: theme.base,
-                  flexShrink: 0,
-                }}>
-                  {s.icon}
-                </div>
-                <div>
-                  <div style={{
-                    fontFamily: theme.display, fontWeight: 900,
-                    fontSize: 22, lineHeight: 1, letterSpacing: '-0.01em',
-                    color: theme.base,
-                    marginBottom: 6,
-                  }}>{s.n}</div>
-                  <h3 style={{
-                    fontFamily: theme.display, fontWeight: 700,
-                    fontSize: 17, lineHeight: 1.2, letterSpacing: '-0.005em',
-                    margin: '0 0 8px',
-                    textTransform: 'uppercase',
-                    color: theme.base,
-                  }}>{s.title}</h3>
-                  <p style={{
-                    fontSize: 13, lineHeight: 1.5,
-                    margin: 0,
-                    color: theme.base,
-                    fontWeight: 500,
-                  }}>{s.line1}</p>
-                </div>
-              </div>
+          <ol className="xg-tl-list">
+            {steps.map((s, i) => (
+              <Milestone key={s.n} step={s} index={i} />
             ))}
-          </Group>
+          </ol>
         </div>
       </div>
     </section>
