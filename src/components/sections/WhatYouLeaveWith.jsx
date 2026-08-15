@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { theme } from '../../theme';
 import { mobileSrc } from '../../utils/mobileSrc';
 import { SplitHeading } from '../primitives/SplitHeading';
@@ -41,9 +42,15 @@ const items = [
   },
 ];
 
-function Slice({ item, isActive, onSelect }) {
+function Slice({ item, index, isActive, onSelect, entered }) {
   return (
-    <button
+    // The open/closed width is CSS: `flex-grow` on the element, transitioned by
+    // the stylesheet. Framer only carries the entrance fade here — its layout
+    // animation was tried first and the widths still changed in one frame,
+    // whereas a CSS transition on flex-grow is something the browser is
+    // guaranteed to interpolate, and it retargets from its current value when
+    // the pointer moves to the next slice mid-slide.
+    <motion.button
       type="button"
       className="xg-fs-slice"
       data-active={isActive || undefined}
@@ -52,6 +59,9 @@ function Slice({ item, isActive, onSelect }) {
       onClick={onSelect}
       onMouseEnter={onSelect}
       onFocus={onSelect}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: entered ? 1 : 0 }}
+      transition={{ duration: 0.5, delay: entered ? index * 0.07 : 0, ease: 'easeOut' }}
     >
       <picture>
         {mobileSrc(item.img) && (
@@ -65,12 +75,32 @@ function Slice({ item, isActive, onSelect }) {
           loading="lazy"
         />
       </picture>
-    </button>
+    </motion.button>
   );
 }
 
 export function WhatYouLeaveWith() {
-  const [active, setActive] = useState(0);
+  // Starts with nothing open, so all seven sit as equal columns. The strip then
+  // opens the first one itself once it is on screen — the section introduces its
+  // own mechanic instead of arriving already in its resting state.
+  const [active, setActive] = useState(null);
+  // Set the moment the pointer picks a slice, so the opening timer below cannot
+  // fire afterwards and drag the strip back to the first panel while someone is
+  // already hovering their way along it.
+  const touched = useRef(false);
+  const rowRef = useRef(null);
+  const entered = useInView(rowRef, { once: true, amount: 0.3 });
+  const reduced = useReducedMotion();
+
+  useEffect(() => {
+    if (!entered) return undefined;
+    // After the columns have faded in, not with them: the expand has to be the
+    // thing you watch, and it is invisible under seven simultaneous fades.
+    const t = setTimeout(() => {
+      if (!touched.current) setActive(0);
+    }, reduced ? 0 : 620);
+    return () => clearTimeout(t);
+  }, [entered, reduced]);
 
   return (
     <section
@@ -110,13 +140,18 @@ export function WhatYouLeaveWith() {
           images, which flattens the whole subtree into a single composited
           layer and forces every image to decode for it. The slices carry their
           own interaction instead. */}
-      <div className="xg-fs-row" data-no-reveal>
+      <div className="xg-fs-row" data-no-reveal ref={rowRef}>
         {items.map((it, i) => (
           <Slice
             key={it.img}
             item={it}
+            index={i}
             isActive={i === active}
-            onSelect={() => setActive(i)}
+            onSelect={() => {
+              touched.current = true;
+              setActive(i);
+            }}
+            entered={entered}
           />
         ))}
       </div>

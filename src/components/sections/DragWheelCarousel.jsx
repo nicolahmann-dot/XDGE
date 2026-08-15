@@ -1,211 +1,129 @@
-import { useRef } from 'react';
-import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { theme } from '../../theme';
+import { useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { theme, cardRise, cardStagger } from '../../theme';
 import { mobileSrc } from '../../utils/mobileSrc';
+import { Group, Reveal } from '../primitives/Reveal';
 import { SplitHeading } from '../primitives/SplitHeading';
 
-const items = [
-  { 
-    id: '01', 
-    title: "Business & Entrepreneurship", 
-    desc: "Start a business, launch a product, develop a service, or solve a commercial challenge.",
-    img: "/assets/1.webp" 
+// Four pathways in the order the copy sets, which is NOT the order the artwork
+// was numbered in — `img` carries each one's own file, so reordering this list
+// never desyncs the pictures from the titles.
+//
+// The images are the optimised variants built by scripts/optimize-images.mjs
+// from the source PNGs, which are 8-14MB each with spaces, commas and ampersands
+// in their names; those originals live in art-source/ and never reach the build.
+const pathways = [
+  {
+    title: 'Business & Entrepreneurship',
+    desc: 'Bring a business idea to life and learn how to lead it from concept to launch. Develop and pitch your idea, test it in the market or build a small enterprise that sets you apart as a future business leader or entrepreneur.',
+    img: '/assets/pathway-1.webp',
   },
-  { 
-    id: '02', 
-    title: "Engineering, Design & Future Technologies", 
-    desc: "Develop products, systems, prototypes, infrastructure, robotics, AI, and emerging technologies.",
-    img: "/assets/4.webp" 
+  {
+    title: 'Research, Creativity & Innovation',
+    desc: 'Question what exists and learn how to lead original thinking from enquiry to impact. Investigate an important issue or develop a creative idea, challenge assumptions and present credible work that sets you apart as a future researcher, creator or innovator.',
+    img: '/assets/pathway-4.webp',
   },
-  { 
-    id: '03', 
-    title: "Community Impact & Social Change", 
-    desc: "Lead initiatives that improve communities, wellbeing, inclusion, or social outcomes.",
-    img: "/assets/3.webp" 
+  {
+    title: 'Leadership & Social Impact',
+    desc: 'Identify what needs to change and learn how to lead an initiative from idea to impact. Influence stakeholders, unite others around a shared goal and create measurable change that sets you apart as a future leader and changemaker.',
+    img: '/assets/pathway-3.webp',
   },
-  { 
-    id: '04', 
-    title: "Media, Marketing & Creative Industries", 
-    desc: "Lead projects in content creation, branding, journalism, film, design, communications, and digital media.",
-    img: "/assets/7.webp" 
-  },
-  { 
-    id: '05', 
-    title: "Leadership, Sport & Human Performance", 
-    desc: "Develop projects around coaching, team leadership, sport, performance psychology, and personal excellence.",
-    img: "/assets/2.webp" 
-  },
-  { 
-    id: '06', 
-    title: "Law, Government & Public Affairs", 
-    desc: "Explore policy, law, governance, diplomacy, public service, and societal challenges.",
-    img: "/assets/5.webp" 
-  },
-  { 
-    id: '07', 
-    title: "Health, Medicine & Life Sciences", 
-    desc: "Explore healthcare, medicine, psychology, sport science, biotechnology, and human performance.",
-    img: "/assets/9.webp" 
-  },
-  { 
-    id: '08', 
-    title: "Culture, Fashion & Creative Enterprise", 
-    desc: "Create ventures, campaigns, products, events, or initiatives within fashion, music, arts, culture, and entertainment.",
-    img: "/assets/6.webp" 
-  },
-  { 
-    id: '09', 
-    title: "Research, Education & Knowledge Creation", 
-    desc: "Conduct original research, investigations, publications, educational resources, or academic studies.",
-    img: "/assets/8.webp" 
-  },
-  { 
-    id: '10', 
-    title: "Finance, Economics & Investment", 
-    desc: "Explore markets, investment, economics, fintech, business finance, and financial decision-making.",
-    img: "/assets/10.webp" 
+  {
+    title: 'Science & Technology',
+    desc: 'Identify a real-world need and learn how to lead a scientific or technological solution from concept to creation. Research, design and test your idea to set yourself apart as a future scientist, technologist or leader in your field.',
+    img: '/assets/pathway-2.webp',
   },
 ];
 
-function Card({ item, index, progress, total }) {
-  // Calculate difference from active center
-  const diff = useTransform(progress, (p) => index - p);
+// The reference component animates every one of these states on a single tween:
+// 0.6s, cubic-bezier(1, .06, .37, .82). Keeping one curve is what makes the fill,
+// the arrow and the image read as one movement rather than three.
+const EASE = [1, 0.06, 0.37, 0.82];
 
-  // Calculate layout on a circle
-  const radius = 1200; // Radius of the wheel
-  const anglePerItem = 14; // Degrees between each item
+// One arrow, rotated a quarter turn when the card opens — the reference does the
+// same rather than swapping in a down-arrow, so the glyph itself never blinks.
+const Arrow = (
+  <svg width="12" height="11" viewBox="0 0 12 11" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M1 5.5h9M6.2 1.6l3.9 3.9-3.9 3.9" />
+  </svg>
+);
 
-  const angle = useTransform(diff, (d) => d * anglePerItem);
-  
-  const x = useTransform(angle, (a) => radius * Math.sin((a * Math.PI) / 180));
-  const y = useTransform(angle, (a) => radius - radius * Math.cos((a * Math.PI) / 180));
-  const rotate = angle;
-  
-  const zIndex = useTransform(diff, (d) => total - Math.abs(Math.round(d)));
-  
-  // Fade out cards that are too far around the wheel
-  const opacity = useTransform(diff, [-4, -3, 0, 3, 4], [0, 0.4, 1, 0.4, 0]);
-  const scale = useTransform(diff, [-3, 0, 3], [0.8, 1, 0.8]);
-
+function Pathway({ item, index, open, onSelect, transition }) {
   return (
-    <motion.div
-      style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        width: 'clamp(240px, 25vw, 340px)',
-        aspectRatio: '3/4',
-        originX: 0.5,
-        originY: 0.5,
-        x: useTransform(x, (val) => `calc(-50% + ${val}px)`),
-        y: useTransform(y, (val) => `calc(-50% + ${val}px)`),
-        rotate,
-        zIndex,
-        opacity,
-        scale,
-      }}
-    >
-      <div style={{
-        width: '100%', height: '100%',
-        position: 'relative',
-        borderRadius: 16,
-        overflow: 'hidden',
-        boxShadow: '0 24px 48px -12px rgba(0,0,0,0.4)',
-        background: '#111',
-      }}>
-        <picture>
-          {mobileSrc(item.img) && (
-            <source media="(max-width: 768px)" srcSet={mobileSrc(item.img)} />
-          )}
-          <img
-            src={item.img}
-            alt={item.title}
-            // Ten of these decode as the section arrives; async keeps that work off
-            // the main thread so a decode can't land inside a scroll frame, and lazy
-            // stops all ten competing during initial page load.
-            decoding="async"
-            loading="lazy"
-            style={{
-              width: '100%', height: '100%',
-              objectFit: 'cover',
-              display: 'block',
-              opacity: 0.8,
-              transition: 'opacity 0.4s ease',
-            }} 
-            onMouseOver={(e) => e.currentTarget.style.opacity = 1}
-            onMouseOut={(e) => e.currentTarget.style.opacity = 0.8}
-          />
-        </picture>
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%)',
-          pointerEvents: 'none'
-        }} />
-        <div style={{
-          position: 'absolute',
-          bottom: 24, left: 24, right: 24,
-          color: theme.base
-        }}>
-          <div style={{
-            fontFamily: theme.display,
-            fontSize: 'clamp(36px, 6vw, 72px)',
-            fontWeight: 900,
-            lineHeight: 1,
-            opacity: 0.5,
-            marginBottom: 8
-          }}>
-            {item.id}
-          </div>
-          <h3 style={{
-            fontFamily: theme.displayTight,
-            fontSize: 'clamp(18px, 2vw, 24px)',
-            margin: 0,
-            lineHeight: 1.1,
-            marginBottom: item.desc ? 8 : 0
-          }}>
-            {item.title}
-          </h3>
-          {item.desc && (
-            <p style={{
-              margin: 0,
-              fontSize: 'clamp(12px, 1.3vw, 14px)',
-              lineHeight: 1.4,
-              color: 'rgba(255,255,255,0.85)'
-            }}>
-              {item.desc}
-            </p>
-          )}
-        </div>
-      </div>
+    <motion.div data-no-reveal variants={cardRise} className="xg-vt-card" data-open={open || undefined}>
+      {/* The fill is its own layer so it can grow out of the card's top edge
+          instead of the card resizing: scaling a background is free on the
+          compositor, where animating the card's own height would relayout the
+          whole column (and the image beside it) on every frame. */}
+      <motion.span
+        aria-hidden="true"
+        className="xg-vt-fill"
+        initial={false}
+        animate={{ scaleY: open ? 1 : 0, opacity: open ? 1 : 0 }}
+        transition={transition}
+      />
+
+      <button
+        type="button"
+        id={`xg-vt-tab-${index}`}
+        className="xg-vt-head"
+        aria-expanded={open}
+        aria-controls={`xg-vt-panel-${index}`}
+        onClick={onSelect}
+        data-cursor="grow"
+      >
+        <span className="xg-vt-title">{item.title}</span>
+        <span className="xg-vt-icon">
+          <motion.span className="xg-vt-arrow" initial={false} animate={{ rotate: open ? 90 : 0 }} transition={transition}>
+            {Arrow}
+          </motion.span>
+        </span>
+      </button>
+
+      {/* `data-no-reveal` because this animates itself. Without it the CSS reveal
+          engine would also claim the <p> inside and fade it on its own curve
+          while framer is animating the wrapper's height — the text judders
+          against its own panel. */}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            data-no-reveal
+            id={`xg-vt-panel-${index}`}
+            role="region"
+            aria-labelledby={`xg-vt-tab-${index}`}
+            className="xg-vt-panel"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={transition}
+            style={{ overflow: 'hidden' }}
+          >
+            <div className="xg-vt-panel-inner">
+              <p className="xg-vt-desc">{item.desc}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
 
 export function DragWheelCarousel() {
-  const containerRef = useRef(null);
+  const [active, setActive] = useState(0);
+  // Which image is on screen, tracked separately from which card is open. Closing
+  // the last card should not blank the column beside it — the reference keeps the
+  // photo of whatever you looked at last, so `shown` never goes back to null.
+  const [shown, setShown] = useState(0);
+  const reduced = useReducedMotion();
+  const transition = reduced ? { duration: 0 } : { duration: 0.6, ease: EASE };
 
-  // Any-pixel latch for the heading, matching SplitHeading's trigger geometry.
-  const headingRef = useRef(null);
-  const headingSeen = useInView(headingRef, { once: true });
-  
-  // Progress value (0 to items.length - 1)
-  const progressRaw = useMotionValue(0);
-  // Soft spring to make the transition smooth
-  const progress = useSpring(progressRaw, { stiffness: 60, damping: 20, mass: 1 });
-
-  // Handle Dragging / Swiping
-  const handleDrag = (event, info) => {
-    const delta = -info.delta.x / 200; // Adjust sensitivity
-    let next = progressRaw.get() + delta;
-    
-    // Clamp to [0, items.length - 1]
-    next = Math.max(0, Math.min(items.length - 1, next));
-    progressRaw.set(next);
+  const toggle = (i) => {
+    setActive((current) => (current === i ? null : i));
+    setShown(i);
   };
 
   return (
-    <section 
+    <section
       data-screen-label="Drag Wheel Carousel"
       data-section-theme="dark"
       style={{
@@ -215,7 +133,9 @@ export function DragWheelCarousel() {
         padding: 'clamp(80px, 9vw, 120px) 0',
       }}
     >
-      <div style={{ marginBottom: 60, position: 'relative', zIndex: 10, padding: '0 clamp(20px, 4vw, 40px)' }}>
+      {/* Same 1280 wrapper the other sections use, so the heading's left edge
+          lines up with the first card below it instead of running to the viewport. */}
+      <div style={{ maxWidth: 1280, margin: '0 auto', marginBottom: 'clamp(36px, 5vw, 60px)', position: 'relative', zIndex: 10, padding: '0 clamp(20px, 4vw, 40px)' }}>
         <SplitHeading
           lines={[
             <span className="xdge-how-will-top-text">HOW WILL<span className="xdge-how-will-you">YOU</span></span>,
@@ -233,85 +153,74 @@ export function DragWheelCarousel() {
           }}
         />
 
-        {/* Navigation Controls */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginTop: 32 }}>
-          <button
-            onClick={() => {
-              const next = Math.max(0, Math.round(progressRaw.get()) - 1);
-              progressRaw.set(next);
-            }}
-            aria-label="Previous"
-            style={{
-              background: '#ffffff',
-              border: 'none',
-              color: '#000000',
-              width: 56, height: 56, borderRadius: '50%',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', transition: 'all 0.2s',
-            }}
-          >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
-          </button>
-          <button
-            onClick={() => {
-              const next = Math.min(items.length - 1, Math.round(progressRaw.get()) + 1);
-              progressRaw.set(next);
-            }}
-            aria-label="Next"
-            style={{
-              background: '#ffffff',
-              border: 'none',
-              color: '#000000',
-              width: 56, height: 56, borderRadius: '50%',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', transition: 'all 0.2s',
-            }}
-          >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
-          </button>
+        {/* Same label + intro pairing the other sections use: a 12px tracked-out
+            uppercase line, then one paragraph at the site's body size. */}
+        <div
+          data-reveal="blur"
+          style={{
+            marginTop: 'clamp(22px, 3vw, 34px)',
+            fontSize: 12,
+            letterSpacing: '0.16em',
+            textTransform: 'uppercase',
+            color: theme.subtitle,
+            fontWeight: 600,
+          }}
+        >
+          Choose Your Project — Prove You Can Lead.
         </div>
+        <p
+          data-reveal
+          style={{
+            marginTop: 14,
+            marginBottom: 0,
+            fontSize: 'clamp(15px, 1.6vw, 17px)',
+            lineHeight: 1.55,
+            color: theme.subtitle,
+            maxWidth: 640,
+          }}
+        >
+          Have an idea, passion or cause you want to bring to life? We help you
+          shape it into a personalised project, train you in the skills to lead it
+          and mentor you through every stage.
+        </p>
       </div>
 
-      {/* Drag Surface & Cards.
-          Deliberately NOT wrapped in `data-reveal` any more. Fading the whole
-          wheel in as one block meant animating `opacity` across a container
-          holding 10 absolutely-positioned, rotated, scaled cards, each with a
-          1600px image — which forces that entire subtree to be flattened into a
-          single composited layer, and every one of those images to be decoded and
-          uploaded for it. Measured scrolling this section in at 1600px/s: a 42ms
-          compositor Commit and a 39ms image decode landing in one frame, worst
-          frame 66.8ms (a 4-frame stall). Removing the block reveal took the worst
-          frame to 17.8ms with zero dropped frames — an ablation with images
-          hidden gave the same 17.7ms, confirming the cost was compositing those
-          images together rather than anything about the cards themselves.
-          The heading above still animates, so the section is not static. */}
-      <div>
-      {/* The drag surface owns its children's transforms every frame, so the CSS
-          reveal engine must stay out of this subtree entirely. This used to be
-          matched by sniffing for `cursor: grab` in the inline style; the marker
-          is explicit now. */}
-      <motion.div
-        data-no-reveal
-        ref={containerRef}
-        drag="x"
-        dragConstraints={{ left: 0, right: 0 }} // We handle the actual movement via progressRaw
-        dragElastic={0}
-        onDrag={handleDrag}
-        style={{
-          position: 'relative',
-          height: 'clamp(400px, 60vh, 600px)',
-          width: '100%',
-          cursor: 'grab',
-          // CRITICAL FIX: touchAction: 'pan-y' allows native vertical page scrolling 
-          // while still allowing Framer Motion to intercept horizontal drags/swipes.
-          touchAction: 'pan-y' 
-        }}
-        whileTap={{ cursor: 'grabbing' }}
-      >
-        {items.map((item, i) => (
-          <Card key={item.id} item={item} index={i} progress={progress} total={items.length} />
-        ))}
-      </motion.div>
+      <div className="xg-vt">
+        <Group className="xg-vt-list" variants={cardStagger}>
+          {pathways.map((p, i) => (
+            <Pathway
+              key={p.title}
+              item={p}
+              index={i}
+              open={i === active}
+              onSelect={() => toggle(i)}
+              transition={transition}
+            />
+          ))}
+        </Group>
+
+        {/* All four stack in place and crossfade. Swapping one <img> src instead
+            would show a blank frame while the new file decodes; here the outgoing
+            image stays until the incoming one is already painted. */}
+        <Reveal className="xg-vt-media">
+          {pathways.map((p, i) => (
+            <picture key={p.img}>
+              {mobileSrc(p.img) && (
+                <source media="(max-width: 768px)" srcSet={mobileSrc(p.img)} />
+              )}
+              <motion.img
+                className="xg-vt-img"
+                src={p.img}
+                alt={p.title}
+                initial={false}
+                animate={{ opacity: i === shown ? 1 : 0, scale: i === shown ? 1 : 1.04 }}
+                transition={transition}
+                decoding="async"
+                loading="lazy"
+              />
+            </picture>
+          ))}
+        </Reveal>
       </div>
     </section>
   );

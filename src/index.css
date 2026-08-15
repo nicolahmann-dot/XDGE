@@ -1385,11 +1385,21 @@ section[data-screen-label] {
    to 2560px. With `flex-basis: 0` the grow factors ARE the ratio, so the split
    is correct at every width and stays correct if items are added or removed. */
 .xg-fs-row {
+  --xg-fs-gap: clamp(6px, 0.7vw, 12px);
+  --xg-fs-pad: clamp(20px, 4vw, 40px);
+  /* The width the open panel settles at. Six slivers at grow 1 against one panel
+     at grow 6 is twelve shares, so the panel takes half of whatever is left once
+     the six gaps are removed. Written out here because the photograph inside is
+     sized to this number rather than to its panel — see .xg-fs-img. The +2px
+     absorbs subpixel rounding and the scrollbar's absence from `100vw`, erring
+     wide so a hairline of background can never show down either edge. */
+  --xg-fs-open: calc((min(1280px, 100vw) - 2 * var(--xg-fs-pad) - 6 * var(--xg-fs-gap)) / 2 + 2px);
+
   display: flex;
-  gap: clamp(6px, 0.7vw, 12px);
+  gap: var(--xg-fs-gap);
   align-items: stretch;
   height: clamp(340px, 42vw, 560px);
-  padding: 0 clamp(20px, 4vw, 40px);
+  padding: 0 var(--xg-fs-pad);
   max-width: 1280px;
   margin: 0 auto;
 }
@@ -1406,12 +1416,12 @@ section[data-screen-label] {
   background: #0a0a0a;
   cursor: pointer;
   appearance: none;
-  /* `flex-grow` is not a compositor property, so this is a layout animation on
-     seven siblings. Affordable because it runs once per interaction rather than
-     per scroll frame, and nothing inside a slice moves independently. */
+  /* Long and decelerating, so the panel glides open instead of snapping. A CSS
+     transition is also self-interrupting: sweep the pointer along the strip and
+     each slice picks up from the width it is currently at, no restart. */
   transition:
-    flex-grow 0.72s var(--xg-ease-hover),
-    border-radius 0.72s var(--xg-ease-hover);
+    flex-grow 1.15s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 1.15s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Grow 6, not 10. The source art is square (4750x4750 document mockups), and 6
@@ -1424,22 +1434,36 @@ section[data-screen-label] {
   border-radius: clamp(18px, 1.6vw, 26px);
 }
 
+.xg-fs-slice picture {
+  display: contents;
+}
+
+/* The photograph is sized to the OPEN panel and never to its own, so the width
+   animation resizes nothing: the panel's `overflow: hidden` just reveals more of
+   an image that is already laid out and rasterised. Sizing it to the panel
+   instead (`width: 100%`) is what made the strip stutter — every frame of the
+   slide re-rastered seven full-bleed photographs at a new width.
+   Centred, so a sliver shows the middle of the artefact exactly as `cover` did. */
 .xg-fs-img {
-  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--xg-fs-open);
   height: 100%;
+  max-width: none;
   display: block;
   object-fit: cover;
   object-position: 50% 50%;
   filter: brightness(0.5) saturate(0.75);
-  transform: scale(1.04);
-  transition:
-    filter 0.72s var(--xg-ease-hover),
-    transform 0.72s var(--xg-ease-hover);
+  /* Shorter than the slide it accompanies, so the photo has finished brightening
+     while the panel is still easing out — that reads as the image coming forward,
+     where a matched duration looks like the brightness lagging the width. */
+  transition: filter 0.7s var(--xg-ease-hover);
 }
 
 .xg-fs-slice[data-active] .xg-fs-img {
   filter: none;
-  transform: none;
 }
 
 @media (hover: hover) {
@@ -1476,9 +1500,12 @@ section[data-screen-label] {
     border-radius: 18px;
   }
 
+  /* Every card is open here, so the photo goes back to filling its own panel. */
   .xg-fs-slice .xg-fs-img {
-    filter: none;
+    position: static;
+    width: 100%;
     transform: none;
+    filter: none;
   }
 }
 
@@ -3018,6 +3045,216 @@ section:not([data-screen-label*='Hero']) h3 {
 /* Both lines are full size — use a lighter stack gap than the global -0.38em */
 [data-screen-label='Drag Wheel Carousel'] h2 > span[class*='-clip'] + span[class*='-clip'] {
   margin-top: -0.12em;
+}
+
+/* ── Stand-out pathways — vertical tabs ─────────────────────────────────────
+   Modelled on the Framer "Vertical Tab" component: two equal columns 40px
+   apart, a stack of cards on the left with one open at a time, and a square
+   image beside them that crossfades with the open card. The geometry is that
+   component's — 24px card padding, 24px between cards, 10px radius, a 28px
+   round arrow button, a dashed rule over the description — with the palette
+   inverted, since the reference fills the open card with ink on a white page
+   and this section is black. */
+.xg-vt {
+  --xg-vt-ease: cubic-bezier(1, 0.06, 0.37, 0.82);
+  --xg-vt-pad-y: clamp(16px, 1.8vw, 24px);
+  --xg-vt-pad-x: clamp(12px, 1.8vw, 24px);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 3vw, 40px);
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 40px);
+  position: relative;
+  z-index: 10;
+}
+
+.xg-vt-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 1.7vw, 24px);
+}
+
+/* The hairline belongs to the CARD, not to the gap between cards, so the open
+   card can drop its own line as it fills while the run of lines above and below
+   stays unbroken. */
+.xg-vt-card {
+  position: relative;
+  border-radius: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+  transition:
+    border-color 0.6s var(--xg-vt-ease),
+    box-shadow 0.6s var(--xg-vt-ease);
+}
+
+.xg-vt-card[data-open] {
+  border-bottom-color: transparent;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Grows down out of the card's top edge. `transform-origin: top` plus a scaled
+   span is why the card can fill without the column relaying out; the 1px inset
+   ring lives on the card above instead of here, because a scaled border would
+   stretch to a different thickness mid-animation. */
+.xg-vt-fill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 10px;
+  transform-origin: top center;
+  background: linear-gradient(168deg, rgba(255, 255, 255, 0.105) 0%, rgba(255, 255, 255, 0.032) 100%);
+  pointer-events: none;
+}
+
+.xg-vt-head {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(12px, 1.4vw, 20px);
+  padding: var(--xg-vt-pad-y) var(--xg-vt-pad-x);
+  background: none;
+  border: 0;
+  appearance: none;
+  cursor: pointer;
+  text-align: left;
+  color: #ffffff;
+}
+
+.xg-vt-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: clamp(17px, 2vw, 28px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  transition: color 0.45s var(--xg-vt-ease);
+}
+
+.xg-vt-icon {
+  flex: none;
+  width: clamp(28px, 3vw, 34px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.85);
+  transition:
+    background 0.6s var(--xg-vt-ease),
+    border-color 0.6s var(--xg-vt-ease),
+    color 0.6s var(--xg-vt-ease),
+    transform 0.18s ease-out;
+}
+
+/* Press feedback on the button that carries the toggle. Scaling the ring and not
+   the arrow keeps this off the arrow's own rotation, which framer drives. */
+.xg-vt-head:active .xg-vt-icon {
+  transform: scale(0.9);
+}
+
+.xg-vt-arrow {
+  display: grid;
+  place-items: center;
+}
+
+.xg-vt-card[data-open] .xg-vt-icon {
+  background: #20e3e8;
+  border-color: #20e3e8;
+  color: #000000;
+}
+
+@media (hover: hover) {
+  .xg-vt-card:not([data-open]) .xg-vt-head:hover .xg-vt-title {
+    color: #20e3e8;
+  }
+
+  .xg-vt-card:not([data-open]) .xg-vt-head:hover .xg-vt-icon {
+    border-color: #20e3e8;
+    color: #20e3e8;
+  }
+}
+
+.xg-vt-panel {
+  position: relative;
+  z-index: 1;
+}
+
+/* The panel animates from height 0 with `overflow: hidden`, so its padding has
+   to sit on this inner box — padding on the animated element would be part of
+   the height being animated and the text would slide against its own frame. */
+.xg-vt-panel-inner {
+  padding: 0 var(--xg-vt-pad-x) var(--xg-vt-pad-y);
+}
+
+/* Spacing here is padding, never margin: a top margin would escape the clipped
+   panel and hold the closed card open by its own margin. */
+.xg-vt-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(14px, 1.35vw, 16px);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
+  padding: var(--xg-vt-pad-y) 0 0;
+  border-top: 1px dashed rgba(255, 255, 255, 0.32);
+}
+
+/* Square, because the source art is square — so `cover` crops nothing and no
+   one gets cut out of frame at the edges. Centred rather than stretched to the
+   column, so opening a card doesn't resize the photo beside it. */
+.xg-vt-media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.xg-vt-media picture {
+  display: contents;
+}
+
+.xg-vt-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: opacity, transform;
+}
+
+@media (max-width: 900px) {
+  .xg-vt {
+    grid-template-columns: 1fr;
+    gap: clamp(22px, 4vw, 32px);
+  }
+
+  /* Image above the list, so the pathway being tapped is illustrated right where
+     the thumb already is rather than in a column that no longer exists. */
+  .xg-vt-media {
+    order: -1;
+  }
+}
+
+/* The reference narrows the card's side padding to 12px on phones so the title
+   keeps as much line as possible before it wraps. */
+@media (max-width: 600px) {
+  .xg-vt {
+    --xg-vt-pad-x: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xg-vt-card,
+  .xg-vt-title,
+  .xg-vt-icon {
+    transition: none;
+  }
 }
 
 [data-screen-label='Step Into Your Next Level'] h2 {
