@@ -18,19 +18,18 @@ export function AboutHero() {
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 10 }}>
         <motion.h1
           data-no-reveal
+          className="xdge-about-us-heading"
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          style={{
-            fontFamily: theme.displayCondensed,
-            fontSize: 'clamp(40px, 11.3vw, 200px)',
-            lineHeight: 0.86,
-            margin: 0,
-            overflow: 'visible',
-          }}
         >
-          <span className="xdge-about-us-filled">ABOUT US</span>
+          <img
+            className="xdge-about-us-heading-img"
+            src="/assets/new-ABOUT-US.jpeg"
+            alt="About Us"
+            decoding="async"
+          />
         </motion.h1>
 
         <div className="xg-about-hero-copy" style={{

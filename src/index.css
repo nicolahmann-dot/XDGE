@@ -3774,6 +3774,12 @@ section:not([data-screen-label*='Hero']) h3 {
   padding-top: 0.06em;
 }
 
+[data-screen-label='About Hero'] .xdge-about-us-heading {
+  line-height: 0 !important;
+  padding-top: 0 !important;
+  font-size: 0 !important;
+}
+
 [data-screen-label='About Hero'] .xdge-about-us-filled {
   display: inline-block;
   line-height: 0.86;
@@ -3784,16 +3790,17 @@ section:not([data-screen-label*='Hero']) h3 {
 .xdge-about-us-heading {
   margin: 0;
   line-height: 0;
+  text-align: center;
+  overflow: visible;
 }
 
 .xdge-about-us-heading-img {
   display: block;
-  width: min(100%, clamp(230px, 56vw, 720px));
+  width: min(78%, 780px);
   height: auto;
-  max-height: clamp(64px, 12.5vw, 155px);
-  aspect-ratio: 1613 / 503;
+  margin: 0 auto;
   object-fit: contain;
-  object-position: left center;
+  object-position: center;
 }
 
 /* Legacy CSS heading — kept if PNG is swapped back. */
@@ -4028,8 +4035,7 @@ section[data-screen-label="Proven Outcomes"] {
   }
 
   .xg-about-page .xdge-about-us-heading-img {
-    width: min(100%, clamp(210px, 80vw, 530px));
-    max-height: clamp(56px, 15.5vw, 118px);
+    width: min(78%, 780px);
   }
 
   .xg-about-page [data-screen-label='About Hero'] {
