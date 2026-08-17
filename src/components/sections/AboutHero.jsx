@@ -26,7 +26,7 @@ export function AboutHero() {
         >
           <img
             className="xdge-about-us-heading-img"
-            src="/assets/new-ABOUT-US.jpeg"
+            src="/assets/new-about-us-1.png"
             alt="About Us"
             decoding="async"
           />
