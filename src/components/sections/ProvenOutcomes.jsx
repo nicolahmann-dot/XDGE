@@ -6,142 +6,148 @@ import { SplitHeading } from '../primitives/SplitHeading';
 
 const testimonials = [
   {
+    name: 'YS',
+    role: 'Age 18 — University XDGE',
+    headline: 'This programme pushed me far beyond anything I had done at school.',
+    body: 'The professional skills sessions were the most useful because they taught me to think on my feet, answer difficult questions and present myself as someone credible.',
+  },
+  {
+    name: 'WP',
+    role: 'Age 15 — Junior MBA',
+    headline: 'The Executive Roundtables were easily the best part for me.',
+    body: 'At first, I was nervous but I actually enjoyed it and it felt like a real professional meeting and showed me that I could hold my own in that kind of room.',
+  },
+  {
+    name: 'KR',
+    role: 'Age 23 — Career XDGE',
+    headline: 'I had felt completely out of my depth in my first job, like everyone else understood this professional world and I didn’t.',
+    body: 'What helped most on this programme was having an amazing coach and building my own playbook and actually practising how to manage myself, organise my work and communicate properly.',
+  },
+  {
+    name: 'JH',
+    role: 'Age 24 — Career XDGE',
+    headline: 'The best part was that my project focused on a real problem at the company I already worked for.',
+    body: 'It gave me some extra credibility because my team and supervisor could see what I was capable of and the value I could bring to them.',
+  },
+  {
+    name: 'Parent',
+    role: 'University XDGE',
+    headline: 'I really don’t think she would have secured the scholarship without the programme.',
+    body: 'The panel said they could clearly see what she would bring to the university, and I honestly believe her project and the way she learned to present herself made the difference.',
+  },
+  {
+    name: 'JB',
+    role: 'Age 17 — College Incubator Programme',
+    headline: 'The best part of the Incubator was having to go out and meet people in the real world and do the kind of work marketing professionals actually do.',
+    body: 'It definitely pushed me out of my comfort zone, but I felt really buzzed by it and proud of what I achieved.',
+  },
+  {
+    name: 'GS',
+    role: 'Age 21 — Career XDGE',
+    headline: 'I really think my project helped me get the job because I had spent so much time analyzing the manufacturing failures in the industry and talking about what could be done to remedy them.',
+    body: 'The interview stopped feeling like an interview and turned into a proper conversation. I think they could see that I would fit in and was ready to help the company, rather than just looking for any job.',
+  },
+  {
+    name: 'PL',
+    role: 'Age 11 — School XDGE',
+    headline: 'I never thought I could be a leader because I am quiet and shy.',
+    body: 'I learned how to change my thinking and it showed me that people can listen to my ideas without me being loud.',
+  },
+  {
+    name: 'FK',
+    role: 'Age 17 — College Incubator',
+    headline: 'The Guild X day was definitely the best part for me.',
+    body: 'It was amazing to get real feedback and recognition for what I had achieved. It was also really good to see how far we had all come.',
+  },
+  {
     name: 'DB',
-    role: 'Age 21 — Career Edge Programme',
-    headline: 'Having a coach who genuinely understood me made a huge difference.',
-    body: "My coach didn't try to turn me into someone else. She took the time to understand who I was, what I was good at, and where I was holding myself back. She challenged me when I needed it, supported me when I doubted myself, and never let me settle for less than I was capable of. Looking back, having someone who saw more in me than I could see in myself made a bigger difference than I realised at the time.",
+    role: 'Age 14 — School XDGE',
+    headline: 'It helped me see what I am good at and make a plan for what I want in life.',
+    body: 'It was amazing to work with real leaders and learn about all the different ways they got there.',
   },
   {
-    name: 'SW',
-    role: 'Age 21 — Career Edge Programme 2026',
-    headline: 'The Executive Round Tables were probably my favourite part of the programme.',
-    body: 'It was really interesting hearing successful people talk honestly about their careers, mistakes, and what they had learned along the way. It felt like a genuine conversation. I came away with a much better understanding of what leadership actually looks like in the real world.',
+    name: 'EN',
+    role: 'Age 14 — School XDGE',
+    headline: 'It definitely helped me become a prefect.',
+    body: 'I found the professional skills part of the course most helpful because it helped me understand how to lead and gave me lots of practice speaking to adults and in public.',
   },
   {
-    name: 'SG',
-    role: 'Age 18 — University Edge Programme 2024',
-    headline: 'It genuinely changed how I think, not just what I know.',
-    body: 'Coming in, I expected to just to learn about what leaders do. What surprised me most was how much it changed the way I see myself. I have become better at handling challenges, criticism, and failure. It’s now easier to step outside my comfort zone.',
+    name: 'HG',
+    role: 'Age 18 — University XDGE',
+    headline: 'What made the programme so good for me was that my mentor helped me find a real problem in the pharmaceutical industry that I was actually interested in.',
+    body: 'She motivated me a lot and kept pushing me to think further, so I wanted to work on it in my own time too. Having something to complete every week helped keep me on track. It was challenging, but it felt like I was a professional in the real world.',
   },
   {
-    name: 'CL',
-    role: 'Age 23',
-    headline: "It felt like having access to a professional network before I'd even started my career.",
-    body: 'One of the best parts was meeting so many different coaches, leaders, and professionals throughout the programme. Hearing about their experiences and getting advice on my own project made everything feel much more real. It was learning from people who had actually done it — I feel like the exposure and support prepared me for the workplace better than a lot of what I learned at university.',
+    name: 'IH',
+    role: 'Age 19 — University XDGE',
+    headline: 'The part I found most useful was learning how to present myself and my ideas in a more professional way.',
+    body: 'Using the right business language helped me present my project properly and really impressed the panel. I was also able to answer their questions without getting thrown off. It made me feel much more credible and less like I was just a school student.',
   },
   {
-    name: 'Parent',
-    role: 'Parent of Age 11 Student',
-    headline: 'Our son became more confident in a matter of weeks.',
-    body: 'The changes were quite subtle at first, but they added up quickly. He started speaking up more, taking ownership of things, and showing more confidence in himself. What stands out most is how he talks about his future now.',
-  },
-  {
-    name: 'TV',
-    role: 'Age 17 — University Edge Programme',
-    headline: 'I always thought leadership was for other people.',
-    body: "I've never been someone who likes being the centre of attention, so I never really saw myself as a leader. The programme helped me realise that leadership is more about having the courage to stand behind something you care about. Working on my project gave me confidence to speak up, share my views, and challenge things when I didn't think they were right. I can’t say I became a different person. I just became more confident being myself.",
-  },
-  {
-    name: 'AP',
-    role: 'Age 17 — Career Edge Programme',
-    headline: 'I finally had something meaningful to talk about.',
-    body: 'In my interviews, instead of talking only about school and grades, I had practical examples, challenges, and achievements to discuss. I felt I could demonstrate what I had actually done and achieved, not just what I had studied.',
-  },
-  {
-    name: 'Parent',
-    role: 'Parent of Year 9 Student — School Edge Programme',
-    headline: 'This was completely different from a school enrichment programme.',
-    body: 'Rather than simply teaching new skills, the programme helped our daughter understand how her thinking and habits were holding her back from what she really wanted for herself.',
-  },
-  {
-    name: 'RH',
-    role: 'Age 19 — Early Career Advantage Programme',
-    headline: 'I walked into my very first professional interview feeling confident and prepared.',
-    body: "The coaching and interview practice helped a lot. I was surprised that the interview actually didn’t feel intimidating. Even when I was asked a question I wasn't fully prepared for, I knew how to stay composed and handle the situation.",
-  },
-  {
-    name: 'Parent',
-    role: 'Parent of Age 13 Student — Early Leader Foundations Programme',
-    headline: 'The confidence gains were remarkable.',
-    body: 'Our son became more independent, organised, and focused. I think he now can see when he is doing something he loves, he can do anything.',
-  },
-  {
-    name: 'Parent',
-    role: 'Parent of Age 14 Student — Early Leader Foundations Programme',
-    headline: 'The programme helped her believe in herself as a leader.',
-    body: 'She became much more comfortable sharing her ideas and stepping forward, even when other people saw things differently. One of the biggest changes for her was seeing that you can be thoughtful, quiet, and still have a huge influence. That shift in her confidence was lovely to watch on the presentation day.',
-  },
-  {
-    name: 'Parent',
-    role: 'Parent of Age 12 Student — School Edge Programme',
-    headline: 'It gave our son direction.',
-    body: "He wasn't lost exactly, but he didn't really have a clear focus. The programme helped him think about where he wanted to go and what he needed to do to get there. Since then, he's been much more motivated and purposeful in how he approaches things. One of the biggest differences we noticed was during his school interview. He went in with far more confidence, communicated his ideas clearly, and seemed much more comfortable talking about himself and his aspirations. We came away feeling that the programme had prepared him for that experience in ways we hadn't expected.",
-  },
-  {
-    name: 'KM',
-    role: 'Age 18 — University Edge Programme 2025',
-    headline: 'I felt like I had something more than most students my age.',
-    body: "It wasn't about sounding impressive anymore. It was about having done something meaningful that I believed in and wanted to succeed at. I felt more confident because I knew I had something that set me apart.",
-  },
-  {
-    name: 'Parent',
-    role: 'Parent of Age 13 Student — Early Leader Foundations Programme',
-    headline: 'XDGE helped our child grow up.',
-    body: "It wasn't an overnight change, but we definitely saw him start taking more ownership of things, thinking ahead more, and following through on commitments over the course of the programme. I think the project helped him see that he could achieve much more than he realised when he focused his effort on something he believed in.",
-  },
-  {
-    name: 'DS',
-    role: 'Age 20 — Career Edge Programme',
-    headline: 'I learned skills I wish I had developed years earlier.',
-    body: "A lot of what I learned isn't taught in school or university. Things like how to communicate professionally, hold a meeting, take initiative, hold presence in a room or even deal with difficult people. They sound simple, but they make a huge difference. I honestly wish I had learned them years ago.",
-  },
-  {
-    name: 'RJS',
-    role: 'Age 23 — Career Edge Programme',
-    headline: 'Having access to someone with that level of experience was amazing.',
-    body: "My coach had done some really impressive things, but they never made it feel intimidating. They were easy to talk to and genuinely interested in helping me develop my ideas. What started as a rough concept turned into a project I was genuinely proud of. Looking back, they helped me think bigger, pay more attention to detail, and produce something far better than I would have done on my own. I don't think I would not have got this job role without it.",
+    name: 'BC',
+    role: 'Age 21 — University XDGE',
+    headline: 'I had always wanted to study abroad, but honestly didn’t know how I was meant to stand out.',
+    body: 'Nicola really changed how I saw myself, especially when I was under pressure. She helped me realise where I was underselling myself and pushed me to take my research project much further than I probably would have on my own. The programme made me think more seriously about the kind of leadership role I want to work towards after graduate school.',
   },
   {
     name: 'ML',
-    role: 'Age 15 — School Edge Programme',
-    headline: "The feedback helped me see strengths I didn't know I had.",
-    body: "It helped me see strengths and qualities in myself that I hadn't really noticed before. I think I was probably too hung up on what I needed to improve. Looking back, that support changed quite a lot for me. It changed how I see myself, what I think I'm capable of, and even how I see my future.",
-  },
-  {
-    name: 'TS',
-    role: 'Age 14 — School Edge',
-    headline: 'Working with professionals in the real world was both inspiring and a bit of a reality check.',
-    body: "It made me realise the standards people are working to and how much opportunity there is if you're willing to put yourself out there. It was motivating to see what is possible.",
-  },
-  {
-    name: 'CB',
-    role: 'Age 19 — University Edge Programme',
-    headline: 'I realised I had to stop waiting for opportunities and start creating them.',
-    body: 'I used to spend a lot of time thinking about things I wanted to do without really taking the first step. The programme helped me turn my ideas into action and gave me the confidence to give things a go. My leadership portfolio boosted my personal statement a lot.',
-  },
-  {
-    name: 'AF',
-    role: 'Age 16 — School Edge Programme',
-    headline: 'I became comfortable being uncomfortable.',
-    body: "I won't say I enjoyed every challenge at the time, but looking back, those were the things that helped me grow the most. I learned that confidence doesn't come before you do something difficult, it comes afterwards. Now I'm much more willing to take on things that I would probably have avoided before.",
+    role: 'Parent — University XDGE',
+    headline: 'The biggest difference the programme made was giving my son a real sense of direction.',
+    body: 'He realised that being intelligent wasn’t enough unless he actually put it into action. Seeing him become so motivated by his project was a big change, and hearing him speak professionally with adults was something I never expected. He has now found a path that genuinely interests him and has real focus on what he needs to do to get into a good university.',
   },
   {
     name: 'Parent',
-    role: 'Parent of 19-Year-Old Student — University Edge Programme',
-    headline: 'The professional skills stood out immediately.',
-    body: 'When she started university, she seemed a step ahead in a lot of ways. She was comfortable speaking to new people, managing her responsibilities, and taking opportunities when they came up. The confidence and professionalism she developed through the programme definitely helped her hit the ground running.',
+    role: 'University XDGE',
+    headline: 'We thought carefully about the cost and time commitment, but the personal support made it worthwhile.',
+    body: 'It wasn’t something my son simply attended and forgot about. Seeing the change in his confidence, focus and direction, and then seeing him secure his university place, made it feel like a real investment for his adult life.',
   },
   {
-    name: 'TW',
-    role: 'Age 21 — Career Edge Programme',
-    headline: 'Employers noticed.',
-    body: 'Before XDGE, I felt like I had the same sort of things on my CV as lots of other graduates. The programme gave me experiences and projects that helped me stand out. Interviews stopped feeling like a test and started feeling more like a conversation because I had real examples to share. I think that confidence came across and helped me make a much stronger impression.',
+    name: 'SF',
+    role: 'Age 25 — Career XDGE',
+    headline: 'The project made a real difference because it was designed to support the strategy for improving engagement and morale in my team.',
+    body: 'It got me a lot of recognition at work and helped me secure a place on the company’s leadership programme. I would definitely recommend it to anyone who wants to make their mark and move into leadership.',
   },
   {
-    name: 'ZP',
-    role: 'Age 16 — School Edge Programme',
-    headline: 'I spent weeks worrying that everyone else would be better than me.',
-    body: 'When my video played and I looked back at everything I had done over the programme, I felt proud of myself. Instead of worrying about what everyone else was doing, I was looking at how far I had come. I realised I had achieved a lot more than I had given myself credit for.',
+    name: 'AV',
+    role: 'Age 20 — Career XDGE',
+    headline: 'There were a lot of “aha” moments, but what stayed with me most was being told on the first day that we were accountable to everyone in the room.',
+    body: 'I didn’t really understand what that meant at first, but it taught me that leadership isn’t just about doing well yourself but also getting the whole team through. We all helped each other with the things we weren’t as good at. That definitely stuck with me.',
+  },
+  {
+    name: 'Parent',
+    role: 'School XDGE',
+    headline: 'I wasn’t sure whether an online programme would feel personal enough, but that was never an issue.',
+    body: 'The sessions were very interactive and her coach knew exactly what she was working on, what she found difficult and when to push her.',
+  },
+  {
+    name: 'TP',
+    role: 'Age 21 — Career XDGE',
+    headline: 'There were several interviews and skills tests, and before the programme I wouldn’t have known what they were really assessing or how to approach them.',
+    body: 'It gave me a real sense of the professional world and what would be expected of me before I had actually entered it.',
+  },
+  {
+    name: 'LS',
+    role: 'Age 18 — Incubator Programme',
+    headline: 'The project helped me have a level of fluency that made answering their questions much easier.',
+    body: '',
+  },
+  {
+    name: 'PB',
+    role: 'Age 17 — School XDGE',
+    headline: 'Having a coach who really understood me made a huge difference.',
+    body: 'The advice never felt general because it was based on my personality, goals and the things I found difficult.',
+  },
+  {
+    name: 'OV',
+    role: 'Age 15 — School XDGE',
+    headline: 'Working on my default thinking and self-limiting habits probably changed me the most.',
+    body: 'I started noticing how quickly I would tell myself I couldn’t do something or wasn’t ready. I think this has changed me a lot as a person as well as changed how I feel about success.',
+  },
+  {
+    name: 'MA',
+    role: 'Age 13 — School XDGE',
+    headline: 'It was amazing to have real leaders talk through my project with me and be interested in my ideas and what I wanted to do.',
+    body: '',
   },
 ];
 
@@ -345,15 +351,17 @@ export function ProvenOutcomes() {
                 }}>
                   {t.headline}
                 </h2>
-                <p style={{
-                  fontSize: 'clamp(14px, 1.4vw, 16px)',
-                  lineHeight: 1.65,
-                  color: theme.base,
-                  margin: 0,
-                  maxWidth: 640,
-                }}>
-                  {t.body}
-                </p>
+                {t.body ? (
+                  <p style={{
+                    fontSize: 'clamp(14px, 1.4vw, 16px)',
+                    lineHeight: 1.65,
+                    color: theme.base,
+                    margin: 0,
+                    maxWidth: 640,
+                  }}>
+                    {t.body}
+                  </p>
+                ) : null}
               </div>
             </motion.div>
           </AnimatePresence>
