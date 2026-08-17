@@ -342,23 +342,11 @@ export function ProvenOutcomes() {
               </div>
 
               <div>
-                <h2 style={{
-                  fontFamily: theme.display, fontWeight: 700,
-                  fontSize: 'clamp(33px, 3.9vw, 54px)',
-                  lineHeight: 1.18, letterSpacing: '-0.005em',
-                  margin: '0 0 24px',
-                  color: theme.base,
-                }}>
+                <p className="xg-outcomes-quote">
                   {t.headline}
-                </h2>
+                </p>
                 {t.body ? (
-                  <p style={{
-                    fontSize: 'clamp(14px, 1.4vw, 16px)',
-                    lineHeight: 1.65,
-                    color: theme.base,
-                    margin: 0,
-                    maxWidth: 640,
-                  }}>
+                  <p className="xg-outcomes-body">
                     {t.body}
                   </p>
                 ) : null}

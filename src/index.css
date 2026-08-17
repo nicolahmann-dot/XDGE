@@ -2527,6 +2527,27 @@ section:not([data-screen-label*='Hero']) h3 {
   font-size: clamp(40px, 11.3vw, 200px);
 }
 
+/* The card quote used to live in an <h2>, so every `section h2` display-heading
+   rule — including the 0.75 line-height meant for "REVIEWS" — landed on the
+   review text and crushed it. It is a paragraph now, sized on its own. */
+.xg-outcomes-quote {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 700;
+  font-size: clamp(36px, 4.4vw, 58px);
+  line-height: 1.18;
+  letter-spacing: -0.005em;
+  margin: 0 0 24px;
+  color: #ffffff;
+}
+
+.xg-outcomes-body {
+  font-size: clamp(16px, 1.7vw, 19px);
+  line-height: 1.65;
+  color: #ffffff;
+  margin: 0;
+  max-width: 640px;
+}
+
 /* The People Behind Your Progress — Heading Set 1 (hollow + solid). */
 .xdge-people-clip {
   width: fit-content;
