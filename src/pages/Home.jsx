@@ -19,11 +19,11 @@ export default function Home() {
       <div className="xg-stick-wrap">
         <WhoWeServe />
       </div>
-      <IsThisRightForMe />
       <WhoWeAre />
       <OurPerformanceFormula />
       <WhatYouLeaveWith />
       <ProvenOutcomes />
+      <IsThisRightForMe />
       <div className="xg-stick-wrap">
         <Insights />
       </div>
