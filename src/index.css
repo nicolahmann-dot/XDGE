@@ -1282,38 +1282,247 @@ section[data-screen-label] {
   }
 }
 
-/* Menu drawer (Boldz-style 3-column layout) */
-.xg-menu-grid {
+/* Menu drawer — left nav with a full-height rule, programmes on the right */
+.xg-menu-layout {
   display: grid;
-  grid-template-columns: 1.05fr 1.6fr 0.85fr;
-  gap: clamp(24px, 4vw, 48px);
+  grid-template-columns: minmax(200px, 250px) minmax(0, 1fr);
+  gap: 0;
   flex: 1;
-  min-height: 0;
+  align-items: stretch;
+  position: relative;
+  z-index: 2;
+  width: 100%;
 }
 
-@media (max-width: 900px) {
-  .xg-menu-grid {
-    grid-template-columns: 1fr;
-    gap: clamp(20px, 4vw, 32px);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+.xg-menu-side {
+  border-right: 1px solid #c8c8c8;
+  padding-right: clamp(28px, 3vw, 44px);
+}
+
+.xg-menu-overlay :focus-visible {
+  outline-color: #000000;
+}
+
+.xg-menu-nav {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2.8vh, 32px);
+  margin-top: clamp(48px, 6vh, 72px);
+}
+
+.xg-menu-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(20px, 1.6vw, 26px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+}
+
+.xg-menu-link.is-active {
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 2.5px;
+  text-decoration-color: #000000;
+}
+
+.xg-menu-link-arrow {
+  display: inline-flex;
+  color: #20E3E8;
+}
+
+.xg-menu-arrow {
+  width: 0.9em;
+  height: 0.9em;
+  flex-shrink: 0;
+}
+
+.xg-menu-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-left: clamp(32px, 3.4vw, 52px);
+  min-width: 0;
+}
+
+.xg-menu-kicker {
+  margin: 0 0 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  font-synthesis: none;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #2484FF;
+}
+
+.xg-menu-title {
+  margin: 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+  font-size: clamp(44px, 4.8vw, 68px);
+  line-height: 0.88;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.xg-menu-lede {
+  margin: 8px 0 0;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 500;
+  line-height: 1.35;
+  color: #2484FF;
+}
+
+.xg-menu-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  flex: 1;
+  margin-top: clamp(48px, 6vh, 80px);
+}
+
+.xg-menu-col {
+  min-width: 0;
+  padding-right: clamp(36px, 3.8vw, 64px);
+}
+
+.xg-menu-col + .xg-menu-col {
+  border-left: 1px solid #c8c8c8;
+  padding-left: clamp(36px, 3.8vw, 64px);
+}
+
+.xg-menu-col-title {
+  margin: 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-size: clamp(22px, 1.7vw, 28px);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.xg-menu-col-sub {
+  margin: 6px 0 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: #4a4a4a;
+}
+
+.xg-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.xg-menu-list a {
+  display: block;
+  padding: 26px 0;
+  border-top: 1px solid #d5d5d5;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(16px, 1.25vw, 20px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+  transition: padding-left 0.3s var(--xg-ease);
+}
+
+.xg-menu-list li:last-child a {
+  border-bottom: 1px solid #d5d5d5;
+}
+
+.xg-menu-rule {
+  border-top: 1px solid #c8c8c8;
+}
+
+.xg-menu-find {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 10px;
+  margin-top: clamp(22px, 3vh, 32px);
+  padding: 14px 18px;
+  border: 1px solid #2b2b2b;
+  background: transparent;
+  color: #000000;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.3s var(--xg-ease);
+}
+
+@media (hover: hover) {
+  .xg-menu-list a:hover {
+    padding-left: 8px;
   }
 
-  .xg-menu-image {
-    max-width: 280px;
-    aspect-ratio: 4 / 3 !important;
-    margin: 0;
+  .xg-menu-find:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+}
+
+@media (max-width: 980px) {
+  .xg-menu-layout {
+    grid-template-columns: 1fr;
+    gap: clamp(28px, 5vw, 40px);
+  }
+
+  .xg-menu-side {
+    border-right: none;
+    padding-right: 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #c8c8c8;
+  }
+
+  .xg-menu-panel {
+    padding-left: 0;
+  }
+
+  .xg-menu-title {
+    white-space: normal;
+  }
+
+  .xg-menu-cols {
+    grid-template-columns: 1fr;
+    flex: none;
+    gap: 40px;
+  }
+
+  .xg-menu-col {
+    padding-right: 0;
+  }
+
+  .xg-menu-col + .xg-menu-col {
+    border-left: none;
+    padding-left: 0;
+    padding-top: 8px;
   }
 }
 
 @media (max-width: 540px) {
-  .xg-menu-grid {
-    gap: 16px;
-  }
-
-  .xg-menu-image {
-    max-width: 220px;
-    aspect-ratio: 16 / 10 !important;
+  .xg-menu-title {
+    font-size: clamp(32px, 10vw, 44px);
   }
 }
 
@@ -5488,6 +5697,10 @@ section[data-screen-label="Proven Outcomes"] {
   .xg-cursor-wrap {
     mix-blend-mode: difference;
   }
+}
+
+.xg-menu-open .xg-scroll-progress {
+  visibility: hidden;
 }
 
 .xg-page-loader {

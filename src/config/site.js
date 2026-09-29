@@ -1,3 +1,5 @@
+import { programmeRouteMeta } from '../data/menu';
+
 /**
  * Site-wide config — update social URLs & analytics ID when client provides details.
  * Leave social URLs as null to hide icons until ready.
@@ -95,4 +97,5 @@ export const routeMeta = {
     title: 'Terms of Use — XDGE',
     description: 'Terms and conditions for using the XDGE website and services.',
   },
+  ...programmeRouteMeta,
 };

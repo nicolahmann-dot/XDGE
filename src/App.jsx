@@ -19,6 +19,7 @@ const TheExperience = lazy(() => import('./pages/TheExperience'));
 const About = lazy(() => import('./pages/About'));
 const PerformanceFormula = lazy(() => import('./pages/PerformanceFormula'));
 const Programmes = lazy(() => import('./pages/Programmes'));
+const ProgrammeDetail = lazy(() => import('./pages/ProgrammeDetail'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Apply = lazy(() => import('./pages/Apply'));
 const Faq = lazy(() => import('./pages/Faq'));
@@ -63,6 +64,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/performance-formula" element={<PerformanceFormula />} />
           <Route path="/programmes" element={<Programmes />} />
+          <Route path="/programmes/:slug" element={<ProgrammeDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/insights" element={<InsightsIndex />} />

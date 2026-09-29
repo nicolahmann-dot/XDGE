@@ -1,24 +1,26 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { theme } from '../theme';
 import { useScrollLock } from '../hooks/useScrollLock';
-import { SocialLinks } from './SocialLinks';
+import { menuLinks, programmeGroups, programmePath } from '../data/menu';
 
-const MotionLink = motion(Link);
+const MotionNavLink = motion(NavLink);
 
-const primaryLinks = [
-  { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'How It Works', to: '/how-it-works' },
-  { label: 'Programmes', to: '/programmes' },
-];
-
-const secondaryLinks = [
-  { label: 'Apply', to: '/apply' },
-  { label: 'Contact', to: '/contact' },
-  { label: 'Insights', to: '/insights' },
-];
+function MenuArrow() {
+  return (
+    <svg className="xg-menu-arrow" viewBox="0 0 20 20" aria-hidden="true">
+      <path
+        d="M4 10h12M11 5l5 5-5 5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 const overlayEase = [0.76, 0, 0.24, 1];
 const fadeEase = [0.22, 1, 0.36, 1];
@@ -34,9 +36,15 @@ const linkVariants = {
 };
 
 // generic clip wrapper for a rising link
-const clip = { display: 'block', overflow: 'hidden', paddingBottom: '0.06em' };
+const clip = { display: 'block', overflow: 'hidden', paddingBottom: '0.4em' };
+
+function linkIsCurrent(pathname, item) {
+  if (item.to === '/') return pathname === '/';
+  return pathname === item.to || pathname.startsWith(`${item.to}/`);
+}
 
 export function TopBar() {
+  const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   // Closing via a nav link is not the same as closing via the burger. A link click
   // also changes route, and that work — unmounting the old page, fetching the lazy
@@ -58,6 +66,12 @@ export function TopBar() {
 
   // Locks the page behind the panel without the 8px scrollbar reflow — see the hook.
   useScrollLock(open);
+
+  // The scroll progress bar sits above the menu. Hide that cyan line while the panel is open.
+  useEffect(() => {
+    document.documentElement.classList.toggle('xg-menu-open', open);
+    return () => document.documentElement.classList.remove('xg-menu-open');
+  }, [open]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -176,6 +190,7 @@ export function TopBar() {
       <AnimatePresence>
         {open && (
           <motion.div key="menu-overlay"
+            className="xg-menu-overlay"
             initial={{ y: '-100%' }}
             animate={{ y: '0%' }}
             exit={{ y: '-100%' }}
@@ -186,18 +201,15 @@ export function TopBar() {
               color: '#000000',
               zIndex: 1000,
               display: 'flex', flexDirection: 'column',
-              padding: 'clamp(96px, 9vw, 112px) clamp(20px, 4vw, 48px) clamp(40px, 5vw, 56px)',
+              padding: 'clamp(96px, 9vw, 112px) clamp(32px, 5vw, 72px) clamp(48px, 6vw, 72px)',
               overflowY: 'auto',
               // Keeps a scroll that bottoms out inside the menu from chaining to
               // the page behind it (previously handled by Lenis's prevent rule).
               overscrollBehavior: 'contain',
             }}
           >
-            <div className="xg-menu-grid" style={{ position: 'relative', zIndex: 2 }}>
-              <div style={{
-                display: 'flex', flexDirection: 'column',
-                justifyContent: 'space-between', gap: 32,
-              }}>
+            <div className="xg-menu-layout">
+              <div className="xg-menu-side">
                 <motion.div data-no-reveal
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.4, ease: fadeEase } }}
@@ -205,25 +217,25 @@ export function TopBar() {
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                     <span style={{
                       fontFamily: theme.display, fontWeight: 900,
-                      fontSize: 'clamp(16px, 2.2vw, 24px)', color: '#000000',
+                      fontSize: 'clamp(14px, 1.15vw, 17px)', color: '#000000',
                       lineHeight: 1
                     }}>THE</span>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <span style={{
                         fontFamily: theme.display, fontWeight: 900,
-                        fontSize: 'clamp(48px, 6.5vw, 88px)', color: '#000000',
-                        letterSpacing: '-0.02em', lineHeight: 0.755
+                        fontSize: 'clamp(44px, 3.8vw, 56px)', color: '#000000',
+                        letterSpacing: '-0.03em', lineHeight: 0.78
                       }}>XDG</span>
-                      <svg viewBox="0 0 100 100" style={{ height: 'clamp(32px, 4.5vw, 64px)', marginLeft: '6px', fill: '#000000' }}>
+                      <svg viewBox="0 0 100 100" style={{ height: 'clamp(30px, 2.6vw, 40px)', marginLeft: '6px', fill: '#000000' }}>
                         <rect y="15" width="100" height="15" />
                         <rect y="45" width="100" height="15" />
                         <rect y="75" width="100" height="15" />
                       </svg>
                     </div>
                     <div style={{
-                      marginTop: 8,
+                      marginTop: 10,
                       fontFamily: theme.body,
-                      fontSize: 'clamp(10px, 1.2vw, 14px)', letterSpacing: '0.02em',
+                      fontSize: 'clamp(11px, 1vw, 13px)', letterSpacing: '0.02em',
                       textTransform: 'uppercase',
                       fontWeight: 600, color: '#000000',
                     }}>
@@ -232,108 +244,78 @@ export function TopBar() {
                   </div>
                 </motion.div>
 
-                <motion.div data-no-reveal
-                  className="xg-menu-image"
-                  initial={{ opacity: 0, scale: 1.06 }}
-                  animate={{ opacity: 1, scale: 1, transition: { duration: 1.0, delay: 0.55, ease: [0.22, 1, 0.36, 1] } }}
-                  style={{
-                    width: '100%', maxWidth: 480,
-                    aspectRatio: '4/3', overflow: 'hidden',
-                    background: '#000000',
-                  }}
-                >
-                  <img
-                    src="/assets/hero-presenter.jpg"
-                    alt="XDGE in action"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                  />
-                </motion.div>
-              </div>
-
-              <nav
-                style={{
-                  display: 'flex', flexDirection: 'column',
-                  justifyContent: 'flex-end',
-                  gap: 'clamp(2px, 0.5vw, 6px)',
-                }}
-              >
-                {primaryLinks.map((item, i) => (
-                  <span key={item.label} style={clip}>
-                    <MotionLink data-no-reveal
-                      to={item.to}
-                      custom={i}
-                      variants={linkVariants}
-                      initial="hidden"
-                      animate="visible"
-                      onClick={closeForNav}
-                      data-cursor="grow"
-                      whileHover={{ x: 16 }}
-                      style={{
-                        display: 'block',
-                        fontFamily: "'Anton', sans-serif",
-                        fontSize: 'clamp(44px, 7vw, 87px)',
-                        lineHeight: 1, letterSpacing: '0.01em',
-                        color: '#000000', textDecoration: 'none',
-                        textTransform: 'uppercase', fontWeight: 400,
-                        whiteSpace: 'nowrap',
-                        transition: 'color 0.3s var(--xg-ease)',
-                      }}
-                    >{item.label}</MotionLink>
-                  </span>
-                ))}
-              </nav>
-
-              <div style={{
-                display: 'flex', flexDirection: 'column',
-                justifyContent: 'space-between', gap: 32,
-                textAlign: 'right',
-              }}>
-                <nav
-                  style={{
-                    display: 'flex', flexDirection: 'column',
-                    gap: 'clamp(2px, 0.4vw, 4px)',
-                  }}
-                >
-                  {secondaryLinks.map(({ label, to }, i) => {
-                    const idx = i + primaryLinks.length;
-                    const linkStyle = {
-                      display: 'block',
-                      fontFamily: "'Anton', sans-serif",
-                      fontSize: 'clamp(22px, 3vw, 46px)',
-                      lineHeight: 1.15, letterSpacing: '0.01em',
-                      color: '#000000', textDecoration: 'none',
-                      textTransform: 'uppercase', fontWeight: 400,
-                    };
-                    const shared = {
-                      custom: idx,
-                      variants: linkVariants,
-                      initial: 'hidden',
-                      animate: 'visible',
-                      onClick: closeForNav,
-                      'data-cursor': 'grow',
-                      whileHover: { x: -10 },
-                      style: linkStyle,
-                    };
-                    return (
-                      <span key={label} style={clip}>
-                        <MotionLink to={to} {...shared}>{label}</MotionLink>
-                      </span>
-                    );
-                  })}
+                <nav className="xg-menu-nav" aria-label="Primary">
+                  {menuLinks.map((item, i) => (
+                    <span key={item.label} style={clip}>
+                      <MotionNavLink
+                        data-no-reveal
+                        to={item.to}
+                        end={item.end}
+                        custom={i}
+                        variants={linkVariants}
+                        initial="hidden"
+                        animate="visible"
+                        onClick={closeForNav}
+                        data-cursor="grow"
+                        whileHover={{ x: 8 }}
+                        className={`xg-menu-link${linkIsCurrent(pathname, item) ? ' is-active' : ''}`}
+                      >
+                        {item.label}
+                        {item.arrow && (
+                          <span className="xg-menu-link-arrow"><MenuArrow /></span>
+                        )}
+                      </MotionNavLink>
+                    </span>
+                  ))}
                 </nav>
-
-                <motion.div data-no-reveal
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.9, ease: fadeEase } }}
-                >
-                  <div style={{
-                    fontSize: 11, letterSpacing: '0.16em',
-                    textTransform: 'uppercase', color: '#000000',
-                    marginBottom: 12, fontWeight: 600,
-                  }}>Follow Us</div>
-                  <SocialLinks theme="light" justify="flex-end" />
-                </motion.div>
               </div>
+
+              <motion.div
+                className="xg-menu-panel"
+                data-no-reveal
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.45, ease: fadeEase } }}
+              >
+                <p className="xg-menu-kicker">Professional Leadership Academy</p>
+                <h2 className="xg-menu-title">Choose Your Next Step</h2>
+                <p className="xg-menu-lede">
+                  Expert-Led Corporate Training Redesigned for Ages 11-24+
+                </p>
+
+                <div className="xg-menu-cols">
+                  {programmeGroups.map((group) => (
+                    <div key={group.title} className="xg-menu-col">
+                      <h3 className="xg-menu-col-title">{group.title}</h3>
+                      <p className="xg-menu-col-sub">{group.subtitle}</p>
+                      <ul className="xg-menu-list">
+                        {group.items.map((item) => (
+                          <li key={item.slug}>
+                            <Link
+                              to={programmePath(item.slug)}
+                              onClick={closeForNav}
+                              data-cursor="grow"
+                            >
+                              {item.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="xg-menu-rule" aria-hidden="true" />
+
+                <Link
+                  to="/programmes"
+                  className="xg-menu-find"
+                  onClick={closeForNav}
+                  data-cursor="grow"
+                >
+                  Find your programme
+                  <MenuArrow />
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}
