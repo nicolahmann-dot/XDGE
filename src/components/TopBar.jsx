@@ -239,7 +239,7 @@ export function TopBar() {
                       textTransform: 'uppercase',
                       fontWeight: 600, color: '#000000',
                     }}>
-                      LEAD YOUR OWN OPPORTUNITIES
+                      Leadership Academy
                     </div>
                   </div>
                 </motion.div>
