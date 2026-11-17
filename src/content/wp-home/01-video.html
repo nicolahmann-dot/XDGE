@@ -1,0 +1,278 @@
+
+
+
+<style>
+
+/* ==========================================
+   FULL-SCREEN CONTAINER
+========================================== */
+
+#xdge-video-intro,
+#xdge-video-intro * {
+  box-sizing: border-box;
+}
+
+#xdge-video-intro {
+  position: relative;
+
+  width: 100vw;
+  max-width: none;
+
+  height: 100vh;
+  height: 100svh;
+
+  min-height: 400px;
+
+  margin: 0;
+  margin-left: calc(50% - 50vw);
+
+  padding: 0;
+
+  background: #000000;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  display: block;
+}
+
+/* ==========================================
+   VIDEO
+========================================== */
+
+#xdge-video-intro .xdge-intro-video {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center center;
+
+  background: #000000;
+
+  border: none;
+  border-radius: 0;
+
+  padding: 0;
+  margin: 0;
+}
+
+/* ==========================================
+   REMOVE VIDEO CONTROLS
+========================================== */
+
+#xdge-video-intro video::-webkit-media-controls {
+  display: none !important;
+}
+
+#xdge-video-intro video::-webkit-media-controls-panel {
+  display: none !important;
+}
+
+#xdge-video-intro video::-webkit-media-controls-play-button {
+  display: none !important;
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 767px) {
+
+  #xdge-video-intro {
+    width: 100vw;
+
+    height: 100vh;
+    height: 100svh;
+
+    min-height: 0;
+  }
+
+  #xdge-video-intro .xdge-intro-video {
+    object-fit: contain;
+    object-position: center center;
+  }
+
+}
+
+</style>
+
+
+
+
+<section id="xdge-video-intro" aria-label="XDGE Leadership animated introduction">
+
+  <video id="xdge-intro-player" class="xdge-intro-video" autoplay="" muted="" playsinline="" webkit-playsinline="" preload="auto" disablepictureinpicture="" disableremoteplayback="" aria-hidden="true">
+
+    <source src="https://xdgeleadership.com/wp-content/uploads/2026/11/Lucid-Particle-Blast-Logo_1080p.mp4" type="video/mp4">
+
+  </video>
+
+</section>
+
+
+
+
+<script>
+
+(function () {
+
+  "use strict";
+
+  const section =
+    document.getElementById("xdge-video-intro");
+
+  const video =
+    document.getElementById("xdge-intro-player");
+
+  if (!section || !video) return;
+
+  /* Prevent duplicate initialisation */
+
+  if (section.dataset.initialised === "true") {
+    return;
+  }
+
+  section.dataset.initialised = "true";
+
+  /* ========================================
+     PLAYBACK SETTINGS
+  ======================================== */
+
+  const REPEAT_INTERVAL = 15000;
+
+  let repeatTimer = null;
+
+  video.muted = true;
+
+  video.defaultMuted = true;
+
+  video.volume = 0;
+
+  video.loop = false;
+
+  video.controls = false;
+
+  video.playsInline = true;
+
+  /* ========================================
+     PLAY ANIMATION FROM BEGINNING
+  ======================================== */
+
+  function playFromBeginning() {
+
+    if (document.hidden) return;
+
+    video.pause();
+
+    try {
+      video.currentTime = 0;
+    } catch (error) {
+      /* Video metadata may still be loading */
+    }
+
+    const playPromise = video.play();
+
+    if (
+      playPromise &&
+      typeof playPromise.catch === "function"
+    ) {
+
+      playPromise.catch(function () {
+        /* Autoplay may be restricted by browser */
+      });
+
+    }
+
+  }
+
+  /* ========================================
+     REPEAT EVERY 15 SECONDS
+  ======================================== */
+
+  function startRepeatCycle() {
+
+    if (repeatTimer !== null) {
+      clearInterval(repeatTimer);
+    }
+
+    playFromBeginning();
+
+    repeatTimer = setInterval(function () {
+
+      playFromBeginning();
+
+    }, REPEAT_INTERVAL);
+
+  }
+
+  /* ========================================
+     KEEP LAST VIDEO FRAME BETWEEN REPEATS
+  ======================================== */
+
+  video.addEventListener("ended", function () {
+
+    /*
+      The video naturally holds on its last frame.
+      No additional image is displayed.
+
+      The 15-second timer will restart playback.
+    */
+
+  });
+
+  /* ========================================
+     PAUSE WHEN BROWSER TAB IS HIDDEN
+  ======================================== */
+
+  document.addEventListener(
+    "visibilitychange",
+    function () {
+
+      if (document.hidden) {
+
+        video.pause();
+
+        if (repeatTimer !== null) {
+          clearInterval(repeatTimer);
+          repeatTimer = null;
+        }
+
+      } else {
+
+        startRepeatCycle();
+
+      }
+
+    }
+  );
+
+  /* ========================================
+     START WHEN PAGE LOADS
+  ======================================== */
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      startRepeatCycle,
+      { once: true }
+    );
+
+  } else {
+
+    startRepeatCycle();
+
+  }
+
+})();
+
+</script>
+
+

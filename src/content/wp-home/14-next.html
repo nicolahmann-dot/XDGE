@@ -1,0 +1,669 @@
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+<style>
+
+/* BASE */
+
+#xdge-next-step,
+#xdge-next-step * {
+  box-sizing: border-box;
+}
+
+#xdge-next-step {
+  --xn-black: #050505;
+  --xn-card: #141414;
+  --xn-blue: #5170FF;
+  --xn-white: #FFFFFF;
+  --xn-grey: #A9A9A9;
+
+  width: 100%;
+  margin: 0;
+  padding: 105px 35px;
+
+  background: var(--xn-black);
+  color: var(--xn-white);
+  font-family: 'Manrope', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#xdge-next-step .xn-wrap {
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+/* TWO-COLUMN LAYOUT */
+
+#xdge-next-step .xn-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.25fr)
+    minmax(0, .75fr);
+
+  gap: clamp(45px, 5vw, 90px);
+  align-items: center;
+}
+
+#xdge-next-step .xn-content {
+  min-width: 0;
+}
+
+/* BLUE EYEBROW */
+
+#xdge-next-step .xn-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--xn-blue);
+  border-radius: 100px;
+
+  padding: 9px 21px;
+  margin-bottom: 27px;
+
+  color: var(--xn-blue);
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.7px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+/* MAIN HEADING - EXACTLY TWO LINES */
+
+#xdge-next-step .xn-heading {
+  margin: 0 0 23px;
+  padding: 0;
+
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: clamp(23px, 4vw, 58px);
+  font-weight: 500;
+  line-height: 1.11;
+  letter-spacing: -1.8px;
+
+  color: #FFFFFF;
+  text-transform: uppercase;
+  -webkit-text-fill-color: #FFFFFF;
+  -webkit-text-stroke: 0;
+}
+
+#xdge-next-step .xn-heading .xn-heading-line {
+  display: block;
+  white-space: nowrap;
+}
+
+/* INTRO */
+
+#xdge-next-step .xn-intro {
+  max-width: 680px;
+  margin: 0 0 42px;
+
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.95;
+
+  color: #E0E0E0;
+}
+
+/* FOUR CARDS */
+
+#xdge-next-step .xn-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 16px;
+}
+
+/* INDIVIDUAL CARD */
+
+#xdge-next-step .xn-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  min-width: 0;
+  min-height: 270px;
+
+  padding: 32px 29px 30px;
+
+  background: var(--xn-card);
+  border: 1px solid #292929;
+  border-radius: 19px;
+
+  transition:
+    border-color .35s ease,
+    transform .35s ease;
+}
+
+#xdge-next-step .xn-card:hover {
+  border-color: #535353;
+  transform: translateY(-3px);
+}
+
+/* BLUE NUMBERS */
+
+#xdge-next-step .xn-number {
+  display: block;
+
+  margin-bottom: 25px;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+
+  letter-spacing: 1.6px;
+  color: var(--xn-blue);
+}
+
+/* CARD HEADINGS */
+
+#xdge-next-step .xn-card-title {
+  margin: 0 0 16px;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(22px, 1.75vw, 27px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -.4px;
+
+  color: #FFFFFF;
+}
+
+/* OPTIONAL TEXT */
+
+#xdge-next-step .xn-optional {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .4px;
+
+  color: #B9B9B9;
+}
+
+/* CARD DESCRIPTIONS */
+
+#xdge-next-step .xn-card-text {
+  margin: 0 0 24px;
+
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.9;
+
+  color: #E0E0E0;
+}
+
+/* BUTTONS INSIDE CARDS */
+
+#xdge-next-step .xn-card-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  width: 100%;
+  min-height: 50px;
+
+  padding: 12px 18px;
+  margin-top: auto;
+
+  border-radius: 100px;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .65px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  transition:
+    background .3s ease,
+    border-color .3s ease,
+    color .3s ease,
+    transform .3s ease;
+}
+
+#xdge-next-step .xn-card-button:hover {
+  transform: translateY(-2px);
+}
+
+#xdge-next-step .xn-card-button:focus-visible {
+  outline: 2px solid var(--xn-blue);
+  outline-offset: 3px;
+}
+
+#xdge-next-step .xn-card-button svg {
+  display: block;
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* APPLY BUTTON */
+
+#xdge-next-step .xn-apply {
+  border: 1px solid #6F6F6F;
+  background: transparent;
+  color: #FFFFFF;
+}
+
+#xdge-next-step .xn-apply:hover {
+  border-color: #FFFFFF;
+  background: #242424;
+  color: #FFFFFF;
+}
+
+/* DISCOVERY BUTTON */
+
+#xdge-next-step .xn-discover {
+  border: 1px solid var(--xn-blue);
+  background: var(--xn-blue);
+  color: #FFFFFF;
+}
+
+#xdge-next-step .xn-discover:hover {
+  background: #3151E7;
+  border-color: #3151E7;
+  color: #FFFFFF;
+}
+
+/* CARD FOOTERS */
+
+#xdge-next-step .xn-card-footer {
+  margin-top: auto;
+  padding-top: 17px;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .9px;
+  text-transform: uppercase;
+
+  color: #B2B2B2;
+}
+
+/* RIGHT IMAGE COLUMN */
+
+#xdge-next-step .xn-image-column {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ORIGINAL IMAGE SHAPE */
+
+#xdge-next-step .xn-image-frame {
+  position: relative;
+
+  width: 100%;
+  max-width: 510px;
+  height: 700px;
+
+  border-radius: 240px 240px 24px 24px;
+  overflow: hidden;
+
+  background: #191919;
+}
+
+#xdge-next-step .xn-image-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center 30%;
+
+  transition: transform 1.2s ease;
+}
+
+#xdge-next-step .xn-image-frame:hover img {
+  transform: scale(1.025);
+}
+
+/* FOOTNOTE */
+
+#xdge-next-step .xn-footnote {
+  margin: 21px 0 0;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.85;
+
+  color: #B5B5B5;
+}
+
+/* TABLET */
+
+@media (max-width: 1100px) {
+
+  #xdge-next-step {
+    padding: 80px 27px;
+  }
+
+  #xdge-next-step .xn-layout {
+    grid-template-columns:
+      minmax(0,1.2fr)
+      minmax(0,.8fr);
+    gap: 35px;
+  }
+
+  #xdge-next-step .xn-heading {
+    font-size: clamp(24px, 3.8vw, 52px);
+    letter-spacing: -1.6px;
+  }
+
+  #xdge-next-step .xn-card {
+    padding: 27px 23px;
+    min-height: 270px;
+  }
+
+  #xdge-next-step .xn-image-frame {
+    height: 620px;
+    border-radius: 190px 190px 22px 22px;
+  }
+
+}
+
+/* SMALL TABLET */
+
+@media (max-width: 850px) {
+
+  #xdge-next-step .xn-layout {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  #xdge-next-step .xn-image-frame {
+    max-width: 560px;
+    height: 510px;
+  }
+
+  #xdge-next-step .xn-image-column {
+    justify-content: center;
+  }
+
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  #xdge-next-step {
+    padding: 65px 19px;
+  }
+
+  #xdge-next-step .xn-eyebrow {
+    font-size: 10px;
+    padding: 8px 17px;
+    margin-bottom: 24px;
+  }
+
+  #xdge-next-step .xn-heading {
+    font-size: clamp(19px, 5.85vw, 34px);
+    letter-spacing: -1px;
+  }
+
+  #xdge-next-step .xn-intro {
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 34px;
+  }
+
+  #xdge-next-step .xn-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  #xdge-next-step .xn-card {
+    min-height: 0;
+    padding: 28px 24px;
+  }
+
+  #xdge-next-step .xn-number {
+    margin-bottom: 17px;
+  }
+
+  #xdge-next-step .xn-card-title {
+    font-size: 23px;
+  }
+
+  #xdge-next-step .xn-card-text {
+    font-size: 15px;
+    margin-bottom: 25px;
+  }
+
+  #xdge-next-step .xn-card-button {
+    min-height: 49px;
+    font-size: 11px;
+  }
+
+  #xdge-next-step .xn-image-frame {
+    width: 100%;
+    height: 430px;
+    max-width: 400px;
+    border-radius: 200px 200px 22px 22px;
+  }
+
+  #xdge-next-step .xn-layout {
+    gap: 40px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  #xdge-next-step .xn-card,
+  #xdge-next-step .xn-card-button,
+  #xdge-next-step .xn-image-frame img {
+    transition: none;
+  }
+
+}
+
+</style>
+
+
+
+
+<section id="xdge-next-step">
+
+  <div class="xn-wrap">
+
+    <div class="xn-layout">
+
+      
+
+      <div class="xn-content">
+
+        
+
+        <div class="xn-eyebrow">
+          YOUR NEXT STEP
+        </div>
+
+        
+
+        <h2 class="xn-heading">
+          <span class="xn-heading-line">BUILD THE FOUNDATIONS</span>
+          <span class="xn-heading-line">FOR FUTURE SUCCESS.</span>
+        </h2>
+
+        
+
+        <p class="xn-intro">
+          Whether you're ready to apply or simply
+          exploring what's possible, we'd love to
+          hear from you. Start with a conversation
+          or apply directly. There's no need to
+          apply before speaking with us.
+        </p>
+
+        
+
+        <div class="xn-cards">
+
+          
+
+          <div class="xn-card">
+
+            <span class="xn-number">
+              01
+            </span>
+
+            <h3 class="xn-card-title">
+              Apply
+            </h3>
+
+            <p class="xn-card-text">
+              Ready to take the next step?
+              Tell us about yourself, your interests,
+              aspirations and what you hope
+              to achieve.
+            </p>
+
+            
+
+            <a class="xn-card-button xn-apply" href="https://www.thexdge.com/apply">
+
+              <span>Apply For A Place</span>
+
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 12h16"></path>
+                <path d="m13 5 7 7-7 7"></path>
+              </svg>
+
+            </a>
+
+          </div>
+
+
+          
+
+          <div class="xn-card">
+
+            <span class="xn-number">
+              02
+            </span>
+
+            <h3 class="xn-card-title">
+              Discover
+            </h3>
+
+            <p class="xn-card-text">
+              Let's have a conversation.
+              Explore your goals, ask questions
+              and discover how XDGE could support
+              you. No application required.
+            </p>
+
+            
+
+            <a class="xn-card-button xn-discover" href="https://calendly.com/thexdge/strategy-session">
+
+              <span>Book A Discovery Call</span>
+
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 12h16"></path>
+                <path d="m13 5 7 7-7 7"></path>
+              </svg>
+
+            </a>
+
+          </div>
+
+
+          
+
+          <div class="xn-card">
+
+            <span class="xn-number">
+              03
+            </span>
+
+            <h3 class="xn-card-title">
+              Experience
+              <span class="xn-optional">
+                (Optional)
+              </span>
+            </h3>
+
+            <p class="xn-card-text">
+              Where available, attend a taster
+              session to experience the XDGE
+              approach and see how we develop
+              confidence, capability and leadership.
+            </p>
+
+            <div class="xn-card-footer">
+              EXPERIENCE THE DIFFERENCE
+            </div>
+
+          </div>
+
+
+          
+
+          <div class="xn-card">
+
+            <span class="xn-number">
+              04
+            </span>
+
+            <h3 class="xn-card-title">
+              Enrol
+            </h3>
+
+            <p class="xn-card-text">
+              Once offered a place, confirm
+              your enrolment and choose to
+              pay in full or in three monthly
+              instalments.
+            </p>
+
+            <div class="xn-card-footer">
+              BEGIN YOUR XDGE JOURNEY
+            </div>
+
+          </div>
+
+        </div>
+
+        
+
+        <p class="xn-footnote">
+          No obligation. No pressure.
+          Just a conversation about what's possible.
+        </p>
+
+      </div>
+
+
+      
+
+      <div class="xn-image-column">
+
+        <div class="xn-image-frame">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/11/kelly-quilodran-CREb7_rl52o-unsplash-scaled.jpg" alt="XDGE leadership development experience" loading="lazy" decoding="async">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+

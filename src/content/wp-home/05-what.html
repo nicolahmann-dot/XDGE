@@ -1,0 +1,770 @@
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================
+   SECTION
+========================================= */
+
+#xdge-what-luxury,
+#xdge-what-luxury * {
+  box-sizing: border-box;
+}
+
+#xdge-what-luxury {
+  --xl-black: #000000;
+  --xl-white: #FAF9F6;
+  --xl-blue: #5170FF;
+
+  width: 100%;
+  margin: 0;
+  padding: 66px 38px 76px;
+
+  background: var(--xl-black);
+  color: var(--xl-white);
+  font-family: 'Manrope', Arial, sans-serif;
+  overflow: hidden;
+}
+
+#xdge-what-luxury .xl-inner {
+  width: 100%;
+  max-width: 1740px;
+  margin: 0 auto;
+}
+
+#xdge-what-luxury h2,
+#xdge-what-luxury h3,
+#xdge-what-luxury p {
+  margin: 0;
+}
+
+/* =========================================
+   BLUE EYEBROW
+========================================= */
+
+#xdge-what-luxury .xl-eyebrow-wrap {
+  text-align: center;
+}
+
+#xdge-what-luxury .xl-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+
+  padding: 11px 25px;
+  border: 1px solid #728AFF;
+  border-radius: 100px;
+
+  background: rgba(81,112,255,0.10);
+  color: #A1B0FF;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* =========================================
+   LARGE CENTRED HEADING
+========================================= */
+
+#xdge-what-luxury .xl-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+
+  width: 100%;
+  gap: clamp(12px, 1.4vw, 25px);
+  margin: 30px 0 0;
+  padding: 0;
+
+  color: var(--xl-white);
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: clamp(66px, 6.8vw, 116px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: 0;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* SOLID IVORY WORDS */
+
+#xdge-what-luxury .xl-heading-solid {
+  display: inline-block;
+  flex: 0 0 auto;
+  color: var(--xl-white);
+  font-family: 'Anton', Impact, sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-text-stroke: 0;
+}
+
+/* =========================================
+   XDGE ACTUAL LOGO SHAPE
+   DIAGONAL X + D G E
+========================================= */
+
+#xdge-what-luxury .xl-logo {
+  display: block;
+  width: clamp(260px, 28vw, 475px);
+  max-width: 44%;
+  height: auto;
+
+  flex: 0 0 auto;
+  overflow: visible;
+  fill: #FAF9F6;
+
+  /* keeps the diagonal X and lettering sharp */
+  shape-rendering: geometricPrecision;
+}
+
+/* =========================================
+   EDITORIAL TEXT + PHOTO
+========================================= */
+
+#xdge-what-luxury .xl-editorial {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.55fr)
+    minmax(0, 0.65fr);
+
+  align-items: center;
+  gap: clamp(35px, 5vw, 100px);
+
+  width: 100%;
+  margin-top: 37px;
+}
+
+#xdge-what-luxury .xl-copy {
+  min-width: 0;
+}
+
+/* SUBHEADING */
+
+#xdge-what-luxury .xl-subheading {
+  max-width: 1050px;
+
+  color: #FAF9F6;
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(24px, 2.15vw, 35px);
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: -0.65px;
+}
+
+/* DESCRIPTION */
+
+#xdge-what-luxury .xl-description {
+  max-width: 1050px;
+  margin-top: 19px;
+
+  color: rgba(250,249,246,0.91);
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(15px, 1.1vw, 18px);
+  font-weight: 400;
+  line-height: 1.85;
+}
+
+/* =========================================
+   SMALL ROUNDED PHOTO
+========================================= */
+
+#xdge-what-luxury .xl-photo-area {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 0;
+}
+
+#xdge-what-luxury .xl-photo {
+  display: block;
+  width: 100%;
+  max-width: 322px;
+  aspect-ratio: 1.42 / 1;
+  height: auto;
+
+  object-fit: cover;
+  object-position: center;
+
+  border: 0;
+  border-radius: 25px;
+  background: #171717;
+}
+
+/* =========================================
+   SIX FEATURES
+========================================= */
+
+#xdge-what-luxury .xl-features {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0,1fr));
+  align-items: start;
+
+  width: 100%;
+  column-gap: clamp(20px, 3.1vw, 62px);
+  margin-top: 73px;
+}
+
+#xdge-what-luxury .xl-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 20px;
+  min-width: 0;
+  padding: 0 4px;
+  text-align: center;
+}
+
+/* THIN LINE ICONS */
+
+#xdge-what-luxury .xl-icon {
+  width: 38px;
+  height: 38px;
+  display: block;
+  flex: 0 0 auto;
+
+  fill: none;
+  stroke: rgba(250,249,246,0.94);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* LIGHT FEATURE LABELS */
+
+#xdge-what-luxury .xl-feature-label {
+  max-width: 215px;
+  margin: 0;
+
+  color: rgba(250,249,246,0.94);
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(11px, 0.9vw, 14px);
+  font-weight: 300;
+  line-height: 1.65;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   SMALLER DESKTOP
+========================================= */
+
+@media (max-width: 1200px) {
+
+  #xdge-what-luxury {
+    padding: 60px 28px 72px;
+  }
+
+  #xdge-what-luxury .xl-heading {
+    font-size: clamp(52px, 6.1vw, 85px);
+    gap: 13px;
+  }
+
+  #xdge-what-luxury .xl-logo {
+    width: clamp(195px, 26vw, 365px);
+  }
+
+  #xdge-what-luxury .xl-editorial {
+    gap: 38px;
+  }
+
+  #xdge-what-luxury .xl-photo {
+    max-width: 290px;
+  }
+
+  #xdge-what-luxury .xl-features {
+    column-gap: 19px;
+  }
+
+  #xdge-what-luxury .xl-feature-label {
+    font-size: 11px;
+    letter-spacing: 0.8px;
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  #xdge-what-luxury .xl-heading {
+    font-size: clamp(44px, 6vw, 72px);
+    gap: 10px;
+  }
+
+  #xdge-what-luxury .xl-logo {
+    width: clamp(165px, 28vw, 320px);
+  }
+
+  #xdge-what-luxury .xl-editorial {
+    grid-template-columns:
+      minmax(0, 1.5fr)
+      minmax(0, 0.8fr);
+
+    gap: 25px;
+  }
+
+  #xdge-what-luxury .xl-subheading {
+    font-size: 24px;
+  }
+
+  #xdge-what-luxury .xl-description {
+    font-size: 15px;
+  }
+
+  #xdge-what-luxury .xl-photo {
+    max-width: 265px;
+  }
+
+  #xdge-what-luxury .xl-features {
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    column-gap: 30px;
+    row-gap: 40px;
+    margin-top: 55px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+
+  #xdge-what-luxury {
+    padding: 48px 19px 58px;
+  }
+
+  #xdge-what-luxury .xl-eyebrow {
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 10px 14px;
+  }
+
+  #xdge-what-luxury .xl-heading {
+    flex-wrap: wrap;
+    justify-content: center;
+
+    gap: 8px 12px;
+    margin-top: 28px;
+
+    font-size: clamp(52px, 11vw, 76px);
+    white-space: normal;
+  }
+
+  #xdge-what-luxury .xl-heading-solid:first-child {
+    width: 100%;
+  }
+
+  #xdge-what-luxury .xl-logo {
+    width: min(65vw, 285px);
+    max-width: 75%;
+  }
+
+  #xdge-what-luxury .xl-editorial {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-top: 31px;
+  }
+
+  #xdge-what-luxury .xl-subheading {
+    font-size: 23px;
+    line-height: 1.4;
+  }
+
+  #xdge-what-luxury .xl-description {
+    margin-top: 18px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  #xdge-what-luxury .xl-photo-area {
+    justify-content: center;
+  }
+
+  #xdge-what-luxury .xl-photo {
+    max-width: 350px;
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  #xdge-what-luxury .xl-features {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 34px 16px;
+    margin-top: 47px;
+  }
+
+  #xdge-what-luxury .xl-feature {
+    gap: 14px;
+  }
+
+  #xdge-what-luxury .xl-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  #xdge-what-luxury .xl-feature-label {
+    font-size: 10px;
+    letter-spacing: 0.75px;
+  }
+}
+
+</style>
+
+
+
+
+<section id="xdge-what-luxury" aria-labelledby="xl-title">
+
+  <div class="xl-inner">
+
+    
+
+    <div class="xl-eyebrow-wrap">
+      <span class="xl-eyebrow">
+        THE XDGE · PROFESSIONAL LEADERSHIP ACADEMY
+      </span>
+    </div>
+
+
+    
+
+    <h2 class="xl-heading" id="xl-title">
+
+      <span class="xl-heading-solid">
+        WHAT IS
+      </span>
+
+      
+      
+
+      <svg class="xl-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 725 232" role="img" aria-label="XDGE logo">
+
+        <path fill="#FAF9F6" fill-rule="evenodd" d="
+            M578,158 L578,169 L577,170 L577,186
+            L708,186 L708,158Z
+
+            M114,142 L114,143 L157,186
+            L159,187 L208,187 L208,186
+            L207,186 L184,163 L183,163
+            L139,120 L134,124 L133,124
+            L116,141Z
+
+            M577,109 L577,135 L579,136
+            L707,136 L708,135 L708,109Z
+
+            M577,58 L577,72 L578,73
+            L578,84 L708,84 L709,83
+            L709,59 L708,57 L578,57Z
+
+            M401,83 L400,86 L398,88
+            L395,94 L395,96 L394,97
+            L394,99 L393,100 L393,102
+            L391,106 L391,110 L390,111
+            L390,133 L391,134 L391,137
+            L392,138 L392,142 L393,143
+            L393,145 L395,148 L395,150
+            L398,156 L400,158 L402,162
+            L414,174 L424,179 L426,181
+            L430,183 L433,183 L434,184
+            L436,184 L437,185 L441,185
+            L442,186 L447,186 L448,187
+            L475,187 L476,188 L493,188
+            L494,187 L552,187 L553,186
+            L553,109 L474,109 L473,110
+            L473,135 L474,136 L521,136
+            L522,137 L522,156 L521,157
+            L446,157 L438,153 L430,146
+            L424,135 L424,132 L423,131
+            L423,113 L424,112 L425,107
+            L427,103 L429,101 L429,100
+            L436,93 L437,91 L447,86
+            L449,86 L450,85 L553,85
+            L553,57 L442,57 L441,58
+            L438,58 L434,60 L431,60
+            L430,61 L428,61 L420,65
+            L414,70 L413,70Z
+
+            M220,57 L220,185 L221,186
+            L268,186 L269,187 L314,187
+            L315,186 L322,186 L323,185
+            L328,185 L329,184 L332,184
+            L333,183 L338,182 L340,180
+            L350,175 L361,165 L363,161
+            L366,158 L369,152 L369,150
+            L372,145 L372,142 L373,141
+            L373,138 L374,137 L374,133
+            L375,132 L375,112 L374,111
+            L374,106 L373,105 L373,103
+            L372,102 L372,100 L371,99
+            L371,97 L370,96 L369,91
+            L367,89 L363,81 L350,68
+            L337,61 L335,61 L334,60
+            L332,60 L328,58 L325,58
+            L324,57 L316,57 L315,56
+            L273,56 L272,57Z
+
+            M251,86 L252,85 L315,85
+            L316,86 L319,86 L322,88
+            L324,88 L335,98 L335,99
+            L339,104 L340,106 L340,108
+            L341,109 L341,112 L343,116
+            L343,128 L342,129 L342,132
+            L341,133 L341,135 L339,139
+            L328,151 L318,156 L252,156Z
+
+            M27,56 L93,123 L118,100
+            L73,56Z
+
+            M219,18 L184,46 L126,99
+            L66,160 L11,221 L44,194
+            L96,146 L181,60Z
+          "></path>
+
+      </svg>
+
+      <span class="xl-heading-solid">?</span>
+
+    </h2>
+
+
+    
+
+    <div class="xl-editorial">
+
+      <div class="xl-copy">
+
+        <h3 class="xl-subheading">
+          Leadership Development Programmes <br>Built Around Who You Are and Where You Want to Go.
+        </h3>
+
+        <p class="xl-description">
+          Guided by leadership development specialists and industry
+          experts, our programmes are strategically aligned with the
+          expectations of their next level and shaped around each
+          young person's individuality and aspirations.
+        </p>
+
+      </div>
+
+
+      
+
+      <div class="xl-photo-area">
+
+        <img class="xl-photo" src="https://xdgeleadership.com/wp-content/uploads/2026/10/xdge.homeschool.4-8.png" alt="Young people taking part in professional leadership development with an experienced mentor" loading="lazy" decoding="async">
+
+      </div>
+
+    </div>
+
+
+    
+
+    <div class="xl-features">
+
+      
+
+      <div class="xl-feature">
+
+        <svg class="xl-icon" viewBox="0 0 64 64" aria-hidden="true">
+
+          <rect x="22" y="9" width="36" height="28" rx="2"></rect>
+
+          <path d="M29 30V23
+                   M37 30V17
+                   M45 30V20
+                   M53 30V13"></path>
+
+          <circle cx="13" cy="21" r="6"></circle>
+
+          <path d="
+            M3 43V37
+            C3 30 8 27 13 27
+            C18 27 23 30 23 37V43
+
+            M18 33L31 21
+            M26 21H31V26
+          "></path>
+
+        </svg>
+
+        <p class="xl-feature-label">
+          Leadership &amp;<br>
+          Business Programmes
+        </p>
+
+      </div>
+
+
+      
+
+      <div class="xl-feature">
+
+        <svg class="xl-icon" viewBox="0 0 64 64" aria-hidden="true">
+
+          <path d="
+            M31 13
+            C25 6 16 10 16 18
+            C8 18 7 29 13 33
+            C7 39 12 49 20 48
+            C20 57 30 58 31 51Z
+
+            M33 13
+            C39 6 48 10 48 18
+            C56 18 57 29 51 33
+            C57 39 52 49 44 48
+            C44 57 34 58 33 51Z
+
+            M31 14V51
+            M33 14V51
+
+            M16 27C22 25 26 29 26 33
+            M48 27C42 25 38 29 38 33
+
+            M18 42C24 41 27 45 27 48
+            M46 42C40 41 37 45 37 48
+          "></path>
+
+        </svg>
+
+        <p class="xl-feature-label">
+          Expert<br>Training
+        </p>
+
+      </div>
+
+
+      
+
+      <div class="xl-feature">
+
+        <svg class="xl-icon" viewBox="0 0 64 64" aria-hidden="true">
+
+          <circle cx="19" cy="21" r="7"></circle>
+          <circle cx="45" cy="21" r="7"></circle>
+
+          <path d="
+            M6 49V42
+            C6 34 11 30 19 30
+            C27 30 32 34 32 42V49
+
+            M32 49V42
+            C32 34 37 30 45 30
+            C53 30 58 34 58 42V49
+
+            M24 13C29 9 35 9 40 13
+            M36 10L40 13L39 18
+
+            M40 56C35 60 29 60 24 56
+            M28 59L24 56L25 51
+          "></path>
+
+        </svg>
+
+        <p class="xl-feature-label">
+          Mutual Peer<br>Experience
+        </p>
+
+      </div>
+
+
+      
+
+      <div class="xl-feature">
+
+        <svg class="xl-icon" viewBox="0 0 64 64" aria-hidden="true">
+
+          <path d="M8 16H56
+                   M8 32H56
+                   M8 48H56"></path>
+
+          <circle cx="25" cy="16" r="5"></circle>
+          <circle cx="42" cy="32" r="5"></circle>
+          <circle cx="19" cy="48" r="5"></circle>
+
+        </svg>
+
+        <p class="xl-feature-label">
+          Personalised<br>Development
+        </p>
+
+      </div>
+
+
+      
+
+      <div class="xl-feature">
+
+        <svg class="xl-icon" viewBox="0 0 64 64" aria-hidden="true">
+
+          <path d="
+            M20 42
+            C24 26 37 14 54 9
+            C52 27 40 40 24 45Z
+          "></path>
+
+          <circle cx="41" cy="23" r="5"></circle>
+
+          <path d="
+            M20 32L11 35L5 47L18 43
+            M31 45L28 58L40 52L43 43
+
+            M15 49L7 57
+            M23 51L16 60
+          "></path>
+
+        </svg>
+
+        <p class="xl-feature-label">
+          Real-World<br>Application
+        </p>
+
+      </div>
+
+
+      
+
+      <div class="xl-feature">
+
+        <svg class="xl-icon" viewBox="0 0 64 64" aria-hidden="true">
+
+          <rect x="13" y="8" width="38" height="48" rx="3"></rect>
+
+          <path d="
+            M22 20H42
+            M22 27H42
+            M22 34H34
+          "></path>
+
+          <circle cx="42" cy="43" r="7"></circle>
+
+          <path d="
+            M37 49L35 60
+            L42 56L49 60L47 49
+          "></path>
+
+        </svg>
+
+        <p class="xl-feature-label">
+          Showcase &amp;<br>Portfolio
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

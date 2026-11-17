@@ -1,0 +1,764 @@
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+<style>
+/* ================================================
+   SECTION FOUNDATION
+================================================ */
+
+#xdge-editorial,
+#xdge-editorial * {
+  box-sizing: border-box;
+}
+
+#xdge-editorial {
+  --xe-blue: #5170FF;
+  --xe-black: #080808;
+  --xe-ivory: #FAF9F6;
+
+  width: 100%;
+  padding: 90px 30px 110px;
+  background: #FAF9F6;
+  color: #080808;
+  font-family: "Manrope", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#xdge-editorial .xe-container {
+  width: 100%;
+  max-width: 1460px;
+  margin: 0 auto;
+}
+
+/* ================================================
+   EDITORIAL HEADER
+================================================ */
+
+#xdge-editorial .xe-intro {
+  display: grid;
+  grid-template-columns: minmax(0,39fr) minmax(0,61fr);
+  column-gap: 25px;
+  min-height: 310px;
+  margin-bottom: 55px;
+}
+
+#xdge-editorial .xe-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+/* BLUE OUTLINED EYEBROW */
+
+#xdge-editorial .xe-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 18px;
+  background: transparent;
+  color: #5170FF;
+  border: 1px solid #5170FF;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .07em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+#xdge-editorial .xe-dot {
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  background: #5170FF;
+  border-radius: 50%;
+}
+
+/* ================================================
+   DISCOVERY CALL
+================================================ */
+
+#xdge-editorial .xe-help p {
+  margin: 0 0 18px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #666666;
+}
+
+#xdge-editorial .xe-discovery {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 13px 20px;
+  border: 1px solid #BDBAB4;
+  border-radius: 999px;
+  text-decoration: none !important;
+  font-family: "Manrope", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #111111 !important;
+  background: transparent;
+  transition:
+    background .4s ease,
+    border-color .4s ease,
+    color .4s ease,
+    transform .4s ease;
+}
+
+#xdge-editorial .xe-discovery:hover {
+  background: #080808;
+  border-color: #080808;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+}
+
+/* ================================================
+   MAIN HEADING
+================================================ */
+
+#xdge-editorial .xe-right {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+#xdge-editorial h2.xe-main-title {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: clamp(48px,5.8vw,86px) !important;
+  font-weight: 400 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.065em !important;
+  text-transform: none !important;
+  color: #080808 !important;
+  -webkit-text-fill-color: #080808;
+  -webkit-text-stroke: 0 !important;
+}
+
+#xdge-editorial .xe-main-title span {
+  color: #5170FF !important;
+  -webkit-text-fill-color: #5170FF !important;
+}
+
+/* ================================================
+   THREE CARD GRID
+================================================ */
+
+#xdge-editorial .xe-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+/* OUTER CARD */
+
+#xdge-editorial .xe-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid transparent;
+  border-radius: 25px;
+  transition: transform .65s cubic-bezier(.2,.75,.2,1);
+}
+
+#xdge-editorial .xe-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ================================================
+   IMAGE FRAMES
+   UNIFORM 16:9
+   NO BLURRED BACKGROUNDS OR EMPTY BANDS
+================================================ */
+
+#xdge-editorial .xe-image {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-radius: 24px 24px 0 0;
+  line-height: 0;
+}
+
+#xdge-editorial .xe-image::before,
+#xdge-editorial .xe-image::after {
+  content: none !important;
+  display: none !important;
+}
+
+#xdge-editorial .xe-image img {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  object-fit: cover !important;
+  object-position: center center;
+  transform: none !important;
+  filter: none !important;
+}
+
+#xdge-editorial .xe-career .xe-image img {
+  object-position: center 42% !important;
+}
+
+#xdge-editorial .xe-university .xe-image img {
+  object-position: center center !important;
+}
+
+#xdge-editorial .xe-school .xe-image img {
+  object-position: center center !important;
+}
+
+/* ================================================
+   CARD BODY
+================================================ */
+
+#xdge-editorial .xe-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  padding: 31px 29px 32px;
+}
+
+/* BLUE PATHWAY LABELS */
+
+#xdge-editorial .xe-category {
+  display: block;
+  margin: 0 0 25px;
+  color: #5170FF !important;
+  font-family: "Manrope", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  line-height: 1.75;
+  text-transform: uppercase;
+}
+
+/* CARD HEADINGS */
+
+#xdge-editorial h3.xe-article-title {
+  margin: 0 0 22px !important;
+  padding: 0 !important;
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: clamp(25px,2.15vw,33px) !important;
+  font-weight: 700 !important;
+  line-height: 1.18 !important;
+  letter-spacing: -.055em !important;
+  text-transform: none !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+/* DESCRIPTIONS */
+
+#xdge-editorial .xe-description {
+  margin: 0;
+  padding: 0;
+  font-family: "Manrope", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.85;
+}
+
+/* LINKS AT BOTTOM OF CARDS */
+
+#xdge-editorial .xe-footer {
+  margin-top: auto;
+  padding-top: 38px;
+}
+
+#xdge-editorial .xe-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  font-family: "Manrope", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  transition: gap .35s ease, color .35s ease;
+}
+
+#xdge-editorial .xe-read:hover {
+  gap: 20px;
+}
+
+#xdge-editorial .xe-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+#xdge-editorial .xe-arrow svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ================================================
+   CAREER CARD - BLACK
+================================================ */
+
+#xdge-editorial .xe-career {
+  background: #080808;
+  color: #FFFFFF;
+}
+
+#xdge-editorial .xe-career .xe-article-title {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+#xdge-editorial .xe-career .xe-description {
+  color: #C5C5C5;
+}
+
+#xdge-editorial .xe-career .xe-read {
+  color: #FFFFFF !important;
+}
+
+#xdge-editorial .xe-career .xe-read:hover {
+  color: #A7B7FF !important;
+}
+
+/* ================================================
+   UNIVERSITY CARD - WHITE
+================================================ */
+
+#xdge-editorial .xe-university {
+  background: #FFFFFF;
+  color: #080808;
+  border-color: #E5E2DC;
+}
+
+#xdge-editorial .xe-university .xe-article-title {
+  color: #080808 !important;
+  -webkit-text-fill-color: #080808 !important;
+}
+
+#xdge-editorial .xe-university .xe-description {
+  color: #666666;
+}
+
+#xdge-editorial .xe-university .xe-read {
+  color: #080808 !important;
+}
+
+#xdge-editorial .xe-university .xe-read:hover {
+  color: #5170FF !important;
+}
+
+/* ================================================
+   EARLY LEADERS CARD - LIGHT GREY
+================================================ */
+
+#xdge-editorial .xe-school {
+  background: #F0F0EE;
+  color: #080808;
+  border-color: #E5E2DC;
+}
+
+#xdge-editorial .xe-school .xe-article-title {
+  color: #080808 !important;
+  -webkit-text-fill-color: #080808 !important;
+}
+
+#xdge-editorial .xe-school .xe-description {
+  color: #666666;
+}
+
+#xdge-editorial .xe-school .xe-read {
+  color: #080808 !important;
+}
+
+#xdge-editorial .xe-school .xe-read:hover {
+  color: #5170FF !important;
+}
+
+/* ================================================
+   ACCESSIBILITY
+================================================ */
+
+#xdge-editorial a:focus-visible {
+  outline: 3px solid #5170FF;
+  outline-offset: 4px;
+}
+
+/* ================================================
+   TABLET
+================================================ */
+
+@media (max-width: 1100px) {
+
+  #xdge-editorial {
+    padding: 75px 24px 85px;
+  }
+
+  #xdge-editorial .xe-intro {
+    grid-template-columns: minmax(0,35fr) minmax(0,65fr);
+    min-height: 275px;
+    margin-bottom: 43px;
+  }
+
+  #xdge-editorial h2.xe-main-title {
+    font-size: clamp(46px,6vw,70px) !important;
+  }
+
+  #xdge-editorial .xe-grid {
+    gap: 15px;
+  }
+
+  #xdge-editorial .xe-image {
+    aspect-ratio: 16 / 9;
+  }
+
+  #xdge-editorial .xe-body {
+    padding: 26px 21px 28px;
+  }
+
+  #xdge-editorial h3.xe-article-title {
+    font-size: clamp(23px,2.6vw,29px) !important;
+  }
+
+  #xdge-editorial .xe-description {
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+}
+
+/* ================================================
+   MOBILE
+================================================ */
+
+@media (max-width: 767px) {
+
+  #xdge-editorial {
+    padding: 65px 20px 80px;
+  }
+
+  #xdge-editorial .xe-intro {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    gap: 34px;
+    margin-bottom: 40px;
+  }
+
+  #xdge-editorial .xe-left {
+    display: contents;
+  }
+
+  #xdge-editorial .xe-label {
+    order: 1;
+    align-self: flex-start;
+  }
+
+  #xdge-editorial .xe-right {
+    order: 2;
+  }
+
+  #xdge-editorial h2.xe-main-title {
+    font-size: clamp(42px,9vw,64px) !important;
+    line-height: 1.12 !important;
+    letter-spacing: -.06em !important;
+  }
+
+  #xdge-editorial .xe-help {
+    order: 3;
+  }
+
+  #xdge-editorial .xe-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  #xdge-editorial .xe-card {
+    border-radius: 21px;
+  }
+
+  #xdge-editorial .xe-image {
+    aspect-ratio: 16 / 9;
+    border-radius: 20px 20px 0 0;
+  }
+
+  #xdge-editorial .xe-body {
+    padding: 28px 25px 31px;
+  }
+
+  #xdge-editorial .xe-category {
+    font-size: 10px;
+    margin-bottom: 20px;
+  }
+
+  #xdge-editorial h3.xe-article-title {
+    font-size: clamp(27px,6vw,34px) !important;
+  }
+
+  #xdge-editorial .xe-description {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  #xdge-editorial .xe-footer {
+    padding-top: 32px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #xdge-editorial .xe-card,
+  #xdge-editorial .xe-read,
+  #xdge-editorial .xe-discovery {
+    transition: none;
+  }
+}
+</style>
+
+
+
+<section id="xdge-editorial">
+
+  <div class="xe-container">
+
+    
+
+    <div class="xe-intro">
+
+      <div class="xe-left">
+
+        <div class="xe-label">
+          <span class="xe-dot"></span>
+          FIND YOUR XDGE
+        </div>
+
+        <div class="xe-help">
+
+          <p>
+            Not sure which pathway is right for you?
+          </p>
+
+          
+
+          <a class="xe-discovery" href="https://calendly.com/thexdge/strategy-session" target="_blank" rel="noopener noreferrer">
+            Schedule a discovery call
+            <span aria-hidden="true">↗</span>
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="xe-right">
+
+        <h2 class="xe-main-title">
+          Think you're not<br>
+          the <span>leadership type?</span>
+        </h2>
+
+      </div>
+
+    </div>
+
+    
+
+    <div class="xe-grid">
+
+      
+
+      <article class="xe-card xe-career">
+
+        <figure class="xe-image">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/01/iStock-924520286-1.jpg" alt="Young professionals preparing for workplace leadership" loading="lazy" decoding="async">
+
+        </figure>
+
+        <div class="xe-body">
+
+          <div class="xe-category">
+            AGES 19+ &nbsp; / &nbsp;
+            CAREER &amp; PROFESSIONAL DEVELOPMENT
+          </div>
+
+          <h3 class="xe-article-title">
+            Qualified.<br>
+            But ready for<br>
+            the real world?
+          </h3>
+
+          <p class="xe-description">
+            Moving from education into the workplace means
+            navigating expectations few students are ever
+            taught to meet. How do you present yourself as
+            a credible, capable professional and stand out
+            from day one?
+          </p>
+
+          <div class="xe-footer">
+
+            
+
+            <a class="xe-read" href="https://xdgeleadership.com/insights-ages-19-qualified-but-ready-for-the-real-world/">
+              Read More
+
+              <span class="xe-arrow">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 19L19 5M8 5h11v11"></path>
+                </svg>
+
+              </span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </article>
+
+      
+
+      <article class="xe-card xe-university">
+
+        <figure class="xe-image">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/11/XDGE-8.png" alt="Young person presenting ideas for university and academic progression" loading="lazy" decoding="async">
+
+        </figure>
+
+        <div class="xe-body">
+
+          <div class="xe-category">
+            AGES 16+ &nbsp; / &nbsp;
+            UNIVERSITY &amp; ACADEMIC PROGRESSION
+          </div>
+
+          <h3 class="xe-article-title">
+            Good grades.<br>
+            But what makes<br>
+            you stand out?
+          </h3>
+
+          <p class="xe-description">
+            Academic achievement may open doors,
+            but what sets you apart from everyone else
+            applying? Discover how to demonstrate leadership,
+            initiative and real achievement that make
+            universities take notice.
+          </p>
+
+          <div class="xe-footer">
+
+            
+
+            <a class="xe-read" href="https://xdgeleadership.com/good-grades-but-what-makes-you-stand-out/">
+              Read More
+
+              <span class="xe-arrow">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 19L19 5M8 5h11v11"></path>
+                </svg>
+
+              </span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </article>
+
+      
+
+      <article class="xe-card xe-school">
+
+        <figure class="xe-image">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/11/XDGE-9.png" alt="Young XDGE students participating in a leadership discussion" loading="lazy" decoding="async">
+
+        </figure>
+
+        <div class="xe-body">
+
+          <div class="xe-category">
+            AGES 11+ &nbsp; / &nbsp;
+            EARLY LEADERS &amp; LEADERSHIP DEVELOPMENT
+          </div>
+
+          <h3 class="xe-article-title">
+            Too early<br>
+            for leadership?
+          </h3>
+
+          <p class="xe-description">
+            Young people are rarely given the preparation
+            they need to navigate what comes next.
+            How do you build the confidence, skills
+            and experiences to take on new challenges
+            and stand out before you even get there?
+          </p>
+
+          <div class="xe-footer">
+
+            
+
+            <a class="xe-read" href="https://xdgeleadership.com/think-you-are-too-young-to-be-a-leader/">
+              Read More
+
+              <span class="xe-arrow">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 19L19 5M8 5h11v11"></path>
+                </svg>
+
+              </span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+

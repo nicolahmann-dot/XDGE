@@ -1,0 +1,614 @@
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+
+<style>
+
+/* ==========================================
+   FOUNDATION
+========================================== */
+
+#xdge-experience-v2,
+#xdge-experience-v2 * {
+  box-sizing: border-box;
+}
+
+#xdge-experience-v2 {
+  --xe-blue: #5170FF;
+  --xe-black: #050505;
+  --xe-card: #111111;
+  --xe-border: #303030;
+  --xe-white: #FFFFFF;
+  --xe-muted: #B4B4B4;
+
+  width: 100%;
+
+  padding: clamp(70px, 8vw, 120px) 35px
+           clamp(80px, 8vw, 120px);
+
+  background: #050505 !important;
+  color: #FFFFFF;
+
+  font-family: "Manrope", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#xdge-experience-v2 h2,
+#xdge-experience-v2 h3,
+#xdge-experience-v2 h4,
+#xdge-experience-v2 p,
+#xdge-experience-v2 figure {
+  margin: 0;
+  padding: 0;
+}
+
+#xdge-experience-v2 .xe-inner {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+/* ==========================================
+   BLUE EYEBROW
+========================================== */
+
+#xdge-experience-v2 .xe-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 26px;
+
+  color: #5170FF;
+  font-family: "Manrope", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+#xdge-experience-v2 .xe-eyebrow::before {
+  content: "";
+  display: block;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 1px;
+  background: #5170FF;
+}
+
+/* ==========================================
+   THE EXPERIENCE HEADER
+   FULL WIDTH - PHOTO REMOVED
+========================================== */
+
+#xdge-experience-v2 .xe-heading-row {
+  display: block;
+  width: 100%;
+}
+
+#xdge-experience-v2 h2.xe-main-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+
+  width: 100%;
+  min-width: 0;
+  gap: clamp(10px, 1.6vw, 26px);
+
+  color: #FFFFFF !important;
+  font-family: "Anton", Impact, sans-serif !important;
+  font-size: clamp(62px, 9vw, 145px) !important;
+  font-weight: 400 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.02em !important;
+  text-transform: uppercase !important;
+}
+
+/* OUTLINED WORD THE */
+
+#xdge-experience-v2 .xe-outline {
+  color: #FFFFFF;
+}
+
+@supports (-webkit-text-stroke: 1px white) {
+
+  #xdge-experience-v2 .xe-outline {
+    color: transparent !important;
+    -webkit-text-stroke: 1.3px #FFFFFF;
+    -webkit-text-fill-color: transparent;
+  }
+
+}
+
+/* ==========================================
+   LEARN IT. APPLY IT. PROVE IT.
+========================================== */
+
+#xdge-experience-v2 .xe-principle {
+  margin-top: 43px;
+}
+
+#xdge-experience-v2 h3.xe-principle-title {
+  margin: 0 0 17px !important;
+
+  color: #FFFFFF !important;
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: clamp(31px, 4vw, 55px) !important;
+  font-weight: 400 !important;
+  line-height: 1.3 !important;
+  letter-spacing: -.05em !important;
+  text-transform: none !important;
+}
+
+#xdge-experience-v2 .xe-blue {
+  color: #5170FF !important;
+  -webkit-text-fill-color: #5170FF !important;
+}
+
+#xdge-experience-v2 .xe-principle-intro {
+  max-width: 1100px;
+
+  color: #B4B4B4;
+  font-family: "Manrope", Arial, sans-serif;
+  font-size: clamp(17px, 1.35vw, 20px);
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+/* ==========================================
+   THREE IMAGE CARDS
+========================================== */
+
+#xdge-experience-v2 .xe-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 19px;
+  margin-top: 38px;
+  align-items: stretch;
+}
+
+#xdge-experience-v2 .xe-card {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+
+  background: #111111;
+  border: 1px solid #303030;
+  border-radius: 25px;
+
+  transition:
+    transform .55s cubic-bezier(.22,1,.36,1),
+    border-color .55s ease,
+    background .55s ease;
+}
+
+#xdge-experience-v2 .xe-card:hover {
+  transform: translateY(-4px);
+  border-color: #474747;
+  background: #141414;
+}
+
+/* ==========================================
+   CARD IMAGES
+   FULL IMAGES VISIBLE - NO CROPPING
+========================================== */
+
+#xdge-experience-v2 .xe-card-image {
+  position: relative;
+  display: block;
+
+  flex: 0 0 auto;
+  width: 100%;
+  aspect-ratio: 1.56 / 1;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+  background: #1A1A1A;
+}
+
+#xdge-experience-v2 .xe-card-image img {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+
+  object-fit: contain !important;
+  object-position: center center !important;
+
+  transform: none !important;
+  transition: none !important;
+}
+
+#xdge-experience-v2 .xe-card:hover .xe-card-image img {
+  transform: none !important;
+}
+
+/* ==========================================
+   CHARCOAL TEXT AREA
+========================================== */
+
+#xdge-experience-v2 .xe-card-content {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  min-width: 0;
+  padding: 28px 29px 34px;
+
+  background: transparent;
+}
+
+#xdge-experience-v2 .xe-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* BLUE LINE ICONS */
+
+#xdge-experience-v2 .xe-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+  color: #5170FF;
+}
+
+#xdge-experience-v2 .xe-card-icon svg {
+  display: block;
+  width: 32px;
+  height: 32px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* SUBTLE CARD NUMBERS */
+
+#xdge-experience-v2 .xe-card-number {
+  color: #505050;
+
+  font-family: "Manrope", Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+/* CARD TITLES */
+
+#xdge-experience-v2 h4.xe-card-title {
+  margin: 0 0 14px !important;
+
+  color: #FFFFFF !important;
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: clamp(18px, 1.45vw, 21px) !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  letter-spacing: -.025em !important;
+  text-transform: uppercase !important;
+}
+
+/* CARD DESCRIPTIONS */
+
+#xdge-experience-v2 .xe-card-description {
+  max-width: 400px;
+
+  color: #B4B4B4;
+  font-family: "Manrope", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.85;
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1100px) {
+
+  #xdge-experience-v2 {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  #xdge-experience-v2 .xe-cards {
+    gap: 14px;
+  }
+
+  #xdge-experience-v2 .xe-card-content {
+    padding: 23px 22px 29px;
+  }
+
+  #xdge-experience-v2 .xe-card-description {
+    font-size: 14px;
+  }
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 700px) {
+
+  #xdge-experience-v2 {
+    padding: 55px 20px 75px;
+  }
+
+  #xdge-experience-v2 .xe-eyebrow {
+    margin-bottom: 22px;
+    font-size: 10px;
+  }
+
+  #xdge-experience-v2 h2.xe-main-title {
+    font-size: clamp(43px, 11vw, 80px) !important;
+    line-height: 1.07 !important;
+    gap: 9px;
+  }
+
+  #xdge-experience-v2 .xe-principle {
+    margin-top: 32px;
+  }
+
+  #xdge-experience-v2 h3.xe-principle-title {
+    font-size: clamp(30px, 7.3vw, 42px) !important;
+    line-height: 1.28 !important;
+  }
+
+  #xdge-experience-v2 .xe-principle-intro {
+    font-size: 16px;
+  }
+
+  #xdge-experience-v2 .xe-cards {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 30px;
+  }
+
+  #xdge-experience-v2 .xe-card {
+    border-radius: 22px;
+  }
+
+  #xdge-experience-v2 .xe-card-image {
+    aspect-ratio: 1.56 / 1;
+  }
+
+  #xdge-experience-v2 .xe-card-image img {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+  #xdge-experience-v2 .xe-card-content {
+    padding: 23px 24px 28px;
+  }
+
+  #xdge-experience-v2 .xe-card-top {
+    margin-bottom: 16px;
+  }
+
+  #xdge-experience-v2 h4.xe-card-title {
+    font-size: 20px !important;
+    margin-bottom: 11px !important;
+  }
+
+  #xdge-experience-v2 .xe-card-description {
+    font-size: 14px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  #xdge-experience-v2 .xe-card {
+    transition: none;
+  }
+
+}
+
+</style>
+
+
+
+
+<section id="xdge-experience-v2" aria-labelledby="xe-main-heading">
+
+  <div class="xe-inner">
+
+    
+
+    <div class="xe-eyebrow">
+      THE XDGE LEARNING EXPERIENCE
+    </div>
+
+
+    
+
+    <div class="xe-heading-row">
+
+      <h2 class="xe-main-title" id="xe-main-heading">
+
+        <span class="xe-outline">THE</span>
+        <span>EXPERIENCE</span>
+
+      </h2>
+
+    </div>
+
+
+    
+
+    <div class="xe-principle">
+
+      <h3 class="xe-principle-title">
+        Learn It. Apply It.
+        <span class="xe-blue">Prove It.</span>
+      </h3>
+
+      <p class="xe-principle-intro">
+        Personal, Professional &amp; Leadership development.
+        Real-world challenges.
+      </p>
+
+    </div>
+
+
+    
+
+    <div class="xe-cards">
+
+
+      
+
+      <article class="xe-card">
+
+        <figure class="xe-card-image xe-learn-image">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/11/MENU-3.png" alt="XDGE personal, professional and leadership learning" loading="lazy" decoding="async">
+
+        </figure>
+
+        <div class="xe-card-content">
+
+          <div class="xe-card-top">
+
+            <div class="xe-card-icon" aria-hidden="true">
+
+              
+              <svg viewBox="0 0 24 24">
+                <path d="M9 18h6"></path>
+                <path d="M10 21h4"></path>
+                <path d="M8.3 15.5a7 7 0 1 1 7.4 0c-.7.5-1.2 1.4-1.2 2.5h-5c0-1.1-.5-2-1.2-2.5Z"></path>
+              </svg>
+
+            </div>
+
+            <span class="xe-card-number" aria-hidden="true">
+              01
+            </span>
+
+          </div>
+
+          <h4 class="xe-card-title">
+            LEARN
+          </h4>
+
+          <p class="xe-card-description">
+            Develop personal, professional and leadership
+            tools through interactive learning and discussion.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      
+
+      <article class="xe-card">
+
+        <figure class="xe-card-image xe-apply-image">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/11/MENU-1.png" alt="XDGE practical leadership challenges and teamwork" loading="lazy" decoding="async">
+
+        </figure>
+
+        <div class="xe-card-content">
+
+          <div class="xe-card-top">
+
+            <div class="xe-card-icon" aria-hidden="true">
+
+              
+              <svg viewBox="0 0 24 24">
+                <path d="m13 2-9 12h7l-1 8 10-13h-7l0-7Z"></path>
+              </svg>
+
+            </div>
+
+            <span class="xe-card-number" aria-hidden="true">
+              02
+            </span>
+
+          </div>
+
+          <h4 class="xe-card-title">
+            APPLY
+          </h4>
+
+          <p class="xe-card-description">
+            Put your new skills and tools into practice
+            through engaging, real-world challenges.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      
+
+      <article class="xe-card">
+
+        <figure class="xe-card-image xe-prove-image">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/11/XDGE-PROVE-1.png" alt="XDGE leadership project presentation and showcase" loading="lazy" decoding="async">
+
+        </figure>
+
+        <div class="xe-card-content">
+
+          <div class="xe-card-top">
+
+            <div class="xe-card-icon" aria-hidden="true">
+
+              
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="8" r="5"></circle>
+                <path d="m8.5 12-1 9 4.5-3 4.5 3-1-9"></path>
+              </svg>
+
+            </div>
+
+            <span class="xe-card-number" aria-hidden="true">
+              03
+            </span>
+
+          </div>
+
+          <h4 class="xe-card-title">
+            PROVE
+          </h4>
+
+          <p class="xe-card-description">
+            Bring your ideas and goals to life through
+            projects and showcase your impact in a
+            presentation format of your choice.
+          </p>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>

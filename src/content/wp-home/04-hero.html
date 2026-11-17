@@ -1,0 +1,1174 @@
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================
+   BASE
+========================================= */
+
+#xdge-distinctive,
+#xdge-distinctive * {
+  box-sizing: border-box;
+}
+
+#xdge-distinctive {
+  --xd-ivory: #FAF9F6;
+  --xd-black: #101010;
+  --xd-blue: #2446FF;
+  --xd-grey: #555555;
+
+  width: 100%;
+  padding: 0 35px;
+  margin: 0;
+
+  background: var(--xd-ivory);
+  color: var(--xd-black);
+  font-family: 'Manrope', Arial, sans-serif;
+
+  overflow: visible;
+}
+
+#xdge-distinctive .xd-wrap {
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   HERO LAYOUT
+========================================= */
+
+#xdge-distinctive .xd-hero {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0,47%)
+    minmax(0,33%)
+    minmax(0,20%);
+
+  min-height: 720px;
+  position: relative;
+  align-items: stretch;
+
+  /* allow portrait to overhang lower section */
+  overflow: visible;
+  z-index: 3;
+}
+
+#xdge-distinctive .xd-hero-copy {
+  position: relative;
+  z-index: 4;
+
+  padding: 43px 0 48px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* =========================================
+   TOP BLUE OUTLINE EYEBROW
+========================================= */
+
+#xdge-distinctive .xd-top-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 9px 19px;
+  margin: 0 0 28px;
+
+  border: 1px solid var(--xd-blue);
+  border-radius: 100px;
+
+  background: transparent;
+  color: var(--xd-blue);
+
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.6px;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   MAIN HEADING
+========================================= */
+
+#xdge-distinctive .xd-hero-heading {
+  margin: 0;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(40px,4vw,60px);
+  font-weight: 300;
+
+  line-height: 1.15;
+  letter-spacing: -2.8px;
+}
+
+#xdge-distinctive .xd-hero-heading span {
+  display: block;
+}
+
+#xdge-distinctive .xd-hero-heading .xd-next {
+  margin-bottom: 12px;
+}
+
+#xdge-distinctive .xd-hero-heading .xd-emphasis {
+  margin-top: 19px;
+  font-weight: 500;
+  line-height: 1.12;
+}
+
+/* =========================================
+   MINIMAL PATHWAY DESIGN
+========================================= */
+
+#xdge-distinctive .xd-pathways {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+
+  width: 740px;
+  max-width: 740px;
+
+  margin: 30px 0 0;
+  padding: 0;
+
+  position: relative;
+  z-index: 4;
+
+  align-items: center;
+}
+
+#xdge-distinctive .xd-pathway {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 13px;
+  min-width: 0;
+  min-height: 60px;
+
+  padding: 5px 18px 5px 22px;
+
+  background: transparent;
+  border: none;
+  border-right: 1px solid #A9A9A9;
+  border-radius: 0;
+
+  color: #151515;
+}
+
+#xdge-distinctive .xd-pathway:first-child {
+  padding-left: 5px;
+}
+
+#xdge-distinctive .xd-pathway:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+#xdge-distinctive .xd-pathway-icon {
+  width: 37px;
+  height: 37px;
+
+  flex: 0 0 37px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #172B65;
+}
+
+#xdge-distinctive .xd-pathway-icon svg {
+  display: block;
+  width: 36px;
+  height: 36px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#xdge-distinctive .xd-pathway-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  gap: 7px;
+  min-width: 0;
+}
+
+#xdge-distinctive .xd-pathway-from {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+
+  letter-spacing: .05px;
+  line-height: 1.4;
+
+  color: #151515;
+  text-transform: uppercase;
+}
+
+#xdge-distinctive .xd-pathway-destination {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+
+  letter-spacing: -.1px;
+  line-height: 1.5;
+
+  color: #333333;
+}
+
+#xdge-distinctive .xd-pathway-arrow {
+  flex: 0 0 auto;
+  color: var(--xd-blue);
+
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1;
+
+  position: relative;
+  top: 1px;
+}
+
+/* =========================================
+   HERO DESCRIPTION
+========================================= */
+
+#xdge-distinctive .xd-hero-description {
+  max-width: 545px;
+  margin: 27px 0 24px;
+
+  color: var(--xd-grey);
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: -.2px;
+}
+
+/* =========================================
+   SHARED BLUE BUTTON
+   UPDATED NAVY GRADIENT ONLY
+========================================= */
+
+#xdge-distinctive .xd-button {
+  width: 100%;
+  max-width: 510px;
+  min-height: 64px;
+
+  padding: 15px 28px 15px 31px;
+
+  border: 0;
+  border-radius: 100px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+
+  background: linear-gradient(
+    110deg,
+    #14203D 0%,
+    #1A376A 48%,
+    #285E9F 100%
+  );
+
+  color: #FFFFFF;
+  text-decoration: none;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+
+  transition:
+    background .3s ease,
+    transform .3s ease;
+}
+
+#xdge-distinctive .xd-button:hover {
+  background: linear-gradient(
+    110deg,
+    #1A2D55 0%,
+    #21477E 48%,
+    #326EB4 100%
+  );
+
+  transform: translateY(-2px);
+}
+
+#xdge-distinctive .xd-button:focus-visible {
+  outline: 3px solid var(--xd-black);
+  outline-offset: 4px;
+}
+
+#xdge-distinctive .xd-button svg {
+  width: 23px;
+  height: 23px;
+
+  flex-shrink: 0;
+
+  fill: none;
+  stroke: currentColor;
+}
+
+/* =========================================
+   WOMAN IMAGE
+   hands slightly overhang lower section
+========================================= */
+
+#xdge-distinctive .xd-portrait {
+  position: relative;
+  min-width: 0;
+  align-self: stretch;
+  z-index: 6;
+  pointer-events: none;
+}
+
+#xdge-distinctive .xd-portrait img {
+  display: block;
+  position: absolute;
+
+  left: 50%;
+  bottom: -96px;
+
+  transform: translateX(-50%);
+
+  width: 124%;
+  max-width: none;
+
+  height: auto;
+  max-height: 100%;
+
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+/* =========================================
+   RIGHT SIDE INDIVIDUALITY
+========================================= */
+
+#xdge-distinctive .xd-values {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding-left: clamp(68px,5.3vw,95px);
+
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+#xdge-distinctive .xd-values-inner {
+  width: 100%;
+  min-width: 0;
+
+  border-left: 1px solid #868686;
+  padding: 3px 0 3px 20px;
+}
+
+#xdge-distinctive .xd-value {
+  margin: 0;
+  color: #222222;
+
+  font-size: clamp(9.6px,.84vw,12px);
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: .65px;
+  text-transform: uppercase;
+}
+
+#xdge-distinctive .xd-value-rule {
+  width: 75px;
+  height: 1px;
+
+  margin: 26px 0;
+  background: #888888;
+}
+
+/* =========================================
+   SECTION DIVIDER + LOWER SECTION
+========================================= */
+
+#xdge-distinctive .xd-horizontal-rule {
+  position: relative;
+  z-index: 1;
+  height: 1px;
+  width: 100%;
+  background: rgba(0,0,0,.22);
+}
+
+#xdge-distinctive .xd-lower {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0,42%)
+    1px
+    minmax(0,1fr);
+
+  gap: 44px;
+  align-items: center;
+
+  padding: 34px 0 43px;
+}
+
+/* =========================================
+   GRADES + DISTINCTIVE EDGE
+========================================= */
+
+#xdge-distinctive .xd-equation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 23px;
+  width: 100%;
+}
+
+#xdge-distinctive .xd-card {
+  width: 215px;
+  height: 145px;
+  min-width: 0;
+
+  border: 1.5px solid #222222;
+  border-radius: 9px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 13px;
+  text-align: center;
+  padding: 17px 10px;
+}
+
+#xdge-distinctive .xd-card-icon {
+  width: 49px;
+  height: 49px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#xdge-distinctive .xd-card-title {
+  font-family: 'Anton', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+
+  letter-spacing: 1.15px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+#xdge-distinctive .xd-plus {
+  font-size: 38px;
+  font-weight: 300;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+#xdge-distinctive .xd-lower-divider {
+  width: 1px;
+  height: 154px;
+  background: rgba(0,0,0,.62);
+}
+
+/* =========================================
+   WHY IT MATTERS
+========================================= */
+
+#xdge-distinctive .xd-lower-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+#xdge-distinctive .xd-eyebrow {
+  margin: 0 0 15px;
+
+  color: #222222;
+  font-size: 12px;
+  font-weight: 600;
+
+  line-height: 1.4;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+
+#xdge-distinctive .xd-message {
+  margin: 0 0 22px;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(23px,2.15vw,31px);
+  font-weight: 300;
+
+  line-height: 1.34;
+  letter-spacing: -1px;
+}
+
+#xdge-distinctive .xd-message strong {
+  display: block;
+  font-weight: 500;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1150px) {
+
+  #xdge-distinctive {
+    padding: 0 27px;
+  }
+
+  #xdge-distinctive .xd-hero {
+    grid-template-columns: 48% 33% 19%;
+    min-height: 680px;
+  }
+
+  #xdge-distinctive .xd-hero-heading {
+    font-size: clamp(35px,4.1vw,51px);
+    letter-spacing: -2px;
+  }
+
+  #xdge-distinctive .xd-pathways {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 26px;
+  }
+
+  #xdge-distinctive .xd-pathway {
+    gap: 7px;
+    padding: 4px 9px;
+  }
+
+  #xdge-distinctive .xd-pathway:first-child {
+    padding-left: 0;
+  }
+
+  #xdge-distinctive .xd-pathway-icon {
+    width: 26px;
+    height: 28px;
+    flex-basis: 26px;
+  }
+
+  #xdge-distinctive .xd-pathway-icon svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  #xdge-distinctive .xd-pathway-from {
+    font-size: 9px;
+  }
+
+  #xdge-distinctive .xd-pathway-destination {
+    font-size: 9px;
+    gap: 4px;
+  }
+
+  #xdge-distinctive .xd-hero-description {
+    font-size: 15px;
+  }
+
+  #xdge-distinctive .xd-portrait img {
+    width: 130%;
+    bottom: -82px;
+  }
+
+  #xdge-distinctive .xd-values {
+    padding-left: 65px;
+  }
+
+  #xdge-distinctive .xd-values-inner {
+    padding-left: 15px;
+  }
+
+  #xdge-distinctive .xd-value {
+    font-size: 9.6px;
+    letter-spacing: .4px;
+  }
+
+  #xdge-distinctive .xd-lower {
+    grid-template-columns: 42% 1px minmax(0,1fr);
+    gap: 25px;
+  }
+
+  #xdge-distinctive .xd-equation {
+    gap: 12px;
+  }
+
+  #xdge-distinctive .xd-card {
+    height: 127px;
+  }
+
+  #xdge-distinctive .xd-card-title {
+    font-size: 15px;
+  }
+
+  #xdge-distinctive .xd-message {
+    font-size: 24px;
+  }
+}
+
+/* =========================================
+   SMALL TABLETS
+========================================= */
+
+@media (min-width: 768px) and (max-width: 950px) {
+
+  #xdge-distinctive .xd-hero {
+    grid-template-columns: 58% 42%;
+    min-height: 0;
+  }
+
+  #xdge-distinctive .xd-hero-copy {
+    padding-bottom: 50px;
+  }
+
+  #xdge-distinctive .xd-pathways {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    max-width: 390px;
+  }
+
+  #xdge-distinctive .xd-pathway {
+    min-height: 43px;
+    padding: 0 0 10px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(0,0,0,.14);
+    align-items: center;
+  }
+
+  #xdge-distinctive .xd-pathway:last-child {
+    border-bottom: 0;
+  }
+
+  #xdge-distinctive .xd-pathway-copy {
+    gap: 3px;
+  }
+
+  #xdge-distinctive .xd-pathway-from {
+    font-size: 10px;
+  }
+
+  #xdge-distinctive .xd-pathway-destination {
+    font-size: 10px;
+  }
+
+  #xdge-distinctive .xd-portrait img {
+    width: 128%;
+    bottom: -60px;
+  }
+
+  #xdge-distinctive .xd-values {
+    grid-column: 1 / -1;
+    padding: 20px 0 27px;
+    justify-content: flex-start;
+  }
+
+  #xdge-distinctive .xd-values-inner {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
+  #xdge-distinctive .xd-value-rule {
+    width: 1px;
+    height: 28px;
+    margin: 0;
+  }
+
+  #xdge-distinctive .xd-value {
+    font-size: 11px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+
+  #xdge-distinctive {
+    padding: 0 19px;
+  }
+
+  #xdge-distinctive .xd-hero {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  #xdge-distinctive .xd-hero-copy {
+    order: 1;
+    padding: 35px 0 30px;
+  }
+
+  #xdge-distinctive .xd-top-eyebrow {
+    margin-bottom: 26px;
+    font-size: 10px;
+    padding: 9px 16px;
+  }
+
+  #xdge-distinctive .xd-hero-heading {
+    font-size: clamp(34px,8.5vw,52px);
+    line-height: 1.17;
+    letter-spacing: -1.8px;
+  }
+
+  #xdge-distinctive .xd-hero-heading .xd-next {
+    margin-bottom: 9px;
+  }
+
+  #xdge-distinctive .xd-hero-heading .xd-emphasis {
+    margin-top: 15px;
+  }
+
+  #xdge-distinctive .xd-pathways {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    width: 100%;
+    max-width: 100%;
+
+    gap: 0;
+    margin: 24px 0 0;
+  }
+
+  #xdge-distinctive .xd-pathway,
+  #xdge-distinctive .xd-pathway:first-child {
+    display: flex;
+    align-items: center;
+
+    min-height: 61px;
+    padding: 10px 0;
+
+    gap: 15px;
+
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,.14);
+  }
+
+  #xdge-distinctive .xd-pathway:last-child {
+    border-bottom: 0;
+  }
+
+  #xdge-distinctive .xd-pathway-icon {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+
+  #xdge-distinctive .xd-pathway-icon svg {
+    width: 33px;
+    height: 33px;
+  }
+
+  #xdge-distinctive .xd-pathway-copy {
+    gap: 4px;
+  }
+
+  #xdge-distinctive .xd-pathway-from {
+    font-size: 11px;
+  }
+
+  #xdge-distinctive .xd-pathway-destination {
+    font-size: 11px;
+    gap: 7px;
+  }
+
+  #xdge-distinctive .xd-hero-description {
+    font-size: 15px;
+    margin: 24px 0;
+    line-height: 1.75;
+  }
+
+  #xdge-distinctive .xd-button {
+    max-width: 510px;
+    min-height: 60px;
+    padding: 14px 17px;
+    font-size: 11px;
+    letter-spacing: .65px;
+  }
+
+  #xdge-distinctive .xd-button svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  #xdge-distinctive .xd-portrait {
+    order: 2;
+    height: 420px;
+    width: 100%;
+    overflow: visible;
+  }
+
+  #xdge-distinctive .xd-portrait img {
+    left: 50%;
+    bottom: -42px;
+
+    width: auto;
+    height: 100%;
+    max-height: none;
+
+    transform: translateX(-50%);
+  }
+
+  #xdge-distinctive .xd-values {
+    order: 3;
+    padding: 20px 0 26px;
+    justify-content: center;
+  }
+
+  #xdge-distinctive .xd-values-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding: 0 0 0 16px;
+    max-width: 480px;
+  }
+
+  #xdge-distinctive .xd-value {
+    font-size: 10px;
+    letter-spacing: .5px;
+  }
+
+  #xdge-distinctive .xd-value-rule {
+    width: 1px;
+    height: 45px;
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  #xdge-distinctive .xd-lower {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 28px 0 35px;
+  }
+
+  #xdge-distinctive .xd-equation {
+    max-width: 500px;
+    gap: 13px;
+  }
+
+  #xdge-distinctive .xd-card {
+    flex: 1 1 0;
+    max-width: 215px;
+    height: 125px;
+    gap: 10px;
+  }
+
+  #xdge-distinctive .xd-card-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  #xdge-distinctive .xd-card-title {
+    font-size: 14px;
+    letter-spacing: .6px;
+  }
+
+  #xdge-distinctive .xd-plus {
+    font-size: 29px;
+  }
+
+  #xdge-distinctive .xd-lower-divider {
+    height: 1px;
+    width: 100%;
+    max-width: 500px;
+    background: rgba(0,0,0,.22);
+  }
+
+  #xdge-distinctive .xd-lower-content {
+    width: 100%;
+  }
+
+  #xdge-distinctive .xd-message {
+    font-size: clamp(23px,5.2vw,29px);
+    line-height: 1.35;
+    margin-bottom: 24px;
+  }
+}
+
+/* =========================================
+   VERY SMALL SCREENS
+========================================= */
+
+@media (max-width: 380px) {
+
+  #xdge-distinctive .xd-portrait {
+    height: 340px;
+  }
+
+  #xdge-distinctive .xd-portrait img {
+    bottom: -34px;
+  }
+
+  #xdge-distinctive .xd-card {
+    height: 113px;
+    padding: 10px 6px;
+  }
+
+  #xdge-distinctive .xd-card-title {
+    font-size: 12px;
+  }
+
+  #xdge-distinctive .xd-value {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #xdge-distinctive .xd-button {
+    transition: none;
+  }
+}
+
+</style>
+
+<section id="xdge-distinctive">
+
+  <div class="xd-wrap">
+
+    <div class="xd-hero">
+
+      <div class="xd-hero-copy">
+
+        <div class="xd-top-eyebrow">
+          Why The XDGE?
+        </div>
+
+        <h1 class="xd-hero-heading">
+
+          <span class="xd-next">
+            Your Next Step:
+          </span>
+
+          <span>
+            School, University or Career.
+          </span>
+
+          <span class="xd-emphasis">
+            You Need a Distinctive Edge.
+          </span>
+
+        </h1>
+
+        <div class="xd-pathways" aria-label="Leadership progression pathways">
+
+          <div class="xd-pathway">
+
+            <div class="xd-pathway-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48">
+                <path d="M3 17L24 7L45 17L24 28L3 17Z"></path>
+                <path d="M12 23V34C12 34 17 40 24 40C31 40 36 34 36 34V23"></path>
+                <path d="M42 19V34"></path>
+              </svg>
+            </div>
+
+            <div class="xd-pathway-copy">
+              <span class="xd-pathway-from">School Student</span>
+              <span class="xd-pathway-destination">
+                <span class="xd-pathway-arrow">→</span>
+                <span>University / Early Leader</span>
+              </span>
+            </div>
+
+          </div>
+
+          <div class="xd-pathway">
+
+            <div class="xd-pathway-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48">
+                <path d="M24 13C18 9 11 9 4 12V36C11 33 18 33 24 37Z"></path>
+                <path d="M24 13C30 9 37 9 44 12V36C37 33 30 33 24 37Z"></path>
+                <path d="M24 13V37"></path>
+              </svg>
+            </div>
+
+            <div class="xd-pathway-copy">
+              <span class="xd-pathway-from">University Student</span>
+              <span class="xd-pathway-destination">
+                <span class="xd-pathway-arrow">→</span>
+                <span>Professional</span>
+              </span>
+            </div>
+
+          </div>
+
+          <div class="xd-pathway">
+
+            <div class="xd-pathway-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48">
+                <rect x="5" y="15" width="38" height="27" rx="4"></rect>
+                <path d="M17 15V10C17 8 19 6 21 6H27C29 6 31 8 31 10V15"></path>
+                <path d="M5 24C14 31 34 31 43 24"></path>
+                <path d="M21 27H27V32H21Z"></path>
+              </svg>
+            </div>
+
+            <div class="xd-pathway-copy">
+              <span class="xd-pathway-from">Early Career</span>
+              <span class="xd-pathway-destination">
+                <span class="xd-pathway-arrow">→</span>
+                <span>Emerging Leader</span>
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+        <p class="xd-hero-description">
+          Leadership is your standout factor.
+          A distinctive edge shaped by who you are,
+          the presence you bring and what you make
+          happen. That is your XDGE.
+        </p>
+
+        <a class="xd-button" href="#xdge-what-they-look-for">
+
+          <span>
+            What They Look For
+          </span>
+
+          <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 12h16"></path>
+            <path d="m13 5 7 7-7 7"></path>
+          </svg>
+
+        </a>
+
+      </div>
+
+      <div class="xd-portrait">
+
+        <img src="https://xdgeleadership.com/wp-content/uploads/2026/11/Untitled-design-72-scaled.png" alt="Confident young professional representing leadership and individuality" loading="eager" decoding="async">
+
+      </div>
+
+      <div class="xd-values">
+
+        <div class="xd-values-inner">
+
+          <p class="xd-value">
+            Built Around<br>
+            Your Individuality
+          </p>
+
+          <div class="xd-value-rule" aria-hidden="true"></div>
+
+          <p class="xd-value">
+            Driven By<br>
+            Your Goals
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="xd-horizontal-rule" aria-hidden="true"></div>
+
+    <div class="xd-lower" id="xdge-what-they-look-for">
+
+      <div class="xd-equation">
+
+        <div class="xd-card">
+
+          <svg class="xd-card-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M4 23L32 9L60 23L32 37L4 23Z"></path>
+            <path d="M17 30V42C17 49 24 54 32 54C40 54 47 49 47 42V30"></path>
+            <path d="M10 26V44"></path>
+            <circle cx="10" cy="47" r="3"></circle>
+            <path d="M10 50V57"></path>
+          </svg>
+
+          <span class="xd-card-title">
+            Grades
+          </span>
+
+        </div>
+
+        <span class="xd-plus" aria-hidden="true">+</span>
+
+        <div class="xd-card">
+
+          <svg class="xd-card-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="27"></circle>
+            <path d="M43 21L36 36L21 43L28 28L43 21Z"></path>
+            <path d="M28 28L36 36"></path>
+          </svg>
+
+          <span class="xd-card-title">
+            A Distinctive Edge
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="xd-lower-divider" aria-hidden="true"></div>
+
+      <div class="xd-lower-content">
+
+        <div class="xd-eyebrow">
+          Why It Matters
+        </div>
+
+        <h2 class="xd-message">
+          Grades show what you know.
+          <strong>
+            Your distinctive edge proves what
+            you can do with it.
+          </strong>
+        </h2>
+
+        <a class="xd-button" href="#xdge-experience">
+
+          <span>
+            How Does Leadership Give Me a Distinctive Edge?
+          </span>
+
+          <svg viewBox="0 0 24 24" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 12h16"></path>
+            <path d="m13 5 7 7-7 7"></path>
+          </svg>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

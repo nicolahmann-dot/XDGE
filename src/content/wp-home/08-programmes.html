@@ -1,0 +1,950 @@
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Manrope:wght@400;500;600&amp;family=Noto+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet">
+
+<style>
+
+/* FOUNDATION */
+
+#xdge-next-step-programmes,
+#xdge-next-step-programmes * {
+  box-sizing: border-box;
+}
+
+#xdge-next-step-programmes {
+  --xp-blue: #5170FF;
+  --xp-bg: #FAF9F6;
+  --xp-card: #F1F1EF;
+  --xp-inner: #E8E8E6;
+  --xp-text: #101010;
+  --xp-muted: #5E6065;
+  --xp-line: #CECECC;
+
+  width: 100%;
+  padding:
+    clamp(68px, 7vw, 100px) 24px
+    clamp(80px, 8vw, 118px);
+
+  background: var(--xp-bg) !important;
+  color: var(--xp-text);
+  font-family: "Manrope", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#xdge-next-step-programmes .xp-inner-wrap {
+  max-width: 1480px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+
+#xdge-next-step-programmes .xp-header {
+  max-width: 1450px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+#xdge-next-step-programmes .xp-eyebrow-wrap {
+  margin-bottom: 20px;
+}
+
+#xdge-next-step-programmes .xp-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  padding: 10px 20px;
+
+  border: 1px solid rgba(81,112,255,.24);
+  border-radius: 999px;
+  background: rgba(81,112,255,.045);
+
+  color: #5170FF !important;
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+/* MAIN HEADING */
+
+#xdge-next-step-programmes h2.xp-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .035em;
+
+  width: 100%;
+  margin: 0 auto 22px !important;
+  padding: 0 !important;
+
+  font-family: "Anton", Impact, sans-serif !important;
+  font-size: clamp(32px, 7.25vw, 112px) !important;
+  font-weight: 400 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -.018em !important;
+
+  text-align: center !important;
+  text-transform: uppercase !important;
+  color: #111111 !important;
+}
+
+#xdge-next-step-programmes .xp-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(5px, 1.2vw, 19px);
+  width: 100%;
+  white-space: nowrap;
+}
+
+#xdge-next-step-programmes .xp-outline {
+  display: block;
+  flex: 0 0 auto;
+
+  font-family: "Anton", Impact, sans-serif !important;
+  font-size: 1em !important;
+  font-weight: 400 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -.018em;
+  text-transform: uppercase;
+
+  color: transparent !important;
+  -webkit-text-stroke: 1.4px #111111;
+  -webkit-text-fill-color: transparent;
+}
+
+/* XDGE SVG LOGO */
+
+#xdge-next-step-programmes .xp-xdge-logo {
+  display: block;
+  flex: 0 0 auto;
+  width: 3.29em;
+  height: 1em;
+  overflow: visible;
+  color: #111111;
+}
+
+#xdge-next-step-programmes .xp-subtitle {
+  max-width: 980px;
+  margin: 0 auto;
+
+  color: #292929 !important;
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+  text-align: center;
+}
+
+/* THREE CARD GRID */
+
+#xdge-next-step-programmes .xp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* CARD STRUCTURE */
+
+#xdge-next-step-programmes .xp-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+
+  background: var(--xp-card);
+  border: 1px solid #E8E8E6;
+  border-radius: 34px;
+}
+
+#xdge-next-step-programmes .xp-card-inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+
+  padding: 18px;
+  background: var(--xp-inner);
+  border-radius: 26px;
+}
+
+/* IMAGES */
+
+#xdge-next-step-programmes .xp-image {
+  width: 100%;
+  aspect-ratio: 1.55 / 1;
+  flex-shrink: 0;
+  margin-bottom: 26px;
+
+  border-radius: 22px;
+  overflow: hidden;
+  background: #D8D8D4;
+}
+
+#xdge-next-step-programmes .xp-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+
+  transition:
+    transform 1s cubic-bezier(.22,1,.36,1);
+}
+
+#xdge-next-step-programmes .xp-card:hover .xp-image img {
+  transform: scale(1.03);
+}
+
+#xdge-next-step-programmes .xp-career-image img {
+  object-position: center 42%;
+}
+
+#xdge-next-step-programmes .xp-university-image img {
+  object-position: 26% center;
+  filter: brightness(1.09) contrast(1.02);
+}
+
+#xdge-next-step-programmes .xp-early-image img {
+  object-position: center 38%;
+}
+
+/* CARD HEADINGS */
+
+#xdge-next-step-programmes h3.xp-card-title {
+  margin: 0 0 4px !important;
+  padding: 0 !important;
+
+  color: #050505 !important;
+  -webkit-text-fill-color: #050505 !important;
+
+  font-family: "Anton", Impact, sans-serif !important;
+  font-size: clamp(28px, 2.2vw, 36px) !important;
+  font-weight: 400 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.01em !important;
+  text-transform: uppercase !important;
+}
+
+/* BLUE AGE LABELS */
+
+#xdge-next-step-programmes .xp-card-age {
+  display: block;
+  margin: 5px 0 10px;
+
+  color: #5170FF !important;
+  -webkit-text-fill-color: #5170FF !important;
+
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* CATEGORY LABELS */
+
+#xdge-next-step-programmes .xp-card-label {
+  margin: 0 0 22px;
+  color: #56595D;
+
+  font-family: "Manrope", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .095em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+/* PROGRAMME ROWS */
+
+#xdge-next-step-programmes .xp-programmes {
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+  border-top: 1px solid var(--xp-line);
+}
+
+#xdge-next-step-programmes .xp-programmes li {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--xp-line);
+}
+
+#xdge-next-step-programmes .xp-programme-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+  width: 100%;
+  min-height: 78px;
+  padding: 17px 0;
+
+  color: #191919 !important;
+  text-decoration: none !important;
+  cursor: pointer;
+
+  transition: color .3s ease;
+}
+
+#xdge-next-step-programmes .xp-programme-name {
+  display: block;
+  min-width: 0;
+
+  color: #181818 !important;
+  -webkit-text-fill-color: #181818 !important;
+
+  font-family: "Noto Sans", Arial, sans-serif !important;
+  font-size: clamp(16px, 1.18vw, 18px) !important;
+  font-weight: 300 !important;
+  line-height: 1.65 !important;
+  letter-spacing: -.01em !important;
+  text-transform: none !important;
+}
+
+/* CIRCULAR ARROWS */
+
+#xdge-next-step-programmes .xp-arrow {
+  flex: 0 0 37px;
+  width: 37px;
+  height: 37px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #B6B6B7;
+  border-radius: 50%;
+  background: transparent;
+  color: #111111;
+
+  transition:
+    color .35s ease,
+    background .35s ease,
+    border-color .35s ease,
+    transform .35s ease;
+}
+
+#xdge-next-step-programmes .xp-arrow svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  transition: transform .35s ease;
+}
+
+/* HOVER ANIMATION */
+
+#xdge-next-step-programmes .xp-programme-link:hover .xp-arrow {
+  background: var(--xp-blue);
+  border-color: var(--xp-blue);
+  color: #FFFFFF;
+  transform: translateX(2px);
+}
+
+#xdge-next-step-programmes .xp-programme-link:hover .xp-arrow svg {
+  transform: rotate(-35deg);
+}
+
+#xdge-next-step-programmes .xp-programme-link:hover .xp-programme-name {
+  color: #5170FF !important;
+  -webkit-text-fill-color: #5170FF !important;
+}
+
+/* BLACK CATEGORY BUTTONS */
+
+#xdge-next-step-programmes .xp-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+
+  width: 100%;
+  min-height: 58px;
+  margin-top: auto;
+  padding: 15px 20px;
+
+  background: #050505;
+  border: 1px solid #050505;
+  border-radius: 100px;
+
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+
+  font-family: "Manrope", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+
+  transition:
+    background .35s ease,
+    transform .35s ease;
+}
+
+#xdge-next-step-programmes .xp-button:hover {
+  background: var(--xp-blue);
+  border-color: var(--xp-blue);
+  transform: translateY(-2px);
+}
+
+#xdge-next-step-programmes .xp-button svg {
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ACCESSIBILITY */
+
+#xdge-next-step-programmes a:focus-visible {
+  outline: 3px solid var(--xp-blue);
+  outline-offset: 4px;
+}
+
+/* TABLET */
+
+@media (max-width: 1100px) {
+
+  #xdge-next-step-programmes .xp-grid {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  #xdge-next-step-programmes .xp-header {
+    max-width: 100%;
+    margin: 0 auto 42px;
+  }
+
+  #xdge-next-step-programmes h2.xp-title {
+    font-size: clamp(29px, 7.8vw, 78px) !important;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 640px) {
+
+  #xdge-next-step-programmes {
+    padding: 58px 16px 74px;
+  }
+
+  #xdge-next-step-programmes .xp-eyebrow {
+    font-size: 11px !important;
+    padding: 10px 22px;
+    letter-spacing: .14em;
+  }
+
+  #xdge-next-step-programmes h2.xp-title {
+    font-size: clamp(27px, 7.6vw, 46px) !important;
+    line-height: 1.05 !important;
+    gap: .08em;
+  }
+
+  #xdge-next-step-programmes .xp-title-row {
+    gap: 8px;
+  }
+
+  #xdge-next-step-programmes .xp-outline {
+    -webkit-text-stroke-width: 1.1px;
+  }
+
+  #xdge-next-step-programmes .xp-subtitle {
+    font-size: 16px !important;
+    line-height: 1.7 !important;
+  }
+
+  #xdge-next-step-programmes .xp-grid {
+    gap: 16px;
+  }
+
+  #xdge-next-step-programmes .xp-card {
+    padding: 12px;
+    border-radius: 26px;
+  }
+
+  #xdge-next-step-programmes .xp-card-inner {
+    padding: 16px;
+    border-radius: 21px;
+  }
+
+  #xdge-next-step-programmes .xp-image {
+    border-radius: 18px;
+    margin-bottom: 22px;
+  }
+
+  #xdge-next-step-programmes h3.xp-card-title {
+    font-size: 30px !important;
+  }
+
+  #xdge-next-step-programmes .xp-card-age {
+    font-size: 16px !important;
+  }
+
+  #xdge-next-step-programmes .xp-programme-link {
+    min-height: 74px;
+  }
+
+  #xdge-next-step-programmes .xp-programme-name {
+    font-size: 17px !important;
+    line-height: 1.62 !important;
+  }
+
+  #xdge-next-step-programmes .xp-arrow {
+    width: 35px;
+    height: 35px;
+    flex-basis: 35px;
+  }
+
+  #xdge-next-step-programmes .xp-button {
+    min-height: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  #xdge-next-step-programmes *,
+  #xdge-next-step-programmes *::before,
+  #xdge-next-step-programmes *::after {
+    transition: none !important;
+  }
+}
+
+</style>
+
+
+
+
+<section id="xdge-next-step-programmes" aria-labelledby="xp-main-title">
+
+  <div class="xp-inner-wrap">
+
+    
+
+    <header class="xp-header">
+
+      <div class="xp-eyebrow-wrap">
+        <span class="xp-eyebrow">
+          WHICH PROGRAMME
+        </span>
+      </div>
+
+      <h2 class="xp-title" id="xp-main-title" aria-label="Choose Your XDGE Programme">
+
+        <span class="xp-title-row">
+          <span class="xp-outline" aria-hidden="true">
+            CHOOSE YOUR
+          </span>
+        </span>
+
+        <span class="xp-title-row">
+
+          
+
+          <svg class="xp-xdge-logo" viewBox="0 0 1845 560" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path fill="currentColor" fill-rule="evenodd" d="M1493,456 L1838,456 L1838,380 L1494,380 Z M280,341 L280,343 L397,458 L530,458 L346,281 L332,291 Z M1493,254 L1493,321 L1496,324 L1836,324 L1838,322 L1837,251 L1495,251 Z M641,193 L643,191 L799,191 L815,194 L832,201 L846,211 L862,229 L872,248 L879,274 L879,300 L874,320 L866,336 L850,355 L831,368 L814,375 L642,375 Z M1493,119 L1494,188 L1837,189 L1840,183 L1840,124 L1837,116 L1496,116 Z M1033,184 L1018,210 L1006,245 L1002,271 L1003,314 L1010,344 L1023,374 L1040,399 L1069,426 L1106,446 L1129,453 L1158,458 L1250,460 L1378,457 L1429,458 L1432,456 L1431,251 L1221,252 L1221,324 L1346,325 L1349,327 L1349,377 L1346,379 L1162,379 L1150,377 L1126,365 L1109,349 L1096,326 L1090,300 L1091,269 L1096,251 L1106,231 L1127,208 L1154,194 L1170,191 L1432,191 L1432,115 L1143,116 L1107,126 L1079,140 L1059,155 Z M933,180 L908,153 L895,143 L867,128 L835,118 L814,115 L765,113 L637,116 L561,115 L558,117 L558,455 L671,456 L696,458 L798,458 L840,453 L866,445 L903,424 L925,403 L943,378 L957,347 L965,313 L966,272 L962,244 L950,209 Z M50,113 L227,292 L293,228 L246,180 L173,113 Z M564,8 L521,41 L459,93 L315,225 L162,380 L46,506 L6,553 L30,535 L109,466 L253,332 L432,151 Z"></path>
+          </svg>
+
+          <span class="xp-outline" aria-hidden="true">
+            PROGRAMME
+          </span>
+
+        </span>
+
+      </h2>
+
+      <p class="xp-subtitle">
+        Built on professional leadership development standards.
+        Designed for the challenges and opportunities ahead of you.
+      </p>
+
+    </header>
+
+
+    
+
+    <div class="xp-grid">
+
+
+      
+
+      <article class="xp-card">
+
+        <div class="xp-card-inner">
+
+          <div class="xp-image xp-career-image">
+            <img src="https://xdgeleadership.com/wp-content/uploads/2026/01/shutterstock_1289836285-1.jpg" alt="Career XDGE professional leadership development" loading="lazy" decoding="async">
+          </div>
+
+          <h3 class="xp-card-title">
+            CAREER XDGE
+          </h3>
+
+          <p class="xp-card-age">
+            Ages 18–24+
+          </p>
+
+          <p class="xp-card-label">
+            CAREER PROGRESSION &amp; LEADERSHIP
+          </p>
+
+          <ul class="xp-programmes">
+
+            
+
+            <li>
+              <a class="xp-programme-link" href="https://xdgeleadership.com/career-accelerator/">
+
+                <span class="xp-programme-name">
+                  Career Accelerator
+                </span>
+
+                <span class="xp-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+
+              </a>
+            </li>
+
+
+            
+
+            <li>
+              <a class="xp-programme-link" href="https://xdgeleadership.com/121-career-accelerator/">
+
+                <span class="xp-programme-name">
+                  1:1 Career Accelerator
+                </span>
+
+                <span class="xp-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+
+              </a>
+            </li>
+
+
+            
+
+            <li>
+              <a class="xp-programme-link" href="https://xdgeleadership.com/professional-to-leader/">
+
+                <span class="xp-programme-name">
+                  Professional to Leader
+                </span>
+
+                <span class="xp-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+
+              </a>
+            </li>
+
+          </ul>
+
+
+          
+
+          <a class="xp-button" href="https://xdgeleadership.com/career-xdge-programmes/">
+
+            <span>
+              Explore Career XDGE
+            </span>
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m13 6 6 6-6 6"></path>
+            </svg>
+
+          </a>
+
+        </div>
+
+      </article>
+
+
+
+      
+
+      <article class="xp-card">
+
+        <div class="xp-card-inner">
+
+          <div class="xp-image xp-university-image">
+            <img src="https://xdgeleadership.com/wp-content/uploads/2026/10/ALL-NEW-IMAGES-14.png" alt="University XDGE student leadership development" loading="lazy" decoding="async">
+          </div>
+
+          <h3 class="xp-card-title">
+            UNIVERSITY XDGE
+          </h3>
+
+          <p class="xp-card-age">
+            Ages 16+
+          </p>
+
+          <p class="xp-card-label">
+            ADMISSIONS &amp; GRADUATE READINESS
+          </p>
+
+          <ul class="xp-programmes">
+
+            
+
+            <li>
+              <a class="xp-programme-link" href="https://xdgeleadership.com/university-standout/">
+
+                <span class="xp-programme-name">
+                  University Standout
+                </span>
+
+                <span class="xp-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+
+              </a>
+            </li>
+
+
+            
+
+            <li>
+              <a class="xp-programme-link" href="https://xdgeleadership.com/121university-standout/">
+
+                <span class="xp-programme-name">
+                  1:1 University Standout
+                </span>
+
+                <span class="xp-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+
+              </a>
+            </li>
+
+
+            
+
+            <li>
+              <a class="xp-programme-link" href="https://xdgeleadership.com/student-professional/">
+
+                <span class="xp-programme-name">
+                  Student to Professional Accelerator
+                </span>
+
+                <span class="xp-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+
+              </a>
+            </li>
+
+
+            
+
+            <li>
+              <a class="xp-programme-link" href="https://xdgeleadership.com/the-leadership-endevour-summer-2027/">
+
+                <span class="xp-programme-name">
+                  The Leader Endeavour – Summer 2027
+                </span>
+
+                <span class="xp-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+
+              </a>
+            </li>
+
+          </ul>
+
+
+          
+
+          <a class="xp-button" href="https://xdgeleadership.com/university-xdge/">
+
+            <span>
+              Explore University XDGE
+            </span>
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m13 6 6 6-6 6"></path>
+            </svg>
+
+          </a>
+
+        </div>
+
+      </article>
+
+
+
+      
+
+      <article class="xp-card">
+
+        <div class="xp-card-inner">
+
+          <div class="xp-image xp-early-image">
+            <img src="https://xdgeleadership.com/wp-content/uploads/2026/10/Untitled-design-66.png" alt="Early Leadership XDGE student development" loading="lazy" decoding="async">
+          </div>
+
+          <h3 class="xp-card-title">
+            EARLY LEADERSHIP XDGE
+          </h3>
+
+          <p class="xp-card-age">
+            Ages 11–18
+          </p>
+
+          <p class="xp-card-label">
+            ENRICHMENT &amp; COMPETITIVE OPPORTUNITIES
+          </p>
+
+          <ul class="xp-programmes">
+
+            
+
+            <li>
+              <a class="xp-programme-link" href="https://xdgeleadership.com/xdge-enrichment-academy/">
+
+                <span class="xp-programme-name">
+                  After School &amp; Weekend Academy
+                </span>
+
+                <span class="xp-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+
+              </a>
+            </li>
+
+
+            
+
+            <li>
+              <a class="xp-programme-link" href="https://xdgeleadership.com/early-leader-standout/">
+
+                <span class="xp-programme-name">
+                  1:1 Early Leader Standout
+                </span>
+
+                <span class="xp-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+
+              </a>
+            </li>
+
+
+            
+
+            <li>
+              <a class="xp-programme-link" href="https://xdgeleadership.com/holiday-camps/">
+
+                <span class="xp-programme-name">
+                  Leadership &amp; Business Camps
+                </span>
+
+                <span class="xp-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+
+              </a>
+            </li>
+
+
+            
+
+            <li>
+              <a class="xp-programme-link" href="https://xdgeleadership.com/homeschool-leader-business-academy/">
+
+                <span class="xp-programme-name">
+                  Homeschool Leader &amp; Business Academy
+                </span>
+
+                <span class="xp-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+
+              </a>
+            </li>
+
+          </ul>
+
+
+          
+
+          <a class="xp-button" href="https://xdgeleadership.com/early-leader-xdge/">
+
+            <span>
+              Explore Early Leadership XDGE
+            </span>
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m13 6 6 6-6 6"></path>
+            </svg>
+
+          </a>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+

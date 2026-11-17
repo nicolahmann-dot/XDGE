@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-const HIDE_ON = ['/apply', '/contact'];
+const HIDE_ON = ['/', '/apply', '/contact'];
 
 export function StickyMobileCTA() {
   const { pathname } = useLocation();

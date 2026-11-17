@@ -1,0 +1,1319 @@
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+
+<style>
+
+/* BASE */
+
+#xdge-deliverables,
+#xdge-deliverables * {
+  box-sizing: border-box;
+}
+
+#xdge-deliverables {
+  --xd-blue: #5170FF;
+  --xd-ivory: #FAF9F6;
+  --xd-black: #101010;
+  --xd-card: #F0EFEC;
+  --xd-body: #353535;
+
+  width: 100%;
+  margin: 0;
+  padding: 100px 35px 110px;
+
+  background: var(--xd-ivory);
+  color: var(--xd-black);
+
+  font-family: 'Manrope', Arial, sans-serif;
+  overflow: hidden;
+}
+
+#xdge-deliverables .xd-wrap {
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+
+#xdge-deliverables .xd-heading-area {
+  text-align: center;
+  margin-bottom: 65px;
+}
+
+/* BLUE OUTLINE EYEBROW */
+
+#xdge-deliverables .xd-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 58px;
+  padding: 15px 38px;
+  margin: 0 0 29px;
+
+  border: 1.5px solid var(--xd-blue);
+  border-radius: 100px;
+
+  background: transparent;
+  color: var(--xd-blue);
+
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+
+  line-height: 1.4;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+}
+
+/* ANTON HEADER */
+
+#xdge-deliverables .xd-main-heading {
+  margin: 0;
+
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: clamp(54px, 7vw, 105px);
+  font-weight: 400;
+
+  line-height: 1.08;
+  letter-spacing: .1px;
+  text-transform: uppercase;
+
+  color: #000000;
+}
+
+#xdge-deliverables .xd-subheading {
+  margin: 22px auto 0;
+
+  font-size: clamp(15px, 1.3vw, 19px);
+  font-weight: 300;
+  line-height: 1.7;
+
+  color: #555555;
+}
+
+/* EDITORIAL LAYOUT */
+
+#xdge-deliverables .xd-layout {
+  display: grid;
+  grid-template-columns: 185px minmax(0, 1fr);
+
+  gap: 55px;
+  align-items: start;
+}
+
+/* LEFT EDITORIAL COLUMN */
+
+#xdge-deliverables .xd-editorial {
+  padding-top: 15px;
+}
+
+#xdge-deliverables .xd-big-number {
+  display: block;
+
+  margin: 0 0 7px;
+
+  font-size: 85px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -5px;
+}
+
+#xdge-deliverables .xd-editorial-label {
+  margin: 10px 0 0;
+
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.6;
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+#xdge-deliverables .xd-editorial-rule {
+  width: 65px;
+  height: 1px;
+
+  margin: 35px 0;
+  background: #999999;
+}
+
+#xdge-deliverables .xd-editorial-copy {
+  margin: 0;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.9;
+
+  color: #444444;
+}
+
+/* CARD GRID */
+
+#xdge-deliverables .xd-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 24px;
+  min-width: 0;
+}
+
+/* FLIP CARD */
+
+#xdge-deliverables .xd-card {
+  display: block;
+  position: relative;
+
+  width: 100%;
+  height: 225px;
+  min-width: 0;
+
+  margin: 0;
+  padding: 0;
+
+  border: none;
+  border-radius: 22px;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+
+  cursor: pointer;
+  perspective: 1200px;
+}
+
+#xdge-deliverables .xd-card:focus-visible {
+  outline: 2px solid var(--xd-blue);
+  outline-offset: 5px;
+}
+
+/* FLIP CONTAINER */
+
+#xdge-deliverables .xd-card-inner {
+  display: block !important;
+
+  position: relative;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  border-radius: 22px;
+
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+
+  transition: transform .75s cubic-bezier(.22,1,.36,1);
+}
+
+/* BOTH CARD FACES */
+
+#xdge-deliverables .xd-card-front,
+#xdge-deliverables .xd-card-back {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 22px;
+  overflow: hidden;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* FRONT FACE */
+
+#xdge-deliverables .xd-card-front {
+  display: grid !important;
+
+  grid-template-columns:
+    minmax(0, 46%)
+    minmax(0, 54%);
+
+  align-items: stretch;
+  padding: 11px;
+
+  background: var(--xd-card);
+  border: 1px solid rgba(0,0,0,.035);
+
+  transform: rotateY(0deg);
+}
+
+/* IMAGE */
+
+#xdge-deliverables .xd-card-photo {
+  display: block !important;
+
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  border-radius: 15px;
+  overflow: hidden;
+
+  background: #E4E1DC;
+}
+
+#xdge-deliverables .xd-card-photo img {
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+
+  object-fit: cover;
+  object-position: center center;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  border: none;
+  border-radius: 15px;
+}
+
+/* SHOW TOP OF PAPERWORK */
+
+#xdge-deliverables
+.xd-card-photo img.xd-paper-top {
+  object-position: center 0% !important;
+}
+
+/* FRONT TEXT */
+
+#xdge-deliverables .xd-card-content {
+  display: flex;
+  position: relative;
+
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+
+  padding: 22px 19px 19px 24px;
+}
+
+#xdge-deliverables .xd-card-number {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 1;
+
+  color: #929292;
+}
+
+#xdge-deliverables .xd-card-title {
+  display: block;
+  margin: 15px 0 11px;
+
+  font-size: clamp(16px, 1.3vw, 20px);
+  font-weight: 600;
+  letter-spacing: -.65px;
+  line-height: 1.35;
+
+  color: #111111;
+}
+
+#xdge-deliverables .xd-card-description {
+  display: block;
+
+  font-size: clamp(12px, 1vw, 14px);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: -.12px;
+
+  color: var(--xd-body);
+}
+
+#xdge-deliverables .xd-reveal {
+  display: block;
+  margin-top: 13px;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 1.4;
+
+  text-transform: uppercase;
+  color: #2446FF;
+}
+
+/* ==========================================
+   UPDATED CARD BACK
+
+   Higher contrast
+   Larger and stronger font
+   Shorter text for comfortable spacing
+========================================== */
+
+#xdge-deliverables .xd-card-back {
+  display: flex;
+
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: 20px 27px;
+
+  background: #101010;
+  color: #FFFFFF;
+
+  transform: rotateY(180deg);
+}
+
+/* SMALL BLUE LABEL */
+
+#xdge-deliverables .xd-back-number {
+  display: block;
+  margin-bottom: 10px;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+
+  line-height: 1.4;
+  letter-spacing: 1.4px;
+
+  color: #A8B6FF;
+}
+
+/* LARGER TITLE */
+
+#xdge-deliverables .xd-back-title {
+  display: block;
+  margin-bottom: 10px;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(19px, 1.55vw, 24px);
+  font-weight: 600;
+
+  line-height: 1.25;
+  letter-spacing: -.65px;
+
+  color: #FFFFFF;
+}
+
+/* MAIN DESCRIPTION - HIGH CONTRAST */
+
+#xdge-deliverables .xd-back-copy {
+  display: block;
+
+  font-family: 'Manrope', sans-serif;
+
+  font-size: clamp(13px, 1.08vw, 15px);
+  font-weight: 500;
+
+  line-height: 1.58;
+  letter-spacing: -.1px;
+
+  color: #F5F5F5;
+}
+
+/* FOOTER */
+
+#xdge-deliverables .xd-back-footer {
+  display: block;
+  margin-top: 13px;
+
+  font-family: 'Manrope', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 1.2px;
+  line-height: 1.4;
+
+  text-transform: uppercase;
+  color: #A8B6FF;
+}
+
+/* FLIP INTERACTION */
+
+@media (hover: hover) and (pointer: fine) {
+
+  #xdge-deliverables
+  .xd-card:hover .xd-card-inner {
+    transform: rotateY(180deg);
+  }
+
+}
+
+#xdge-deliverables
+.xd-card.is-flipped .xd-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* SEVENTH CARD */
+
+#xdge-deliverables .xd-card:last-child {
+  grid-column: 1 / -1;
+}
+
+#xdge-deliverables
+.xd-card:last-child .xd-card-front {
+  grid-template-columns: 32% 68%;
+}
+
+#xdge-deliverables
+.xd-card:last-child .xd-card-content {
+  padding-left: 36px;
+}
+
+#xdge-deliverables
+.xd-card:last-child .xd-card-description {
+  max-width: 430px;
+}
+
+/* FOOTNOTE */
+
+#xdge-deliverables .xd-footnote {
+  margin: 28px 0 0;
+
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.8;
+
+  color: #666666;
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1150px) {
+
+  #xdge-deliverables {
+    padding: 85px 27px;
+  }
+
+  #xdge-deliverables .xd-layout {
+    grid-template-columns: 155px minmax(0,1fr);
+    gap: 32px;
+  }
+
+  #xdge-deliverables .xd-cards {
+    gap: 17px;
+  }
+
+  #xdge-deliverables .xd-card {
+    height: 225px;
+  }
+
+  #xdge-deliverables .xd-card-content {
+    padding: 22px 14px 17px 17px;
+  }
+
+  #xdge-deliverables .xd-card-title {
+    font-size: 16px;
+  }
+
+  #xdge-deliverables .xd-card-description {
+    font-size: 12px;
+  }
+
+  #xdge-deliverables .xd-card-back {
+    padding: 18px 20px;
+  }
+
+  #xdge-deliverables .xd-back-title {
+    font-size: 19px;
+  }
+
+  #xdge-deliverables .xd-back-copy {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  #xdge-deliverables .xd-back-footer {
+    margin-top: 10px;
+  }
+
+}
+
+/* ==========================================
+   SMALL TABLET
+========================================== */
+
+@media (max-width: 950px) {
+
+  #xdge-deliverables .xd-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  #xdge-deliverables .xd-editorial {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 18px;
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #DDDDDD;
+  }
+
+  #xdge-deliverables .xd-big-number {
+    font-size: 59px;
+  }
+
+  #xdge-deliverables .xd-editorial-rule {
+    display: none;
+  }
+
+  #xdge-deliverables .xd-editorial-copy {
+    max-width: 330px;
+    margin-left: auto;
+    font-size: 12px;
+  }
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 700px) {
+
+  #xdge-deliverables {
+    padding: 65px 19px 75px;
+  }
+
+  #xdge-deliverables .xd-heading-area {
+    margin-bottom: 40px;
+  }
+
+  #xdge-deliverables .xd-eyebrow {
+    min-height: 47px;
+
+    padding: 12px 25px;
+    margin-bottom: 25px;
+
+    font-size: 11px;
+    letter-spacing: 1.6px;
+  }
+
+  #xdge-deliverables .xd-main-heading {
+    font-size: clamp(43px, 11vw, 70px);
+  }
+
+  #xdge-deliverables .xd-subheading {
+    font-size: 14px;
+    margin-top: 17px;
+  }
+
+  #xdge-deliverables .xd-editorial {
+    gap: 13px;
+  }
+
+  #xdge-deliverables .xd-big-number {
+    font-size: 53px;
+    letter-spacing: -3px;
+  }
+
+  #xdge-deliverables .xd-editorial-copy {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  #xdge-deliverables .xd-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  #xdge-deliverables .xd-card {
+    height: 225px;
+  }
+
+  #xdge-deliverables .xd-card-front,
+  #xdge-deliverables
+  .xd-card:last-child .xd-card-front {
+    grid-template-columns: 45% 55%;
+    padding: 9px;
+  }
+
+  #xdge-deliverables .xd-card-content,
+  #xdge-deliverables
+  .xd-card:last-child .xd-card-content {
+    padding: 23px 14px 15px 16px;
+  }
+
+  #xdge-deliverables .xd-card-number {
+    font-size: 21px;
+  }
+
+  #xdge-deliverables .xd-card-title {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  #xdge-deliverables .xd-card-description {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  #xdge-deliverables .xd-reveal {
+    font-size: 9px;
+    margin-top: 10px;
+  }
+
+  #xdge-deliverables .xd-card:last-child {
+    grid-column: auto;
+  }
+
+  /* MOBILE CARD BACK */
+
+  #xdge-deliverables .xd-card-back {
+    padding: 19px 23px;
+  }
+
+  #xdge-deliverables .xd-back-number {
+    font-size: 10px;
+    margin-bottom: 9px;
+  }
+
+  #xdge-deliverables .xd-back-title {
+    font-size: 20px;
+    margin-bottom: 9px;
+  }
+
+  #xdge-deliverables .xd-back-copy {
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  #xdge-deliverables .xd-back-footer {
+    font-size: 9px;
+    margin-top: 11px;
+  }
+
+}
+
+/* VERY SMALL SCREENS */
+
+@media (max-width: 380px) {
+
+  #xdge-deliverables .xd-card {
+    height: 255px;
+  }
+
+  #xdge-deliverables .xd-card-title {
+    font-size: 14px;
+  }
+
+  #xdge-deliverables .xd-card-description {
+    font-size: 11px;
+  }
+
+  #xdge-deliverables .xd-back-title {
+    font-size: 19px;
+  }
+
+  #xdge-deliverables .xd-back-copy {
+    font-size: 13px;
+  }
+
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+  #xdge-deliverables .xd-card-inner {
+    transition: none;
+  }
+
+}
+
+</style>
+
+
+
+
+<section id="xdge-deliverables">
+
+  <div class="xd-wrap">
+
+    
+
+    <div class="xd-heading-area">
+
+      <div class="xd-eyebrow">
+        THE XDGE OUTCOME
+      </div>
+
+      <h2 class="xd-main-heading">
+        WHAT YOU LEAVE WITH
+      </h2>
+
+      <p class="xd-subheading">
+        All XDGE students graduate with a professional-standard portfolio showcasing their projects, leadership, capability and impact.
+      </p>
+
+    </div>
+
+
+    
+
+    <div class="xd-layout">
+
+      
+
+      <aside class="xd-editorial">
+
+        <span class="xd-big-number">7</span>
+
+        <p class="xd-editorial-label">
+          KEY DELIVERABLES
+        </p>
+
+        <div class="xd-editorial-rule"></div>
+
+        <p class="xd-editorial-copy">
+          Real outputs that showcase your
+          capability, progress and potential.
+        </p>
+
+      </aside>
+
+
+      
+
+      <div>
+
+        <div class="xd-cards">
+
+
+          
+
+          <button class="xd-card" type="button" aria-pressed="false" aria-label="Leadership Playbook. Show details">
+
+            <span class="xd-card-inner">
+
+              <span class="xd-card-front">
+
+                <span class="xd-card-photo">
+                  <img src="https://xdgeleadership.com/wp-content/uploads/2026/11/xdge.leadership-21.png" alt="XDGE Leadership Playbook" loading="eager" decoding="async">
+                </span>
+
+                <span class="xd-card-content">
+
+                  <span class="xd-card-number">01</span>
+
+                  <span class="xd-card-title">
+                    Leadership Playbook
+                  </span>
+
+                  <span class="xd-card-description">
+                    Your personalised plan for
+                    continued growth and next steps.
+                  </span>
+
+                  <span class="xd-reveal">
+                    EXPLORE →
+                  </span>
+
+                </span>
+
+              </span>
+
+              <span class="xd-card-back">
+
+                <span class="xd-back-number">
+                  01 / THE XDGE OUTCOME
+                </span>
+
+                <span class="xd-back-title">
+                  Leadership Playbook
+                </span>
+
+                <span class="xd-back-copy">
+                  Your personalised development
+                  resource, bringing together
+                  your strengths, goals, leadership
+                  habits and a clear plan for
+                  your next steps.
+                </span>
+
+                <span class="xd-back-footer">
+                  PERSONALISED TO YOU
+                </span>
+
+              </span>
+
+            </span>
+
+          </button>
+
+
+          
+
+          <button class="xd-card" type="button" aria-pressed="false" aria-label="Leadership Portfolio. Show details">
+
+            <span class="xd-card-inner">
+
+              <span class="xd-card-front">
+
+                <span class="xd-card-photo">
+                  <img src="https://xdgeleadership.com/wp-content/uploads/2026/11/xdge.leadership-16.png" alt="XDGE Leadership Portfolio" loading="eager" decoding="async">
+                </span>
+
+                <span class="xd-card-content">
+
+                  <span class="xd-card-number">02</span>
+
+                  <span class="xd-card-title">
+                    Leadership Portfolio
+                  </span>
+
+                  <span class="xd-card-description">
+                    A curated record of your projects,
+                    achievements and impact.
+                  </span>
+
+                  <span class="xd-reveal">
+                    EXPLORE →
+                  </span>
+
+                </span>
+
+              </span>
+
+              <span class="xd-card-back">
+
+                <span class="xd-back-number">
+                  02 / THE XDGE OUTCOME
+                </span>
+
+                <span class="xd-back-title">
+                  Leadership Portfolio
+                </span>
+
+                <span class="xd-back-copy">
+                  A professional collection of
+                  your projects, challenges and
+                  achievements. Tangible evidence
+                  of your leadership in action.
+                </span>
+
+                <span class="xd-back-footer">
+                  EVIDENCE OF CAPABILITY
+                </span>
+
+              </span>
+
+            </span>
+
+          </button>
+
+
+          
+
+          <button class="xd-card" type="button" aria-pressed="false" aria-label="Recorded Capstone and Panel Feedback. Show details">
+
+            <span class="xd-card-inner">
+
+              <span class="xd-card-front">
+
+                <span class="xd-card-photo">
+                  <img src="https://xdgeleadership.com/wp-content/uploads/2026/11/xdge.leadership-17.png" alt="XDGE Capstone and Panel Feedback" loading="eager" decoding="async">
+                </span>
+
+                <span class="xd-card-content">
+
+                  <span class="xd-card-number">03</span>
+
+                  <span class="xd-card-title">
+                    Recorded Capstone
+                    &amp; Panel Feedback
+                  </span>
+
+                  <span class="xd-card-description">
+                    A presentation of your work,
+                    with professional feedback.
+                  </span>
+
+                  <span class="xd-reveal">
+                    EXPLORE →
+                  </span>
+
+                </span>
+
+              </span>
+
+              <span class="xd-card-back">
+
+                <span class="xd-back-number">
+                  03 / THE XDGE OUTCOME
+                </span>
+
+                <span class="xd-back-title">
+                  Capstone Showcase
+                </span>
+
+                <span class="xd-back-copy">
+                  Present your project and demonstrate
+                  your impact. Receive professional
+                  panel feedback and a recording
+                  of your final showcase.
+                </span>
+
+                <span class="xd-back-footer">
+                  PROVE WHAT YOU CAN DO
+                </span>
+
+              </span>
+
+            </span>
+
+          </button>
+
+
+          
+
+          <button class="xd-card" type="button" aria-pressed="false" aria-label="Skills Transcript. Show details">
+
+            <span class="xd-card-inner">
+
+              <span class="xd-card-front">
+
+                <span class="xd-card-photo">
+                  <img src="https://xdgeleadership.com/wp-content/uploads/2026/11/xdge.leadership-20.png" alt="XDGE Skills Transcript" loading="eager" decoding="async">
+                </span>
+
+                <span class="xd-card-content">
+
+                  <span class="xd-card-number">04</span>
+
+                  <span class="xd-card-title">
+                    Skills Transcript
+                  </span>
+
+                  <span class="xd-card-description">
+                    A structured record of the
+                    skills you developed and demonstrated.
+                  </span>
+
+                  <span class="xd-reveal">
+                    EXPLORE →
+                  </span>
+
+                </span>
+
+              </span>
+
+              <span class="xd-card-back">
+
+                <span class="xd-back-number">
+                  04 / THE XDGE OUTCOME
+                </span>
+
+                <span class="xd-back-title">
+                  Skills Transcript
+                </span>
+
+                <span class="xd-back-copy">
+                  A structured record of the
+                  leadership and professional
+                  capabilities you developed
+                  and demonstrated during
+                  your XDGE programme.
+                </span>
+
+                <span class="xd-back-footer">
+                  YOUR SKILLS DOCUMENTED
+                </span>
+
+              </span>
+
+            </span>
+
+          </button>
+
+
+          
+
+          <button class="xd-card" type="button" aria-pressed="false" aria-label="Interview and Opportunity Preparation. Show details">
+
+            <span class="xd-card-inner">
+
+              <span class="xd-card-front">
+
+                <span class="xd-card-photo">
+                  <img class="xd-paper-top" src="https://xdgeleadership.com/wp-content/uploads/2026/11/xdge.leadership-19.png" alt="XDGE Interview Preparation" loading="eager" decoding="async">
+                </span>
+
+                <span class="xd-card-content">
+
+                  <span class="xd-card-number">05</span>
+
+                  <span class="xd-card-title">
+                    Interview &amp;
+                    Opportunity Preparation
+                  </span>
+
+                  <span class="xd-card-description">
+                    Focused preparation to help
+                    you perform with confidence.
+                  </span>
+
+                  <span class="xd-reveal">
+                    EXPLORE →
+                  </span>
+
+                </span>
+
+              </span>
+
+              <span class="xd-card-back">
+
+                <span class="xd-back-number">
+                  05 / THE XDGE OUTCOME
+                </span>
+
+                <span class="xd-back-title">
+                  Opportunity Preparation
+                </span>
+
+                <span class="xd-back-copy">
+                  Practical interview preparation,
+                  professional feedback and
+                  techniques to communicate
+                  your strengths with confidence.
+                </span>
+
+                <span class="xd-back-footer">
+                  READY FOR YOUR NEXT STEP
+                </span>
+
+              </span>
+
+            </span>
+
+          </button>
+
+
+          
+
+          <button class="xd-card" type="button" aria-pressed="false" aria-label="Certificate of Completion. Show details">
+
+            <span class="xd-card-inner">
+
+              <span class="xd-card-front">
+
+                <span class="xd-card-photo">
+                  <img src="https://xdgeleadership.com/wp-content/uploads/2026/11/xdge.leadership-15.png" alt="XDGE Certificate of Completion" loading="eager" decoding="async">
+                </span>
+
+                <span class="xd-card-content">
+
+                  <span class="xd-card-number">06</span>
+
+                  <span class="xd-card-title">
+                    Certificate of Completion
+                  </span>
+
+                  <span class="xd-card-description">
+                    Recognition of your
+                    development and achievement.
+                  </span>
+
+                  <span class="xd-reveal">
+                    EXPLORE →
+                  </span>
+
+                </span>
+
+              </span>
+
+              <span class="xd-card-back">
+
+                <span class="xd-back-number">
+                  06 / THE XDGE OUTCOME
+                </span>
+
+                <span class="xd-back-title">
+                  Certificate of Completion
+                </span>
+
+                <span class="xd-back-copy">
+                  Formal recognition of your
+                  successful programme completion,
+                  commitment and demonstrated
+                  development throughout XDGE.
+                </span>
+
+                <span class="xd-back-footer">
+                  RECOGNITION OF ACHIEVEMENT
+                </span>
+
+              </span>
+
+            </span>
+
+          </button>
+
+
+          
+
+          <button class="xd-card" type="button" aria-pressed="false" aria-label="Letter of Recommendation. Show details">
+
+            <span class="xd-card-inner">
+
+              <span class="xd-card-front">
+
+                <span class="xd-card-photo">
+                  <img class="xd-paper-top" src="https://xdgeleadership.com/wp-content/uploads/2026/11/xdge.leadership-14.png" alt="XDGE Letter of Recommendation" loading="eager" decoding="async">
+                </span>
+
+                <span class="xd-card-content">
+
+                  <span class="xd-card-number">07</span>
+
+                  <span class="xd-card-title">
+                    Letter of Recommendation
+                  </span>
+
+                  <span class="xd-card-description">
+                    Where applicable, a personalised
+                    endorsement of your strengths,
+                    achievements and potential.
+                  </span>
+
+                  <span class="xd-reveal">
+                    EXPLORE →
+                  </span>
+
+                </span>
+
+              </span>
+
+              <span class="xd-card-back">
+
+                <span class="xd-back-number">
+                  07 / OPTIONAL OUTCOME
+                </span>
+
+                <span class="xd-back-title">
+                  Letter of Recommendation
+                </span>
+
+                <span class="xd-back-copy">
+                  Where offered, a personalised
+                  professional recommendation
+                  recognising your achievements,
+                  leadership strengths and potential.
+                </span>
+
+                <span class="xd-back-footer">
+                  WHERE APPLICABLE
+                </span>
+
+              </span>
+
+            </span>
+
+          </button>
+
+        </div>
+
+        <p class="xd-footnote">
+          Deliverables vary by programme.
+          Letters of recommendation are offered
+          where applicable.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+<script>
+(function () {
+
+  function initXDGEFlipCards() {
+
+    const section =
+      document.getElementById("xdge-deliverables");
+
+    if (!section) return;
+
+    if (section.dataset.ready === "true") return;
+
+    section.dataset.ready = "true";
+
+    const cards =
+      section.querySelectorAll(".xd-card");
+
+    cards.forEach(function(card) {
+
+      card.addEventListener("click", function() {
+
+        const wasFlipped =
+          card.classList.contains("is-flipped");
+
+        cards.forEach(function(otherCard) {
+
+          otherCard.classList.remove("is-flipped");
+
+          otherCard.setAttribute(
+            "aria-pressed",
+            "false"
+          );
+
+        });
+
+        if (!wasFlipped) {
+
+          card.classList.add("is-flipped");
+
+          card.setAttribute(
+            "aria-pressed",
+            "true"
+          );
+
+        }
+
+      });
+
+    });
+
+  }
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initXDGEFlipCards
+    );
+
+  } else {
+
+    initXDGEFlipCards();
+
+  }
+
+})();
+</script>

@@ -1299,6 +1299,12 @@ section[data-screen-label] {
   padding-right: clamp(28px, 3vw, 44px);
 }
 
+.xg-menu-logo {
+  display: block;
+  width: min(100%, 210px);
+  height: auto;
+}
+
 .xg-menu-overlay :focus-visible {
   outline-color: #000000;
 }
@@ -1400,6 +1406,11 @@ section[data-screen-label] {
 .xg-menu-col + .xg-menu-col {
   border-left: 1px solid #c8c8c8;
   padding-left: clamp(36px, 3.8vw, 64px);
+}
+
+.xg-menu-col-title a {
+  color: inherit;
+  text-decoration: none;
 }
 
 .xg-menu-col-title {
@@ -2568,9 +2579,9 @@ h3 > span[class*='-clip'] > span[data-no-reveal] {
   overflow: visible;
 }
 
-section:not([data-screen-label*='Hero']) h1,
-section:not([data-screen-label*='Hero']) h2,
-section:not([data-screen-label*='Hero']) h3 {
+section:not(.xg-wp-section):not([data-screen-label*='Hero']) h1,
+section:not(.xg-wp-section):not([data-screen-label*='Hero']) h2,
+section:not(.xg-wp-section):not([data-screen-label*='Hero']) h3 {
   line-height: var(--xdge-heading-line-height);
 }
 
@@ -3124,9 +3135,9 @@ section:not([data-screen-label*='Hero']) h3 {
 /* Desktop editorial layouts — mobile overrides in @media (max-width: 768px) */
 @media (min-width: 769px) {
   /* Mobile: unified left-aligned section headings (hero stays centered) */
-  .xg-page section:not([data-screen-label*='Hero']):not([data-screen-label='What You Leave With']) h1,
-  .xg-page section:not([data-screen-label*='Hero']):not([data-screen-label='What You Leave With']) h2,
-  .xg-page section:not([data-screen-label*='Hero']):not([data-screen-label='What You Leave With']) h3 {
+  .xg-page section:not(.xg-wp-section):not([data-screen-label*='Hero']):not([data-screen-label='What You Leave With']) h1,
+  .xg-page section:not(.xg-wp-section):not([data-screen-label*='Hero']):not([data-screen-label='What You Leave With']) h2,
+  .xg-page section:not(.xg-wp-section):not([data-screen-label*='Hero']):not([data-screen-label='What You Leave With']) h3 {
     text-align: left !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -4501,8 +4512,8 @@ section[data-screen-label="Proven Outcomes"] {
   }
 
   /* Display headings — mobile (all pages, matches Experience scale) */
-  .xg-page section:not([data-screen-label*='Hero']) h1,
-  .xg-page section:not([data-screen-label*='Hero']) h2 {
+  .xg-page section:not(.xg-wp-section):not([data-screen-label*='Hero']) h1,
+  .xg-page section:not(.xg-wp-section):not([data-screen-label*='Hero']) h2 {
     font-size: clamp(56px, 15vw, 100px) !important;
     line-height: var(--xdge-heading-line-height) !important;
     margin-bottom: clamp(16px, 3vw, 24px) !important;
@@ -4867,8 +4878,8 @@ section[data-screen-label="Proven Outcomes"] {
     padding-bottom: clamp(40px, 8vw, 56px) !important;
   }
 
-  .xg-page section:not([data-screen-label*='Hero']) h1,
-  .xg-page section:not([data-screen-label*='Hero']) h2 {
+  .xg-page section:not(.xg-wp-section):not([data-screen-label*='Hero']) h1,
+  .xg-page section:not(.xg-wp-section):not([data-screen-label*='Hero']) h2 {
     font-size: clamp(52px, 14vw, 92px) !important;
     margin-bottom: clamp(14px, 3vw, 20px) !important;
   }
@@ -5697,6 +5708,25 @@ section[data-screen-label="Proven Outcomes"] {
   .xg-cursor-wrap {
     mix-blend-mode: difference;
   }
+}
+
+/* WordPress homepage blocks bring their own layout. Don't let the
+   site-wide heading scale or alignment rewrite them. */
+.xg-wp-block {
+  width: 100%;
+}
+
+.xg-wp-section {
+  margin: 0;
+  padding: 0;
+}
+
+/* Site headings pull the next line up by -0.38em. That stacks the
+   programme logo on top of "Choose your". Keep the WordPress spacing. */
+.xg-wp-section h1 > span + span,
+.xg-wp-section h2 > span + span,
+.xg-wp-section h3 > span + span {
+  margin-top: 0;
 }
 
 .xg-menu-open .xg-scroll-progress {

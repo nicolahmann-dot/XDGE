@@ -1,0 +1,653 @@
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+<style>
+
+/* ==========================================
+   BASE SECTION
+========================================== */
+
+#xdge-who-final,
+#xdge-who-final * {
+  box-sizing: border-box;
+}
+
+#xdge-who-final {
+  --xdge-blue: #5170FF;
+  width: 100%;
+  padding: clamp(60px,7vw,100px) 24px clamp(70px,8vw,112px);
+  background: #FAF9F6;
+  color: #111;
+  font-family: "Manrope", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#xdge-who-final h2,
+#xdge-who-final h3,
+#xdge-who-final p {
+  margin: 0;
+  padding: 0;
+}
+
+#xdge-who-final .xdge-inner {
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+#xdge-who-final .xdge-heading-group {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+/* EYEBROW */
+
+#xdge-who-final .xdge-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  padding: 10px 20px;
+  border: 1px solid rgba(81,112,255,.24);
+  border-radius: 999px;
+  background: rgba(81,112,255,.045);
+  color: #5170FF !important;
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+/* ==========================================
+   OUTLINED HEADING
+========================================== */
+
+#xdge-who-final .xdge-display-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(5px,1.2vw,19px);
+  width: 100%;
+  margin: 28px auto 18px;
+  font-size: clamp(32px,7.25vw,112px) !important;
+  font-weight: 400 !important;
+  line-height: 1.05 !important;
+  white-space: nowrap;
+}
+
+#xdge-who-final .xdge-outline {
+  display: block;
+  flex: 0 0 auto;
+  font-family: "Anton", Impact, sans-serif !important;
+  font-size: 1em !important;
+  font-weight: 400 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -.018em;
+  text-transform: uppercase;
+  color: transparent !important;
+  -webkit-text-stroke: 1.4px #111;
+  -webkit-text-fill-color: transparent;
+}
+
+/* XDGE SVG LOGO */
+
+#xdge-who-final .xdge-logo {
+  display: block;
+  flex: 0 1 auto;
+  width: 3.29em;
+  height: 1em;
+  max-width: 36%;
+  overflow: visible;
+  color: #111;
+}
+
+/* SUBHEADING */
+
+#xdge-who-final .xdge-subheading {
+  max-width: 900px;
+  margin: 0 auto !important;
+  color: #292929 !important;
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+  letter-spacing: 0;
+}
+
+/* ==========================================
+   THREE BLACK CARDS
+========================================== */
+
+#xdge-who-final .xdge-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  align-items: stretch;
+  gap: clamp(12px,1.4vw,20px);
+}
+
+#xdge-who-final .xdge-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: clamp(310px,30vw,380px);
+  padding: clamp(23px,2.3vw,35px);
+  border-radius: 15px;
+  overflow: hidden;
+  background: #050505;
+  color: #fff;
+}
+
+/* ICONS */
+
+#xdge-who-final .xdge-pathway-icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* CARD TITLES */
+
+#xdge-who-final .xdge-card-title {
+  color: #fff !important;
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: 26px !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+  letter-spacing: -.035em;
+  text-transform: none !important;
+}
+
+/* AGE LABELS */
+
+#xdge-who-final .xdge-card-age {
+  margin-top: 5px;
+  color: #7D96FF;
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: 1.5 !important;
+}
+
+/* DIVIDER */
+
+#xdge-who-final .xdge-divider {
+  width: 100%;
+  height: 1px;
+  margin: 17px 0 16px;
+  background: rgba(255,255,255,.42);
+}
+
+/* ==========================================
+   AUDIENCE LISTS
+========================================== */
+
+#xdge-who-final .xdge-audience {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+}
+
+#xdge-who-final .xdge-audience li {
+  display: grid;
+  grid-template-columns: 5px minmax(0,1fr);
+  align-items: start;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  color: #F6F6F6;
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+}
+
+#xdge-who-final .xdge-audience li::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-top: 10px;
+  border-radius: 50%;
+  background: #5170FF;
+}
+
+/* ==========================================
+   EXPLORE BUTTONS
+========================================== */
+
+#xdge-who-final .xdge-explore {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 45px;
+  margin-top: auto;
+  padding: 9px 18px;
+  border: 1px solid #5170FF;
+  border-radius: 999px;
+  background: transparent;
+  color: #fff !important;
+  font-family: "Manrope", Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  text-align: left;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: background .4s ease;
+}
+
+#xdge-who-final .xdge-explore:hover {
+  background: #1B2659;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+#xdge-who-final .xdge-explore svg {
+  display: block;
+  flex: 0 0 19px;
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: #5170FF;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ==========================================
+   EARLY LEADERS CORNER RIBBON
+
+   FIXED:
+   - Smaller 10.5px text
+   - Reduced letter spacing
+   - Narrower diagonal ribbon
+   - Text centred within visible area
+   - Fully contained inside card corner
+========================================== */
+
+#xdge-who-final .xdge-ribbon-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 224px;
+  height: 154px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* BLUE DIAGONAL STRIP */
+
+#xdge-who-final .xdge-ribbon {
+  position: absolute;
+
+  width: 278px;
+  top: 40px;
+  right: -58px;
+
+  padding: 11px 0;
+
+  transform: rotate(37deg);
+  transform-origin: center center;
+
+  background: linear-gradient(
+    135deg,
+    #8096FF 0%,
+    #5170FF 55%,
+    #3D5BED 100%
+  );
+
+  color: #FFFFFF !important;
+  text-align: center;
+
+  font-family: "Manrope", Arial, sans-serif !important;
+
+  /* SMALLER TEXT TO PREVENT CLIPPING */
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  letter-spacing: -.035em;
+
+  white-space: nowrap;
+
+  box-shadow: 0 5px 18px rgba(0,0,0,.22);
+}
+
+#xdge-who-final .xdge-ribbon span {
+  display: block;
+  width: 100%;
+  color: #FFFFFF !important;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* TITLE CLEARANCE */
+
+#xdge-who-final .xdge-card--early .xdge-card-title {
+  position: relative;
+  z-index: 1;
+  max-width: calc(100% - 90px);
+}
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+#xdge-who-final .xdge-explore:focus-visible {
+  outline: 2px solid #5170FF;
+  outline-offset: 4px;
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 780px) {
+
+  #xdge-who-final {
+    padding: 64px 18px 76px;
+  }
+
+  #xdge-who-final .xdge-heading-group {
+    margin-bottom: 30px;
+  }
+
+  #xdge-who-final .xdge-display-heading {
+    font-size: clamp(29px,7.8vw,58px) !important;
+    gap: 7px;
+    margin-top: 24px;
+  }
+
+  #xdge-who-final .xdge-card-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin: 0 auto;
+    gap: 14px;
+  }
+
+  #xdge-who-final .xdge-card {
+    min-height: 290px;
+    padding: 28px;
+  }
+
+  #xdge-who-final .xdge-card-title {
+    font-size: 24px !important;
+  }
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 420px) {
+
+  #xdge-who-final .xdge-display-heading {
+    font-size: clamp(25px,7.6vw,32px) !important;
+    gap: 5px;
+  }
+
+  #xdge-who-final .xdge-eyebrow {
+    font-size: 9px !important;
+    letter-spacing: .1em;
+    padding: 9px 12px;
+  }
+
+  #xdge-who-final .xdge-subheading {
+    font-size: 16px !important;
+  }
+
+  /* MOBILE RIBBON */
+
+  #xdge-who-final .xdge-ribbon-corner {
+    width: 216px;
+    height: 147px;
+  }
+
+  #xdge-who-final .xdge-ribbon {
+    width: 260px;
+    top: 35px;
+    right: -53px;
+    padding: 10px 0;
+    font-size: 9.5px !important;
+    letter-spacing: -.035em;
+  }
+
+  #xdge-who-final .xdge-card--early .xdge-card-title {
+    max-width: calc(100% - 90px);
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #xdge-who-final .xdge-explore {
+    transition: none;
+  }
+}
+
+</style>
+
+
+
+
+<section id="xdge-who-final" aria-labelledby="xdge-who-title">
+
+  <div class="xdge-inner">
+
+    
+
+    <header class="xdge-heading-group">
+
+      <p class="xdge-eyebrow">
+        THE XDGE · PROFESSIONAL LEADERSHIP ACADEMY
+      </p>
+
+      <h2 class="xdge-display-heading" id="xdge-who-title" aria-label="Who is XDGE for?">
+
+        <span class="xdge-outline" aria-hidden="true">
+          WHO IS
+        </span>
+
+        
+
+        <svg class="xdge-logo" viewBox="0 0 1845 560" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <path fill="currentColor" fill-rule="evenodd" d="M1493,456 L1838,456 L1838,380 L1494,380 Z M280,341 L280,343 L397,458 L530,458 L346,281 L332,291 Z M1493,254 L1493,321 L1496,324 L1836,324 L1838,322 L1837,251 L1495,251 Z M641,193 L643,191 L799,191 L815,194 L832,201 L846,211 L862,229 L872,248 L879,274 L879,300 L874,320 L866,336 L850,355 L831,368 L814,375 L642,375 Z M1493,119 L1494,188 L1837,189 L1840,183 L1840,124 L1837,116 L1496,116 Z M1033,184 L1018,210 L1006,245 L1002,271 L1003,314 L1010,344 L1023,374 L1040,399 L1069,426 L1106,446 L1129,453 L1158,458 L1250,460 L1378,457 L1429,458 L1432,456 L1431,251 L1221,252 L1221,324 L1346,325 L1349,327 L1349,377 L1346,379 L1162,379 L1150,377 L1126,365 L1109,349 L1096,326 L1090,300 L1091,269 L1096,251 L1106,231 L1127,208 L1154,194 L1170,191 L1432,191 L1432,115 L1143,116 L1107,126 L1079,140 L1059,155 Z M933,180 L908,153 L895,143 L867,128 L835,118 L814,115 L765,113 L637,116 L561,115 L558,117 L558,455 L671,456 L696,458 L798,458 L840,453 L866,445 L903,424 L925,403 L943,378 L957,347 L965,313 L966,272 L962,244 L950,209 Z M50,113 L227,292 L293,228 L246,180 L173,113 Z M564,8 L521,41 L459,93 L315,225 L162,380 L46,506 L6,553 L30,535 L109,466 L253,332 L432,151 Z"></path>
+        </svg>
+
+        <span class="xdge-outline" aria-hidden="true">
+          FOR?
+        </span>
+
+      </h2>
+
+      <p class="xdge-subheading">
+        Leadership development specifically designed to help you stand out in your next step.
+      </p>
+
+    </header>
+
+
+    
+
+    <div class="xdge-card-grid">
+
+
+      
+
+      <article class="xdge-card" aria-labelledby="xdge-career-name">
+
+        <svg class="xdge-pathway-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="7" width="18" height="14" rx="2"></rect>
+          <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12c5 3 13 3 18 0"></path>
+        </svg>
+
+        <h3 class="xdge-card-title" id="xdge-career-name">
+          Career
+        </h3>
+
+        <p class="xdge-card-age">
+          Ages 18–24+
+        </p>
+
+        <div class="xdge-divider"></div>
+
+        <ul class="xdge-audience">
+
+          <li>Graduates starting their careers</li>
+
+          <li>Early-career professionals</li>
+
+          <li>New &amp; aspiring leaders</li>
+
+        </ul>
+
+        
+
+        <a class="xdge-explore" href="https://xdgeleadership.com/career-xdge-programmes/" aria-label="Explore Career XDGE programmes">
+
+          <span>Explore programmes</span>
+
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14m-6-6 6 6-6 6"></path>
+          </svg>
+
+        </a>
+
+      </article>
+
+
+      
+
+      <article class="xdge-card" aria-labelledby="xdge-university-name">
+
+        <svg class="xdge-pathway-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m2 9 10-5 10 5-10 5L2 9Z"></path>
+          <path d="M6 11v5c3.4 2.6 8.6 2.6 12 0v-5M22 9v8"></path>
+        </svg>
+
+        <h3 class="xdge-card-title" id="xdge-university-name">
+          University
+        </h3>
+
+        <p class="xdge-card-age">
+          Ages 16+
+        </p>
+
+        <div class="xdge-divider"></div>
+
+        <ul class="xdge-audience">
+
+          <li>University applicants looking to stand out</li>
+
+          <li>Undergraduate &amp; postgraduate applicants</li>
+
+          <li>Graduates preparing for job interviews</li>
+
+        </ul>
+
+        
+
+        <a class="xdge-explore" href="https://xdgeleadership.com/university-xdge/" aria-label="Explore University XDGE programmes">
+
+          <span>Explore programmes</span>
+
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14m-6-6 6 6-6 6"></path>
+          </svg>
+
+        </a>
+
+      </article>
+
+
+      
+
+      <article class="xdge-card xdge-card--early" aria-labelledby="xdge-early-leaders-name">
+
+        
+
+        <div class="xdge-ribbon-corner" aria-label="New Homeschool Programme">
+
+          <div class="xdge-ribbon">
+
+            <span>NEW HOMESCHOOL PROGRAMME</span>
+
+          </div>
+
+        </div>
+
+
+        
+
+        <svg class="xdge-pathway-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 6.5C9.5 4.6 6.5 4 3 4.5v14c3.5-.5 6.5.1 9 2 2.5-1.9 5.5-2.5 9-2v-14c-3.5-.5-6.5.1-9 2Z"></path>
+          <path d="M12 6.5v14"></path>
+        </svg>
+
+
+        
+
+        <h3 class="xdge-card-title" id="xdge-early-leaders-name">
+          Early Leaders
+        </h3>
+
+        <p class="xdge-card-age">
+          Ages 11–18
+        </p>
+
+        <div class="xdge-divider"></div>
+
+
+        
+
+        <ul class="xdge-audience">
+
+          <li>School &amp; homeschool students</li>
+
+          <li>Students pursuing scholarships &amp; leadership roles</li>
+
+          <li>Students preparing for competitive entry</li>
+
+        </ul>
+
+
+        
+
+        <a class="xdge-explore" href="https://xdgeleadership.com/early-leader-xdge/" aria-label="Explore Early Leaders XDGE programmes">
+
+          <span>Explore programmes</span>
+
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14m-6-6 6 6-6 6"></path>
+          </svg>
+
+        </a>
+
+      </article>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { theme } from '../theme';
 import { useScrollLock } from '../hooks/useScrollLock';
-import { menuLinks, programmeGroups, programmePath } from '../data/menu';
+import { menuLinks, programmeGroups, programmePath, programmesHref } from '../data/menu';
 
 const MotionNavLink = motion(NavLink);
 
@@ -39,6 +39,7 @@ const linkVariants = {
 const clip = { display: 'block', overflow: 'hidden', paddingBottom: '0.4em' };
 
 function linkIsCurrent(pathname, item) {
+  if (!item.to) return false;
   if (item.to === '/') return pathname === '/';
   return pathname === item.to || pathname.startsWith(`${item.to}/`);
 }
@@ -214,59 +215,47 @@ export function TopBar() {
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.4, ease: fadeEase } }}
                 >
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                    <span style={{
-                      fontFamily: theme.display, fontWeight: 900,
-                      fontSize: 'clamp(14px, 1.15vw, 17px)', color: '#000000',
-                      lineHeight: 1
-                    }}>THE</span>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <span style={{
-                        fontFamily: theme.display, fontWeight: 900,
-                        fontSize: 'clamp(44px, 3.8vw, 56px)', color: '#000000',
-                        letterSpacing: '-0.03em', lineHeight: 0.78
-                      }}>XDG</span>
-                      <svg viewBox="0 0 100 100" style={{ height: 'clamp(30px, 2.6vw, 40px)', marginLeft: '6px', fill: '#000000' }}>
-                        <rect y="15" width="100" height="15" />
-                        <rect y="45" width="100" height="15" />
-                        <rect y="75" width="100" height="15" />
-                      </svg>
-                    </div>
-                    <div style={{
-                      marginTop: 10,
-                      fontFamily: theme.body,
-                      fontSize: 'clamp(11px, 1vw, 13px)', letterSpacing: '0.02em',
-                      textTransform: 'uppercase',
-                      fontWeight: 600, color: '#000000',
-                    }}>
-                      Leadership Academy
-                    </div>
-                  </div>
+                  <img
+                    src="/assets/logo/the-xdge-mark.png"
+                    alt="The XDGE"
+                    className="xg-menu-logo"
+                  />
                 </motion.div>
 
                 <nav className="xg-menu-nav" aria-label="Primary">
-                  {menuLinks.map((item, i) => (
-                    <span key={item.label} style={clip}>
-                      <MotionNavLink
-                        data-no-reveal
-                        to={item.to}
-                        end={item.end}
-                        custom={i}
-                        variants={linkVariants}
-                        initial="hidden"
-                        animate="visible"
-                        onClick={closeForNav}
-                        data-cursor="grow"
-                        whileHover={{ x: 8 }}
-                        className={`xg-menu-link${linkIsCurrent(pathname, item) ? ' is-active' : ''}`}
-                      >
+                  {menuLinks.map((item, i) => {
+                    const className = `xg-menu-link${linkIsCurrent(pathname, item) ? ' is-active' : ''}`;
+                    const motionProps = {
+                      'data-no-reveal': true,
+                      custom: i,
+                      variants: linkVariants,
+                      initial: 'hidden',
+                      animate: 'visible',
+                      onClick: closeForNav,
+                      'data-cursor': 'grow',
+                      whileHover: { x: 8 },
+                      className,
+                    };
+                    const label = (
+                      <>
                         {item.label}
                         {item.arrow && (
                           <span className="xg-menu-link-arrow"><MenuArrow /></span>
                         )}
-                      </MotionNavLink>
-                    </span>
-                  ))}
+                      </>
+                    );
+                    return (
+                      <span key={item.label} style={clip}>
+                        {item.href ? (
+                          <motion.a href={item.href} {...motionProps}>{label}</motion.a>
+                        ) : (
+                          <MotionNavLink to={item.to} end={item.end} {...motionProps}>
+                            {label}
+                          </MotionNavLink>
+                        )}
+                      </span>
+                    );
+                  })}
                 </nav>
               </div>
 
@@ -285,18 +274,28 @@ export function TopBar() {
                 <div className="xg-menu-cols">
                   {programmeGroups.map((group) => (
                     <div key={group.title} className="xg-menu-col">
-                      <h3 className="xg-menu-col-title">{group.title}</h3>
+                      <h3 className="xg-menu-col-title">
+                        {group.href ? (
+                          <a href={group.href} onClick={closeForNav} data-cursor="grow">{group.title}</a>
+                        ) : group.title}
+                      </h3>
                       <p className="xg-menu-col-sub">{group.subtitle}</p>
                       <ul className="xg-menu-list">
                         {group.items.map((item) => (
                           <li key={item.slug}>
-                            <Link
-                              to={programmePath(item.slug)}
-                              onClick={closeForNav}
-                              data-cursor="grow"
-                            >
-                              {item.label}
-                            </Link>
+                            {item.href ? (
+                              <a href={item.href} onClick={closeForNav} data-cursor="grow">
+                                {item.label}
+                              </a>
+                            ) : (
+                              <Link
+                                to={programmePath(item.slug)}
+                                onClick={closeForNav}
+                                data-cursor="grow"
+                              >
+                                {item.label}
+                              </Link>
+                            )}
                           </li>
                         ))}
                       </ul>
@@ -306,15 +305,15 @@ export function TopBar() {
 
                 <div className="xg-menu-rule" aria-hidden="true" />
 
-                <Link
-                  to="/programmes"
+                <a
+                  href={programmesHref}
                   className="xg-menu-find"
                   onClick={closeForNav}
                   data-cursor="grow"
                 >
                   Find your programme
                   <MenuArrow />
-                </Link>
+                </a>
               </motion.div>
             </div>
           </motion.div>

@@ -1,0 +1,2034 @@
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+<section id="xdge-reviews-2026" aria-label="XDGE reviews">
+
+<style>
+
+/* FOUNDATION */
+
+#xdge-reviews-2026,
+#xdge-reviews-2026 * {
+  box-sizing: border-box;
+}
+
+#xdge-reviews-2026 {
+  --blue: #5170FF;
+  --paper: #FAF9F6;
+  width: 100%;
+  padding: clamp(64px,8vw,115px) 0 76px;
+  background: var(--paper);
+  color: #090909;
+  font-family: "Manrope", Arial, sans-serif;
+  overflow: hidden;
+}
+
+#xdge-reviews-2026 .xr-wrap {
+  max-width: 1400px;
+  width: calc(100% - 88px);
+  margin: auto;
+}
+
+/* INTRODUCTION */
+
+#xdge-reviews-2026 .xr-intro {
+  display: grid;
+  grid-template-columns: .8fr 1.45fr;
+  gap: clamp(35px,6vw,110px);
+  align-items: end;
+  margin-bottom: 55px;
+}
+
+#xdge-reviews-2026 .xr-intro-left {
+  display: flex;
+  min-height: 205px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+#xdge-reviews-2026 .xr-pill {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 18px;
+  border: 1px solid var(--blue);
+  border-radius: 50px;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .15em;
+}
+
+#xdge-reviews-2026 .xr-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+
+#xdge-reviews-2026 .xr-intro-left p {
+  margin: 0 0 10px;
+  max-width: 350px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+#xdge-reviews-2026 .xr-intro-left .xr-description {
+  color: #686868;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+#xdge-reviews-2026 .xr-heading {
+  margin: 0;
+  font: 400 clamp(56px,7vw,110px)/1.02 "Anton",Impact,sans-serif;
+  text-transform: uppercase;
+}
+
+#xdge-reviews-2026 .xr-heading span {
+  color: var(--blue);
+}
+
+/* NAVIGATION */
+
+#xdge-reviews-2026 .xr-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+#xdge-reviews-2026 .xr-counter-line {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+  min-width: 0;
+}
+
+#xdge-reviews-2026 .xr-counter {
+  flex-shrink: 0;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .07em;
+}
+
+#xdge-reviews-2026 .xr-meter {
+  height: 2px;
+  width: min(310px,100%);
+  background: #D8D8D8;
+}
+
+#xdge-reviews-2026 .xr-meter span {
+  display: block;
+  width: 9.09%;
+  height: 3px;
+  background: var(--blue);
+  transition: width .25s;
+}
+
+#xdge-reviews-2026 .xr-controls {
+  display: flex;
+  gap: 11px;
+}
+
+#xdge-reviews-2026 .xr-btn {
+  appearance: none;
+  border: 1px solid #111;
+  border-radius: 50px;
+  min-height: 47px;
+  padding: 12px 19px;
+  background: transparent;
+  color: #111;
+  font-size: 11px;
+  letter-spacing: .045em;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#xdge-reviews-2026 .xr-btn-next {
+  background: #050505;
+  color: #FFFFFF;
+}
+
+#xdge-reviews-2026 .xr-btn:hover {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: #FFFFFF;
+}
+
+#xdge-reviews-2026 .xr-btn:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* SCROLLING CAROUSEL */
+
+#xdge-reviews-2026 .xr-scroller {
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+}
+
+#xdge-reviews-2026 .xr-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+#xdge-reviews-2026 .xr-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+#xdge-reviews-2026 .xr-grid {
+  display: grid;
+  grid-template-columns:
+    minmax(0,1.13fr)
+    minmax(0,.84fr)
+    minmax(0,1.14fr);
+  gap: 17px;
+  align-items: stretch;
+}
+
+/* BLACK REVIEW CARD */
+
+#xdge-reviews-2026 .xr-feature {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#xdge-reviews-2026 .xr-black {
+  background: #050505;
+  color: #FFFFFF;
+  padding: clamp(25px,2.8vw,42px);
+  border-radius: 23px;
+  min-height: 455px;
+  flex: 1;
+}
+
+#xdge-reviews-2026 .xr-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: #D4D4D4;
+  font-size: 10px;
+  letter-spacing: .13em;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+#xdge-reviews-2026 .xr-dots {
+  color: var(--blue);
+  letter-spacing: .16em;
+}
+
+#xdge-reviews-2026 .xr-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+#xdge-reviews-2026 .xr-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: var(--blue);
+  color: #FFFFFF;
+  font: 18px "Anton",Impact,sans-serif;
+}
+
+#xdge-reviews-2026 .xr-name {
+  font-size: 14px;
+  font-weight: 800;
+  margin: 0 0 4px;
+}
+
+#xdge-reviews-2026 .xr-detail {
+  font-size: 12px;
+  color: #BCBCBC;
+  margin: 0;
+  line-height: 1.5;
+}
+
+#xdge-reviews-2026 .xr-quote {
+  font-size: clamp(19px,1.7vw,25px);
+  font-weight: 750;
+  line-height: 1.39;
+  letter-spacing: -.035em;
+  margin: 0 0 20px;
+  overflow-wrap: anywhere;
+}
+
+#xdge-reviews-2026 .xr-body {
+  font-size: 14px;
+  line-height: 1.82;
+  color: #D7D7D7;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+#xdge-reviews-2026 .xr-feature-foot {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 20px 4px 0;
+  font-size: 10px;
+  letter-spacing: .1em;
+  color: #666;
+}
+
+#xdge-reviews-2026 .xr-feature-foot:before {
+  content: "";
+  background: var(--blue);
+  width: 32px;
+  height: 2px;
+}
+
+/* PHOTOGRAPH FRAME
+   No added grey background or padding.
+   Full original image visible.
+*/
+
+#xdge-reviews-2026 .xr-photo {
+  align-self: start;
+  width: 100%;
+  min-width: 0;
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 23px;
+  background: transparent;
+}
+
+#xdge-reviews-2026 .xr-photo img {
+  display: block !important;
+  position: static !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  object-fit: contain !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+#xdge-reviews-2026 .xr-photo:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45%;
+  background: linear-gradient(
+    transparent,
+    rgba(0,0,0,.72)
+  );
+  pointer-events: none;
+}
+
+#xdge-reviews-2026 .xr-photo-copy {
+  position: absolute;
+  bottom: 19px;
+  left: 20px;
+  right: 12px;
+  z-index: 1;
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 8px rgba(0,0,0,.32);
+}
+
+#xdge-reviews-2026 .xr-photo-copy small {
+  display: block;
+  margin-bottom: 7px;
+  color: #C4D0FF !important;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+#xdge-reviews-2026 .xr-photo-copy strong {
+  display: block;
+  font: 400 clamp(23px,2.4vw,40px)/1.05 "Anton",Impact,sans-serif;
+  color: #FFFFFF !important;
+}
+
+#xdge-reviews-2026 .xr-photo-copy strong span {
+  display: block;
+}
+
+/* LANDSCAPE PHOTOS */
+
+#xdge-reviews-2026 .xr-photo.xr-landscape .xr-photo-copy {
+  bottom: 10px;
+  left: 12px;
+}
+
+#xdge-reviews-2026 .xr-photo.xr-landscape .xr-photo-copy strong {
+  font-size: clamp(15px,1.55vw,23px);
+}
+
+#xdge-reviews-2026 .xr-photo.xr-landscape .xr-photo-copy strong span {
+  display: inline;
+  margin-right: .2em;
+}
+
+#xdge-reviews-2026 .xr-photo.xr-landscape .xr-photo-copy small {
+  font-size: 8px;
+  margin-bottom: 4px;
+}
+
+/* LIGHT GREY SECOND REVIEW CARD */
+
+#xdge-reviews-2026 .xr-grey {
+  background: #EFEFEF;
+  border-radius: 23px;
+  padding: clamp(25px,2.7vw,40px);
+  min-height: 455px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#xdge-reviews-2026 .xr-grey-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+#xdge-reviews-2026 .xr-mark {
+  font: 700 75px/.8 Georgia,serif;
+  color: #B8B8B8;
+}
+
+#xdge-reviews-2026 .xr-grey-num {
+  color: #777;
+  font-size: 11px;
+  letter-spacing: .07em;
+  font-weight: 700;
+}
+
+#xdge-reviews-2026 .xr-grey-quote {
+  font-weight: 800;
+  font-size: clamp(18px,1.6vw,23px);
+  line-height: 1.42;
+  letter-spacing: -.035em;
+  margin: 0 0 22px;
+  overflow-wrap: anywhere;
+}
+
+#xdge-reviews-2026 .xr-grey-body {
+  color: #5E6065;
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 0 0 26px;
+  overflow-wrap: anywhere;
+  flex: 1;
+}
+
+#xdge-reviews-2026 .xr-grey-author {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-top: 22px;
+  border-top: 1px solid #D5D5D5;
+}
+
+#xdge-reviews-2026 .xr-grey-avatar {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background: #DADADA;
+  font: 18px "Anton",Impact,sans-serif;
+}
+
+#xdge-reviews-2026 .xr-grey-name {
+  font-size: 13px;
+  font-weight: 800;
+  margin: 0 0 5px;
+}
+
+#xdge-reviews-2026 .xr-grey-detail {
+  color: #6D6D6D;
+  font-size: 12px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* BOTTOM STRIP */
+
+#xdge-reviews-2026 .xr-bottom {
+  margin-top: 42px;
+  padding-top: 20px;
+  border-top: 1px solid #DDD;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+#xdge-reviews-2026 .xr-bottom .xr-blue {
+  color: var(--blue);
+}
+
+/* RESPONSIVENESS */
+
+@media(max-width:1100px) {
+
+  #xdge-reviews-2026 .xr-wrap {
+    width: calc(100% - 56px);
+  }
+
+  #xdge-reviews-2026 .xr-grid {
+    gap: 12px;
+    grid-template-columns:
+      minmax(0,1fr)
+      minmax(0,.78fr)
+      minmax(0,1fr);
+  }
+
+  #xdge-reviews-2026 .xr-black,
+  #xdge-reviews-2026 .xr-grey {
+    padding: 24px;
+  }
+}
+
+@media(max-width:840px) {
+
+  #xdge-reviews-2026 .xr-intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  #xdge-reviews-2026 .xr-intro-left {
+    min-height: 0;
+  }
+
+  #xdge-reviews-2026 .xr-grid {
+    grid-template-columns: 1fr .82fr;
+  }
+
+  #xdge-reviews-2026 .xr-grey {
+    grid-column: 1/-1;
+    min-height: 0;
+  }
+
+  #xdge-reviews-2026 .xr-feature-foot {
+    display: none;
+  }
+}
+
+@media(max-width:600px) {
+
+  #xdge-reviews-2026 .xr-wrap {
+    width: calc(100% - 34px);
+  }
+
+  #xdge-reviews-2026 .xr-heading {
+    font-size: clamp(44px,10vw,64px);
+  }
+
+  #xdge-reviews-2026 .xr-nav {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  #xdge-reviews-2026 .xr-counter-line {
+    flex-basis: 100%;
+  }
+
+  #xdge-reviews-2026 .xr-controls {
+    width: 100%;
+  }
+
+  #xdge-reviews-2026 .xr-btn {
+    flex: 1;
+    font-size: 9px;
+    padding: 10px 7px;
+  }
+
+  #xdge-reviews-2026 .xr-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  #xdge-reviews-2026 .xr-black,
+  #xdge-reviews-2026 .xr-grey {
+    min-height: 0;
+    padding: 27px;
+  }
+
+  #xdge-reviews-2026 .xr-photo {
+    width: 100%;
+    border-radius: 19px;
+  }
+
+  #xdge-reviews-2026 .xr-photo-copy strong {
+    font-size: clamp(27px,7vw,42px);
+  }
+
+  #xdge-reviews-2026 .xr-photo.xr-landscape .xr-photo-copy strong {
+    font-size: 19px;
+  }
+
+  #xdge-reviews-2026 .xr-bottom {
+    flex-direction: column;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+  #xdge-reviews-2026 .xr-scroller {
+    scroll-behavior: auto;
+  }
+
+  #xdge-reviews-2026 * {
+    transition-duration: .01ms !important;
+  }
+}
+
+</style>
+
+
+<div class="xr-wrap">
+
+  
+
+  <div class="xr-intro">
+
+    <div class="xr-intro-left">
+
+      <div class="xr-pill">
+        <span class="xr-dot"></span>
+        REVIEWS
+      </div>
+
+      <div>
+        <p>
+          What Young People And Parents Say About XDGE
+        </p>
+
+        <p class="xr-description">
+          Experiences from participants and families
+          who have built their next step advantage
+          through XDGE.
+        </p>
+      </div>
+
+    </div>
+
+    <h2 class="xr-heading">
+      RESULTS THAT<br>
+      SPEAK FOR<br>
+      <span>THEMSELVES.</span>
+    </h2>
+
+  </div>
+
+
+  
+
+  <div class="xr-nav">
+
+    <div class="xr-counter-line">
+
+      <span class="xr-counter" aria-live="polite">
+        <span id="xdge-current-2026">01</span>
+        — 11
+      </span>
+
+      <div class="xr-meter">
+        <span id="xdge-progress-2026"></span>
+      </div>
+
+    </div>
+
+    <div class="xr-controls">
+
+      <button type="button" class="xr-btn" id="xdge-prev-2026">
+        ← PREVIOUS REVIEW
+      </button>
+
+      <button type="button" class="xr-btn xr-btn-next" id="xdge-next-2026">
+        SEE MORE REVIEWS →
+      </button>
+
+    </div>
+
+  </div>
+
+
+  
+
+  <div class="xr-scroller" id="xdge-scroll-2026" aria-label="Scrollable 11-review carousel" tabindex="0">
+
+    
+
+    <article class="xr-slide" id="xdge-review-01" aria-label="Review 1 of 11">
+
+      <div class="xr-grid">
+
+        <div class="xr-feature">
+
+          <div class="xr-black">
+
+            <div class="xr-topline">
+              <span>THE XDGE EXPERIENCE</span>
+              <span class="xr-dots">● ● ●</span>
+            </div>
+
+            <div class="xr-person">
+              <span class="xr-avatar">YS</span>
+              <div>
+                <p class="xr-name">YS</p>
+                <p class="xr-detail">
+                  Age 18 — University Admission Standout
+                </p>
+              </div>
+            </div>
+
+            <h3 class="xr-quote">
+              This programme pushed me far beyond anything
+              I had done at school.
+            </h3>
+
+            <p class="xr-body">
+              The professional skills sessions were the most
+              useful because they taught me to think on my feet,
+              answer difficult questions and present myself
+              as someone credible.
+            </p>
+
+          </div>
+
+          <div class="xr-feature-foot">
+            REAL EXPERIENCES. REAL CAPABILITY.
+          </div>
+
+        </div>
+
+        <figure class="xr-photo">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/10/xdge.homeschool.png" alt="XDGE programme photograph, image 1 of 11" loading="eager" decoding="async">
+
+          <figcaption class="xr-photo-copy">
+            <small>THE XDGE APPROACH</small>
+            <strong>
+              <span>LEARN IT.</span>
+              <span>APPLY IT.</span>
+              <span>PROVE IT.</span>
+            </strong>
+          </figcaption>
+
+        </figure>
+
+        <div class="xr-grey">
+
+          <div class="xr-grey-top">
+            <span class="xr-mark">“</span>
+            <span class="xr-grey-num">REVIEW 02</span>
+          </div>
+
+          <h3 class="xr-grey-quote">
+            The Executive Roundtables were easily
+            the best part for me.
+          </h3>
+
+          <p class="xr-grey-body">
+            At first, I was nervous but I actually enjoyed it
+            and it felt like a real professional meeting
+            and showed me that I could hold my own
+            in that kind of room.
+          </p>
+
+          <div class="xr-grey-author">
+            <span class="xr-grey-avatar">WP</span>
+            <div>
+              <p class="xr-grey-name">WP</p>
+              <p class="xr-grey-detail">
+                Age 15 — After School &amp; Weekend Academy
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    
+
+    <article class="xr-slide" id="xdge-review-02" aria-label="Review 2 of 11">
+
+      <div class="xr-grid">
+
+        <div class="xr-feature">
+
+          <div class="xr-black">
+
+            <div class="xr-topline">
+              <span>THE XDGE EXPERIENCE</span>
+              <span class="xr-dots">● ● ●</span>
+            </div>
+
+            <div class="xr-person">
+              <span class="xr-avatar">WP</span>
+              <div>
+                <p class="xr-name">WP</p>
+                <p class="xr-detail">
+                  Age 15 — After School &amp; Weekend Academy
+                </p>
+              </div>
+            </div>
+
+            <h3 class="xr-quote">
+              The Executive Roundtables were easily
+              the best part for me.
+            </h3>
+
+            <p class="xr-body">
+              At first, I was nervous but I actually
+              enjoyed it and it felt like a real
+              professional meeting and showed me
+              that I could hold my own in that kind of room.
+            </p>
+
+          </div>
+
+          <div class="xr-feature-foot">
+            REAL EXPERIENCES. REAL CAPABILITY.
+          </div>
+
+        </div>
+
+        <figure class="xr-photo">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/10/xdge.homeschool.4-2.png" alt="XDGE programme photograph, image 2 of 11" loading="lazy" decoding="async">
+
+          <figcaption class="xr-photo-copy">
+            <small>THE XDGE APPROACH</small>
+            <strong>
+              <span>LEARN IT.</span>
+              <span>APPLY IT.</span>
+              <span>PROVE IT.</span>
+            </strong>
+          </figcaption>
+
+        </figure>
+
+        <div class="xr-grey">
+
+          <div class="xr-grey-top">
+            <span class="xr-mark">“</span>
+            <span class="xr-grey-num">REVIEW 03</span>
+          </div>
+
+          <h3 class="xr-grey-quote">
+            I had felt completely out of my depth
+            in my first job, like everyone else
+            understood this professional world
+            and I didn’t.
+          </h3>
+
+          <p class="xr-grey-body">
+            What helped most on this programme was
+            having an amazing coach and building
+            my own playbook and actually practising
+            how to manage myself, organise my work
+            and communicate properly.
+          </p>
+
+          <div class="xr-grey-author">
+            <span class="xr-grey-avatar">KR</span>
+            <div>
+              <p class="xr-grey-name">KR</p>
+              <p class="xr-grey-detail">
+                Age 23 — Career Accelerator
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    
+
+    <article class="xr-slide" id="xdge-review-03" aria-label="Review 3 of 11">
+
+      <div class="xr-grid">
+
+        <div class="xr-feature">
+
+          <div class="xr-black">
+
+            <div class="xr-topline">
+              <span>THE XDGE EXPERIENCE</span>
+              <span class="xr-dots">● ● ●</span>
+            </div>
+
+            <div class="xr-person">
+              <span class="xr-avatar">KR</span>
+              <div>
+                <p class="xr-name">KR</p>
+                <p class="xr-detail">
+                  Age 23 — Career Accelerator
+                </p>
+              </div>
+            </div>
+
+            <h3 class="xr-quote">
+              I had felt completely out of my depth
+              in my first job, like everyone else
+              understood this professional world
+              and I didn’t.
+            </h3>
+
+            <p class="xr-body">
+              What helped most on this programme was
+              having an amazing coach and building
+              my own playbook and actually practising
+              how to manage myself, organise my work
+              and communicate properly.
+            </p>
+
+          </div>
+
+          <div class="xr-feature-foot">
+            REAL EXPERIENCES. REAL CAPABILITY.
+          </div>
+
+        </div>
+
+        <figure class="xr-photo">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/10/Xdge.leadership.png" alt="XDGE programme photograph, image 3 of 11" loading="lazy" decoding="async">
+
+          <figcaption class="xr-photo-copy">
+            <small>THE XDGE APPROACH</small>
+            <strong>
+              <span>LEARN IT.</span>
+              <span>APPLY IT.</span>
+              <span>PROVE IT.</span>
+            </strong>
+          </figcaption>
+
+        </figure>
+
+        <div class="xr-grey">
+
+          <div class="xr-grey-top">
+            <span class="xr-mark">“</span>
+            <span class="xr-grey-num">REVIEW 04</span>
+          </div>
+
+          <h3 class="xr-grey-quote">
+            The best part was that my project
+            focused on a real problem at the
+            company I already worked for.
+          </h3>
+
+          <p class="xr-grey-body">
+            It gave me some extra credibility
+            because my team and supervisor could see
+            what I was capable of and the value
+            I could bring to them.
+          </p>
+
+          <div class="xr-grey-author">
+            <span class="xr-grey-avatar">JH</span>
+            <div>
+              <p class="xr-grey-name">JH</p>
+              <p class="xr-grey-detail">
+                Age 24 — Emerging Leader Accelerator
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    
+
+    <article class="xr-slide" id="xdge-review-04" aria-label="Review 4 of 11">
+
+      <div class="xr-grid">
+
+        <div class="xr-feature">
+
+          <div class="xr-black">
+
+            <div class="xr-topline">
+              <span>THE XDGE EXPERIENCE</span>
+              <span class="xr-dots">● ● ●</span>
+            </div>
+
+            <div class="xr-person">
+              <span class="xr-avatar">JH</span>
+              <div>
+                <p class="xr-name">JH</p>
+                <p class="xr-detail">
+                  Age 24 — Emerging Leader Accelerator
+                </p>
+              </div>
+            </div>
+
+            <h3 class="xr-quote">
+              The best part was that my project
+              focused on a real problem at the company
+              I already worked for.
+            </h3>
+
+            <p class="xr-body">
+              It gave me some extra credibility because
+              my team and supervisor could see what I was
+              capable of and the value I could bring to them.
+            </p>
+
+          </div>
+
+          <div class="xr-feature-foot">
+            REAL EXPERIENCES. REAL CAPABILITY.
+          </div>
+
+        </div>
+
+        <figure class="xr-photo">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/10/xdge.homeschool.4-4.png" alt="XDGE programme photograph, image 4 of 11" loading="lazy" decoding="async">
+
+          <figcaption class="xr-photo-copy">
+            <small>THE XDGE APPROACH</small>
+            <strong>
+              <span>LEARN IT.</span>
+              <span>APPLY IT.</span>
+              <span>PROVE IT.</span>
+            </strong>
+          </figcaption>
+
+        </figure>
+
+        <div class="xr-grey">
+
+          <div class="xr-grey-top">
+            <span class="xr-mark">“</span>
+            <span class="xr-grey-num">REVIEW 05</span>
+          </div>
+
+          <h3 class="xr-grey-quote">
+            I really don’t think she would have
+            secured the scholarship without
+            the programme.
+          </h3>
+
+          <p class="xr-grey-body">
+            The panel said they could clearly see what
+            she would bring to the university, and
+            I honestly believe her project and the way
+            she learned to present herself made the difference.
+          </p>
+
+          <div class="xr-grey-author">
+            <span class="xr-grey-avatar">P</span>
+            <div>
+              <p class="xr-grey-name">Parent</p>
+              <p class="xr-grey-detail">
+                1:1 University Admission Standout
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    
+
+    <article class="xr-slide" id="xdge-review-05" aria-label="Review 5 of 11">
+
+      <div class="xr-grid">
+
+        <div class="xr-feature">
+
+          <div class="xr-black">
+
+            <div class="xr-topline">
+              <span>THE XDGE EXPERIENCE</span>
+              <span class="xr-dots">● ● ●</span>
+            </div>
+
+            <div class="xr-person">
+              <span class="xr-avatar">P</span>
+              <div>
+                <p class="xr-name">Parent</p>
+                <p class="xr-detail">
+                  1:1 University Admission Standout
+                </p>
+              </div>
+            </div>
+
+            <h3 class="xr-quote">
+              I really don’t think she would have
+              secured the scholarship without
+              the programme.
+            </h3>
+
+            <p class="xr-body">
+              The panel said they could clearly see what
+              she would bring to the university, and I
+              honestly believe her project and the way
+              she learned to present herself made the difference.
+            </p>
+
+          </div>
+
+          <div class="xr-feature-foot">
+            REAL EXPERIENCES. REAL CAPABILITY.
+          </div>
+
+        </div>
+
+        <figure class="xr-photo">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/08/box-mentor-2.png" alt="XDGE programme photograph, image 5 of 11" loading="lazy" decoding="async">
+
+          <figcaption class="xr-photo-copy">
+            <small>THE XDGE APPROACH</small>
+            <strong>
+              <span>LEARN IT.</span>
+              <span>APPLY IT.</span>
+              <span>PROVE IT.</span>
+            </strong>
+          </figcaption>
+
+        </figure>
+
+        <div class="xr-grey">
+
+          <div class="xr-grey-top">
+            <span class="xr-mark">“</span>
+            <span class="xr-grey-num">REVIEW 06</span>
+          </div>
+
+          <h3 class="xr-grey-quote">
+            The best part of the programme was having
+            to go out and meet people in the real world
+            and do the kind of work marketing
+            professionals actually do.
+          </h3>
+
+          <p class="xr-grey-body">
+            It definitely pushed me out of my comfort zone,
+            but I felt really buzzed by it and proud
+            of what I achieved.
+          </p>
+
+          <div class="xr-grey-author">
+            <span class="xr-grey-avatar">JB</span>
+            <div>
+              <p class="xr-grey-name">JB</p>
+              <p class="xr-grey-detail">
+                Age 17 — Student Career Accelerator
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    
+
+    <article class="xr-slide" id="xdge-review-06" aria-label="Review 6 of 11">
+
+      <div class="xr-grid">
+
+        <div class="xr-feature">
+
+          <div class="xr-black">
+
+            <div class="xr-topline">
+              <span>THE XDGE EXPERIENCE</span>
+              <span class="xr-dots">● ● ●</span>
+            </div>
+
+            <div class="xr-person">
+              <span class="xr-avatar">JB</span>
+              <div>
+                <p class="xr-name">JB</p>
+                <p class="xr-detail">
+                  Age 17 — Student Career Accelerator
+                </p>
+              </div>
+            </div>
+
+            <h3 class="xr-quote">
+              The best part of the programme was having
+              to go out and meet people in the real world
+              and do the kind of work marketing professionals
+              actually do.
+            </h3>
+
+            <p class="xr-body">
+              It definitely pushed me out of my comfort zone,
+              but I felt really buzzed by it and proud
+              of what I achieved.
+            </p>
+
+          </div>
+
+          <div class="xr-feature-foot">
+            REAL EXPERIENCES. REAL CAPABILITY.
+          </div>
+
+        </div>
+
+        <figure class="xr-photo">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/03/20251014_1358_Confident-Young-Presenter_simple_compose_01k7hcse2sevqvdn25f5wxd9h0-edited-1.png" alt="XDGE programme photograph, image 6 of 11" loading="lazy" decoding="async">
+
+          <figcaption class="xr-photo-copy">
+            <small>THE XDGE APPROACH</small>
+            <strong>
+              <span>LEARN IT.</span>
+              <span>APPLY IT.</span>
+              <span>PROVE IT.</span>
+            </strong>
+          </figcaption>
+
+        </figure>
+
+        <div class="xr-grey">
+
+          <div class="xr-grey-top">
+            <span class="xr-mark">“</span>
+            <span class="xr-grey-num">REVIEW 07</span>
+          </div>
+
+          <h3 class="xr-grey-quote">
+            I really think my project helped me get the job
+            because I had spent so much time analyzing
+            the manufacturing failures in the industry
+            and talking about what could be done to remedy them.
+          </h3>
+
+          <p class="xr-grey-body">
+            The interview stopped feeling like an interview
+            and turned into a proper conversation. I think
+            they could see that I would fit in and was
+            ready to help the company, rather than
+            just looking for any job.
+          </p>
+
+          <div class="xr-grey-author">
+            <span class="xr-grey-avatar">GS</span>
+            <div>
+              <p class="xr-grey-name">GS</p>
+              <p class="xr-grey-detail">
+                Age 21 — Career Accelerator
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    
+
+    <article class="xr-slide" id="xdge-review-07" aria-label="Review 7 of 11">
+
+      <div class="xr-grid">
+
+        <div class="xr-feature">
+
+          <div class="xr-black">
+
+            <div class="xr-topline">
+              <span>THE XDGE EXPERIENCE</span>
+              <span class="xr-dots">● ● ●</span>
+            </div>
+
+            <div class="xr-person">
+              <span class="xr-avatar">GS</span>
+              <div>
+                <p class="xr-name">GS</p>
+                <p class="xr-detail">
+                  Age 21 — Career Accelerator
+                </p>
+              </div>
+            </div>
+
+            <h3 class="xr-quote">
+              I really think my project helped me get the job
+              because I had spent so much time analyzing
+              the manufacturing failures in the industry
+              and talking about what could be done to remedy them.
+            </h3>
+
+            <p class="xr-body">
+              The interview stopped feeling like an interview
+              and turned into a proper conversation. I think
+              they could see that I would fit in and was ready
+              to help the company, rather than just looking
+              for any job.
+            </p>
+
+          </div>
+
+          <div class="xr-feature-foot">
+            REAL EXPERIENCES. REAL CAPABILITY.
+          </div>
+
+        </div>
+
+        <figure class="xr-photo">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/03/20260128_1916_Image-Generation_simple_compose_01kg30fzybf65876mgvw7t25zc-edited.png" alt="XDGE programme photograph, image 7 of 11" loading="lazy" decoding="async">
+
+          <figcaption class="xr-photo-copy">
+            <small>THE XDGE APPROACH</small>
+            <strong>
+              <span>LEARN IT.</span>
+              <span>APPLY IT.</span>
+              <span>PROVE IT.</span>
+            </strong>
+          </figcaption>
+
+        </figure>
+
+        <div class="xr-grey">
+
+          <div class="xr-grey-top">
+            <span class="xr-mark">“</span>
+            <span class="xr-grey-num">REVIEW 08</span>
+          </div>
+
+          <h3 class="xr-grey-quote">
+            I never thought I could be a leader
+            because I am quiet and shy.
+          </h3>
+
+          <p class="xr-grey-body">
+            I learned how to change my thinking and
+            it showed me that people can listen to
+            my ideas without me being loud.
+          </p>
+
+          <div class="xr-grey-author">
+            <span class="xr-grey-avatar">PL</span>
+            <div>
+              <p class="xr-grey-name">PL</p>
+              <p class="xr-grey-detail">
+                Age 11 — 1:1 Student Standout
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    
+
+    <article class="xr-slide" id="xdge-review-08" aria-label="Review 8 of 11">
+
+      <div class="xr-grid">
+
+        <div class="xr-feature">
+
+          <div class="xr-black">
+
+            <div class="xr-topline">
+              <span>THE XDGE EXPERIENCE</span>
+              <span class="xr-dots">● ● ●</span>
+            </div>
+
+            <div class="xr-person">
+              <span class="xr-avatar">PL</span>
+              <div>
+                <p class="xr-name">PL</p>
+                <p class="xr-detail">
+                  Age 11 — 1:1 Student Standout
+                </p>
+              </div>
+            </div>
+
+            <h3 class="xr-quote">
+              I never thought I could be a leader
+              because I am quiet and shy.
+            </h3>
+
+            <p class="xr-body">
+              I learned how to change my thinking and
+              it showed me that people can listen to my
+              ideas without me being loud.
+            </p>
+
+          </div>
+
+          <div class="xr-feature-foot">
+            REAL EXPERIENCES. REAL CAPABILITY.
+          </div>
+
+        </div>
+
+        <figure class="xr-photo xr-landscape">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/01/christina-wocintechchat-com-swi1DGRCshQ-unsplash-scaled-1.jpg" alt="XDGE programme photograph, image 8 of 11" loading="lazy" decoding="async">
+
+          <figcaption class="xr-photo-copy">
+            <small>THE XDGE APPROACH</small>
+            <strong>
+              <span>LEARN IT.</span>
+              <span>APPLY IT.</span>
+              <span>PROVE IT.</span>
+            </strong>
+          </figcaption>
+
+        </figure>
+
+        <div class="xr-grey">
+
+          <div class="xr-grey-top">
+            <span class="xr-mark">“</span>
+            <span class="xr-grey-num">REVIEW 09</span>
+          </div>
+
+          <h3 class="xr-grey-quote">
+            The Guild X day was definitely the
+            best part for me.
+          </h3>
+
+          <p class="xr-grey-body">
+            It was amazing to get real feedback and
+            recognition for what I had achieved.
+            It was also really good to see
+            how far we had all come.
+          </p>
+
+          <div class="xr-grey-author">
+            <span class="xr-grey-avatar">FK</span>
+            <div>
+              <p class="xr-grey-name">FK</p>
+              <p class="xr-grey-detail">
+                Age 17 — University Admission Standout
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    
+
+    <article class="xr-slide" id="xdge-review-09" aria-label="Review 9 of 11">
+
+      <div class="xr-grid">
+
+        <div class="xr-feature">
+
+          <div class="xr-black">
+
+            <div class="xr-topline">
+              <span>THE XDGE EXPERIENCE</span>
+              <span class="xr-dots">● ● ●</span>
+            </div>
+
+            <div class="xr-person">
+              <span class="xr-avatar">FK</span>
+              <div>
+                <p class="xr-name">FK</p>
+                <p class="xr-detail">
+                  Age 17 — University Admission Standout
+                </p>
+              </div>
+            </div>
+
+            <h3 class="xr-quote">
+              The Guild X day was definitely
+              the best part for me.
+            </h3>
+
+            <p class="xr-body">
+              It was amazing to get real feedback
+              and recognition for what I had achieved.
+              It was also really good to see
+              how far we had all come.
+            </p>
+
+          </div>
+
+          <div class="xr-feature-foot">
+            REAL EXPERIENCES. REAL CAPABILITY.
+          </div>
+
+        </div>
+
+        <figure class="xr-photo">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/01/The-Xdge-26.png" alt="XDGE programme photograph, image 9 of 11" loading="lazy" decoding="async">
+
+          <figcaption class="xr-photo-copy">
+            <small>THE XDGE APPROACH</small>
+            <strong>
+              <span>LEARN IT.</span>
+              <span>APPLY IT.</span>
+              <span>PROVE IT.</span>
+            </strong>
+          </figcaption>
+
+        </figure>
+
+        <div class="xr-grey">
+
+          <div class="xr-grey-top">
+            <span class="xr-mark">“</span>
+            <span class="xr-grey-num">REVIEW 10</span>
+          </div>
+
+          <h3 class="xr-grey-quote">
+            It helped me see what I am good at
+            and make a plan for what I want in life.
+          </h3>
+
+          <p class="xr-grey-body">
+            It was amazing to work with real leaders
+            and learn about all the different
+            ways they got there.
+          </p>
+
+          <div class="xr-grey-author">
+            <span class="xr-grey-avatar">DB</span>
+            <div>
+              <p class="xr-grey-name">DB</p>
+              <p class="xr-grey-detail">
+                Age 14 — After School &amp; Weekend Academy
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    
+
+    <article class="xr-slide" id="xdge-review-10" aria-label="Review 10 of 11">
+
+      <div class="xr-grid">
+
+        <div class="xr-feature">
+
+          <div class="xr-black">
+
+            <div class="xr-topline">
+              <span>THE XDGE EXPERIENCE</span>
+              <span class="xr-dots">● ● ●</span>
+            </div>
+
+            <div class="xr-person">
+              <span class="xr-avatar">DB</span>
+              <div>
+                <p class="xr-name">DB</p>
+                <p class="xr-detail">
+                  Age 14 — After School &amp; Weekend Academy
+                </p>
+              </div>
+            </div>
+
+            <h3 class="xr-quote">
+              It helped me see what I am good at
+              and make a plan for what I want in life.
+            </h3>
+
+            <p class="xr-body">
+              It was amazing to work with real leaders
+              and learn about all the different
+              ways they got there.
+            </p>
+
+          </div>
+
+          <div class="xr-feature-foot">
+            REAL EXPERIENCES. REAL CAPABILITY.
+          </div>
+
+        </div>
+
+        <figure class="xr-photo">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/01/The-Xdge-23.png" alt="XDGE programme photograph, image 10 of 11" loading="lazy" decoding="async">
+
+          <figcaption class="xr-photo-copy">
+            <small>THE XDGE APPROACH</small>
+            <strong>
+              <span>LEARN IT.</span>
+              <span>APPLY IT.</span>
+              <span>PROVE IT.</span>
+            </strong>
+          </figcaption>
+
+        </figure>
+
+        <div class="xr-grey">
+
+          <div class="xr-grey-top">
+            <span class="xr-mark">“</span>
+            <span class="xr-grey-num">REVIEW 11</span>
+          </div>
+
+          <h3 class="xr-grey-quote">
+            It definitely helped me become a prefect.
+          </h3>
+
+          <p class="xr-grey-body">
+            I found the professional skills part of the
+            course most helpful because it helped me
+            understand how to lead and gave me lots
+            of practice speaking to adults and in public.
+          </p>
+
+          <div class="xr-grey-author">
+            <span class="xr-grey-avatar">EN</span>
+            <div>
+              <p class="xr-grey-name">EN</p>
+              <p class="xr-grey-detail">
+                Age 14 — 1:1 Student Standout
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    
+
+    <article class="xr-slide" id="xdge-review-11" aria-label="Review 11 of 11">
+
+      <div class="xr-grid">
+
+        <div class="xr-feature">
+
+          <div class="xr-black">
+
+            <div class="xr-topline">
+              <span>THE XDGE EXPERIENCE</span>
+              <span class="xr-dots">● ● ●</span>
+            </div>
+
+            <div class="xr-person">
+              <span class="xr-avatar">EN</span>
+              <div>
+                <p class="xr-name">EN</p>
+                <p class="xr-detail">
+                  Age 14 — 1:1 Student Standout
+                </p>
+              </div>
+            </div>
+
+            <h3 class="xr-quote">
+              It definitely helped me become a prefect.
+            </h3>
+
+            <p class="xr-body">
+              I found the professional skills part of the
+              course most helpful because it helped me
+              understand how to lead and gave me lots
+              of practice speaking to adults and in public.
+            </p>
+
+          </div>
+
+          <div class="xr-feature-foot">
+            REAL EXPERIENCES. REAL CAPABILITY.
+          </div>
+
+        </div>
+
+        <figure class="xr-photo">
+
+          <img src="https://xdgeleadership.com/wp-content/uploads/2026/01/The-Xdge-8.png" alt="XDGE programme photograph, image 11 of 11" loading="lazy" decoding="async">
+
+          <figcaption class="xr-photo-copy">
+            <small>THE XDGE APPROACH</small>
+            <strong>
+              <span>LEARN IT.</span>
+              <span>APPLY IT.</span>
+              <span>PROVE IT.</span>
+            </strong>
+          </figcaption>
+
+        </figure>
+
+        <div class="xr-grey">
+
+          <div class="xr-grey-top">
+            <span class="xr-mark">“</span>
+            <span class="xr-grey-num">REVIEW 01</span>
+          </div>
+
+          <h3 class="xr-grey-quote">
+            This programme pushed me far beyond
+            anything I had done at school.
+          </h3>
+
+          <p class="xr-grey-body">
+            The professional skills sessions were
+            the most useful because they taught me
+            to think on my feet, answer difficult
+            questions and present myself as someone credible.
+          </p>
+
+          <div class="xr-grey-author">
+            <span class="xr-grey-avatar">YS</span>
+            <div>
+              <p class="xr-grey-name">YS</p>
+              <p class="xr-grey-detail">
+                Age 18 — University Admission Standout
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  
+
+  <div class="xr-bottom">
+
+    <span>
+      ALL 11 REVIEWS · USE THE BUTTONS OR SWIPE TO EXPLORE
+    </span>
+
+    <span>
+      LEARN IT. APPLY IT.
+      <b class="xr-blue">PROVE IT.</b>
+    </span>
+
+  </div>
+
+</div>
+
+
+
+
+<script>
+
+(function () {
+
+  function setup() {
+
+    const root = document.getElementById('xdge-reviews-2026');
+
+    if (!root || root.dataset.ready === 'yes') return;
+
+    root.dataset.ready = 'yes';
+
+    const scroller = root.querySelector('#xdge-scroll-2026');
+    const slides = Array.from(scroller.querySelectorAll('.xr-slide'));
+    const counter = root.querySelector('#xdge-current-2026');
+    const progress = root.querySelector('#xdge-progress-2026');
+
+    let index = 0;
+    let timer = null;
+    let manual = false;
+    let inView = true;
+    let programmatic = false;
+    let programmaticTimer = null;
+
+    const reduce = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+    function position(i) {
+      return slides[i].offsetLeft - slides[0].offsetLeft;
+    }
+
+    function update() {
+      counter.textContent = String(index+1).padStart(2,'0');
+      progress.style.width =
+        (((index+1)/slides.length)*100)+'%';
+    }
+
+    function stop() {
+      if (timer !== null) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function show(i, byUser) {
+
+      if (byUser) {
+        manual = true;
+        stop();
+      }
+
+      const wrap = i < 0 || i >= slides.length;
+
+      index = (i + slides.length) % slides.length;
+
+      update();
+
+      clearTimeout(programmaticTimer);
+      programmatic = true;
+
+      if (wrap || reduce) {
+
+        scroller.style.scrollBehavior = 'auto';
+        scroller.scrollLeft = position(index);
+        scroller.style.scrollBehavior = '';
+        programmatic = false;
+
+      } else {
+
+        scroller.scrollTo({
+          left: position(index),
+          behavior: 'smooth'
+        });
+
+        programmaticTimer = setTimeout(function () {
+          programmatic = false;
+        },1000);
+
+      }
+    }
+
+    function play() {
+
+      stop();
+
+      if (
+        manual ||
+        !inView ||
+        document.hidden ||
+        reduce
+      ) return;
+
+      timer = setInterval(function () {
+        show(index+1,false);
+      },7000);
+    }
+
+    root.querySelector('#xdge-prev-2026')
+      .addEventListener('click',function () {
+        show(index-1,true);
+      });
+
+    root.querySelector('#xdge-next-2026')
+      .addEventListener('click',function () {
+        show(index+1,true);
+      });
+
+    scroller.addEventListener('pointerdown',function () {
+      manual = true;
+      stop();
+    },{passive:true});
+
+    scroller.addEventListener('touchstart',function () {
+      manual = true;
+      stop();
+    },{passive:true});
+
+    scroller.addEventListener('scroll',function () {
+
+      if (programmatic) return;
+
+      const w = scroller.clientWidth;
+
+      if (w <= 0) return;
+
+      index = Math.max(
+        0,
+        Math.min(
+          slides.length-1,
+          Math.round(scroller.scrollLeft/w)
+        )
+      );
+
+      update();
+
+    },{passive:true});
+
+    scroller.addEventListener('keydown',function (e) {
+
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        show(index+1,true);
+      }
+
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        show(index-1,true);
+      }
+
+    });
+
+    root.addEventListener('mouseenter',stop);
+    root.addEventListener('mouseleave',play);
+    root.addEventListener('focusin',stop);
+
+    root.addEventListener('focusout',function (e) {
+      if (!root.contains(e.relatedTarget)) play();
+    });
+
+    document.addEventListener('visibilitychange',play);
+
+    if ('IntersectionObserver' in window) {
+
+      inView = false;
+
+      new IntersectionObserver(function (entries) {
+
+        inView = entries[0].isIntersecting;
+
+        if (inView) {
+          play();
+        } else {
+          stop();
+        }
+
+      },{threshold:.12}).observe(root);
+
+    }
+
+    play();
+
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener(
+      'DOMContentLoaded',
+      setup,
+      {once:true}
+    );
+  } else {
+    setup();
+  }
+
+})();
+
+</script>
+
+
+
+
+<script>
+
+(function () {
+
+  function protectXDGEReviewPhotos() {
+
+    var root = document.getElementById('xdge-reviews-2026');
+
+    if (!root ||
+        root.dataset.photoFallbackReady === 'yes') return;
+
+    root.dataset.photoFallbackReady = 'yes';
+
+    var backup =
+      'https://xdgeleadership.com/wp-content/uploads/2026/11/XDGE-10.png';
+
+    root.querySelectorAll('.xr-photo img').forEach(function (img) {
+
+      function recover() {
+
+        if (img.dataset.fallbackApplied === 'yes') return;
+
+        img.dataset.fallbackApplied = 'yes';
+        img.src = backup;
+
+      }
+
+      img.addEventListener('error',recover);
+
+      if (img.complete && img.naturalWidth === 0) {
+        recover();
+      }
+
+    });
+
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener(
+      'DOMContentLoaded',
+      protectXDGEReviewPhotos
+    );
+  } else {
+    protectXDGEReviewPhotos();
+  }
+
+})();
+
+</script>
+
+</section>
+
+
