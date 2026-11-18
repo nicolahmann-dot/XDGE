@@ -1,5 +1,5 @@
 import { lazy, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { ScrollProgress } from './components/ScrollProgress';
 import { TopBar } from './components/TopBar';
 import { PageTransition } from './components/PageTransition';
@@ -30,6 +30,9 @@ const Terms = lazy(() => import('./pages/Terms'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function Layout() {
+  const { pathname } = useLocation();
+  const isHome = pathname === '/';
+
   return (
     <div>
       <SkipToContent />
@@ -43,7 +46,7 @@ function Layout() {
       <main id="main-content">
         <PageTransition />
       </main>
-      <Footer />
+      {!isHome && <Footer />}
       <BackToTop />
       <StickyMobileCTA />
     </div>

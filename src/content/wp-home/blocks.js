@@ -12,11 +12,12 @@ import outcomes from './11-outcomes.html?raw';
 import reviews from './12-reviews.html?raw';
 import questions from './13-questions.html?raw';
 import next from './14-next.html?raw';
+import footer from './15-footer.html?raw';
 
 /**
  * WordPress homepage, in order.
  * The opening video and the "Your Next Step" hero stay as designed.
- * Every other section is left to the site's scroll reveal.
+ * Every other section rises in with Framer as it scrolls into view.
  */
 export const homeBlocks = [
   { id: 'video', html: video, theme: 'dark', reveal: false, label: 'Hero' },
@@ -33,4 +34,5 @@ export const homeBlocks = [
   { id: 'reviews', html: reviews, theme: 'light', reveal: true, label: 'Reviews' },
   { id: 'questions', html: questions, theme: 'light', reveal: true, label: 'Find your XDGE' },
   { id: 'next', html: next, theme: 'dark', reveal: true, label: 'Next step' },
+  { id: 'footer', html: footer, theme: 'dark', reveal: true, label: 'Footer' },
 ];

@@ -1,0 +1,653 @@
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+
+<style>
+
+/* ==========================================
+   FOUNDATION
+========================================== */
+
+#xdge-site-footer,
+#xdge-site-footer * {
+  box-sizing: border-box;
+}
+
+#xdge-site-footer {
+  width: 100%;
+  background: #000000 !important;
+  color: #FFFFFF;
+  font-family: 'Inter', Arial, sans-serif;
+  border-top: 1px solid #1A1C20;
+  overflow: hidden;
+}
+
+#xdge-site-footer a {
+  color: inherit;
+  text-decoration: none;
+  transition: color .25s ease;
+}
+
+#xdge-site-footer a:hover {
+  color: #5170FF;
+}
+
+#xdge-site-footer a:focus-visible {
+  outline: 2px solid #5170FF;
+  outline-offset: 5px;
+}
+
+/* ==========================================
+   ANIMATED SCROLLING BANNER
+========================================== */
+
+#xdge-site-footer .xdge-footer-banner {
+  width: 100%;
+  overflow: hidden;
+
+  padding:
+    clamp(40px, 6vw, 64px) 0
+    clamp(24px, 4vw, 40px);
+
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+
+#xdge-site-footer .xdge-footer-marquee {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+
+  animation: xdgeFooterScroll 90s linear infinite;
+  will-change: transform;
+}
+
+#xdge-site-footer .xdge-footer-marquee span {
+  flex: 0 0 auto;
+  padding-right: .35em;
+
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+
+  font-size: clamp(40px, 11.3vw, 200px);
+  line-height: .86;
+  letter-spacing: .04em;
+
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+@keyframes xdgeFooterScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ==========================================
+   CONTENT CONTAINER
+========================================== */
+
+#xdge-site-footer .xdge-footer-inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 40px);
+}
+
+#xdge-site-footer .xdge-footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: clamp(32px, 6vw, 80px);
+}
+
+/* ==========================================
+   LABELS
+========================================== */
+
+#xdge-site-footer .xdge-footer-label {
+  font-size: 11px;
+  font-weight: 400;
+  color: #A8A8A8;
+
+  letter-spacing: .16em;
+  text-transform: uppercase;
+
+  margin-bottom: 16px;
+}
+
+/* ==========================================
+   TOP SECTION
+========================================== */
+
+#xdge-site-footer .xdge-footer-top {
+  padding-bottom: clamp(48px, 8vw, 88px);
+}
+
+#xdge-site-footer .xdge-footer-address {
+  font-size: clamp(15px, 1.6vw, 17px);
+  line-height: 1.6;
+
+  color: #FFFFFF;
+  margin-bottom: 24px;
+}
+
+#xdge-site-footer .xdge-footer-contact {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+#xdge-site-footer .xdge-footer-phone-icon {
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  border: 1px solid #1A1C20;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#xdge-site-footer .xdge-footer-contact-details {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+#xdge-site-footer .xdge-footer-email {
+  margin-top: 8px;
+  color: #A8A8A8;
+}
+
+#xdge-site-footer .xdge-footer-email a {
+  color: #A8A8A8;
+}
+
+/* ==========================================
+   RIGHT COLUMN / PATHWAYS
+========================================== */
+
+#xdge-site-footer .xdge-footer-right {
+  justify-self: end;
+  text-align: left;
+}
+
+#xdge-site-footer .xdge-footer-pathways {
+  width: 100%;
+  max-width: 380px;
+}
+
+#xdge-site-footer .xdge-footer-pathways a {
+  display: block;
+  width: fit-content;
+
+  color: #FFFFFF;
+  font-size: 14px;
+  line-height: 2.1;
+  font-weight: 400;
+}
+
+#xdge-site-footer .xdge-footer-pathways a:hover {
+  color: #5170FF;
+}
+
+/* ==========================================
+   LOWER NAVIGATION
+========================================== */
+
+#xdge-site-footer .xdge-footer-middle {
+  padding-bottom: clamp(48px, 6vw, 64px);
+  align-items: flex-start;
+}
+
+#xdge-site-footer .xdge-footer-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: clamp(32px, 5vw, 64px);
+}
+
+#xdge-site-footer .xdge-footer-nav a {
+  display: block;
+
+  font-size: 14px;
+  line-height: 2.1;
+  font-weight: 400;
+
+  color: #FFFFFF;
+}
+
+#xdge-site-footer .xdge-footer-nav a:hover {
+  color: #5170FF;
+}
+
+/* ==========================================
+   EXPLORE PROGRAMMES PANEL
+========================================== */
+
+#xdge-site-footer .xdge-footer-explore {
+  width: 100%;
+  max-width: 380px;
+}
+
+#xdge-site-footer .xdge-footer-explore p {
+  font-size: 14px;
+  line-height: 1.6;
+
+  color: #FFFFFF;
+
+  margin: 0 0 18px;
+}
+
+#xdge-site-footer .xdge-explore-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 12px 20px;
+
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 999px;
+
+  color: #FFFFFF;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  transition:
+    background .3s ease,
+    border-color .3s ease,
+    color .3s ease,
+    transform .3s ease;
+}
+
+#xdge-site-footer .xdge-explore-button:hover {
+  background: rgba(81,112,255,.12);
+  border-color: #5170FF;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   COPYRIGHT
+========================================== */
+
+#xdge-site-footer .xdge-footer-divider {
+  width: 100%;
+  height: 1px;
+  background: #1A1C20;
+}
+
+#xdge-site-footer .xdge-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  flex-wrap: wrap;
+  gap: 12px;
+
+  padding: clamp(20px, 3vw, 28px) 0;
+
+  font-size: 12px;
+  color: #A8A8A8;
+}
+
+#xdge-site-footer .xdge-footer-bottom a {
+  color: #A8A8A8;
+}
+
+#xdge-site-footer .xdge-footer-bottom a:hover {
+  color: #5170FF;
+}
+
+/* ==========================================
+   MOBILE RESPONSIVENESS
+========================================== */
+
+@media (max-width: 768px) {
+
+  #xdge-site-footer .xdge-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  #xdge-site-footer .xdge-footer-right {
+    justify-self: start;
+  }
+
+  #xdge-site-footer .xdge-footer-banner {
+    padding-top: 40px;
+    padding-bottom: 30px;
+  }
+
+  #xdge-site-footer .xdge-footer-marquee span {
+    font-size: clamp(48px, 12vw, 90px);
+  }
+
+  #xdge-site-footer .xdge-footer-top {
+    padding-bottom: 56px;
+  }
+
+  #xdge-site-footer .xdge-footer-middle {
+    padding-bottom: 52px;
+  }
+
+  #xdge-site-footer .xdge-footer-explore,
+  #xdge-site-footer .xdge-footer-pathways {
+    max-width: 100%;
+  }
+
+  #xdge-site-footer .xdge-footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  #xdge-site-footer .xdge-footer-nav {
+    gap: 24px;
+  }
+
+  #xdge-site-footer .xdge-footer-contact-details {
+    font-size: 13px;
+  }
+
+  #xdge-site-footer .xdge-footer-address {
+    font-size: 15px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  #xdge-site-footer .xdge-footer-marquee {
+    animation: none;
+  }
+
+}
+
+</style>
+
+
+
+
+<footer id="xdge-site-footer">
+
+  
+
+  <div class="xdge-footer-banner">
+
+    <div class="xdge-footer-marquee">
+
+      <span>
+        CAREER · UNIVERSITY · EARLY LEADERS ·
+      </span>
+
+      <span aria-hidden="true">
+        CAREER · UNIVERSITY · EARLY LEADERS ·
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="xdge-footer-inner">
+
+    
+
+    <div class="xdge-footer-grid xdge-footer-top">
+
+      
+
+      <div>
+
+        <div class="xdge-footer-label">
+          HEAD OFFICE
+        </div>
+
+        <div class="xdge-footer-address">
+          71-75 Shelton Street,<br>
+          Covent Garden,<br>
+          London. WC2H 9JQ
+        </div>
+
+        <div class="xdge-footer-contact">
+
+          <div class="xdge-footer-phone-icon">
+
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+
+            </svg>
+
+          </div>
+
+          <div class="xdge-footer-contact-details">
+
+            <div>
+              UK:
+              <a href="tel:+443301334470">
+                0330 133 4470
+              </a>
+            </div>
+
+            <div>
+              USA:
+              <a href="tel:+16199838853">
+                619 983 8853
+              </a>
+            </div>
+
+            <div class="xdge-footer-email">
+
+              <a href="mailto:info@thexdge.com">
+                info@thexdge.com
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      
+
+      <div class="xdge-footer-right xdge-footer-pathways">
+
+        <div class="xdge-footer-label">
+          OUR PATHWAYS
+        </div>
+
+        
+
+        <a href="https://xdgeleadership.com/career-xdge-programmes/">
+          Career XDGE
+        </a>
+
+        
+
+        <a href="https://xdgeleadership.com/university-xdge/">
+          University XDGE
+        </a>
+
+        
+
+        <a href="https://xdgeleadership.com/early-leader-xdge/">
+          Early Leaders XDGE
+        </a>
+
+      </div>
+
+    </div>
+
+
+    
+
+    <div class="xdge-footer-grid xdge-footer-middle">
+
+      <nav class="xdge-footer-nav" aria-label="Footer navigation">
+
+        
+
+        <div>
+
+          <div class="xdge-footer-label">
+            COMPANY
+          </div>
+
+          
+
+          <a href="https://xdgeleadership.com/">
+            Home
+          </a>
+
+          
+
+          <a href="https://xdgeleadership.com/programmes/">
+            Programmes
+          </a>
+
+          
+
+          <a href="https://xdgeleadership.com/career-xdge-programmes/">
+            Career XDGE
+          </a>
+
+          
+
+          <a href="https://xdgeleadership.com/university-xdge/">
+            University XDGE
+          </a>
+
+          
+
+          <a href="https://xdgeleadership.com/early-leader-xdge/">
+            Early Leaders XDGE
+          </a>
+
+        </div>
+
+
+        
+
+        <div>
+
+          <div class="xdge-footer-label">
+            RESOURCES
+          </div>
+
+          
+
+          <a href="https://xdgeleadership.com/faq/">
+            FAQ
+          </a>
+
+          
+
+          <a href="https://xdgeleadership.com/apply">
+            Apply
+          </a>
+
+          
+
+          <a href="mailto:info@thexdge.com">
+            Contact
+          </a>
+
+          
+
+          <a href="https://xdgeleadership.com/programmes/">
+            Explore Programmes
+          </a>
+
+        </div>
+
+      </nav>
+
+
+      
+
+      <div class="xdge-footer-right xdge-footer-explore">
+
+        <div class="xdge-footer-label">
+          EXPLORE XDGE
+        </div>
+
+        <p>
+          Built around your individuality.<br>
+          Driven by your goals.
+        </p>
+
+        <a class="xdge-explore-button" href="https://xdgeleadership.com/programmes/">
+
+          Explore all programmes
+
+          <span aria-hidden="true">→</span>
+
+        </a>
+
+      </div>
+
+    </div>
+
+
+    
+
+    <div class="xdge-footer-divider"></div>
+
+
+    
+
+    <div class="xdge-footer-bottom">
+
+      <div>
+        © 2026 XDGE — All rights reserved
+      </div>
+
+      <div>
+        <a href="https://xdgeleadership.com/faq/">
+          FAQ
+        </a>
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        <a href="mailto:info@thexdge.com">
+          Contact
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>
+
+

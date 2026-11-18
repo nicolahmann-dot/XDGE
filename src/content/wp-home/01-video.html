@@ -51,7 +51,7 @@
 
   display: block;
 
-  object-fit: cover;
+  object-fit: contain;
   object-position: center center;
 
   background: #000000;
@@ -86,12 +86,12 @@
 @media (max-width: 767px) {
 
   #xdge-video-intro {
-    width: 100vw;
-
-    height: 100vh;
-    height: 100svh;
-
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
     min-height: 0;
+    margin-left: 0;
   }
 
   #xdge-video-intro .xdge-intro-video {
@@ -108,7 +108,7 @@
 
 <section id="xdge-video-intro" aria-label="XDGE Leadership animated introduction">
 
-  <video id="xdge-intro-player" class="xdge-intro-video" autoplay="" muted="" playsinline="" webkit-playsinline="" preload="auto" disablepictureinpicture="" disableremoteplayback="" aria-hidden="true">
+  <video id="xdge-intro-player" class="xdge-intro-video" autoplay="" muted="" playsinline="" webkit-playsinline="" preload="metadata" poster="/assets/New%20Logo/Artboard%203.png" disablepictureinpicture="" disableremoteplayback="" aria-hidden="true">
 
     <source src="https://xdgeleadership.com/wp-content/uploads/2026/11/Lucid-Particle-Blast-Logo_1080p.mp4" type="video/mp4">
 
