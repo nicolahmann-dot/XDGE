@@ -22,7 +22,7 @@
   background: var(--paper);
   color: #090909;
   font-family: "Manrope", Arial, sans-serif;
-  overflow: hidden;
+  overflow: visible;
 }
 
 #xdge-reviews-2026 .xr-wrap {
@@ -176,7 +176,7 @@
   display: flex;
   align-items: flex-start;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -193,6 +193,46 @@
   min-width: 0;
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  opacity: 0.38;
+  transform: translate3d(28px, 0, 0) scale(0.985);
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+#xdge-reviews-2026 .xr-slide.is-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Desktop: black card + photo + grey card each rise in (incl. slides 4 & 5). */
+#xdge-reviews-2026 .xr-slide .xr-feature,
+#xdge-reviews-2026 .xr-slide .xr-photo,
+#xdge-reviews-2026 .xr-slide .xr-grey {
+  opacity: 0;
+  transform: translate3d(0, 36px, 0);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#xdge-reviews-2026 .xr-slide.is-active .xr-feature {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-delay: 0.05s;
+}
+
+#xdge-reviews-2026 .xr-slide.is-active .xr-photo {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-delay: 0.18s;
+}
+
+#xdge-reviews-2026 .xr-slide.is-active .xr-grey {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-delay: 0.3s;
 }
 
 #xdge-reviews-2026 .xr-grid {
@@ -547,12 +587,17 @@
 
 @media(max-width:600px) {
 
+  #xdge-reviews-2026 {
+    overflow: visible;
+  }
+
   #xdge-reviews-2026 .xr-wrap {
     width: calc(100% - 34px);
   }
 
   #xdge-reviews-2026 .xr-heading {
-    font-size: clamp(44px,10vw,64px);
+    font-size: clamp(40px, 9.5vw, 58px);
+    line-height: 0.95;
   }
 
   #xdge-reviews-2026 .xr-nav {
@@ -583,12 +628,29 @@
   #xdge-reviews-2026 .xr-black,
   #xdge-reviews-2026 .xr-grey {
     min-height: 0;
-    padding: 27px;
+    height: auto;
+    padding: 24px 22px;
+    overflow: visible;
+  }
+
+  #xdge-reviews-2026 .xr-quote {
+    font-size: clamp(18px, 5.2vw, 22px);
+  }
+
+  #xdge-reviews-2026 .xr-body {
+    font-size: 14px;
   }
 
   #xdge-reviews-2026 .xr-photo {
     width: 100%;
     border-radius: 19px;
+    max-height: none;
+  }
+
+  #xdge-reviews-2026 .xr-photo img {
+    height: auto !important;
+    max-height: none !important;
+    object-fit: cover;
   }
 
   #xdge-reviews-2026 .xr-photo-copy strong {
@@ -601,6 +663,25 @@
 
   #xdge-reviews-2026 .xr-bottom {
     flex-direction: column;
+  }
+
+  #xdge-reviews-2026 .xr-slide {
+    opacity: 0.28;
+    transform: translate3d(18px, 0, 0);
+  }
+
+  #xdge-reviews-2026 .xr-slide.is-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* On phones the grid stacks — keep one clean rise, not triple stagger. */
+  #xdge-reviews-2026 .xr-slide .xr-feature,
+  #xdge-reviews-2026 .xr-slide .xr-photo,
+  #xdge-reviews-2026 .xr-slide .xr-grey {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
@@ -1810,10 +1891,32 @@
       return slides[i].offsetLeft - slides[0].offsetLeft;
     }
 
+    function warmImages(i) {
+      // Eager-load current + neighbours so slides 4/5 photos don’t pop blank.
+      [i - 1, i, i + 1].forEach(function (n) {
+        const slide = slides[(n + slides.length) % slides.length];
+        if (!slide) return;
+        slide.querySelectorAll('img').forEach(function (img) {
+          if (img.dataset.xrWarmed === '1') return;
+          img.dataset.xrWarmed = '1';
+          img.loading = 'eager';
+          if (img.decode) {
+            img.decode().catch(function () {});
+          }
+        });
+      });
+    }
+
     function update() {
       counter.textContent = String(index+1).padStart(2,'0');
       progress.style.width =
         (((index+1)/slides.length)*100)+'%';
+
+      slides.forEach(function (slide, i) {
+        slide.classList.toggle('is-active', i === index);
+      });
+
+      warmImages(index);
     }
 
     function stop() {
@@ -1839,17 +1942,47 @@
       clearTimeout(programmaticTimer);
       programmatic = true;
 
+      const targetLeft = position(index);
+      const touchLike = window.matchMedia('(hover: none), (max-width: 900px)').matches;
+
       if (wrap || reduce) {
 
         scroller.style.scrollBehavior = 'auto';
-        scroller.scrollLeft = position(index);
+        scroller.scrollLeft = targetLeft;
         scroller.style.scrollBehavior = '';
         programmatic = false;
+
+      } else if (touchLike) {
+        // iOS often ignores scrollTo({behavior:'smooth'}). Animate by hand
+        // so Previous / See more reviews actually eases between slides.
+        const startLeft = scroller.scrollLeft;
+        const delta = targetLeft - startLeft;
+        const duration = 780;
+        const start = performance.now();
+
+        function easeOut(t) {
+          return 1 - Math.pow(1 - t, 3);
+        }
+
+        function tick(now) {
+          const t = Math.min(1, (now - start) / duration);
+          scroller.scrollLeft = startLeft + delta * easeOut(t);
+          if (t < 1) {
+            requestAnimationFrame(tick);
+          } else {
+            programmatic = false;
+          }
+        }
+
+        requestAnimationFrame(tick);
+        programmaticTimer = setTimeout(function () {
+          programmatic = false;
+        }, duration + 80);
 
       } else {
 
         scroller.scrollTo({
-          left: position(index),
+          left: targetLeft,
           behavior: 'smooth'
         });
 
@@ -1958,6 +2091,7 @@
 
     }
 
+    update();
     play();
 
   }

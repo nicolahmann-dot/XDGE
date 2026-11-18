@@ -1,14 +1,16 @@
 import { useLayoutEffect, useRef } from 'react';
-import { animate, scroll } from 'framer-motion';
+import { animate, inView, scroll } from 'framer-motion';
 
 /** Boldz expo-out — long travel, slow settle. */
 const EASE = [0.16, 1, 0.3, 1];
 const RISE = 120;
 const RISE_CARD = 160;
+const RISE_MOBILE = 48;
+const DURATION_MOBILE = 1.35;
 
 /**
- * Prefer whole blocks. Anything inside <details> is skipped so dropdown
- * copy is never left at opacity 0.
+ * Prefer whole blocks. Anything inside <details> / reviews carousel
+ * is skipped so dropdowns and slides are never left at opacity 0.
  */
 const UNIT = [
   'article',
@@ -57,8 +59,6 @@ function isClippedByAncestor(el, root) {
   return false;
 }
 
-/** 3D flip cards break if we also put translateY on them — the back face
- *  leaks as a black slab beside the grid. Fade only for those. */
 function is3dFlipCard(el) {
   if (el.querySelector?.('.xd-card-inner, [class*="card-inner"], [class*="card-back"]')) {
     return true;
@@ -67,26 +67,31 @@ function is3dFlipCard(el) {
   return style.perspective !== 'none' || style.transformStyle === 'preserve-3d';
 }
 
+function isMobileMotion() {
+  return window.matchMedia('(max-width: 900px), (hover: none)').matches;
+}
+
 function collectUnits(root) {
   return [...root.querySelectorAll(UNIT)].filter((el) => {
     if (el.closest('[data-no-motion]')) return false;
     if (el.closest('details')) return false;
-    if (el.tagName === 'IMG' && el.closest('a, button, [class*="icon"], summary')) return false;
+    // Reviews carousel owns its own slide motion — Framer breaks it on iOS.
+    if (el.closest('#xdge-reviews-2026, .xr-scroller, .xr-slide')) return false;
+    // Portrait keeps CSS position (no translate). Grades band stays still.
+    if (el.closest('.xd-portrait, .xd-equation, .xd-values, .xd-lower')) return false;
+    if (el.tagName === 'IMG' && el.closest('a, button, [class*="icon"], summary, .xd-portrait')) {
+      return false;
+    }
     const parentUnit = el.parentElement && el.parentElement.closest(UNIT);
     if (parentUnit && root.contains(parentUnit)) return false;
     return true;
   });
 }
 
-/**
- * Wrap dropdown bodies for CSS grid height animation.
- * Native <details open> still controls state — no preventDefault fighting.
- */
 function armAccordions(root) {
   root.querySelectorAll('details').forEach((details) => {
     details.setAttribute('data-no-motion', '');
 
-    // Clear any leftover Framer inline styles that hide the answers.
     details.querySelectorAll('p, h3, .xu-about-answer, .xu-about-label').forEach((el) => {
       el.style.opacity = '';
       el.style.transform = '';
@@ -115,25 +120,69 @@ function armAccordions(root) {
   return () => {};
 }
 
+/** Desktop: scroll-linked Boldz rise. Mobile/iOS: simpler inView (Safari
+ *  scroll-timeline linking is flaky and leaves things popping / stuck). */
 function armFramer(root) {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return () => {};
   }
 
+  const mobile = isMobileMotion();
   const nodes = collectUnits(root);
+
+  if (mobile) {
+    const stops = nodes.map((el, i) => {
+      const flip = is3dFlipCard(el);
+      const clipped = isClippedByAncestor(el, root);
+      const rise = flip || clipped ? 0 : RISE_MOBILE;
+
+      el.style.opacity = '0';
+      if (rise) el.style.transform = `translate3d(0, ${rise}px, 0)`;
+      el.style.willChange = rise ? 'transform, opacity' : 'opacity';
+
+      let played = false;
+      return inView(
+        el,
+        () => {
+          if (played) return undefined;
+          played = true;
+          animate(
+            el,
+            rise ? { opacity: 1, y: 0 } : { opacity: 1 },
+            {
+              duration: DURATION_MOBILE,
+              ease: EASE,
+              delay: Math.min((i % 3) * 0.08, 0.24),
+            },
+          ).then(() => {
+            el.style.willChange = '';
+          });
+          return undefined;
+        },
+        { amount: 0.12, margin: '0px 0px -6% 0px' },
+      );
+    });
+
+    return () => {
+      stops.forEach((stop) => stop());
+      nodes.forEach((el) => {
+        el.style.opacity = '';
+        el.style.transform = '';
+        el.style.willChange = '';
+      });
+    };
+  }
+
   const cancels = nodes.map((el) => {
     const clipped = isClippedByAncestor(el, root);
     const flip = is3dFlipCard(el);
     const isCard = /card/i.test(el.className || '') || el.matches('[class*="-card"]');
-    // Never translate 3D flip cards — rotateY + translateY leaks the black back.
     const rise = flip || clipped ? 0 : (isCard ? RISE_CARD : RISE);
 
     el.style.willChange = rise ? 'transform, opacity' : 'opacity';
     el.style.opacity = '0';
     if (rise) el.style.transform = `translate3d(0, ${rise}px, 0)`;
 
-    // Progress follows scroll — long offset window = slow fluid rise,
-    // not a quick pop when the element crosses the fold.
     const animation = animate(
       el,
       rise ? { opacity: [0, 1], y: [rise, 0] } : { opacity: [0, 1] },
@@ -142,8 +191,6 @@ function armFramer(root) {
 
     const stopScroll = scroll(animation, {
       target: el,
-      // Starts at bottom of viewport, finishes near the top third.
-      // That travel distance keeps the move Boldz-slow.
       offset: ['start end', 'start 18%'],
     });
 
@@ -166,6 +213,8 @@ export function WpBlock({ html, reveal = true, theme, label }) {
     const root = ref.current;
     if (!root) return undefined;
     activate(root);
+    // Reviews carousel drives its own slide motion.
+    root.querySelector('#xdge-reviews-2026')?.setAttribute('data-no-motion', '');
     const stopAccordions = armAccordions(root);
     const stopFramer = reveal ? armFramer(root) : () => {};
     return () => {
