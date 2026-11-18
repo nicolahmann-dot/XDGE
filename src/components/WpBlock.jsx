@@ -6,7 +6,9 @@ const EASE = [0.16, 1, 0.3, 1];
 const RISE = 120;
 const RISE_CARD = 160;
 const RISE_MOBILE = 48;
+const RISE_MOBILE_SOFT = 28;
 const DURATION_MOBILE = 1.35;
+const DURATION_MOBILE_SOFT = 0.75;
 
 /**
  * Prefer whole blocks. Anything inside <details> / reviews carousel
@@ -72,7 +74,9 @@ function isMobileMotion() {
 }
 
 function collectUnits(root) {
-  return [...root.querySelectorAll(UNIT)].filter((el) => {
+  const mobile = isMobileMotion();
+
+  const nodes = [...root.querySelectorAll(UNIT)].filter((el) => {
     if (el.closest('[data-no-motion]')) return false;
     if (el.closest('details')) return false;
     // Reviews carousel owns its own slide motion — Framer breaks it on iOS.
@@ -82,10 +86,20 @@ function collectUnits(root) {
     if (el.tagName === 'IMG' && el.closest('a, button, [class*="icon"], summary, .xd-portrait')) {
       return false;
     }
+    // Mobile distinctive: skip piece-by-piece — soft block added below.
+    if (mobile && el.closest('#xdge-distinctive')) return false;
     const parentUnit = el.parentElement && el.parentElement.closest(UNIT);
     if (parentUnit && root.contains(parentUnit)) return false;
     return true;
   });
+
+  if (mobile) {
+    root.querySelectorAll('#xdge-distinctive .xd-hero-copy').forEach((el) => {
+      if (!el.closest('[data-no-motion]')) nodes.push(el);
+    });
+  }
+
+  return nodes;
 }
 
 function armAccordions(root) {
@@ -133,8 +147,10 @@ function armFramer(root) {
   if (mobile) {
     const stops = nodes.map((el, i) => {
       const flip = is3dFlipCard(el);
-      const clipped = isClippedByAncestor(el, root);
-      const rise = flip || clipped ? 0 : RISE_MOBILE;
+      const soft = el.matches('.xd-hero-copy');
+      const clipped = !soft && isClippedByAncestor(el, root);
+      const rise = flip || clipped ? 0 : (soft ? RISE_MOBILE_SOFT : RISE_MOBILE);
+      const duration = soft ? DURATION_MOBILE_SOFT : DURATION_MOBILE;
 
       el.style.opacity = '0';
       if (rise) el.style.transform = `translate3d(0, ${rise}px, 0)`;
@@ -150,16 +166,16 @@ function armFramer(root) {
             el,
             rise ? { opacity: 1, y: 0 } : { opacity: 1 },
             {
-              duration: DURATION_MOBILE,
+              duration,
               ease: EASE,
-              delay: Math.min((i % 3) * 0.08, 0.24),
+              delay: soft ? 0.05 : Math.min((i % 3) * 0.08, 0.24),
             },
           ).then(() => {
             el.style.willChange = '';
           });
           return undefined;
         },
-        { amount: 0.12, margin: '0px 0px -6% 0px' },
+        { amount: soft ? 0.2 : 0.12, margin: '0px 0px -6% 0px' },
       );
     });
 
