@@ -16,14 +16,13 @@ import footer from './15-footer.html?raw';
 
 /**
  * WordPress homepage, in order.
- * The opening video and the "Your Next Step" hero stay as designed.
- * Every other section rises in with Framer as it scrolls into view.
+ * Opening video stays static. Everything else rises Boldz-style on scroll.
  */
 export const homeBlocks = [
   { id: 'video', html: video, theme: 'dark', reveal: false, label: 'Hero' },
   { id: 'strip', html: strip, theme: 'dark', reveal: true, label: 'Strip' },
   { id: 'call', html: call, theme: null, reveal: false, label: 'Discovery call' },
-  { id: 'hero', html: hero, theme: 'light', reveal: false, label: 'Hero statement' },
+  { id: 'hero', html: hero, theme: 'light', reveal: true, label: 'Hero statement' },
   { id: 'what', html: what, theme: 'dark', reveal: true, label: 'What is XDGE' },
   { id: 'who', html: who, theme: 'light', reveal: true, label: 'Who it is for' },
   { id: 'bridge', html: bridge, theme: 'light', reveal: true, label: 'Experience bridge' },
