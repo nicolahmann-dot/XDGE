@@ -6,9 +6,7 @@ const EASE = [0.16, 1, 0.3, 1];
 const RISE = 120;
 const RISE_CARD = 160;
 const RISE_MOBILE = 48;
-const RISE_MOBILE_SOFT = 28;
 const DURATION_MOBILE = 1.35;
-const DURATION_MOBILE_SOFT = 0.75;
 
 /**
  * Prefer whole blocks. Anything inside <details> / reviews carousel
@@ -76,30 +74,81 @@ function isMobileMotion() {
 function collectUnits(root) {
   const mobile = isMobileMotion();
 
-  const nodes = [...root.querySelectorAll(UNIT)].filter((el) => {
+  return [...root.querySelectorAll(UNIT)].filter((el) => {
     if (el.closest('[data-no-motion]')) return false;
     if (el.closest('details')) return false;
     // Reviews carousel owns its own slide motion — Framer breaks it on iOS.
     if (el.closest('#xdge-reviews-2026, .xr-scroller, .xr-slide')) return false;
-    // Portrait keeps CSS position (no translate). Grades band stays still.
+    // Portrait keeps CSS position. Grades band stays still.
     if (el.closest('.xd-portrait, .xd-equation, .xd-values, .xd-lower')) return false;
     if (el.tagName === 'IMG' && el.closest('a, button, [class*="icon"], summary, .xd-portrait')) {
       return false;
     }
-    // Mobile distinctive: skip piece-by-piece — soft block added below.
+    // Mobile distinctive top is handled by armDistinctiveMobileTop().
     if (mobile && el.closest('#xdge-distinctive')) return false;
     const parentUnit = el.parentElement && el.parentElement.closest(UNIT);
     if (parentUnit && root.contains(parentUnit)) return false;
     return true;
   });
+}
 
-  if (mobile) {
-    root.querySelectorAll('#xdge-distinctive .xd-hero-copy').forEach((el) => {
-      if (!el.closest('[data-no-motion]')) nodes.push(el);
+/** Mobile-only: staggered rise on distinctive top copy (not Grades band / portrait). */
+function armDistinctiveMobileTop(root) {
+  if (!isMobileMotion()) return () => {};
+
+  const copy = root.querySelector('#xdge-distinctive .xd-hero-copy');
+  if (!copy || copy.closest('[data-no-motion]')) return () => {};
+
+  const parts = [
+    copy.querySelector('.xd-top-eyebrow'),
+    copy.querySelector('.xd-hero-heading'),
+    copy.querySelector('.xd-pathways'),
+    copy.querySelector('.xd-hero-description'),
+    copy.querySelector('.xd-button'),
+  ].filter(Boolean);
+
+  if (!parts.length) return () => {};
+
+  parts.forEach((el) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translate3d(0, 40px, 0)';
+    el.style.willChange = 'transform, opacity';
+  });
+
+  let played = false;
+  const stopInView = inView(
+    copy,
+    () => {
+      if (played) return undefined;
+      played = true;
+
+      parts.forEach((el, i) => {
+        animate(
+          el,
+          { opacity: 1, y: 0 },
+          {
+            duration: 0.95,
+            ease: EASE,
+            delay: 0.08 + i * 0.1,
+          },
+        ).then(() => {
+          el.style.willChange = '';
+        });
+      });
+
+      return undefined;
+    },
+    { amount: 0.08, margin: '0px 0px -4% 0px' },
+  );
+
+  return () => {
+    stopInView();
+    parts.forEach((el) => {
+      el.style.opacity = '';
+      el.style.transform = '';
+      el.style.willChange = '';
     });
-  }
-
-  return nodes;
+  };
 }
 
 function armAccordions(root) {
@@ -143,14 +192,13 @@ function armFramer(root) {
 
   const mobile = isMobileMotion();
   const nodes = collectUnits(root);
+  const stopDistinctiveTop = armDistinctiveMobileTop(root);
 
   if (mobile) {
     const stops = nodes.map((el, i) => {
       const flip = is3dFlipCard(el);
-      const soft = el.matches('.xd-hero-copy');
-      const clipped = !soft && isClippedByAncestor(el, root);
-      const rise = flip || clipped ? 0 : (soft ? RISE_MOBILE_SOFT : RISE_MOBILE);
-      const duration = soft ? DURATION_MOBILE_SOFT : DURATION_MOBILE;
+      const clipped = isClippedByAncestor(el, root);
+      const rise = flip || clipped ? 0 : RISE_MOBILE;
 
       el.style.opacity = '0';
       if (rise) el.style.transform = `translate3d(0, ${rise}px, 0)`;
@@ -166,20 +214,21 @@ function armFramer(root) {
             el,
             rise ? { opacity: 1, y: 0 } : { opacity: 1 },
             {
-              duration,
+              duration: DURATION_MOBILE,
               ease: EASE,
-              delay: soft ? 0.05 : Math.min((i % 3) * 0.08, 0.24),
+              delay: Math.min((i % 3) * 0.08, 0.24),
             },
           ).then(() => {
             el.style.willChange = '';
           });
           return undefined;
         },
-        { amount: soft ? 0.2 : 0.12, margin: '0px 0px -6% 0px' },
+        { amount: 0.12, margin: '0px 0px -6% 0px' },
       );
     });
 
     return () => {
+      stopDistinctiveTop();
       stops.forEach((stop) => stop());
       nodes.forEach((el) => {
         el.style.opacity = '';
@@ -219,7 +268,10 @@ function armFramer(root) {
     };
   });
 
-  return () => cancels.forEach((cancel) => cancel());
+  return () => {
+    stopDistinctiveTop();
+    cancels.forEach((cancel) => cancel());
+  };
 }
 
 export function WpBlock({ html, reveal = true, theme, label }) {
