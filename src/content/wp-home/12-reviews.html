@@ -177,11 +177,18 @@
   align-items: flex-start;
   overflow-x: auto;
   overflow-y: visible;
+  /* Snap only while idle — JS turns this off during animated moves
+     so Previous / Next never get stuck mid-slide. */
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   overscroll-behavior-x: contain;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+}
+
+#xdge-reviews-2026 .xr-scroller.is-animating {
+  scroll-snap-type: none;
+  pointer-events: none;
 }
 
 #xdge-reviews-2026 .xr-scroller::-webkit-scrollbar {
@@ -1879,10 +1886,11 @@
 
     let index = 0;
     let timer = null;
+    let resumeTimer = null;
     let manual = false;
     let inView = true;
     let programmatic = false;
-    let programmaticTimer = null;
+    let rafId = 0;
 
     const reduce = window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -1926,11 +1934,66 @@
       }
     }
 
+    function scheduleResume() {
+      clearTimeout(resumeTimer);
+      // After manual use, autoplay can start again so it never feels permanently stuck.
+      resumeTimer = setTimeout(function () {
+        manual = false;
+        play();
+      }, 12000);
+    }
+
+    function finishMove(targetLeft) {
+      scroller.scrollLeft = targetLeft;
+      scroller.classList.remove('is-animating');
+      programmatic = false;
+      rafId = 0;
+      update();
+    }
+
+    function moveTo(targetLeft, instant) {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
+
+      const startLeft = scroller.scrollLeft;
+      const delta = targetLeft - startLeft;
+
+      if (instant || reduce || Math.abs(delta) < 2) {
+        finishMove(targetLeft);
+        return;
+      }
+
+      programmatic = true;
+      scroller.classList.add('is-animating');
+
+      const duration = 720;
+      const start = performance.now();
+
+      function easeOut(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+
+      function tick(now) {
+        const t = Math.min(1, (now - start) / duration);
+        scroller.scrollLeft = startLeft + delta * easeOut(t);
+        if (t < 1) {
+          rafId = requestAnimationFrame(tick);
+        } else {
+          finishMove(targetLeft);
+        }
+      }
+
+      rafId = requestAnimationFrame(tick);
+    }
+
     function show(i, byUser) {
 
       if (byUser) {
         manual = true;
         stop();
+        scheduleResume();
       }
 
       const wrap = i < 0 || i >= slides.length;
@@ -1938,59 +2001,8 @@
       index = (i + slides.length) % slides.length;
 
       update();
+      moveTo(position(index), wrap);
 
-      clearTimeout(programmaticTimer);
-      programmatic = true;
-
-      const targetLeft = position(index);
-      const touchLike = window.matchMedia('(hover: none), (max-width: 900px)').matches;
-
-      if (wrap || reduce) {
-
-        scroller.style.scrollBehavior = 'auto';
-        scroller.scrollLeft = targetLeft;
-        scroller.style.scrollBehavior = '';
-        programmatic = false;
-
-      } else if (touchLike) {
-        // iOS often ignores scrollTo({behavior:'smooth'}). Animate by hand
-        // so Previous / See more reviews actually eases between slides.
-        const startLeft = scroller.scrollLeft;
-        const delta = targetLeft - startLeft;
-        const duration = 780;
-        const start = performance.now();
-
-        function easeOut(t) {
-          return 1 - Math.pow(1 - t, 3);
-        }
-
-        function tick(now) {
-          const t = Math.min(1, (now - start) / duration);
-          scroller.scrollLeft = startLeft + delta * easeOut(t);
-          if (t < 1) {
-            requestAnimationFrame(tick);
-          } else {
-            programmatic = false;
-          }
-        }
-
-        requestAnimationFrame(tick);
-        programmaticTimer = setTimeout(function () {
-          programmatic = false;
-        }, duration + 80);
-
-      } else {
-
-        scroller.scrollTo({
-          left: targetLeft,
-          behavior: 'smooth'
-        });
-
-        programmaticTimer = setTimeout(function () {
-          programmatic = false;
-        },1000);
-
-      }
     }
 
     function play() {
@@ -2022,11 +2034,13 @@
     scroller.addEventListener('pointerdown',function () {
       manual = true;
       stop();
+      scheduleResume();
     },{passive:true});
 
     scroller.addEventListener('touchstart',function () {
       manual = true;
       stop();
+      scheduleResume();
     },{passive:true});
 
     scroller.addEventListener('scroll',function () {
@@ -2037,15 +2051,23 @@
 
       if (w <= 0) return;
 
-      index = Math.max(
-        0,
-        Math.min(
-          slides.length-1,
-          Math.round(scroller.scrollLeft/w)
-        )
-      );
+      // Prefer offset-based index — more reliable than width math when
+      // gutters / subpixel layout shift.
+      let nearest = 0;
+      let best = Infinity;
+      const left = scroller.scrollLeft;
+      slides.forEach(function (slide, i) {
+        const dist = Math.abs(position(i) - left);
+        if (dist < best) {
+          best = dist;
+          nearest = i;
+        }
+      });
 
-      update();
+      if (nearest !== index) {
+        index = nearest;
+        update();
+      }
 
     },{passive:true});
 
@@ -2064,14 +2086,23 @@
     });
 
     root.addEventListener('mouseenter',stop);
-    root.addEventListener('mouseleave',play);
+    root.addEventListener('mouseleave',function () {
+      manual = false;
+      play();
+    });
     root.addEventListener('focusin',stop);
 
     root.addEventListener('focusout',function (e) {
-      if (!root.contains(e.relatedTarget)) play();
+      if (!root.contains(e.relatedTarget)) {
+        manual = false;
+        play();
+      }
     });
 
-    document.addEventListener('visibilitychange',play);
+    document.addEventListener('visibilitychange',function () {
+      if (!document.hidden) play();
+      else stop();
+    });
 
     if ('IntersectionObserver' in window) {
 
@@ -2091,8 +2122,12 @@
 
     }
 
-    update();
-    play();
+    // Layout may not be ready on first paint — sync after images/fonts.
+    requestAnimationFrame(function () {
+      update();
+      finishMove(position(index));
+      play();
+    });
 
   }
 

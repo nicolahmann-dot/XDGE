@@ -517,12 +517,41 @@
   }
 }
 
+/* Scroll-triggered rise — armed by WpBlock (no hover). */
+#xdge-next-step-programmes .xp-scroll-rise {
+  opacity: 0;
+  transform: translate3d(0, 72px, 0);
+  transition:
+    opacity 1.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--xp-rise-delay, 0s);
+  will-change: opacity, transform;
+}
+
+#xdge-next-step-programmes .xp-scroll-rise-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (max-width: 900px) {
+  #xdge-next-step-programmes .xp-scroll-rise {
+    transform: translate3d(0, 48px, 0);
+    transition-duration: 1.45s, 1.45s;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   #xdge-next-step-programmes *,
   #xdge-next-step-programmes *::before,
   #xdge-next-step-programmes *::after {
     transition: none !important;
+  }
+
+  #xdge-next-step-programmes .xp-scroll-rise,
+  #xdge-next-step-programmes .xp-scroll-rise-in {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

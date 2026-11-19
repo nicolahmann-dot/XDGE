@@ -60,7 +60,8 @@ function isClippedByAncestor(el, root) {
 }
 
 function is3dFlipCard(el) {
-  if (el.querySelector?.('.xd-card-inner, [class*="card-inner"], [class*="card-back"]')) {
+  // Only real flip faces — not programme `.xp-card-inner` wrappers.
+  if (el.querySelector?.('.xd-card-inner, [class*="card-back"]')) {
     return true;
   }
   const style = getComputedStyle(el);
@@ -81,6 +82,8 @@ function collectUnits(root) {
     if (el.closest('#xdge-reviews-2026, .xr-scroller, .xr-slide')) return false;
     // Portrait keeps CSS position. Grades band stays still.
     if (el.closest('.xd-portrait, .xd-equation, .xd-values, .xd-lower')) return false;
+    // Programme section owns its CSS scroll-rise (header + cards).
+    if (el.closest('#xdge-next-step-programmes')) return false;
     if (el.tagName === 'IMG' && el.closest('a, button, [class*="icon"], summary, .xd-portrait')) {
       return false;
     }
@@ -151,6 +154,96 @@ function armDistinctiveMobileTop(root) {
   };
 }
 
+/** Programme cards — CSS scroll rise (works on mobile + desktop). */
+function armProgrammeCards(root) {
+  const section = root.querySelector('#xdge-next-step-programmes');
+  if (!section) return () => {};
+
+  const cards = [...section.querySelectorAll('.xp-card')];
+  const headerBits = [
+    section.querySelector('.xp-eyebrow'),
+    section.querySelector('.xp-title'),
+    section.querySelector('.xp-subtitle'),
+  ].filter(Boolean);
+
+  const targets = [...headerBits, ...cards];
+  if (!targets.length) return () => {};
+
+  targets.forEach((el, i) => {
+    el.classList.add('xp-scroll-rise');
+    el.style.setProperty('--xp-rise-delay', `${i * 0.12}s`);
+  });
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('xp-scroll-rise-in');
+        } else if (entry.boundingClientRect.top > 0) {
+          // Scrolled back above — allow replay on the way down again.
+          entry.target.classList.remove('xp-scroll-rise-in');
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+  );
+
+  targets.forEach((el) => io.observe(el));
+
+  return () => {
+    io.disconnect();
+    targets.forEach((el) => {
+      el.classList.remove('xp-scroll-rise', 'xp-scroll-rise-in');
+      el.style.removeProperty('--xp-rise-delay');
+    });
+  };
+}
+
+/** Grades + Why it matters — scroll-linked rise (replays with scroll, no hover). */
+function armDistinctiveLower(root) {
+  const lower = root.querySelector('#xdge-distinctive .xd-lower');
+  if (!lower) return () => {};
+
+  const parts = [
+    lower.querySelector('.xd-equation'),
+    lower.querySelector('.xd-lower-content'),
+  ].filter(Boolean);
+
+  if (!parts.length) return () => {};
+
+  const rise = isMobileMotion() ? 48 : 80;
+
+  const cancels = parts.map((el, i) => {
+    el.style.willChange = 'transform, opacity';
+    el.style.opacity = '0';
+    el.style.transform = `translate3d(0, ${rise}px, 0)`;
+
+    const animation = animate(
+      el,
+      { opacity: [0, 1], y: [rise, 0] },
+      { ease: EASE },
+    );
+
+    // Tied to scroll progress — reverse on scroll up, replay on scroll down.
+    const stopScroll = scroll(animation, {
+      target: lower,
+      offset: i === 0
+        ? ['start end', 'start 28%']
+        : ['start 92%', 'start 22%'],
+    });
+
+    return () => {
+      stopScroll();
+      animation.stop();
+      el.style.opacity = '';
+      el.style.transform = '';
+      el.style.willChange = '';
+    };
+  });
+
+  return () => cancels.forEach((cancel) => cancel());
+}
+
 function armAccordions(root) {
   root.querySelectorAll('details').forEach((details) => {
     details.setAttribute('data-no-motion', '');
@@ -193,6 +286,8 @@ function armFramer(root) {
   const mobile = isMobileMotion();
   const nodes = collectUnits(root);
   const stopDistinctiveTop = armDistinctiveMobileTop(root);
+  const stopDistinctiveLower = armDistinctiveLower(root);
+  const stopProgrammeCards = armProgrammeCards(root);
 
   if (mobile) {
     const stops = nodes.map((el, i) => {
@@ -229,6 +324,8 @@ function armFramer(root) {
 
     return () => {
       stopDistinctiveTop();
+      stopDistinctiveLower();
+      stopProgrammeCards();
       stops.forEach((stop) => stop());
       nodes.forEach((el) => {
         el.style.opacity = '';
@@ -242,7 +339,11 @@ function armFramer(root) {
     const clipped = isClippedByAncestor(el, root);
     const flip = is3dFlipCard(el);
     const isCard = /card/i.test(el.className || '') || el.matches('[class*="-card"]');
+    // Longer scroll range for cards so rise is readable, not snappy.
     const rise = flip || clipped ? 0 : (isCard ? RISE_CARD : RISE);
+    const offset = isCard
+      ? ['start end', 'start 42%']
+      : ['start end', 'start 22%'];
 
     el.style.willChange = rise ? 'transform, opacity' : 'opacity';
     el.style.opacity = '0';
@@ -256,7 +357,7 @@ function armFramer(root) {
 
     const stopScroll = scroll(animation, {
       target: el,
-      offset: ['start end', 'start 18%'],
+      offset,
     });
 
     return () => {
@@ -270,6 +371,8 @@ function armFramer(root) {
 
   return () => {
     stopDistinctiveTop();
+    stopDistinctiveLower();
+    stopProgrammeCards();
     cancels.forEach((cancel) => cancel());
   };
 }
@@ -280,6 +383,8 @@ export function WpBlock({ html, reveal = true, theme, label }) {
   useLayoutEffect(() => {
     const root = ref.current;
     if (!root) return undefined;
+    // Allow reviews carousel script to re-bind after React remounts HTML.
+    root.querySelector('#xdge-reviews-2026')?.removeAttribute('data-ready');
     activate(root);
     // Reviews carousel drives its own slide motion.
     root.querySelector('#xdge-reviews-2026')?.setAttribute('data-no-motion', '');
