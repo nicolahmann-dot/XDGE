@@ -213,33 +213,49 @@
   transform: translate3d(0, 0, 0) scale(1);
 }
 
-/* Desktop: black card + photo + grey card each rise in (incl. slides 4 & 5). */
+/* Section scroll entrance (intro / nav / stage) — armed by WpBlock. */
+#xdge-reviews-2026 .xr-scroll-rise {
+  opacity: 0;
+  transform: translate3d(0, 44px, 0);
+  transition:
+    opacity 1.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--xr-rise-delay, 0s);
+  will-change: opacity, transform;
+}
+
+#xdge-reviews-2026 .xr-scroll-rise-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Desktop: black + photo + grey rise on scroll into section + on slide change. */
 #xdge-reviews-2026 .xr-slide .xr-feature,
 #xdge-reviews-2026 .xr-slide .xr-photo,
 #xdge-reviews-2026 .xr-slide .xr-grey {
   opacity: 0;
-  transform: translate3d(0, 36px, 0);
+  transform: translate3d(0, 40px, 0);
   transition:
-    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-#xdge-reviews-2026 .xr-slide.is-active .xr-feature {
+#xdge-reviews-2026.xr-section-in .xr-slide.is-active .xr-feature {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-  transition-delay: 0.05s;
+  transition-delay: 0.12s;
 }
 
-#xdge-reviews-2026 .xr-slide.is-active .xr-photo {
+#xdge-reviews-2026.xr-section-in .xr-slide.is-active .xr-photo {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-  transition-delay: 0.18s;
+  transition-delay: 0.28s;
 }
 
-#xdge-reviews-2026 .xr-slide.is-active .xr-grey {
+#xdge-reviews-2026.xr-section-in .xr-slide.is-active .xr-grey {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-  transition-delay: 0.3s;
+  transition-delay: 0.44s;
 }
 
 #xdge-reviews-2026 .xr-grid {
@@ -682,13 +698,18 @@
     transform: translate3d(0, 0, 0);
   }
 
-  /* On phones the grid stacks — keep one clean rise, not triple stagger. */
+  /* On phones the grid stacks — stage rises as one; no triple stagger. */
   #xdge-reviews-2026 .xr-slide .xr-feature,
   #xdge-reviews-2026 .xr-slide .xr-photo,
   #xdge-reviews-2026 .xr-slide .xr-grey {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  #xdge-reviews-2026 .xr-scroll-rise {
+    transform: translate3d(0, 32px, 0);
+    transition-duration: 1.35s, 1.35s;
   }
 }
 
@@ -698,8 +719,12 @@
     scroll-behavior: auto;
   }
 
-  #xdge-reviews-2026 * {
+  #xdge-reviews-2026 *,
+  #xdge-reviews-2026 .xr-scroll-rise,
+  #xdge-reviews-2026 .xr-scroll-rise-in {
     transition-duration: .01ms !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

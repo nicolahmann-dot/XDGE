@@ -520,10 +520,10 @@
 /* Scroll-triggered rise — armed by WpBlock (no hover). */
 #xdge-next-step-programmes .xp-scroll-rise {
   opacity: 0;
-  transform: translate3d(0, 72px, 0);
+  transform: translate3d(0, 64px, 0);
   transition:
-    opacity 1.65s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1.65s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 1.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.85s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: var(--xp-rise-delay, 0s);
   will-change: opacity, transform;
 }
@@ -535,8 +535,8 @@
 
 @media (max-width: 900px) {
   #xdge-next-step-programmes .xp-scroll-rise {
-    transform: translate3d(0, 48px, 0);
-    transition-duration: 1.45s, 1.45s;
+    transform: translate3d(0, 42px, 0);
+    transition-duration: 1.65s, 1.65s;
   }
 }
 

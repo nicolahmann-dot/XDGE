@@ -272,6 +272,31 @@
   overflow: hidden;
 }
 
+/* Scroll entrance for Who Are We option rows (armed by WpBlock). */
+#xdge-unified-experience .xu-about-item.xu-about-rise {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 1.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--xu-about-delay, 0s);
+  will-change: opacity, transform;
+}
+
+#xdge-unified-experience .xu-about-item.xu-about-rise-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #xdge-unified-experience .xu-about-item.xu-about-rise,
+  #xdge-unified-experience .xu-about-item.xu-about-rise-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 #xdge-unified-experience .xu-about-summary {
   display: grid;
   grid-template-columns: 28px minmax(0,1fr) 20px;
@@ -431,6 +456,32 @@
   border-radius: 18px;
   overflow: hidden;
   transition: border-color .3s ease;
+}
+
+/* Scroll entrance for What to Expect options (armed by WpBlock). */
+#xdge-unified-experience .xu-expect-item.xu-expect-rise {
+  opacity: 0;
+  transform: translate3d(0, 52px, 0);
+  transition:
+    opacity 1.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.55s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color .3s ease;
+  transition-delay: var(--xu-expect-delay, 0s);
+  will-change: opacity, transform;
+}
+
+#xdge-unified-experience .xu-expect-item.xu-expect-rise-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #xdge-unified-experience .xu-expect-item.xu-expect-rise,
+  #xdge-unified-experience .xu-expect-item.xu-expect-rise-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: border-color .3s ease !important;
+  }
 }
 
 #xdge-unified-experience .xu-expect-item:hover {

@@ -170,8 +170,41 @@
   transition: transform .65s cubic-bezier(.2,.75,.2,1);
 }
 
-#xdge-editorial .xe-card:hover {
-  transform: translateY(-5px);
+@media (hover: hover) and (pointer: fine) {
+  #xdge-editorial .xe-card:hover {
+    transform: translateY(-5px);
+  }
+}
+
+/* Scroll entrance for pathway cards (armed by WpBlock). */
+#xdge-editorial .xe-card.xe-card-rise {
+  opacity: 0;
+  transform: translate3d(0, 48px, 0);
+  transition:
+    opacity 1.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--xe-card-delay, 0s);
+  will-change: opacity, transform;
+}
+
+#xdge-editorial .xe-card.xe-card-rise-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #xdge-editorial .xe-card.xe-card-rise-in:hover {
+    transform: translateY(-5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #xdge-editorial .xe-card.xe-card-rise,
+  #xdge-editorial .xe-card.xe-card-rise-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* ================================================

@@ -5717,6 +5717,48 @@ section[data-screen-label="Proven Outcomes"] {
   width: 100%;
 }
 
+/* Homepage-only cascade rises (armed by WpBlock). Other pages untouched. */
+.xg-wp-block .xg-home-rise {
+  opacity: 0;
+  transform: translate3d(0, 56px, 0);
+  transition:
+    opacity 1.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--xg-rise-delay, 0s);
+  will-change: opacity, transform;
+}
+
+.xg-wp-block .xg-home-fade {
+  opacity: 0;
+  transition: opacity 1.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--xg-rise-delay, 0s);
+  will-change: opacity;
+}
+
+.xg-wp-block .xg-home-rise.is-in,
+.xg-wp-block .xg-home-fade.is-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (max-width: 900px) {
+  .xg-wp-block .xg-home-rise {
+    transform: translate3d(0, 36px, 0);
+    transition-duration: 1.55s, 1.55s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xg-wp-block .xg-home-rise,
+  .xg-wp-block .xg-home-fade,
+  .xg-wp-block .xg-home-rise.is-in,
+  .xg-wp-block .xg-home-fade.is-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 .xg-wp-section {
   margin: 0;
   padding: 0;
