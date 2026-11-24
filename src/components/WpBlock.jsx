@@ -217,7 +217,7 @@ function armEditorialCards(root) {
 
   cards.forEach((el, i) => {
     el.classList.add('xe-card-rise');
-    el.style.setProperty('--xe-card-delay', `${0.08 + i * 0.15}s`);
+    el.style.setProperty('--xe-card-delay', `${0.2 + i * 0.28}s`);
   });
 
   const io = new IntersectionObserver(
@@ -230,7 +230,8 @@ function armEditorialCards(root) {
         }
       });
     },
-    { threshold: 0.1, rootMargin: '0px 0px -6% 0px' },
+    // Start later in the viewport so the rise is visible, not spent off-screen.
+    { threshold: 0.22, rootMargin: '0px 0px -18% 0px' },
   );
   io.observe(grid);
 
@@ -505,7 +506,7 @@ function armDistinctiveLower(root) {
 
   if (!parts.length) return () => {};
 
-  const rise = isMobileMotion() ? 44 : 72;
+  const rise = isMobileMotion() ? 40 : 64;
 
   const cancels = parts.map((el, i) => {
     el.style.willChange = 'transform, opacity';
@@ -518,11 +519,12 @@ function armDistinctiveLower(root) {
       { ease: EASE },
     );
 
+    // Longer scroll travel so Grades / Why it matters settles slowly (not a pop).
     const stopScroll = scroll(animation, {
       target: lower,
       offset: i === 0
-        ? ['start end', 'start 36%']
-        : ['start 90%', 'start 28%'],
+        ? ['start end', 'start 48%']
+        : ['start 95%', 'start 38%'],
     });
 
     return () => {
